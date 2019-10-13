@@ -1,0 +1,26 @@
+{
+  "name": "spotify-web-api-ts",
+  "version": "1.0.0",
+  "description": "A TypeScript wrapper for Spotify's Web API",
+  "main": "index.js",
+  "repository": "https://github.com/adamgrieger/spotify-web-api-ts.git",
+  "author": "Adam Grieger",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@typescript-eslint/eslint-plugin": "^2.3.2",
+    "@typescript-eslint/parser": "^2.3.2",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "jest": "^24.9.0",
+    "prettier": "^1.18.2",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "axios": "^0.19.0"
+  }
+}
