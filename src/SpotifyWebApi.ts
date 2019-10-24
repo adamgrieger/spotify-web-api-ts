@@ -22,10 +22,9 @@ export class SpotifyWebApi {
   // +--------+
 
   /**
-   * Get Spotify catalog information for a single album.
+   * Get an Album
    *
-   * See [Get an Album](https://developer.spotify.com/documentation/web-api/reference/albums/get-album/)
-   * on the Spotify Developer site for more information about the endpoint.
+   * Get Spotify catalog information for a single album.
    *
    * @param albumId The Spotify ID for the album.
    * @param options A JSON object with optional request information.
@@ -38,16 +37,15 @@ export class SpotifyWebApi {
   }
 
   /**
+   * Get Several Albums
+   *
    * Get Spotify catalog information for multiple albums identified by their
    * Spotify IDs.
-   *
-   * See [Get Several Albums](https://developer.spotify.com/documentation/web-api/reference/albums/get-several-albums)
-   * on the Spotify Developer site for more information about the endpoint.
    *
    * @param albumIds The Spotify IDs for the albums.
    * @param options A JSON object with optional request information.
    */
-  getAlbums(albumIds: string[], options?: model.GetAlbumsOptions) {
+  getAlbums(albumIds: string[], options?: model.GetAlbumOptions) {
     return axios.get<model.GetAlbumsResponse>("/albums", {
       ...constructAxiosConfig(this.accessToken),
       params: {
@@ -58,11 +56,9 @@ export class SpotifyWebApi {
   }
 
   /**
-   * Get Spotify catalog information about an album's tracks.
-   * Optional parameters can be used to limit the number of tracks returned.
+   * Get an Album's Tracks
    *
-   * See [Get an Album's Tracks](https://developer.spotify.com/documentation/web-api/reference/albums/get-albums-tracks)
-   * on the Spotify Developer site for more information about the endpoint.
+   * Get Spotify catalog information about an album's tracks.
    *
    * @param albumId The Spotify ID for the album.
    * @param options A JSON object with optional request information.

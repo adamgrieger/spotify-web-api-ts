@@ -4,14 +4,14 @@ import { constructAxiosConfig } from "./helpers/constructAxiosConfig";
 
 jest.mock("axios");
 
-const axiosMock = axios as jest.Mocked<typeof axios>;
-
 describe("SpotifyWebApi", () => {
+  const axiosMock = axios as jest.Mocked<typeof axios>;
+
   beforeEach(() => {
     jest.resetAllMocks();
   });
 
-  it("should return the access token", () => {
+  it("should get the access token", () => {
     const spotify = new SpotifyWebApi("token");
     expect(spotify.getAccessToken()).toBe("token");
   });
@@ -22,19 +22,15 @@ describe("SpotifyWebApi", () => {
     expect(spotify.getAccessToken()).toBe("newToken");
   });
 
-  // +--------+
-  // | Albums |
-  // +--------+
-
   describe("Albums endpoints", () => {
     describe("getAlbum", () => {
       it("should get an album (without options)", () => {
         const spotify = new SpotifyWebApi("token");
         spotify.getAlbum("foo");
-        expect(axiosMock.get).toBeCalledWith("/albums/foo", {
-          ...constructAxiosConfig("token"),
-          params: undefined
-        });
+        expect(axiosMock.get).toBeCalledWith(
+          "/albums/foo",
+          constructAxiosConfig("token")
+        );
       });
 
       it("should get an album (with options)", () => {
@@ -82,21 +78,20 @@ describe("SpotifyWebApi", () => {
       it("should get an album's tracks (without options)", () => {
         const spotify = new SpotifyWebApi("token");
         spotify.getAlbumTracks("foo");
-        expect(axiosMock.get).toBeCalledWith("/albums/foo/tracks", {
-          ...constructAxiosConfig("token")
-        });
+        expect(axiosMock.get).toBeCalledWith(
+          "/albums/foo/tracks",
+          constructAxiosConfig("token")
+        );
       });
 
       it("should get an album's tracks (with options)", () => {
         const spotify = new SpotifyWebApi("token");
         spotify.getAlbumTracks("foo", {
-          limit: 5,
           market: "bar"
         });
         expect(axiosMock.get).toBeCalledWith("/albums/foo/tracks", {
           ...constructAxiosConfig("token"),
           params: {
-            limit: 5,
             market: "bar"
           }
         });
