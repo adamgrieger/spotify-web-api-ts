@@ -20,6 +20,19 @@ export interface Album {
   uri: string;
 }
 
+export interface Artist {
+  external_urls: ExternalURL;
+  followers: Followers;
+  genres: string[];
+  href: string;
+  id: string;
+  images: Image[];
+  name: string;
+  popularity: number;
+  type: "artist";
+  uri: string;
+}
+
 export interface Copyright {
   text: string;
   type: "C" | "P";
@@ -31,6 +44,11 @@ export interface ExternalID {
 
 export interface ExternalURL {
   [key: string]: string;
+}
+
+export interface Followers {
+  href: string | null;
+  total: number;
 }
 
 export interface Image {
@@ -51,6 +69,23 @@ export interface Paging<T> {
 
 export interface Restrictions {
   reason: string;
+}
+
+export interface SimplifiedAlbum {
+  album_group?: "album" | "single" | "compilation" | "appears_on";
+  album_type: "album" | "single" | "compilation";
+  artists: SimplifiedArtist[];
+  available_markets: string[];
+  external_urls: ExternalURL;
+  href: string;
+  id: string;
+  images: Image[];
+  name: string;
+  release_date: string;
+  release_date_precision: "year" | "month" | "day";
+  restrictions: Restrictions;
+  type: "album";
+  uri: string;
 }
 
 export interface SimplifiedArtist {
@@ -76,6 +111,29 @@ export interface SimplifiedTrack {
   restrictions: Restrictions;
   name: string;
   preview_url: string;
+  track_number: number;
+  type: "track";
+  uri: string;
+  is_local: boolean;
+}
+
+export interface Track {
+  album: SimplifiedAlbum;
+  artists: SimplifiedArtist[];
+  available_markets: string[];
+  disc_number: number;
+  duration_ms: number;
+  explicit: boolean;
+  external_ids: ExternalID;
+  external_urls: ExternalURL;
+  href: string;
+  id: string;
+  is_playable: boolean;
+  linked_from: TrackLink;
+  restrictions: Restrictions;
+  name: string;
+  popularity: number;
+  preview_url: string | null;
   track_number: number;
   type: "track";
   uri: string;

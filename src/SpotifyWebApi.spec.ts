@@ -98,4 +98,78 @@ describe("SpotifyWebApi", () => {
       });
     });
   });
+
+  describe("Artists endpoints", () => {
+    describe("getArtist", () => {
+      it("should get an artist", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getArtist("foo");
+        expect(axiosMock.get).toBeCalledWith(
+          "/artists/foo",
+          constructAxiosConfig("token")
+        );
+      });
+    });
+
+    describe("getArtistAlbums", () => {
+      it("should get an artist's albums (without options)", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getArtistAlbums("foo");
+        expect(axiosMock.get).toBeCalledWith(
+          "/artists/foo/albums",
+          constructAxiosConfig("token")
+        );
+      });
+
+      it("should get an artist's albums (with options)", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getArtistAlbums("foo", {
+          country: "bar"
+        });
+        expect(axiosMock.get).toBeCalledWith("/artists/foo/albums", {
+          ...constructAxiosConfig("token"),
+          params: {
+            country: "bar"
+          }
+        });
+      });
+    });
+
+    describe("getArtists", () => {
+      it("should get several artists", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getArtists(["foo", "bar"]);
+        expect(axiosMock.get).toBeCalledWith("/artists", {
+          ...constructAxiosConfig("token"),
+          params: {
+            ids: ["foo", "bar"]
+          }
+        });
+      });
+    });
+
+    describe("getArtistTopTracks", () => {
+      it("should get an artist's top tracks", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getArtistTopTracks("foo", "bar");
+        expect(axiosMock.get).toBeCalledWith("/artists/foo/top-tracks", {
+          ...constructAxiosConfig("token"),
+          params: {
+            country: "bar"
+          }
+        });
+      });
+    });
+
+    describe("getRelatedArtists", () => {
+      it("should get an artist's related artists", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getRelatedArtists("foo");
+        expect(axiosMock.get).toBeCalledWith(
+          "/artists/foo/related-artists",
+          constructAxiosConfig("token")
+        );
+      });
+    });
+  });
 });

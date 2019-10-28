@@ -15,3 +15,14 @@ export interface GetAlbumTracksOptions {
   offset?: number;
   market?: string;
 }
+
+// +---------+
+// | Artists |
+// +---------+
+
+export interface GetArtistAlbumsOptions {
+  include_groups?: Array<"album" | "single" | "appears_on" | "compilation">;
+  country?: string;
+  limit?: number;
+  offset?: number;
+}
