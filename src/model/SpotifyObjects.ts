@@ -33,6 +33,13 @@ export interface Artist {
   uri: string;
 }
 
+export interface Category {
+  href: string;
+  icons: Image[];
+  id: string;
+  name: string;
+}
+
 export interface Copyright {
   text: string;
   type: "C" | "P";
@@ -51,6 +58,12 @@ export interface Followers {
   total: number;
 }
 
+export interface GetRecommendationsSeeds {
+  seed_artists?: string[];
+  seed_genres?: string[];
+  seed_tracks?: string[];
+}
+
 export interface Image {
   height: number | null;
   url: string;
@@ -65,6 +78,26 @@ export interface Paging<T> {
   offset: number;
   previous: string | null;
   total: number;
+}
+
+export interface PublicUser {
+  display_name: string | null;
+  external_urls: ExternalURL;
+  followers: Followers;
+  href: string;
+  id: string;
+  images: Image[];
+  type: "user";
+  uri: string;
+}
+
+export interface RecommendationSeed {
+  afterFilteringSize: number;
+  afterRelinkingSize: number;
+  href: string | null;
+  id: string;
+  initialPoolSize: number;
+  type: "artist" | "track" | "genre";
 }
 
 export interface Restrictions {
@@ -94,6 +127,21 @@ export interface SimplifiedArtist {
   id: string;
   name: string;
   type: "artist";
+  uri: string;
+}
+
+export interface SimplifiedPlaylist {
+  collaborative: boolean;
+  external_urls: ExternalURL;
+  href: string;
+  id: string;
+  images: Image[];
+  name: string;
+  owner: PublicUser;
+  public: boolean | null;
+  snapshot_id: string;
+  tracks: Tracks;
+  type: "playlist";
   uri: string;
 }
 
@@ -146,4 +194,9 @@ export interface TrackLink {
   id: string;
   type: "track";
   uri: string;
+}
+
+export interface Tracks {
+  href: string;
+  total: number;
 }

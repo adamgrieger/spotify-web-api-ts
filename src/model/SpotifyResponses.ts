@@ -35,3 +35,36 @@ export interface GetArtistTopTracksResponse {
 export interface GetRelatedArtistsResponse {
   artists: SpotifyObjects.Artist[];
 }
+
+// +--------+
+// | Browse |
+// +--------+
+
+export interface GetAvailableGenreSeedsResponse {
+  genres: string[];
+}
+
+export interface GetCategoriesResponse {
+  categories: SpotifyObjects.Paging<SpotifyObjects.Category>;
+}
+
+export type GetCategoryResponse = SpotifyObjects.Category;
+
+export type GetCategoryPlaylistsResponse = SpotifyObjects.Paging<
+  SpotifyObjects.SimplifiedPlaylist
+>;
+
+export interface GetFeaturedPlaylistsResponse {
+  message: string;
+  playlists: SpotifyObjects.Paging<SpotifyObjects.SimplifiedPlaylist>;
+}
+
+export interface GetNewReleasesResponse {
+  message: string;
+  albums: SpotifyObjects.Paging<SpotifyObjects.SimplifiedAlbum>;
+}
+
+export interface GetRecommendationsResponse {
+  seeds: SpotifyObjects.RecommendationSeed[];
+  tracks: SpotifyObjects.SimplifiedTrack[];
+}

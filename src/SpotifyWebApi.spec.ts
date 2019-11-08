@@ -172,4 +172,174 @@ describe("SpotifyWebApi", () => {
       });
     });
   });
+
+  describe("Browse endpoints", () => {
+    describe("getAvailableGenreSeeds", () => {
+      it("should get available genre seeds", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getAvailableGenreSeeds();
+        expect(axiosMock.get).toBeCalledWith(
+          "/recommendations/available-genre-seeds",
+          constructAxiosConfig("token")
+        );
+      });
+    });
+
+    describe("getCategories", () => {
+      it("should get a list of categories (without options)", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getCategories();
+        expect(axiosMock.get).toBeCalledWith(
+          "/browse/categories",
+          constructAxiosConfig("token")
+        );
+      });
+
+      it("should get a list of categories (with options)", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getCategories({
+          country: "foo"
+        });
+        expect(axiosMock.get).toBeCalledWith("/browse/categories", {
+          ...constructAxiosConfig("token"),
+          params: {
+            country: "foo"
+          }
+        });
+      });
+    });
+
+    describe("getCategory", () => {
+      it("should get a category (without options)", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getCategory("foo");
+        expect(axiosMock.get).toBeCalledWith(
+          "/browse/categories/foo",
+          constructAxiosConfig("token")
+        );
+      });
+
+      it("should get a category (with options)", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getCategory("foo", {
+          country: "bar"
+        });
+        expect(axiosMock.get).toBeCalledWith("/browse/categories/foo", {
+          ...constructAxiosConfig("token"),
+          params: {
+            country: "bar"
+          }
+        });
+      });
+    });
+
+    describe("getCategoryPlaylists", () => {
+      it("should get a category's playlists (without options)", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getCategoryPlaylists("foo");
+        expect(axiosMock.get).toBeCalledWith(
+          "/browse/categories/foo/playlists",
+          constructAxiosConfig("token")
+        );
+      });
+
+      it("should get a category's playlists (without options)", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getCategoryPlaylists("foo", {
+          country: "bar"
+        });
+        expect(axiosMock.get).toBeCalledWith(
+          "/browse/categories/foo/playlists",
+          {
+            ...constructAxiosConfig("token"),
+            params: {
+              country: "bar"
+            }
+          }
+        );
+      });
+    });
+
+    describe("getFeaturedPlaylists", () => {
+      it("should get a list of featured playlists (without options)", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getFeaturedPlaylists();
+        expect(axiosMock.get).toBeCalledWith(
+          "/browse/featured-playlists",
+          constructAxiosConfig("token")
+        );
+      });
+
+      it("should get a list of featured playlists (with options)", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getFeaturedPlaylists({
+          country: "foo"
+        });
+        expect(axiosMock.get).toBeCalledWith("/browse/featured-playlists", {
+          ...constructAxiosConfig("token"),
+          params: {
+            country: "foo"
+          }
+        });
+      });
+    });
+
+    describe("getNewReleases", () => {
+      it("should get a list of new releases (without options)", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getNewReleases();
+        expect(axiosMock.get).toBeCalledWith(
+          "/browse/new-releases",
+          constructAxiosConfig("token")
+        );
+      });
+
+      it("should get a list of new releases (with options)", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getNewReleases({
+          country: "foo"
+        });
+        expect(axiosMock.get).toBeCalledWith("/browse/new-releases", {
+          ...constructAxiosConfig("token"),
+          params: {
+            country: "foo"
+          }
+        });
+      });
+    });
+
+    describe("getRecommendations", () => {
+      it("should get recommendations (without options)", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getRecommendations({
+          seed_artists: ["foo", "bar"]
+        });
+        expect(axiosMock.get).toBeCalledWith("/recommendations", {
+          ...constructAxiosConfig("token"),
+          params: {
+            seed_artists: ["foo", "bar"]
+          }
+        });
+      });
+
+      it("should get recommendations (with options)", () => {
+        const spotify = new SpotifyWebApi("token");
+        spotify.getRecommendations(
+          {
+            seed_artists: ["foo", "bar"]
+          },
+          {
+            market: "baz"
+          }
+        );
+        expect(axiosMock.get).toBeCalledWith("/recommendations", {
+          ...constructAxiosConfig("token"),
+          params: {
+            seed_artists: ["foo", "bar"],
+            market: "baz"
+          }
+        });
+      });
+    });
+  });
 });
