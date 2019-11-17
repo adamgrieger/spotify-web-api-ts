@@ -16,4 +16,4 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn jest --coverage
-      - run: codecov --token=CODECOV_TOKEN
+      - run: yarn codecov --token=CODECOV_TOKEN
