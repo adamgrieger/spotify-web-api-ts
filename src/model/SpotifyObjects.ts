@@ -100,6 +100,13 @@ export interface RecommendationSeed {
   type: "artist" | "track" | "genre";
 }
 
+export interface RegularError {
+  error: {
+    status: number;
+    message: string;
+  };
+}
+
 export interface Restrictions {
   reason: string;
 }

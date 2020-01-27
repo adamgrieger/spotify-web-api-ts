@@ -1,5 +1,5 @@
-import axios, { AxiosRequestConfig } from "axios";
-import { constructAxiosConfig } from "./constructAxiosConfig";
+import { AxiosRequestConfig } from "axios";
+import { spotifyAxios } from "./spotifyAxios";
 
 export class Http {
   private accessToken: string;
@@ -17,9 +17,18 @@ export class Http {
   }
 
   get<T>(url: string, config?: AxiosRequestConfig) {
-    return axios.get<T>(url, {
-      ...constructAxiosConfig(this.accessToken),
-      ...config
-    });
+    return spotifyAxios<T>(url, "GET", this.accessToken, config);
+  }
+
+  post<T>(url: string, config?: AxiosRequestConfig) {
+    return spotifyAxios<T>(url, "POST", this.accessToken, config);
+  }
+
+  put<T>(url: string, config?: AxiosRequestConfig) {
+    return spotifyAxios<T>(url, "PUT", this.accessToken, config);
+  }
+
+  delete<T>(url: string, config?: AxiosRequestConfig) {
+    return spotifyAxios<T>(url, "DELETE", this.accessToken, config);
   }
 }
