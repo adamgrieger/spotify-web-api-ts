@@ -10,12 +10,15 @@ export class SpotifyWebApi {
 
   public browse: api.BrowseApi;
 
+  public follow: api.FollowApi;
+
   constructor(accessToken: string) {
     this.http = new Http(accessToken);
 
     this.albums = new api.AlbumsApi(this.http);
     this.artists = new api.ArtistsApi(this.http);
     this.browse = new api.BrowseApi(this.http);
+    this.follow = new api.FollowApi(this.http);
   }
 
   getAccessToken() {

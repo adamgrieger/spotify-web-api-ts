@@ -109,3 +109,16 @@ export interface GetRecommendationsOptions {
   target_time_signature?: number;
   target_valence?: number;
 }
+
+// +--------+
+// | Follow |
+// +--------+
+
+export interface FollowPlaylistOptions {
+  public?: boolean;
+}
+
+export interface GetFollowedArtistsOptions {
+  limit?: number;
+  after?: string;
+}

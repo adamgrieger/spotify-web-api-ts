@@ -45,6 +45,19 @@ export interface Copyright {
   type: "C" | "P";
 }
 
+export interface Cursor {
+  after: string;
+}
+
+export interface CursorBasedPaging<T> {
+  href: string;
+  items: T[];
+  limit: number;
+  next: string | null;
+  cursors: Cursor;
+  total: number;
+}
+
 export interface ExternalID {
   [key: string]: string;
 }

@@ -68,3 +68,11 @@ export interface GetRecommendationsResponse {
   seeds: SpotifyObjects.RecommendationSeed[];
   tracks: SpotifyObjects.SimplifiedTrack[];
 }
+
+// +--------+
+// | Follow |
+// +--------+
+
+export interface GetFollowedArtistsResponse {
+  artists: SpotifyObjects.CursorBasedPaging<SpotifyObjects.Artist>;
+}
