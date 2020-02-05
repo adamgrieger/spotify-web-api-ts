@@ -12,6 +12,8 @@ export class SpotifyWebApi {
 
   public follow: api.FollowApi;
 
+  public library: api.LibraryApi;
+
   constructor(accessToken: string) {
     this.http = new Http(accessToken);
 
@@ -19,6 +21,7 @@ export class SpotifyWebApi {
     this.artists = new api.ArtistsApi(this.http);
     this.browse = new api.BrowseApi(this.http);
     this.follow = new api.FollowApi(this.http);
+    this.library = new api.LibraryApi(this.http);
   }
 
   getAccessToken() {

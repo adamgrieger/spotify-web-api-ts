@@ -124,6 +124,16 @@ export interface Restrictions {
   reason: string;
 }
 
+export interface SavedAlbum {
+  added_at: string;
+  album: Album;
+}
+
+export interface SavedTrack {
+  added_at: string;
+  track: Track;
+}
+
 export interface SimplifiedAlbum {
   album_group?: "album" | "single" | "compilation" | "appears_on";
   album_type: "album" | "single" | "compilation";

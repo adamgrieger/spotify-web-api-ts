@@ -122,3 +122,19 @@ export interface GetFollowedArtistsOptions {
   limit?: number;
   after?: string;
 }
+
+// +---------+
+// | Library |
+// +---------+
+
+export interface GetSavedAlbumsOptions {
+  limit?: number;
+  offset?: number;
+  market?: string;
+}
+
+export interface GetSavedTracksOptions {
+  limit?: number;
+  offset?: number;
+  market?: string;
+}

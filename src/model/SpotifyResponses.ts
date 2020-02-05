@@ -76,3 +76,15 @@ export interface GetRecommendationsResponse {
 export interface GetFollowedArtistsResponse {
   artists: SpotifyObjects.CursorBasedPaging<SpotifyObjects.Artist>;
 }
+
+// +---------+
+// | Library |
+// +---------+
+
+export type GetSavedAlbumsResponse = SpotifyObjects.Paging<
+  SpotifyObjects.SavedAlbum
+>;
+
+export type GetSavedTracksResponse = SpotifyObjects.Paging<
+  SpotifyObjects.SavedTrack
+>;
