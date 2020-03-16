@@ -138,3 +138,19 @@ export interface GetSavedTracksOptions {
   offset?: number;
   market?: string;
 }
+
+// +-----------------+
+// | Personalization |
+// +-----------------+
+
+export interface GetMyTopArtistsOptions {
+  limit?: number;
+  offset?: number;
+  time_range?: "long_term" | "medium_term" | "short_term";
+}
+
+export interface GetMyTopTracksOptions {
+  limit?: number;
+  offset?: number;
+  time_range?: "long_term" | "medium_term" | "short_term";
+}

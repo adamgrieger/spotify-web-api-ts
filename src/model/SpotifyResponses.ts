@@ -88,3 +88,15 @@ export type GetSavedAlbumsResponse = SpotifyObjects.Paging<
 export type GetSavedTracksResponse = SpotifyObjects.Paging<
   SpotifyObjects.SavedTrack
 >;
+
+// +-----------------+
+// | Personalization |
+// +-----------------+
+
+export type GetMyTopArtistsResponse = SpotifyObjects.Paging<
+  SpotifyObjects.Artist
+>;
+
+export type GetMyTopTracksResponse = SpotifyObjects.Paging<
+  SpotifyObjects.Track
+>;
