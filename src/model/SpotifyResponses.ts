@@ -100,3 +100,15 @@ export type GetMyTopArtistsResponse = SpotifyObjects.Paging<
 export type GetMyTopTracksResponse = SpotifyObjects.Paging<
   SpotifyObjects.Track
 >;
+
+// +--------+
+// | Player |
+// +--------+
+
+export type GetMyDevicesResponse = SpotifyObjects.Device[];
+
+export type GetPlaybackInfoResponse = SpotifyObjects.CurrentlyPlayingContext;
+
+export type GetRecentlyPlayedTracksResponse = SpotifyObjects.CursorBasedPaging<
+  SpotifyObjects.PlayHistory
+>;

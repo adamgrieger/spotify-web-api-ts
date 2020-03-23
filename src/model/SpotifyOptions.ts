@@ -154,3 +154,64 @@ export interface GetMyTopTracksOptions {
   offset?: number;
   time_range?: "long_term" | "medium_term" | "short_term";
 }
+
+// +--------+
+// | Player |
+// +--------+
+
+export interface AddToQueueOptions {
+  device_id?: string;
+}
+
+export interface GetPlaybackInfoOptions {
+  market?: string;
+}
+
+export interface GetRecentlyPlayedTracksOptions {
+  limit?: number;
+  after?: number;
+  before?: number;
+}
+
+export interface GetCurrentlyPlayingTrackOptions {
+  market?: string;
+}
+
+export interface NextOptions {
+  device_id?: string;
+}
+
+export interface PauseOptions {
+  device_id?: string;
+}
+
+export interface PlayOptions {
+  device_id?: string;
+  context_uri?: string;
+  uris?: string[];
+  offset?: { position: number } | { uri: string };
+}
+
+export interface PreviousOptions {
+  device_id?: string;
+}
+
+export interface RepeatOptions {
+  device_id?: string;
+}
+
+export interface SeekOptions {
+  device_id?: string;
+}
+
+export interface ShuffleOptions {
+  device_id?: string;
+}
+
+export interface TransferPlaybackOptions {
+  play?: boolean;
+}
+
+export interface VolumeOptions {
+  device_id?: string;
+}

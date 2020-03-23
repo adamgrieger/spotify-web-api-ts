@@ -14,6 +14,10 @@ export class SpotifyWebApi {
 
   public library: api.LibraryApi;
 
+  public personalization: api.PersonalizationApi;
+
+  public player: api.PlayerApi;
+
   constructor(accessToken: string) {
     this.http = new Http(accessToken);
 
@@ -22,6 +26,8 @@ export class SpotifyWebApi {
     this.browse = new api.BrowseApi(this.http);
     this.follow = new api.FollowApi(this.http);
     this.library = new api.LibraryApi(this.http);
+    this.personalization = new api.PersonalizationApi(this.http);
+    this.player = new api.PlayerApi(this.http);
   }
 
   getAccessToken() {

@@ -1,3 +1,15 @@
+export type Action =
+  | "interrupting_playback"
+  | "pausing"
+  | "resuming"
+  | "seeking"
+  | "skipping_next"
+  | "skipping_prev"
+  | "toggling_repeat_context"
+  | "toggling_shuffle"
+  | "toggling_repeat_track"
+  | "transferring_playback";
+
 export interface Album {
   album_type: "album" | "single" | "compilation";
   artists: SimplifiedArtist[];
@@ -40,10 +52,40 @@ export interface Category {
   name: string;
 }
 
+export type Context = {
+  uri: string;
+  href: string | null;
+  external_urls: ExternalURL | null;
+  type: "album" | "artist" | "playlist";
+};
+
 export interface Copyright {
   text: string;
   type: "C" | "P";
 }
+
+export type CurrentlyPlaying = {
+  context: Context | null;
+  timestamp: number;
+  progress_ms: number | null;
+  is_playing: boolean;
+  item: Track | null;
+  currently_playing_type: "track" | "episode" | "ad" | "unknown";
+  actions: Disallows;
+};
+
+export type CurrentlyPlayingContext = {
+  device: Device;
+  repeat_state: "off" | "track" | "context";
+  shuffle_state: boolean;
+  context: Context | null;
+  timestamp: number;
+  progress_ms: number | null;
+  is_playing: boolean;
+  item: Track | null;
+  currently_playing_type: "track" | "episode" | "ad" | "unknown";
+  actions: Disallows;
+};
 
 export interface Cursor {
   after: string;
@@ -57,6 +99,33 @@ export interface CursorBasedPaging<T> {
   cursors: Cursor;
   total: number;
 }
+
+export type Device = {
+  id: string | null;
+  is_active: boolean;
+  is_private_session: boolean;
+  is_restricted: boolean;
+  name: string;
+  type: DeviceType;
+  volume_percent: number | null;
+};
+
+export type DeviceType =
+  | "Computer"
+  | "Tablet"
+  | "Smartphone"
+  | "Speaker"
+  | "TV"
+  | "AVR"
+  | "STB"
+  | "AudioDongle"
+  | "GameConsole"
+  | "CastVideo"
+  | "CastAudio"
+  | "Automobile"
+  | "Unknown";
+
+export type Disallows = Record<Action, boolean>;
 
 export interface ExternalID {
   [key: string]: string;
@@ -93,6 +162,12 @@ export interface Paging<T> {
   total: number;
 }
 
+export interface PlayHistory {
+  track: SimplifiedTrack;
+  played_at: string;
+  context: Context;
+}
+
 export interface PublicUser {
   display_name: string | null;
   external_urls: ExternalURL;
@@ -119,6 +194,8 @@ export interface RegularError {
     message: string;
   };
 }
+
+export type RepeatState = "track" | "context" | "off";
 
 export interface Restrictions {
   reason: string;
