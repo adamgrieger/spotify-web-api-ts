@@ -2,68 +2,68 @@
 // | Albums |
 // +--------+
 
-export interface GetAlbumOptions {
+export type GetAlbumOptions = {
   market?: string;
-}
+};
 
-export interface GetAlbumsOptions {
+export type GetAlbumsOptions = {
   market?: string;
-}
+};
 
-export interface GetAlbumTracksOptions {
+export type GetAlbumTracksOptions = {
   limit?: number;
   offset?: number;
   market?: string;
-}
+};
 
 // +---------+
 // | Artists |
 // +---------+
 
-export interface GetArtistAlbumsOptions {
+export type GetArtistAlbumsOptions = {
   include_groups?: Array<"album" | "single" | "appears_on" | "compilation">;
   country?: string;
   limit?: number;
   offset?: number;
-}
+};
 
 // +--------+
 // | Browse |
 // +--------+
 
-export interface GetCategoriesOptions {
+export type GetCategoriesOptions = {
   country?: string;
   locale?: string;
   limit?: number;
   offset?: number;
-}
+};
 
-export interface GetCategoryOptions {
+export type GetCategoryOptions = {
   country?: string;
   locale?: string;
-}
+};
 
-export interface GetCategoryPlaylistsOptions {
+export type GetCategoryPlaylistsOptions = {
   country?: string;
   limit?: number;
   offset?: number;
-}
+};
 
-export interface GetFeaturedPlaylistsOptions {
+export type GetFeaturedPlaylistsOptions = {
   locale?: string;
   country?: string;
   timestamp?: string;
   limit?: number;
   offset?: number;
-}
+};
 
-export interface GetNewReleasesOptions {
+export type GetNewReleasesOptions = {
   country?: string;
   limit?: number;
   offset?: number;
-}
+};
 
-export interface GetRecommendationsOptions {
+export type GetRecommendationsOptions = {
   limit?: number;
   market?: string;
   max_acousticness?: number;
@@ -108,110 +108,110 @@ export interface GetRecommendationsOptions {
   target_tempo?: number;
   target_time_signature?: number;
   target_valence?: number;
-}
+};
 
 // +--------+
 // | Follow |
 // +--------+
 
-export interface FollowPlaylistOptions {
+export type FollowPlaylistOptions = {
   public?: boolean;
-}
+};
 
-export interface GetFollowedArtistsOptions {
+export type GetFollowedArtistsOptions = {
   limit?: number;
   after?: string;
-}
+};
 
 // +---------+
 // | Library |
 // +---------+
 
-export interface GetSavedAlbumsOptions {
+export type GetSavedAlbumsOptions = {
   limit?: number;
   offset?: number;
   market?: string;
-}
+};
 
-export interface GetSavedTracksOptions {
+export type GetSavedTracksOptions = {
   limit?: number;
   offset?: number;
   market?: string;
-}
+};
 
 // +-----------------+
 // | Personalization |
 // +-----------------+
 
-export interface GetMyTopArtistsOptions {
+export type GetMyTopArtistsOptions = {
   limit?: number;
   offset?: number;
   time_range?: "long_term" | "medium_term" | "short_term";
-}
+};
 
-export interface GetMyTopTracksOptions {
+export type GetMyTopTracksOptions = {
   limit?: number;
   offset?: number;
   time_range?: "long_term" | "medium_term" | "short_term";
-}
+};
 
 // +--------+
 // | Player |
 // +--------+
 
-export interface AddToQueueOptions {
+export type AddToQueueOptions = {
   device_id?: string;
-}
+};
 
-export interface GetPlaybackInfoOptions {
+export type GetPlaybackInfoOptions = {
   market?: string;
-}
+};
 
-export interface GetRecentlyPlayedTracksOptions {
+export type GetRecentlyPlayedTracksOptions = {
   limit?: number;
   after?: number;
   before?: number;
-}
+};
 
-export interface GetCurrentlyPlayingTrackOptions {
+export type GetCurrentlyPlayingTrackOptions = {
   market?: string;
-}
+};
 
-export interface NextOptions {
+export type NextOptions = {
   device_id?: string;
-}
+};
 
-export interface PauseOptions {
+export type PauseOptions = {
   device_id?: string;
-}
+};
 
-export interface PlayOptions {
+export type PlayOptions = {
   device_id?: string;
   context_uri?: string;
   uris?: string[];
   offset?: { position: number } | { uri: string };
-}
+};
 
-export interface PreviousOptions {
+export type PreviousOptions = {
   device_id?: string;
-}
+};
 
-export interface RepeatOptions {
+export type RepeatOptions = {
   device_id?: string;
-}
+};
 
-export interface SeekOptions {
+export type SeekOptions = {
   device_id?: string;
-}
+};
 
-export interface ShuffleOptions {
+export type ShuffleOptions = {
   device_id?: string;
-}
+};
 
-export interface TransferPlaybackOptions {
+export type TransferPlaybackOptions = {
   play?: boolean;
-}
+};
 
-export interface VolumeOptions {
+export type VolumeOptions = {
   device_id?: string;
-}
+};

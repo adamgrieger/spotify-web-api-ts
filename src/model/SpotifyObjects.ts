@@ -10,7 +10,7 @@ export type Action =
   | "toggling_repeat_track"
   | "transferring_playback";
 
-export interface Album {
+export type Album = {
   album_type: "album" | "single" | "compilation";
   artists: SimplifiedArtist[];
   available_markets: string[];
@@ -30,9 +30,9 @@ export interface Album {
   tracks: Paging<SimplifiedTrack>;
   type: "album";
   uri: string;
-}
+};
 
-export interface Artist {
+export type Artist = {
   external_urls: ExternalURL;
   followers: Followers;
   genres: string[];
@@ -43,14 +43,14 @@ export interface Artist {
   popularity: number;
   type: "artist";
   uri: string;
-}
+};
 
-export interface Category {
+export type Category = {
   href: string;
   icons: Image[];
   id: string;
   name: string;
-}
+};
 
 export type Context = {
   uri: string;
@@ -59,10 +59,10 @@ export type Context = {
   type: "album" | "artist" | "playlist";
 };
 
-export interface Copyright {
+export type Copyright = {
   text: string;
   type: "C" | "P";
-}
+};
 
 export type CurrentlyPlaying = {
   context: Context | null;
@@ -87,18 +87,18 @@ export type CurrentlyPlayingContext = {
   actions: Disallows;
 };
 
-export interface Cursor {
+export type Cursor = {
   after: string;
-}
+};
 
-export interface CursorBasedPaging<T> {
+export type CursorBasedPaging<T> = {
   href: string;
   items: T[];
   limit: number;
   next: string | null;
   cursors: Cursor;
   total: number;
-}
+};
 
 export type Device = {
   id: string | null;
@@ -127,32 +127,32 @@ export type DeviceType =
 
 export type Disallows = Record<Action, boolean>;
 
-export interface ExternalID {
+export type ExternalID = {
   [key: string]: string;
-}
+};
 
-export interface ExternalURL {
+export type ExternalURL = {
   [key: string]: string;
-}
+};
 
-export interface Followers {
+export type Followers = {
   href: string | null;
   total: number;
-}
+};
 
-export interface GetRecommendationsSeeds {
+export type GetRecommendationsSeeds = {
   seed_artists?: string[];
   seed_genres?: string[];
   seed_tracks?: string[];
-}
+};
 
-export interface Image {
+export type Image = {
   height: number | null;
   url: string;
   width: number | null;
-}
+};
 
-export interface Paging<T> {
+export type Paging<T> = {
   href: string;
   items: T[];
   limit: number;
@@ -160,15 +160,15 @@ export interface Paging<T> {
   offset: number;
   previous: string | null;
   total: number;
-}
+};
 
-export interface PlayHistory {
+export type PlayHistory = {
   track: SimplifiedTrack;
   played_at: string;
   context: Context;
-}
+};
 
-export interface PublicUser {
+export type PublicUser = {
   display_name: string | null;
   external_urls: ExternalURL;
   followers: Followers;
@@ -177,41 +177,41 @@ export interface PublicUser {
   images: Image[];
   type: "user";
   uri: string;
-}
+};
 
-export interface RecommendationSeed {
+export type RecommendationSeed = {
   afterFilteringSize: number;
   afterRelinkingSize: number;
   href: string | null;
   id: string;
   initialPoolSize: number;
   type: "artist" | "track" | "genre";
-}
+};
 
-export interface RegularError {
+export type RegularError = {
   error: {
     status: number;
     message: string;
   };
-}
+};
 
 export type RepeatState = "track" | "context" | "off";
 
-export interface Restrictions {
+export type Restrictions = {
   reason: string;
-}
+};
 
-export interface SavedAlbum {
+export type SavedAlbum = {
   added_at: string;
   album: Album;
-}
+};
 
-export interface SavedTrack {
+export type SavedTrack = {
   added_at: string;
   track: Track;
-}
+};
 
-export interface SimplifiedAlbum {
+export type SimplifiedAlbum = {
   album_group?: "album" | "single" | "compilation" | "appears_on";
   album_type: "album" | "single" | "compilation";
   artists: SimplifiedArtist[];
@@ -226,18 +226,18 @@ export interface SimplifiedAlbum {
   restrictions: Restrictions;
   type: "album";
   uri: string;
-}
+};
 
-export interface SimplifiedArtist {
+export type SimplifiedArtist = {
   external_urls: ExternalURL;
   href: string;
   id: string;
   name: string;
   type: "artist";
   uri: string;
-}
+};
 
-export interface SimplifiedPlaylist {
+export type SimplifiedPlaylist = {
   collaborative: boolean;
   external_urls: ExternalURL;
   href: string;
@@ -250,9 +250,9 @@ export interface SimplifiedPlaylist {
   tracks: Tracks;
   type: "playlist";
   uri: string;
-}
+};
 
-export interface SimplifiedTrack {
+export type SimplifiedTrack = {
   artists: SimplifiedArtist[];
   available_markets: string[];
   disc_number: number;
@@ -270,9 +270,9 @@ export interface SimplifiedTrack {
   type: "track";
   uri: string;
   is_local: boolean;
-}
+};
 
-export interface Track {
+export type Track = {
   album: SimplifiedAlbum;
   artists: SimplifiedArtist[];
   available_markets: string[];
@@ -293,17 +293,17 @@ export interface Track {
   type: "track";
   uri: string;
   is_local: boolean;
-}
+};
 
-export interface TrackLink {
+export type TrackLink = {
   external_urls: ExternalURL;
   href: string;
   id: string;
   type: "track";
   uri: string;
-}
+};
 
-export interface Tracks {
+export type Tracks = {
   href: string;
   total: number;
-}
+};

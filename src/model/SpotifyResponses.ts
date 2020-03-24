@@ -6,9 +6,9 @@ import * as SpotifyObjects from "./SpotifyObjects";
 
 export type GetAlbumResponse = SpotifyObjects.Album;
 
-export interface GetAlbumsResponse {
+export type GetAlbumsResponse = {
   albums: SpotifyObjects.Album[];
-}
+};
 
 export type GetAlbumTracksResponse = SpotifyObjects.Paging<
   SpotifyObjects.SimplifiedTrack
@@ -24,29 +24,29 @@ export type GetArtistAlbumsResponse = SpotifyObjects.Paging<
   SpotifyObjects.SimplifiedAlbum
 >;
 
-export interface GetArtistsResponse {
+export type GetArtistsResponse = {
   artists: SpotifyObjects.Artist[];
-}
+};
 
-export interface GetArtistTopTracksResponse {
+export type GetArtistTopTracksResponse = {
   tracks: SpotifyObjects.Track[];
-}
+};
 
-export interface GetRelatedArtistsResponse {
+export type GetRelatedArtistsResponse = {
   artists: SpotifyObjects.Artist[];
-}
+};
 
 // +--------+
 // | Browse |
 // +--------+
 
-export interface GetAvailableGenreSeedsResponse {
+export type GetAvailableGenreSeedsResponse = {
   genres: string[];
-}
+};
 
-export interface GetCategoriesResponse {
+export type GetCategoriesResponse = {
   categories: SpotifyObjects.Paging<SpotifyObjects.Category>;
-}
+};
 
 export type GetCategoryResponse = SpotifyObjects.Category;
 
@@ -54,28 +54,28 @@ export type GetCategoryPlaylistsResponse = SpotifyObjects.Paging<
   SpotifyObjects.SimplifiedPlaylist
 >;
 
-export interface GetFeaturedPlaylistsResponse {
+export type GetFeaturedPlaylistsResponse = {
   message: string;
   playlists: SpotifyObjects.Paging<SpotifyObjects.SimplifiedPlaylist>;
-}
+};
 
-export interface GetNewReleasesResponse {
+export type GetNewReleasesResponse = {
   message: string;
   albums: SpotifyObjects.Paging<SpotifyObjects.SimplifiedAlbum>;
-}
+};
 
-export interface GetRecommendationsResponse {
+export type GetRecommendationsResponse = {
   seeds: SpotifyObjects.RecommendationSeed[];
   tracks: SpotifyObjects.SimplifiedTrack[];
-}
+};
 
 // +--------+
 // | Follow |
 // +--------+
 
-export interface GetFollowedArtistsResponse {
+export type GetFollowedArtistsResponse = {
   artists: SpotifyObjects.CursorBasedPaging<SpotifyObjects.Artist>;
-}
+};
 
 // +---------+
 // | Library |
