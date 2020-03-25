@@ -1,5 +1,5 @@
 import { Http } from "../helpers/Http";
-import * as model from "../model";
+import * as types from "../types";
 
 export class FollowApi {
   private http: Http;
@@ -47,7 +47,7 @@ export class FollowApi {
    * @param playlistId The Spotify ID of the playlist.
    * @param options A JSON object with optional request information.
    */
-  followPlaylist(playlistId: string, options?: model.FollowPlaylistOptions) {
+  followPlaylist(playlistId: string, options?: types.FollowPlaylistOptions) {
     return this.http.put<void>(
       `/playlists/${playlistId}/followers`,
       options && { data: options }
@@ -75,8 +75,8 @@ export class FollowApi {
    *
    * @param options A JSON object with optional request information.
    */
-  getFollowedArtists(options?: model.GetFollowedArtistsOptions) {
-    return this.http.get<model.GetFollowedArtistsResponse>("/me/following", {
+  getFollowedArtists(options?: types.GetFollowedArtistsOptions) {
+    return this.http.get<types.GetFollowedArtistsResponse>("/me/following", {
       params: {
         ...options,
         type: "artist"

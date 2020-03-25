@@ -1,33 +1,33 @@
 import { Http } from "./helpers/Http";
-import * as api from "./api";
+import * as apis from "./apis";
 
 export class SpotifyWebApi {
   private http: Http;
 
-  public albums: api.AlbumsApi;
+  public albums: apis.AlbumsApi;
 
-  public artists: api.ArtistsApi;
+  public artists: apis.ArtistsApi;
 
-  public browse: api.BrowseApi;
+  public browse: apis.BrowseApi;
 
-  public follow: api.FollowApi;
+  public follow: apis.FollowApi;
 
-  public library: api.LibraryApi;
+  public library: apis.LibraryApi;
 
-  public personalization: api.PersonalizationApi;
+  public personalization: apis.PersonalizationApi;
 
-  public player: api.PlayerApi;
+  public player: apis.PlayerApi;
 
   constructor(accessToken: string) {
     this.http = new Http(accessToken);
 
-    this.albums = new api.AlbumsApi(this.http);
-    this.artists = new api.ArtistsApi(this.http);
-    this.browse = new api.BrowseApi(this.http);
-    this.follow = new api.FollowApi(this.http);
-    this.library = new api.LibraryApi(this.http);
-    this.personalization = new api.PersonalizationApi(this.http);
-    this.player = new api.PlayerApi(this.http);
+    this.albums = new apis.AlbumsApi(this.http);
+    this.artists = new apis.ArtistsApi(this.http);
+    this.browse = new apis.BrowseApi(this.http);
+    this.follow = new apis.FollowApi(this.http);
+    this.library = new apis.LibraryApi(this.http);
+    this.personalization = new apis.PersonalizationApi(this.http);
+    this.player = new apis.PlayerApi(this.http);
   }
 
   getAccessToken() {

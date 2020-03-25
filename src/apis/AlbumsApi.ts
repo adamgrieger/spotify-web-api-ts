@@ -1,5 +1,5 @@
 import { Http } from "../helpers/Http";
-import * as model from "../model";
+import * as types from "../types";
 
 export class AlbumsApi {
   private http: Http;
@@ -16,8 +16,8 @@ export class AlbumsApi {
    * @param albumId The Spotify ID for the album.
    * @param options A JSON object with optional request information.
    */
-  getAlbum(albumId: string, options?: model.GetAlbumOptions) {
-    return this.http.get<model.GetAlbumResponse>(
+  getAlbum(albumId: string, options?: types.GetAlbumOptions) {
+    return this.http.get<types.GetAlbumResponse>(
       `/albums/${albumId}`,
       options && { params: options }
     );
@@ -32,8 +32,8 @@ export class AlbumsApi {
    * @param albumIds The Spotify IDs for the albums.
    * @param options A JSON object with optional request information.
    */
-  getAlbums(albumIds: string[], options?: model.GetAlbumsOptions) {
-    return this.http.get<model.GetAlbumsResponse>("/albums", {
+  getAlbums(albumIds: string[], options?: types.GetAlbumsOptions) {
+    return this.http.get<types.GetAlbumsResponse>("/albums", {
       params: {
         ...options,
         ids: albumIds
@@ -49,8 +49,8 @@ export class AlbumsApi {
    * @param albumId The Spotify ID for the album.
    * @param options A JSON object with optional request information.
    */
-  getAlbumTracks(albumId: string, options?: model.GetAlbumTracksOptions) {
-    return this.http.get<model.GetAlbumTracksResponse>(
+  getAlbumTracks(albumId: string, options?: types.GetAlbumTracksOptions) {
+    return this.http.get<types.GetAlbumTracksResponse>(
       `/albums/${albumId}/tracks`,
       options && { params: options }
     );

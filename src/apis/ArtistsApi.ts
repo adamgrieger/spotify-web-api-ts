@@ -1,5 +1,5 @@
 import { Http } from "../helpers/Http";
-import * as model from "../model";
+import * as types from "../types";
 
 export class ArtistsApi {
   private http: Http;
@@ -17,7 +17,7 @@ export class ArtistsApi {
    * @param artistId The Spotify ID for the artist.
    */
   getArtist(artistId: string) {
-    return this.http.get<model.GetArtistResponse>(`/artists/${artistId}`);
+    return this.http.get<types.GetArtistResponse>(`/artists/${artistId}`);
   }
 
   /**
@@ -28,8 +28,8 @@ export class ArtistsApi {
    * @param artistId The Spotify ID for the artist.
    * @param options A JSON object with optional request information.
    */
-  getArtistAlbums(artistId: string, options?: model.GetArtistAlbumsOptions) {
-    return this.http.get<model.GetArtistAlbumsResponse>(
+  getArtistAlbums(artistId: string, options?: types.GetArtistAlbumsOptions) {
+    return this.http.get<types.GetArtistAlbumsResponse>(
       `/artists/${artistId}/albums`,
       options && { params: options }
     );
@@ -42,7 +42,7 @@ export class ArtistsApi {
    * @param artistIds The Spotify IDs for the artists.
    */
   getArtists(artistIds: string[]) {
-    return this.http.get<model.GetArtistsResponse>("/artists", {
+    return this.http.get<types.GetArtistsResponse>("/artists", {
       params: {
         ids: artistIds
       }
@@ -58,7 +58,7 @@ export class ArtistsApi {
    * @param country An ISO 3166-1 alpha-2 country code or the string `from_token`.
    */
   getArtistTopTracks(artistId: string, country: string) {
-    return this.http.get<model.GetArtistTopTracksResponse>(
+    return this.http.get<types.GetArtistTopTracksResponse>(
       `/artists/${artistId}/top-tracks`,
       {
         params: {
@@ -78,7 +78,7 @@ export class ArtistsApi {
    * @param artistId The Spotify ID for the artist.
    */
   getRelatedArtists(artistId: string) {
-    return this.http.get<model.GetRelatedArtistsResponse>(
+    return this.http.get<types.GetRelatedArtistsResponse>(
       `/artists/${artistId}/related-artists`
     );
   }

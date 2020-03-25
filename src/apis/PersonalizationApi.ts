@@ -1,5 +1,5 @@
 import { Http } from "../helpers/Http";
-import * as model from "../model";
+import * as types from "../types";
 
 export class PersonalizationApi {
   private http: Http;
@@ -13,8 +13,8 @@ export class PersonalizationApi {
    *
    * @param options A JSON object with optional request information.
    */
-  getMyTopArtists(options?: model.GetMyTopArtistsOptions) {
-    return this.http.get<model.GetMyTopArtistsResponse>(
+  getMyTopArtists(options?: types.GetMyTopArtistsOptions) {
+    return this.http.get<types.GetMyTopArtistsResponse>(
       "/me/top/artists",
       options && { params: options }
     );
@@ -25,8 +25,8 @@ export class PersonalizationApi {
    *
    * @param options A JSON object with optional request information.
    */
-  getMyTopTracks(options?: model.GetMyTopTracksOptions) {
-    return this.http.get<model.GetMyTopTracksResponse>(
+  getMyTopTracks(options?: types.GetMyTopTracksOptions) {
+    return this.http.get<types.GetMyTopTracksResponse>(
       "/me/top/tracks",
       options && { params: options }
     );

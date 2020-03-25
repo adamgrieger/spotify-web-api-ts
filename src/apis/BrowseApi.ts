@@ -1,5 +1,5 @@
 import { Http } from "../helpers/Http";
-import * as model from "../model";
+import * as types from "../types";
 
 export class BrowseApi {
   private http: Http;
@@ -15,7 +15,7 @@ export class BrowseApi {
    * recommendations.
    */
   getAvailableGenreSeeds() {
-    return this.http.get<model.GetAvailableGenreSeedsResponse>(
+    return this.http.get<types.GetAvailableGenreSeedsResponse>(
       "/recommendations/available-genre-seeds"
     );
   }
@@ -28,8 +28,8 @@ export class BrowseApi {
    *
    * @param options A JSON object with optional request information.
    */
-  getCategories(options?: model.GetCategoriesOptions) {
-    return this.http.get<model.GetCategoriesResponse>(
+  getCategories(options?: types.GetCategoriesOptions) {
+    return this.http.get<types.GetCategoriesResponse>(
       "/browse/categories",
       options && { params: options }
     );
@@ -44,8 +44,8 @@ export class BrowseApi {
    * @param categoryId The Spotify category ID for the category.
    * @param options A JSON object with optional request information.
    */
-  getCategory(categoryId: string, options?: model.GetCategoryOptions) {
-    return this.http.get<model.GetCategoryResponse>(
+  getCategory(categoryId: string, options?: types.GetCategoryOptions) {
+    return this.http.get<types.GetCategoryResponse>(
       `/browse/categories/${categoryId}`,
       options && { params: options }
     );
@@ -61,9 +61,9 @@ export class BrowseApi {
    */
   getCategoryPlaylists(
     categoryId: string,
-    options?: model.GetCategoryPlaylistsOptions
+    options?: types.GetCategoryPlaylistsOptions
   ) {
-    return this.http.get<model.GetCategoryPlaylistsResponse>(
+    return this.http.get<types.GetCategoryPlaylistsResponse>(
       `/browse/categories/${categoryId}/playlists`,
       options && { params: options }
     );
@@ -77,8 +77,8 @@ export class BrowseApi {
    *
    * @param options A JSON object with optional request information.
    */
-  getFeaturedPlaylists(options?: model.GetFeaturedPlaylistsOptions) {
-    return this.http.get<model.GetFeaturedPlaylistsResponse>(
+  getFeaturedPlaylists(options?: types.GetFeaturedPlaylistsOptions) {
+    return this.http.get<types.GetFeaturedPlaylistsResponse>(
       "/browse/featured-playlists",
       options && { params: options }
     );
@@ -92,8 +92,8 @@ export class BrowseApi {
    *
    * @param options A JSON object with optional request information.
    */
-  getNewReleases(options?: model.GetNewReleasesOptions) {
-    return this.http.get<model.GetNewReleasesResponse>(
+  getNewReleases(options?: types.GetNewReleasesOptions) {
+    return this.http.get<types.GetNewReleasesResponse>(
       "/browse/new-releases",
       options && { params: options }
     );
@@ -117,10 +117,10 @@ export class BrowseApi {
    * @param options A JSON object with optional request information.
    */
   getRecommendations(
-    seeds: model.GetRecommendationsSeeds,
-    options?: model.GetRecommendationsOptions
+    seeds: types.GetRecommendationsSeeds,
+    options?: types.GetRecommendationsOptions
   ) {
-    return this.http.get<model.GetRecommendationsResponse>("/recommendations", {
+    return this.http.get<types.GetRecommendationsResponse>("/recommendations", {
       params: {
         ...seeds,
         ...options

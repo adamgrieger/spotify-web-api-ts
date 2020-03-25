@@ -1,5 +1,5 @@
 import { Http } from "../helpers/Http";
-import * as model from "../model";
+import * as types from "../types";
 
 export class LibraryApi {
   private http: Http;
@@ -39,8 +39,8 @@ export class LibraryApi {
    *
    * @param options A JSON object with optional request information.
    */
-  getSavedAlbums(options?: model.GetSavedAlbumsOptions) {
-    return this.http.get<model.GetSavedAlbumsResponse>(
+  getSavedAlbums(options?: types.GetSavedAlbumsOptions) {
+    return this.http.get<types.GetSavedAlbumsResponse>(
       "/me/albums",
       options && { params: options }
     );
@@ -51,8 +51,8 @@ export class LibraryApi {
    *
    * @param options A JSON object with optional request information.
    */
-  getSavedTracks(options?: model.GetSavedTracksOptions) {
-    return this.http.get<model.GetSavedTracksResponse>(
+  getSavedTracks(options?: types.GetSavedTracksOptions) {
+    return this.http.get<types.GetSavedTracksResponse>(
       "/me/tracks",
       options && { params: options }
     );
