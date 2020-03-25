@@ -110,6 +110,18 @@ export type GetRecommendationsOptions = {
   target_valence?: number;
 };
 
+// +----------+
+// | Episodes |
+// +----------+
+
+export type GetEpisodeOptions = {
+  market?: string;
+};
+
+export type GetEpisodesOptions = {
+  market?: string;
+};
+
 // +--------+
 // | Follow |
 // +--------+

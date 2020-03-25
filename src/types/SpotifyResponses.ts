@@ -69,6 +69,14 @@ export type GetRecommendationsResponse = {
   tracks: SpotifyObjects.SimplifiedTrack[];
 };
 
+// +----------+
+// | Episodes |
+// +----------+
+
+export type GetEpisodeResponse = SpotifyObjects.Episode;
+
+export type GetEpisodesResponse = Array<SpotifyObjects.Episode | null>;
+
 // +--------+
 // | Follow |
 // +--------+

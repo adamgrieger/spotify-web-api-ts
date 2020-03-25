@@ -127,6 +127,27 @@ export type DeviceType =
 
 export type Disallows = Record<Action, boolean>;
 
+export type Episode = {
+  audio_preview_url: string | null;
+  description: string;
+  duration_ms: number;
+  explicit: boolean;
+  external_urls: ExternalURL;
+  href: string;
+  id: string;
+  images: Image[];
+  is_externally_hosted: boolean;
+  is_playable: boolean;
+  languages: string[];
+  name: string;
+  release_date: string;
+  release_date_precision: "year" | "month" | "day";
+  resume_point: ResumePoint;
+  show: SimplifiedShow;
+  type: "episode";
+  uri: string;
+};
+
 export type ExternalID = {
   [key: string]: string;
 };
@@ -197,6 +218,11 @@ export type RegularError = {
 
 export type RepeatState = "track" | "context" | "off";
 
+export type ResumePoint = {
+  fully_played: boolean;
+  resume_position_ms: number;
+};
+
 export type Restrictions = {
   reason: string;
 };
@@ -249,6 +275,24 @@ export type SimplifiedPlaylist = {
   snapshot_id: string;
   tracks: Tracks;
   type: "playlist";
+  uri: string;
+};
+
+export type SimplifiedShow = {
+  available_markets: string[];
+  copyrights: Copyright[];
+  description: string;
+  explicit: boolean;
+  external_urls: ExternalURL;
+  href: string;
+  id: string;
+  images: Image[];
+  is_externally_hosted: boolean | null;
+  languages: string[];
+  media_type: string;
+  name: string;
+  publisher: string;
+  type: "show";
   uri: string;
 };
 

@@ -10,6 +10,8 @@ export class SpotifyWebApi {
 
   public browse: apis.BrowseApi;
 
+  public episodes: apis.EpisodesApi;
+
   public follow: apis.FollowApi;
 
   public library: apis.LibraryApi;
@@ -24,6 +26,7 @@ export class SpotifyWebApi {
     this.albums = new apis.AlbumsApi(this.http);
     this.artists = new apis.ArtistsApi(this.http);
     this.browse = new apis.BrowseApi(this.http);
+    this.episodes = new apis.EpisodesApi(this.http);
     this.follow = new apis.FollowApi(this.http);
     this.library = new apis.LibraryApi(this.http);
     this.personalization = new apis.PersonalizationApi(this.http);
