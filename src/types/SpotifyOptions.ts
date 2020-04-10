@@ -227,3 +227,50 @@ export type TransferPlaybackOptions = {
 export type VolumeOptions = {
   device_id?: string;
 };
+
+// +-----------+
+// | Playlists |
+// +-----------+
+
+export type AddTracksToPlaylistOptions = {
+  position?: number;
+};
+
+export type CreatePlaylistOptions = {
+  public?: boolean;
+  collaborative?: boolean;
+  description?: string;
+};
+
+export type GetMyPlaylistsOptions = {
+  limit?: number;
+  offset?: number;
+};
+
+export type GetPlaylistOptions = {
+  fields?: string;
+  market?: string;
+  additional_types?: Array<"track" | "episode">;
+};
+
+export type GetPlaylistTracksOptions = {
+  fields?: string;
+  limit?: number;
+  offset?: number;
+  market?: string;
+  additional_types?: Array<"track" | "episode">;
+};
+
+export type GetUserPlaylistsOptions = {
+  limit?: number;
+  offset?: number;
+};
+
+export type RemovePlaylistTracksByPositionOptions = {
+  snapshot_id?: string;
+};
+
+export type ReorderPlaylistTracksOptions = {
+  range_length?: number;
+  snapshot_id?: string;
+};

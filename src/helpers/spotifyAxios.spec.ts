@@ -11,7 +11,7 @@ describe("spotifyAxios", () => {
     jest.resetAllMocks();
   });
 
-  it("should successfully call Spotify's Web API", async () => {
+  it("should successfully call Spotify's Web API with the default content type", async () => {
     axiosMock.mockResolvedValue({ data: "foo" });
     await spotifyAxios("foo", "GET", "token", {
       params: {
@@ -24,7 +24,26 @@ describe("spotifyAxios", () => {
       },
       baseURL: BASE_URL,
       headers: {
-        Authorization: "Bearer token"
+        Authorization: "Bearer token",
+        "Content-Type": "application/json"
+      },
+      url: "foo",
+      method: "GET"
+    });
+  });
+
+  it("should successfully call Spotify's Web API with a custom content type", async () => {
+    axiosMock.mockResolvedValue({ data: "foo" });
+    await spotifyAxios("foo", "GET", "token", {
+      contentType: "image/jpeg",
+      data: "bar"
+    });
+    expect(axiosMock).toBeCalledWith({
+      data: "bar",
+      baseURL: BASE_URL,
+      headers: {
+        Authorization: "Bearer token",
+        "Content-Type": "image/jpeg"
       },
       url: "foo",
       method: "GET"

@@ -189,6 +189,37 @@ export type PlayHistory = {
   context: Context;
 };
 
+export type Playlist = {
+  collaborative: boolean;
+  description: string | null;
+  external_urls: ExternalURL;
+  followers: Followers;
+  href: string;
+  id: string;
+  images: Image[];
+  name: string;
+  owner: PublicUser;
+  public: boolean | null;
+  snapshot_id: string;
+  tracks: Paging<PlaylistTrack>;
+  type: "playlist";
+  uri: string;
+};
+
+export type PlaylistDetails = {
+  name?: string;
+  public?: boolean;
+  collaborative?: boolean;
+  description?: string;
+};
+
+export type PlaylistTrack = {
+  added_at: string | null;
+  added_by: PublicUser | null;
+  is_local: boolean;
+  track: Track | Episode;
+};
+
 export type PublicUser = {
   display_name: string | null;
   external_urls: ExternalURL;

@@ -120,3 +120,35 @@ export type GetPlaybackInfoResponse = SpotifyObjects.CurrentlyPlayingContext;
 export type GetRecentlyPlayedTracksResponse = SpotifyObjects.CursorBasedPaging<
   SpotifyObjects.PlayHistory
 >;
+
+// +-----------+
+// | Playlists |
+// +-----------+
+
+export type AddTracksToPlaylistResponse = {
+  snapshot_id: string;
+};
+
+export type GetMyPlaylistsResponse = SpotifyObjects.Paging<
+  SpotifyObjects.SimplifiedPlaylist
+>;
+
+export type GetPlaylistResponse = SpotifyObjects.Playlist;
+
+export type GetPlaylistCoverImageResponse = SpotifyObjects.Image[];
+
+export type GetPlaylistTracksResponse = SpotifyObjects.Paging<
+  Array<SpotifyObjects.Track | SpotifyObjects.Episode>
+>;
+
+export type RemovePlaylistTracksResponse = {
+  snapshot_id: string;
+};
+
+export type RemovePlaylistTracksByPositionResponse = {
+  snapshot_id: string;
+};
+
+export type ReorderPlaylistTracksResponse = {
+  snapshot_id: string;
+};

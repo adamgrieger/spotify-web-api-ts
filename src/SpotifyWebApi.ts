@@ -20,6 +20,8 @@ export class SpotifyWebApi {
 
   public player: apis.PlayerApi;
 
+  public playlists: apis.PlaylistsApi;
+
   constructor(accessToken: string) {
     this.http = new Http(accessToken);
 
@@ -31,6 +33,7 @@ export class SpotifyWebApi {
     this.library = new apis.LibraryApi(this.http);
     this.personalization = new apis.PersonalizationApi(this.http);
     this.player = new apis.PlayerApi(this.http);
+    this.playlists = new apis.PlaylistsApi(this.http);
   }
 
   getAccessToken() {
