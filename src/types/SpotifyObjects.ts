@@ -45,6 +45,35 @@ export type Artist = {
   uri: string;
 };
 
+export type AudioAnalysis = {
+  bars: TimeInterval[];
+  beats: TimeInterval[];
+  sections: Section[];
+  segments: Segment[];
+  tatums: TimeInterval[];
+};
+
+export type AudioFeatures = {
+  duration_ms: number;
+  key: number;
+  mode: number;
+  time_signature: number;
+  acousticness: number;
+  danceability: number;
+  energy: number;
+  instrumentalness: number;
+  liveness: number;
+  loudness: number;
+  speechiness: number;
+  valence: number;
+  tempo: number;
+  id: string;
+  uri: string;
+  track_href: string;
+  analysis_url: string;
+  type: "audio_features";
+};
+
 export type Category = {
   href: string;
   icons: Image[];
@@ -276,6 +305,33 @@ export type SearchType =
   | "show"
   | "episode";
 
+export type Section = {
+  start: number;
+  duration: number;
+  confidence: number;
+  loudness: number;
+  tempo: number;
+  tempo_confidence: number;
+  key: number;
+  key_confidence: number;
+  mode: number;
+  mode_confidence: number;
+  time_signature: number;
+  time_signature_confidence: number;
+};
+
+export type Segment = {
+  start: number;
+  duration: number;
+  confidence: number;
+  loudness_start: number;
+  loudness_max: number;
+  loudness_max_time: number;
+  loudness_end: number;
+  pitches: number[];
+  timbre: number[];
+};
+
 export type Show = {
   available_markets: string[];
   copyrights: Copyright[];
@@ -391,6 +447,12 @@ export type SimplifiedTrack = {
   type: "track";
   uri: string;
   is_local: boolean;
+};
+
+export type TimeInterval = {
+  start: number;
+  duration: number;
+  confidence: number;
 };
 
 export type Track = {

@@ -199,3 +199,21 @@ export type GetShowsResponse = Array<SpotifyObjects.Show | null>;
 export type GetShowEpisodesResponse = SpotifyObjects.Paging<
   SpotifyObjects.SimplifiedEpisode
 >;
+
+// +--------+
+// | Tracks |
+// +--------+
+
+export type GetAudioAnalysisForTrackResponse = SpotifyObjects.AudioAnalysis;
+
+export type GetAudioFeaturesForTrackResponse = SpotifyObjects.AudioFeatures;
+
+export type GetAudioFeaturesForTracksResponse = {
+  audio_features: Array<SpotifyObjects.AudioFeatures | null>;
+};
+
+export type GetTrackResponse = SpotifyObjects.Track;
+
+export type GetTracksResponse = {
+  tracks: Array<SpotifyObjects.Track | null>;
+};

@@ -303,3 +303,15 @@ export type GetShowEpisodesOptions = {
   offset?: number;
   market?: string;
 };
+
+// +--------+
+// | Tracks |
+// +--------+
+
+export type GetTrackOptions = {
+  market?: string;
+};
+
+export type GetTracksOptions = {
+  market?: string;
+};
