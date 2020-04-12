@@ -249,6 +249,20 @@ export type PlaylistTrack = {
   track: Track | Episode;
 };
 
+export type PrivateUser = {
+  country?: string;
+  display_name: string | null;
+  email?: string;
+  external_urls: ExternalURL;
+  followers: Followers;
+  href: string;
+  id: string;
+  images: Image[];
+  product?: string;
+  type: "user";
+  uri: string;
+};
+
 export type PublicUser = {
   display_name: string | null;
   external_urls: ExternalURL;

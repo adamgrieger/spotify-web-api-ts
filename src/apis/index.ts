@@ -10,3 +10,4 @@ export { PlaylistsApi } from "./PlaylistsApi";
 export { SearchApi } from "./SearchApi";
 export { ShowsApi } from "./ShowsApi";
 export { TracksApi } from "./TracksApi";
+export { UsersApi } from "./UsersApi";

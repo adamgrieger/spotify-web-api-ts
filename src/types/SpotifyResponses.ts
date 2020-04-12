@@ -217,3 +217,11 @@ export type GetTrackResponse = SpotifyObjects.Track;
 export type GetTracksResponse = {
   tracks: Array<SpotifyObjects.Track | null>;
 };
+
+// +-------+
+// | Users |
+// +-------+
+
+export type GetMeResponse = SpotifyObjects.PrivateUser;
+
+export type GetUserResponse = SpotifyObjects.PublicUser;
