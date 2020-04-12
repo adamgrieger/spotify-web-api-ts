@@ -285,3 +285,21 @@ export type SearchOptions = {
   offset?: number;
   include_external?: "audio";
 };
+
+// +-------+
+// | Shows |
+// +-------+
+
+export type GetShowOptions = {
+  market?: string;
+};
+
+export type GetShowsOptions = {
+  market?: string;
+};
+
+export type GetShowEpisodesOptions = {
+  limit?: number;
+  offset?: number;
+  market?: string;
+};

@@ -276,6 +276,25 @@ export type SearchType =
   | "show"
   | "episode";
 
+export type Show = {
+  available_markets: string[];
+  copyrights: Copyright[];
+  description: string;
+  explicit: boolean;
+  episodes: Paging<SimplifiedEpisode>;
+  external_urls: ExternalURL;
+  href: string;
+  id: string;
+  images: Image[];
+  is_externally_hosted: boolean | null;
+  languages: string[];
+  media_type: string;
+  name: string;
+  publisher: string;
+  type: "show";
+  uri: string;
+};
+
 export type SimplifiedAlbum = {
   album_group?: "album" | "single" | "compilation" | "appears_on";
   album_type: "album" | "single" | "compilation";

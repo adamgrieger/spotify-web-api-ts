@@ -187,3 +187,15 @@ export type SearchShowsResponse = SpotifyObjects.Paging<
 >;
 
 export type SearchTracksResponse = SpotifyObjects.Paging<SpotifyObjects.Track>;
+
+// +-------+
+// | Shows |
+// +-------+
+
+export type GetShowResponse = SpotifyObjects.Show;
+
+export type GetShowsResponse = Array<SpotifyObjects.Show | null>;
+
+export type GetShowEpisodesResponse = SpotifyObjects.Paging<
+  SpotifyObjects.SimplifiedEpisode
+>;
