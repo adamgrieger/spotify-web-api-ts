@@ -17,7 +17,7 @@ describe(SearchApi.name, () => {
     jest.resetAllMocks();
   });
 
-  describe(SearchApi.prototype.search.name, () => {
+  describe("search", () => {
     it("should search for an item (without options)", () => {
       const search = new SearchApi(httpMock);
       search.search("foo", ["album", "artist"]);
@@ -41,7 +41,7 @@ describe(SearchApi.name, () => {
     });
   });
 
-  describe(SearchApi.prototype.searchAlbums.name, () => {
+  describe("searchAlbums", () => {
     it("should search for an album (without options)", () => {
       const search = new SearchApi(httpMock);
       search.searchAlbums("foo");
@@ -62,7 +62,7 @@ describe(SearchApi.name, () => {
     });
   });
 
-  describe(SearchApi.prototype.searchArtists.name, () => {
+  describe("searchArtists", () => {
     it("should search for an artist (without options)", () => {
       const search = new SearchApi(httpMock);
       search.searchArtists("foo");
@@ -83,7 +83,7 @@ describe(SearchApi.name, () => {
     });
   });
 
-  describe(SearchApi.prototype.searchEpisodes.name, () => {
+  describe("searchEpisodes", () => {
     it("should search for an episode (without options)", () => {
       const search = new SearchApi(httpMock);
       search.searchEpisodes("foo");
@@ -104,7 +104,7 @@ describe(SearchApi.name, () => {
     });
   });
 
-  describe(SearchApi.prototype.searchPlaylists.name, () => {
+  describe("searchPlaylists", () => {
     it("should search for a playlist (without options)", () => {
       const search = new SearchApi(httpMock);
       search.searchPlaylists("foo");
@@ -125,7 +125,7 @@ describe(SearchApi.name, () => {
     });
   });
 
-  describe(SearchApi.prototype.searchShows.name, () => {
+  describe("searchShows", () => {
     it("should search for a show (without options)", () => {
       const search = new SearchApi(httpMock);
       search.searchShows("foo");
@@ -146,7 +146,7 @@ describe(SearchApi.name, () => {
     });
   });
 
-  describe(SearchApi.prototype.searchTracks.name, () => {
+  describe("searchTracks", () => {
     it("should search for a track (without options)", () => {
       const search = new SearchApi(httpMock);
       search.searchTracks("foo");
