@@ -274,3 +274,14 @@ export type ReorderPlaylistTracksOptions = {
   range_length?: number;
   snapshot_id?: string;
 };
+
+// +--------+
+// | Search |
+// +--------+
+
+export type SearchOptions = {
+  market?: string;
+  limit?: number;
+  offset?: number;
+  include_external?: "audio";
+};

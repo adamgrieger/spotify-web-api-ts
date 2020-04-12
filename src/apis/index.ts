@@ -7,3 +7,4 @@ export { LibraryApi } from "./LibraryApi";
 export { PersonalizationApi } from "./PersonalizationApi";
 export { PlayerApi } from "./PlayerApi";
 export { PlaylistsApi } from "./PlaylistsApi";
+export { SearchApi } from "./SearchApi";

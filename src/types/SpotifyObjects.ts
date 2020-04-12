@@ -268,6 +268,14 @@ export type SavedTrack = {
   track: Track;
 };
 
+export type SearchType =
+  | "album"
+  | "artist"
+  | "playlist"
+  | "track"
+  | "show"
+  | "episode";
+
 export type SimplifiedAlbum = {
   album_group?: "album" | "single" | "compilation" | "appears_on";
   album_type: "album" | "single" | "compilation";
@@ -291,6 +299,25 @@ export type SimplifiedArtist = {
   id: string;
   name: string;
   type: "artist";
+  uri: string;
+};
+
+export type SimplifiedEpisode = {
+  audio_preview_url: string | null;
+  description: string;
+  duration_ms: number;
+  explicit: boolean;
+  external_urls: ExternalURL;
+  href: string;
+  id: string;
+  images: Image[];
+  is_externally_hosted: boolean;
+  is_playable: boolean;
+  languages: string[];
+  name: string;
+  release_date: string;
+  release_date_precision: "year" | "month" | "day";
+  type: "episode";
   uri: string;
 };
 

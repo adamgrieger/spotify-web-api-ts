@@ -152,3 +152,38 @@ export type RemovePlaylistTracksByPositionResponse = {
 export type ReorderPlaylistTracksResponse = {
   snapshot_id: string;
 };
+
+// +--------+
+// | Search |
+// +--------+
+
+export type SearchResponse = SpotifyObjects.Paging<
+  | SpotifyObjects.SimplifiedAlbum
+  | SpotifyObjects.Artist
+  | SpotifyObjects.SimplifiedEpisode
+  | SpotifyObjects.SimplifiedPlaylist
+  | SpotifyObjects.SimplifiedShow
+  | SpotifyObjects.Track
+>;
+
+export type SearchAlbumsResponse = SpotifyObjects.Paging<
+  SpotifyObjects.SimplifiedAlbum
+>;
+
+export type SearchArtistsResponse = SpotifyObjects.Paging<
+  SpotifyObjects.Artist
+>;
+
+export type SearchEpisodesResponse = SpotifyObjects.Paging<
+  SpotifyObjects.SimplifiedEpisode
+>;
+
+export type SearchPlaylistsResponse = SpotifyObjects.Paging<
+  SpotifyObjects.SimplifiedPlaylist
+>;
+
+export type SearchShowsResponse = SpotifyObjects.Paging<
+  SpotifyObjects.SimplifiedShow
+>;
+
+export type SearchTracksResponse = SpotifyObjects.Paging<SpotifyObjects.Track>;
