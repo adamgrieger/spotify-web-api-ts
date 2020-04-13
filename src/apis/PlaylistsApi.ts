@@ -22,7 +22,7 @@ export class PlaylistsApi {
     uris: string[],
     options?: types.AddTracksToPlaylistOptions
   ) {
-    return this.http.post<types.AddTracksToPlaylistResponse>(
+    return this.http.post<types.SnapshotIdResponse>(
       `/playlists/${playlistId}/tracks`,
       {
         data: {
@@ -155,7 +155,7 @@ export class PlaylistsApi {
    * @param trackUris The Spotify track URIs to remove.
    */
   removePlaylistTracks(playlistId: string, trackUris: string[]) {
-    return this.http.delete<types.RemovePlaylistTracksResponse>(
+    return this.http.delete<types.SnapshotIdResponse>(
       `/playlists/${playlistId}/tracks`,
       {
         data: {
@@ -179,7 +179,7 @@ export class PlaylistsApi {
     tracks: Array<{ uri: string; positions: number[] }>,
     options?: types.RemovePlaylistTracksByPositionOptions
   ) {
-    return this.http.delete<types.RemovePlaylistTracksByPositionResponse>(
+    return this.http.delete<types.SnapshotIdResponse>(
       `/playlists/${playlistId}/tracks`,
       {
         data: {
@@ -206,7 +206,7 @@ export class PlaylistsApi {
     insertBefore: number,
     options?: types.ReorderPlaylistTracksOptions
   ) {
-    return this.http.put<types.ReorderPlaylistTracksResponse>(
+    return this.http.put<types.SnapshotIdResponse>(
       `/playlists/${playlistId}/tracks`,
       {
         data: {
