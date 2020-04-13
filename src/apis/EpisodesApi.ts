@@ -17,7 +17,7 @@ export class EpisodesApi {
    * @param options Optional request information.
    */
   getEpisode(episodeId: string, options?: types.GetEpisodeOptions) {
-    return this.http.get<types.GetEpisodeResponse>(
+    return this.http.get<types.Episode>(
       `/episodes/${episodeId}`,
       options && { params: options }
     );

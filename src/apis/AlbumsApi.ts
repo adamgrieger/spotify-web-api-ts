@@ -17,7 +17,7 @@ export class AlbumsApi {
    * @param options A JSON object with optional request information.
    */
   getAlbum(albumId: string, options?: types.GetAlbumOptions) {
-    return this.http.get<types.GetAlbumResponse>(
+    return this.http.get<types.Album>(
       `/albums/${albumId}`,
       options && { params: options }
     );

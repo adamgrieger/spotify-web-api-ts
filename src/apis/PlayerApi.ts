@@ -39,7 +39,7 @@ export class PlayerApi {
    * Get information about a user's available devices.
    */
   getMyDevices() {
-    return this.http.get<types.GetMyDevicesResponse>("/me/player/devices");
+    return this.http.get<types.Device[]>("/me/player/devices");
   }
 
   /**
@@ -49,7 +49,7 @@ export class PlayerApi {
    * @param options A JSON object with optional request information.
    */
   getPlaybackInfo(options?: types.GetPlaybackInfoOptions) {
-    return this.http.get<types.GetPlaybackInfoResponse>(
+    return this.http.get<types.CurrentlyPlayingContext>(
       "/me/player",
       options && { params: options }
     );

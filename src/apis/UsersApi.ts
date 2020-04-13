@@ -15,7 +15,7 @@ export class UsersApi {
    * current user's username).
    */
   getMe() {
-    return this.http.get<types.GetMeResponse>("/me");
+    return this.http.get<types.PrivateUser>("/me");
   }
 
   /**
@@ -26,6 +26,6 @@ export class UsersApi {
    * @param userId The user's Spotify user ID.
    */
   getUser(userId: string) {
-    return this.http.get<types.GetUserResponse>(`/users/${userId}`);
+    return this.http.get<types.PublicUser>(`/users/${userId}`);
   }
 }

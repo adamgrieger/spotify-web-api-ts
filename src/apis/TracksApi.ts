@@ -17,9 +17,7 @@ export class TracksApi {
    * @param trackId The Spotify ID for the track.
    */
   getAudioAnalysisForTrack(trackId: string) {
-    return this.http.get<types.GetAudioAnalysisForTrackResponse>(
-      `/audio-analysis/${trackId}`
-    );
+    return this.http.get<types.AudioAnalysis>(`/audio-analysis/${trackId}`);
   }
 
   /**
@@ -31,9 +29,7 @@ export class TracksApi {
    * @param trackId The Spotify ID for the track.
    */
   getAudioFeaturesForTrack(trackId: string) {
-    return this.http.get<types.GetAudioFeaturesForTrackResponse>(
-      `/audio-features/${trackId}`
-    );
+    return this.http.get<types.AudioFeatures>(`/audio-features/${trackId}`);
   }
 
   /**
@@ -64,7 +60,7 @@ export class TracksApi {
    * @param options Optional request information.
    */
   getTrack(trackId: string, options?: types.GetTrackOptions) {
-    return this.http.get<types.GetTrackResponse>(
+    return this.http.get<types.Track>(
       `/tracks/${trackId}`,
       options && { params: options }
     );

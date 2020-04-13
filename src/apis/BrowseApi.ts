@@ -45,7 +45,7 @@ export class BrowseApi {
    * @param options A JSON object with optional request information.
    */
   getCategory(categoryId: string, options?: types.GetCategoryOptions) {
-    return this.http.get<types.GetCategoryResponse>(
+    return this.http.get<types.Category>(
       `/browse/categories/${categoryId}`,
       options && { params: options }
     );

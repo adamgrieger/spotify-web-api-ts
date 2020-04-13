@@ -4,8 +4,6 @@ import * as SpotifyObjects from "./SpotifyObjects";
 // | Albums |
 // +--------+
 
-export type GetAlbumResponse = SpotifyObjects.Album;
-
 export type GetAlbumsResponse = {
   albums: SpotifyObjects.Album[];
 };
@@ -17,8 +15,6 @@ export type GetAlbumTracksResponse = SpotifyObjects.Paging<
 // +---------+
 // | Artists |
 // +---------+
-
-export type GetArtistResponse = SpotifyObjects.Artist;
 
 export type GetArtistAlbumsResponse = SpotifyObjects.Paging<
   SpotifyObjects.SimplifiedAlbum
@@ -48,8 +44,6 @@ export type GetCategoriesResponse = {
   categories: SpotifyObjects.Paging<SpotifyObjects.Category>;
 };
 
-export type GetCategoryResponse = SpotifyObjects.Category;
-
 export type GetCategoryPlaylistsResponse = SpotifyObjects.Paging<
   SpotifyObjects.SimplifiedPlaylist
 >;
@@ -72,8 +66,6 @@ export type GetRecommendationsResponse = {
 // +----------+
 // | Episodes |
 // +----------+
-
-export type GetEpisodeResponse = SpotifyObjects.Episode;
 
 export type GetEpisodesResponse = Array<SpotifyObjects.Episode | null>;
 
@@ -113,10 +105,6 @@ export type GetMyTopTracksResponse = SpotifyObjects.Paging<
 // | Player |
 // +--------+
 
-export type GetMyDevicesResponse = SpotifyObjects.Device[];
-
-export type GetPlaybackInfoResponse = SpotifyObjects.CurrentlyPlayingContext;
-
 export type GetRecentlyPlayedTracksResponse = SpotifyObjects.CursorBasedPaging<
   SpotifyObjects.PlayHistory
 >;
@@ -132,10 +120,6 @@ export type AddTracksToPlaylistResponse = {
 export type GetMyPlaylistsResponse = SpotifyObjects.Paging<
   SpotifyObjects.SimplifiedPlaylist
 >;
-
-export type GetPlaylistResponse = SpotifyObjects.Playlist;
-
-export type GetPlaylistCoverImageResponse = SpotifyObjects.Image[];
 
 export type GetPlaylistTracksResponse = SpotifyObjects.Paging<
   Array<SpotifyObjects.Track | SpotifyObjects.Episode>
@@ -192,8 +176,6 @@ export type SearchTracksResponse = SpotifyObjects.Paging<SpotifyObjects.Track>;
 // | Shows |
 // +-------+
 
-export type GetShowResponse = SpotifyObjects.Show;
-
 export type GetShowsResponse = Array<SpotifyObjects.Show | null>;
 
 export type GetShowEpisodesResponse = SpotifyObjects.Paging<
@@ -204,24 +186,10 @@ export type GetShowEpisodesResponse = SpotifyObjects.Paging<
 // | Tracks |
 // +--------+
 
-export type GetAudioAnalysisForTrackResponse = SpotifyObjects.AudioAnalysis;
-
-export type GetAudioFeaturesForTrackResponse = SpotifyObjects.AudioFeatures;
-
 export type GetAudioFeaturesForTracksResponse = {
   audio_features: Array<SpotifyObjects.AudioFeatures | null>;
 };
 
-export type GetTrackResponse = SpotifyObjects.Track;
-
 export type GetTracksResponse = {
   tracks: Array<SpotifyObjects.Track | null>;
 };
-
-// +-------+
-// | Users |
-// +-------+
-
-export type GetMeResponse = SpotifyObjects.PrivateUser;
-
-export type GetUserResponse = SpotifyObjects.PublicUser;

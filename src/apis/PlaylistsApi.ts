@@ -95,7 +95,7 @@ export class PlaylistsApi {
    * @param options Optional request information.
    */
   getPlaylist(playlistId: string, options?: types.GetPlaylistOptions) {
-    return this.http.get<types.GetPlaylistResponse>(
+    return this.http.get<types.Playlist>(
       `/playlists/${playlistId}`,
       options && { params: options }
     );
@@ -109,9 +109,7 @@ export class PlaylistsApi {
    * @param playlistId The Spotify ID for the playlist.
    */
   getPlaylistCoverImage(playlistId: string) {
-    return this.http.get<types.GetPlaylistCoverImageResponse>(
-      `/playlists/${playlistId}/images`
-    );
+    return this.http.get<types.Image[]>(`/playlists/${playlistId}/images`);
   }
 
   /**

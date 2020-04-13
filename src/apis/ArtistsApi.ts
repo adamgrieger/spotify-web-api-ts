@@ -17,7 +17,7 @@ export class ArtistsApi {
    * @param artistId The Spotify ID for the artist.
    */
   getArtist(artistId: string) {
-    return this.http.get<types.GetArtistResponse>(`/artists/${artistId}`);
+    return this.http.get<types.Artist>(`/artists/${artistId}`);
   }
 
   /**

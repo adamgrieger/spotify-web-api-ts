@@ -18,7 +18,7 @@ export class ShowsApi {
    * @param options Optional request information.
    */
   getShow(showId: string, options?: types.GetShowOptions) {
-    return this.http.get<types.GetShowResponse>(
+    return this.http.get<types.Show>(
       `/shows/${showId}`,
       options && { params: options }
     );
