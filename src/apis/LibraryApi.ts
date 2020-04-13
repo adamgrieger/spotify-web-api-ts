@@ -39,7 +39,7 @@ export class LibraryApi {
    *
    * @param options A JSON object with optional request information.
    */
-  getSavedAlbums(options?: types.GetSavedAlbumsOptions) {
+  getSavedAlbums(options?: types.LibraryOptions) {
     return this.http.get<types.GetSavedAlbumsResponse>(
       "/me/albums",
       options && { params: options }
@@ -51,7 +51,7 @@ export class LibraryApi {
    *
    * @param options A JSON object with optional request information.
    */
-  getSavedTracks(options?: types.GetSavedTracksOptions) {
+  getSavedTracks(options?: types.LibraryOptions) {
     return this.http.get<types.GetSavedTracksResponse>(
       "/me/tracks",
       options && { params: options }

@@ -17,7 +17,7 @@ export class ShowsApi {
    * @param showId The Spotify ID for the show.
    * @param options Optional request information.
    */
-  getShow(showId: string, options?: types.GetShowOptions) {
+  getShow(showId: string, options?: types.MarketOptions) {
     return this.http.get<types.Show>(
       `/shows/${showId}`,
       options && { params: options }
@@ -48,7 +48,7 @@ export class ShowsApi {
    * @param showIds The Spotify IDs for the shows.
    * @param options Optional request information.
    */
-  getShows(showIds: string[], options?: types.GetShowsOptions) {
+  getShows(showIds: string[], options?: types.MarketOptions) {
     return this.http.get<types.GetShowsResponse>("/shows", {
       params: {
         ...options,

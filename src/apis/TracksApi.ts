@@ -59,7 +59,7 @@ export class TracksApi {
    * @param trackId The Spotify ID for the track.
    * @param options Optional request information.
    */
-  getTrack(trackId: string, options?: types.GetTrackOptions) {
+  getTrack(trackId: string, options?: types.MarketOptions) {
     return this.http.get<types.Track>(
       `/tracks/${trackId}`,
       options && { params: options }
@@ -74,7 +74,7 @@ export class TracksApi {
    * @param trackIds The Spotify IDs for the tracks.
    * @param options Optional request information.
    */
-  getTracks(trackIds: string[], options?: types.GetTracksOptions) {
+  getTracks(trackIds: string[], options?: types.MarketOptions) {
     return this.http.get<types.GetTracksResponse>("/tracks", {
       params: {
         ...options,

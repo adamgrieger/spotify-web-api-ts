@@ -14,7 +14,7 @@ export class PlayerApi {
    * @param uri The uri of the track or episode to add to the queue.
    * @param options A JSON object with optional request information.
    */
-  addToQueue(uri: string, options?: types.AddToQueueOptions) {
+  addToQueue(uri: string, options?: types.DeviceIdOptions) {
     return this.http.post<void>("/me/player/queue", {
       params: {
         ...options,
@@ -28,7 +28,7 @@ export class PlayerApi {
    *
    * @param options A JSON object with optional request information.
    */
-  getCurrentlyPlayingTrack(options?: types.GetCurrentlyPlayingTrackOptions) {
+  getCurrentlyPlayingTrack(options?: types.MarketOptions) {
     return this.http.get<types.CurrentlyPlaying>(
       "/me/player/currently-playing",
       options && { params: options }
@@ -48,7 +48,7 @@ export class PlayerApi {
    *
    * @param options A JSON object with optional request information.
    */
-  getPlaybackInfo(options?: types.GetPlaybackInfoOptions) {
+  getPlaybackInfo(options?: types.MarketOptions) {
     return this.http.get<types.CurrentlyPlayingContext>(
       "/me/player",
       options && { params: options }
@@ -72,7 +72,7 @@ export class PlayerApi {
    *
    * @param options A JSON object with optional request information.
    */
-  next(options?: types.NextOptions) {
+  next(options?: types.DeviceIdOptions) {
     return this.http.post<void>(
       "/me/player/next",
       options && { params: options }
@@ -84,7 +84,7 @@ export class PlayerApi {
    *
    * @param options A JSON object with optional request information.
    */
-  pause(options?: types.PauseOptions) {
+  pause(options?: types.DeviceIdOptions) {
     return this.http.put<void>(
       "/me/player/pause",
       options && { params: options }
@@ -113,7 +113,7 @@ export class PlayerApi {
    *
    * @param options A JSON object with optional request information.
    */
-  previous(options?: types.PreviousOptions) {
+  previous(options?: types.DeviceIdOptions) {
     return this.http.post<void>(
       "/me/player/previous",
       options && { params: options }
@@ -126,7 +126,7 @@ export class PlayerApi {
    * @param state The desired repeat mode.
    * @param options A JSON object with optional request information.
    */
-  repeat(state: types.RepeatState, options?: types.RepeatOptions) {
+  repeat(state: types.RepeatState, options?: types.DeviceIdOptions) {
     return this.http.put<void>("/me/player/repeat", {
       params: {
         ...options,
@@ -141,7 +141,7 @@ export class PlayerApi {
    * @param position_ms The position in milliseconds to seek to.
    * @param options A JSON object with optional request information.
    */
-  seek(position_ms: number, options?: types.SeekOptions) {
+  seek(position_ms: number, options?: types.DeviceIdOptions) {
     return this.http.put<void>("/me/player/seek", {
       params: {
         ...options,
@@ -156,7 +156,7 @@ export class PlayerApi {
    * @param state The desired shuffle state.
    * @param options A JSON object with optional request information.
    */
-  shuffle(state: boolean, options?: types.ShuffleOptions) {
+  shuffle(state: boolean, options?: types.DeviceIdOptions) {
     return this.http.put<void>("/me/player/shuffle", {
       params: {
         ...options,
@@ -189,7 +189,7 @@ export class PlayerApi {
    * @param volume_percent The volume to set.
    * @param options A JSON object with optional request information.
    */
-  volume(volume_percent: number, options?: types.VolumeOptions) {
+  volume(volume_percent: number, options?: types.DeviceIdOptions) {
     return this.http.put<void>("/me/player/volume", {
       params: {
         ...options,

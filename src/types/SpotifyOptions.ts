@@ -1,14 +1,18 @@
+// +---------+
+// | General |
+// +---------+
+
+export type DeviceIdOptions = {
+  device_id?: string;
+};
+
+export type MarketOptions = {
+  market?: string;
+};
+
 // +--------+
 // | Albums |
 // +--------+
-
-export type GetAlbumOptions = {
-  market?: string;
-};
-
-export type GetAlbumsOptions = {
-  market?: string;
-};
 
 export type GetAlbumTracksOptions = {
   limit?: number;
@@ -110,18 +114,6 @@ export type GetRecommendationsOptions = {
   target_valence?: number;
 };
 
-// +----------+
-// | Episodes |
-// +----------+
-
-export type GetEpisodeOptions = {
-  market?: string;
-};
-
-export type GetEpisodesOptions = {
-  market?: string;
-};
-
 // +--------+
 // | Follow |
 // +--------+
@@ -139,13 +131,7 @@ export type GetFollowedArtistsOptions = {
 // | Library |
 // +---------+
 
-export type GetSavedAlbumsOptions = {
-  limit?: number;
-  offset?: number;
-  market?: string;
-};
-
-export type GetSavedTracksOptions = {
+export type LibraryOptions = {
   limit?: number;
   offset?: number;
   market?: string;
@@ -155,13 +141,7 @@ export type GetSavedTracksOptions = {
 // | Personalization |
 // +-----------------+
 
-export type GetMyTopArtistsOptions = {
-  limit?: number;
-  offset?: number;
-  time_range?: "long_term" | "medium_term" | "short_term";
-};
-
-export type GetMyTopTracksOptions = {
+export type PersonalizationOptions = {
   limit?: number;
   offset?: number;
   time_range?: "long_term" | "medium_term" | "short_term";
@@ -171,30 +151,10 @@ export type GetMyTopTracksOptions = {
 // | Player |
 // +--------+
 
-export type AddToQueueOptions = {
-  device_id?: string;
-};
-
-export type GetPlaybackInfoOptions = {
-  market?: string;
-};
-
 export type GetRecentlyPlayedTracksOptions = {
   limit?: number;
   after?: number;
   before?: number;
-};
-
-export type GetCurrentlyPlayingTrackOptions = {
-  market?: string;
-};
-
-export type NextOptions = {
-  device_id?: string;
-};
-
-export type PauseOptions = {
-  device_id?: string;
 };
 
 export type PlayOptions = {
@@ -204,28 +164,8 @@ export type PlayOptions = {
   offset?: { position: number } | { uri: string };
 };
 
-export type PreviousOptions = {
-  device_id?: string;
-};
-
-export type RepeatOptions = {
-  device_id?: string;
-};
-
-export type SeekOptions = {
-  device_id?: string;
-};
-
-export type ShuffleOptions = {
-  device_id?: string;
-};
-
 export type TransferPlaybackOptions = {
   play?: boolean;
-};
-
-export type VolumeOptions = {
-  device_id?: string;
 };
 
 // +-----------+
@@ -290,28 +230,8 @@ export type SearchOptions = {
 // | Shows |
 // +-------+
 
-export type GetShowOptions = {
-  market?: string;
-};
-
-export type GetShowsOptions = {
-  market?: string;
-};
-
 export type GetShowEpisodesOptions = {
   limit?: number;
   offset?: number;
-  market?: string;
-};
-
-// +--------+
-// | Tracks |
-// +--------+
-
-export type GetTrackOptions = {
-  market?: string;
-};
-
-export type GetTracksOptions = {
   market?: string;
 };

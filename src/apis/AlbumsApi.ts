@@ -16,7 +16,7 @@ export class AlbumsApi {
    * @param albumId The Spotify ID for the album.
    * @param options A JSON object with optional request information.
    */
-  getAlbum(albumId: string, options?: types.GetAlbumOptions) {
+  getAlbum(albumId: string, options?: types.MarketOptions) {
     return this.http.get<types.Album>(
       `/albums/${albumId}`,
       options && { params: options }
@@ -32,7 +32,7 @@ export class AlbumsApi {
    * @param albumIds The Spotify IDs for the albums.
    * @param options A JSON object with optional request information.
    */
-  getAlbums(albumIds: string[], options?: types.GetAlbumsOptions) {
+  getAlbums(albumIds: string[], options?: types.MarketOptions) {
     return this.http.get<types.GetAlbumsResponse>("/albums", {
       params: {
         ...options,
