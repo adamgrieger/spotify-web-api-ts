@@ -1,6 +1,6 @@
-import { Http } from "../helpers/Http";
-import * as types from "../types";
-import { searchHelper } from "../helpers/searchHelper";
+import { Http } from '../helpers/Http';
+import * as types from '../types';
+import { searchHelper } from '../helpers/searchHelper';
 
 export class SearchApi {
   private http: Http;
@@ -22,7 +22,7 @@ export class SearchApi {
   search(
     query: string,
     type: types.SearchType[],
-    options?: types.SearchOptions
+    options?: types.SearchOptions,
   ) {
     return searchHelper<types.SearchResponse>(this.http, query, type, options);
   }
@@ -39,8 +39,8 @@ export class SearchApi {
     return searchHelper<types.SearchAlbumsResponse>(
       this.http,
       query,
-      ["album"],
-      options
+      ['album'],
+      options,
     );
   }
 
@@ -56,8 +56,8 @@ export class SearchApi {
     return searchHelper<types.SearchArtistsResponse>(
       this.http,
       query,
-      ["artist"],
-      options
+      ['artist'],
+      options,
     );
   }
 
@@ -73,8 +73,8 @@ export class SearchApi {
     return searchHelper<types.SearchEpisodesResponse>(
       this.http,
       query,
-      ["episode"],
-      options
+      ['episode'],
+      options,
     );
   }
 
@@ -90,8 +90,8 @@ export class SearchApi {
     return searchHelper<types.SearchPlaylistsResponse>(
       this.http,
       query,
-      ["playlist"],
-      options
+      ['playlist'],
+      options,
     );
   }
 
@@ -107,8 +107,8 @@ export class SearchApi {
     return searchHelper<types.SearchShowsResponse>(
       this.http,
       query,
-      ["show"],
-      options
+      ['show'],
+      options,
     );
   }
 
@@ -124,8 +124,8 @@ export class SearchApi {
     return searchHelper<types.SearchTracksResponse>(
       this.http,
       query,
-      ["track"],
-      options
+      ['track'],
+      options,
     );
   }
 }

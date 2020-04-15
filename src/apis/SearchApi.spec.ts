@@ -1,9 +1,9 @@
-import { Http } from "../helpers/Http";
-import { SearchApi } from "./SearchApi";
-import { searchHelper } from "../helpers/searchHelper";
+import { Http } from '../helpers/Http';
+import { SearchApi } from './SearchApi';
+import { searchHelper } from '../helpers/searchHelper';
 
-jest.mock("../helpers/Http");
-jest.mock("../helpers/searchHelper");
+jest.mock('../helpers/Http');
+jest.mock('../helpers/searchHelper');
 
 const HttpMock = Http as jest.MockedClass<typeof Http>;
 const searchHelperMock = searchHelper as jest.MockedFunction<
@@ -11,158 +11,158 @@ const searchHelperMock = searchHelper as jest.MockedFunction<
 >;
 
 describe(SearchApi.name, () => {
-  const httpMock = new HttpMock("token");
+  const httpMock = new HttpMock('token');
 
   beforeEach(() => {
     jest.resetAllMocks();
   });
 
-  describe("search", () => {
-    it("should search for an item (without options)", () => {
+  describe('search', () => {
+    it('should search for an item (without options)', () => {
       const search = new SearchApi(httpMock);
-      search.search("foo", ["album", "artist"]);
+      search.search('foo', ['album', 'artist']);
       expect(searchHelperMock).toBeCalledWith(
         httpMock,
-        "foo",
-        ["album", "artist"],
-        undefined
+        'foo',
+        ['album', 'artist'],
+        undefined,
       );
     });
 
-    it("should search for an item (with options)", () => {
+    it('should search for an item (with options)', () => {
       const search = new SearchApi(httpMock);
-      search.search("foo", ["album", "artist"], { limit: 2 });
+      search.search('foo', ['album', 'artist'], { limit: 2 });
       expect(searchHelperMock).toBeCalledWith(
         httpMock,
-        "foo",
-        ["album", "artist"],
-        { limit: 2 }
+        'foo',
+        ['album', 'artist'],
+        { limit: 2 },
       );
     });
   });
 
-  describe("searchAlbums", () => {
-    it("should search for an album (without options)", () => {
+  describe('searchAlbums', () => {
+    it('should search for an album (without options)', () => {
       const search = new SearchApi(httpMock);
-      search.searchAlbums("foo");
+      search.searchAlbums('foo');
       expect(searchHelperMock).toBeCalledWith(
         httpMock,
-        "foo",
-        ["album"],
-        undefined
+        'foo',
+        ['album'],
+        undefined,
       );
     });
 
-    it("should search for an album (with options)", () => {
+    it('should search for an album (with options)', () => {
       const search = new SearchApi(httpMock);
-      search.searchAlbums("foo", { limit: 2 });
-      expect(searchHelperMock).toBeCalledWith(httpMock, "foo", ["album"], {
-        limit: 2
+      search.searchAlbums('foo', { limit: 2 });
+      expect(searchHelperMock).toBeCalledWith(httpMock, 'foo', ['album'], {
+        limit: 2,
       });
     });
   });
 
-  describe("searchArtists", () => {
-    it("should search for an artist (without options)", () => {
+  describe('searchArtists', () => {
+    it('should search for an artist (without options)', () => {
       const search = new SearchApi(httpMock);
-      search.searchArtists("foo");
+      search.searchArtists('foo');
       expect(searchHelperMock).toBeCalledWith(
         httpMock,
-        "foo",
-        ["artist"],
-        undefined
+        'foo',
+        ['artist'],
+        undefined,
       );
     });
 
-    it("should search for an artist (with options)", () => {
+    it('should search for an artist (with options)', () => {
       const search = new SearchApi(httpMock);
-      search.searchArtists("foo", { limit: 2 });
-      expect(searchHelperMock).toBeCalledWith(httpMock, "foo", ["artist"], {
-        limit: 2
+      search.searchArtists('foo', { limit: 2 });
+      expect(searchHelperMock).toBeCalledWith(httpMock, 'foo', ['artist'], {
+        limit: 2,
       });
     });
   });
 
-  describe("searchEpisodes", () => {
-    it("should search for an episode (without options)", () => {
+  describe('searchEpisodes', () => {
+    it('should search for an episode (without options)', () => {
       const search = new SearchApi(httpMock);
-      search.searchEpisodes("foo");
+      search.searchEpisodes('foo');
       expect(searchHelperMock).toBeCalledWith(
         httpMock,
-        "foo",
-        ["episode"],
-        undefined
+        'foo',
+        ['episode'],
+        undefined,
       );
     });
 
-    it("should search for an episode (with options)", () => {
+    it('should search for an episode (with options)', () => {
       const search = new SearchApi(httpMock);
-      search.searchEpisodes("foo", { limit: 2 });
-      expect(searchHelperMock).toBeCalledWith(httpMock, "foo", ["episode"], {
-        limit: 2
+      search.searchEpisodes('foo', { limit: 2 });
+      expect(searchHelperMock).toBeCalledWith(httpMock, 'foo', ['episode'], {
+        limit: 2,
       });
     });
   });
 
-  describe("searchPlaylists", () => {
-    it("should search for a playlist (without options)", () => {
+  describe('searchPlaylists', () => {
+    it('should search for a playlist (without options)', () => {
       const search = new SearchApi(httpMock);
-      search.searchPlaylists("foo");
+      search.searchPlaylists('foo');
       expect(searchHelperMock).toBeCalledWith(
         httpMock,
-        "foo",
-        ["playlist"],
-        undefined
+        'foo',
+        ['playlist'],
+        undefined,
       );
     });
 
-    it("should search for a playlist (with options)", () => {
+    it('should search for a playlist (with options)', () => {
       const search = new SearchApi(httpMock);
-      search.searchPlaylists("foo", { limit: 2 });
-      expect(searchHelperMock).toBeCalledWith(httpMock, "foo", ["playlist"], {
-        limit: 2
+      search.searchPlaylists('foo', { limit: 2 });
+      expect(searchHelperMock).toBeCalledWith(httpMock, 'foo', ['playlist'], {
+        limit: 2,
       });
     });
   });
 
-  describe("searchShows", () => {
-    it("should search for a show (without options)", () => {
+  describe('searchShows', () => {
+    it('should search for a show (without options)', () => {
       const search = new SearchApi(httpMock);
-      search.searchShows("foo");
+      search.searchShows('foo');
       expect(searchHelperMock).toBeCalledWith(
         httpMock,
-        "foo",
-        ["show"],
-        undefined
+        'foo',
+        ['show'],
+        undefined,
       );
     });
 
-    it("should search for a show (with options)", () => {
+    it('should search for a show (with options)', () => {
       const search = new SearchApi(httpMock);
-      search.searchShows("foo", { limit: 2 });
-      expect(searchHelperMock).toBeCalledWith(httpMock, "foo", ["show"], {
-        limit: 2
+      search.searchShows('foo', { limit: 2 });
+      expect(searchHelperMock).toBeCalledWith(httpMock, 'foo', ['show'], {
+        limit: 2,
       });
     });
   });
 
-  describe("searchTracks", () => {
-    it("should search for a track (without options)", () => {
+  describe('searchTracks', () => {
+    it('should search for a track (without options)', () => {
       const search = new SearchApi(httpMock);
-      search.searchTracks("foo");
+      search.searchTracks('foo');
       expect(searchHelperMock).toBeCalledWith(
         httpMock,
-        "foo",
-        ["track"],
-        undefined
+        'foo',
+        ['track'],
+        undefined,
       );
     });
 
-    it("should search for a track (with options)", () => {
+    it('should search for a track (with options)', () => {
       const search = new SearchApi(httpMock);
-      search.searchTracks("foo", { limit: 2 });
-      expect(searchHelperMock).toBeCalledWith(httpMock, "foo", ["track"], {
-        limit: 2
+      search.searchTracks('foo', { limit: 2 });
+      expect(searchHelperMock).toBeCalledWith(httpMock, 'foo', ['track'], {
+        limit: 2,
       });
     });
   });

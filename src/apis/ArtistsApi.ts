@@ -1,5 +1,5 @@
-import { Http } from "../helpers/Http";
-import * as types from "../types";
+import { Http } from '../helpers/Http';
+import * as types from '../types';
 
 export class ArtistsApi {
   private http: Http;
@@ -31,7 +31,7 @@ export class ArtistsApi {
   getArtistAlbums(artistId: string, options?: types.GetArtistAlbumsOptions) {
     return this.http.get<types.GetArtistAlbumsResponse>(
       `/artists/${artistId}/albums`,
-      options && { params: options }
+      options && { params: options },
     );
   }
 
@@ -42,10 +42,10 @@ export class ArtistsApi {
    * @param artistIds The Spotify IDs for the artists.
    */
   getArtists(artistIds: string[]) {
-    return this.http.get<types.GetArtistsResponse>("/artists", {
+    return this.http.get<types.GetArtistsResponse>('/artists', {
       params: {
-        ids: artistIds
-      }
+        ids: artistIds,
+      },
     });
   }
 
@@ -62,9 +62,9 @@ export class ArtistsApi {
       `/artists/${artistId}/top-tracks`,
       {
         params: {
-          country
-        }
-      }
+          country,
+        },
+      },
     );
   }
 
@@ -79,7 +79,7 @@ export class ArtistsApi {
    */
   getRelatedArtists(artistId: string) {
     return this.http.get<types.GetRelatedArtistsResponse>(
-      `/artists/${artistId}/related-artists`
+      `/artists/${artistId}/related-artists`,
     );
   }
 }

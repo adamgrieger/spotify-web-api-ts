@@ -1,5 +1,5 @@
-import { Http } from "../helpers/Http";
-import * as types from "../types";
+import { Http } from '../helpers/Http';
+import * as types from '../types';
 
 export class BrowseApi {
   private http: Http;
@@ -16,7 +16,7 @@ export class BrowseApi {
    */
   getAvailableGenreSeeds() {
     return this.http.get<types.GetAvailableGenreSeedsResponse>(
-      "/recommendations/available-genre-seeds"
+      '/recommendations/available-genre-seeds',
     );
   }
 
@@ -30,8 +30,8 @@ export class BrowseApi {
    */
   getCategories(options?: types.GetCategoriesOptions) {
     return this.http.get<types.GetCategoriesResponse>(
-      "/browse/categories",
-      options && { params: options }
+      '/browse/categories',
+      options && { params: options },
     );
   }
 
@@ -47,7 +47,7 @@ export class BrowseApi {
   getCategory(categoryId: string, options?: types.GetCategoryOptions) {
     return this.http.get<types.Category>(
       `/browse/categories/${categoryId}`,
-      options && { params: options }
+      options && { params: options },
     );
   }
 
@@ -61,11 +61,11 @@ export class BrowseApi {
    */
   getCategoryPlaylists(
     categoryId: string,
-    options?: types.GetCategoryPlaylistsOptions
+    options?: types.GetCategoryPlaylistsOptions,
   ) {
     return this.http.get<types.GetCategoryPlaylistsResponse>(
       `/browse/categories/${categoryId}/playlists`,
-      options && { params: options }
+      options && { params: options },
     );
   }
 
@@ -79,8 +79,8 @@ export class BrowseApi {
    */
   getFeaturedPlaylists(options?: types.GetFeaturedPlaylistsOptions) {
     return this.http.get<types.GetFeaturedPlaylistsResponse>(
-      "/browse/featured-playlists",
-      options && { params: options }
+      '/browse/featured-playlists',
+      options && { params: options },
     );
   }
 
@@ -94,8 +94,8 @@ export class BrowseApi {
    */
   getNewReleases(options?: types.GetNewReleasesOptions) {
     return this.http.get<types.GetNewReleasesResponse>(
-      "/browse/new-releases",
-      options && { params: options }
+      '/browse/new-releases',
+      options && { params: options },
     );
   }
 
@@ -118,13 +118,13 @@ export class BrowseApi {
    */
   getRecommendations(
     seeds: types.GetRecommendationsSeeds,
-    options?: types.GetRecommendationsOptions
+    options?: types.GetRecommendationsOptions,
   ) {
-    return this.http.get<types.GetRecommendationsResponse>("/recommendations", {
+    return this.http.get<types.GetRecommendationsResponse>('/recommendations', {
       params: {
         ...seeds,
-        ...options
-      }
+        ...options,
+      },
     });
   }
 }

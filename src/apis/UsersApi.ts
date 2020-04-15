@@ -1,5 +1,5 @@
-import { Http } from "../helpers/Http";
-import * as types from "../types";
+import { Http } from '../helpers/Http';
+import * as types from '../types';
 
 export class UsersApi {
   private http: Http;
@@ -15,7 +15,7 @@ export class UsersApi {
    * current user's username).
    */
   getMe() {
-    return this.http.get<types.PrivateUser>("/me");
+    return this.http.get<types.PrivateUser>('/me');
   }
 
   /**

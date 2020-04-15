@@ -1,5 +1,1 @@
-module.exports = {
-  collectCoverageFrom: ["src/**/*.ts"],
-  preset: "ts-jest",
-  testEnvironment: "node"
-};
+module.exports = require('@spotify/web-scripts/config/jest.config.js');

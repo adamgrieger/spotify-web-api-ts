@@ -1,5 +1,5 @@
-import { Http } from "../helpers/Http";
-import * as types from "../types";
+import { Http } from '../helpers/Http';
+import * as types from '../types';
 
 export class FollowApi {
   private http: Http;
@@ -19,9 +19,9 @@ export class FollowApi {
       `/playlists/${playlistId}/followers/contains`,
       {
         params: {
-          ids: userIds
-        }
-      }
+          ids: userIds,
+        },
+      },
     );
   }
 
@@ -31,13 +31,13 @@ export class FollowApi {
    * @param artistIds The Spotify IDs of the artists.
    */
   followArtists(artistIds: string[]) {
-    return this.http.put<void>("/me/following", {
+    return this.http.put<void>('/me/following', {
       params: {
-        type: "artist"
+        type: 'artist',
       },
       data: {
-        ids: artistIds
-      }
+        ids: artistIds,
+      },
     });
   }
 
@@ -50,7 +50,7 @@ export class FollowApi {
   followPlaylist(playlistId: string, options?: types.FollowPlaylistOptions) {
     return this.http.put<void>(
       `/playlists/${playlistId}/followers`,
-      options && { data: options }
+      options && { data: options },
     );
   }
 
@@ -60,13 +60,13 @@ export class FollowApi {
    * @param userIds The Spotify IDs of the users.
    */
   followUsers(userIds: string[]) {
-    return this.http.put<void>("/me/following", {
+    return this.http.put<void>('/me/following', {
       params: {
-        type: "user"
+        type: 'user',
       },
       data: {
-        ids: userIds
-      }
+        ids: userIds,
+      },
     });
   }
 
@@ -76,11 +76,11 @@ export class FollowApi {
    * @param options A JSON object with optional request information.
    */
   getFollowedArtists(options?: types.GetFollowedArtistsOptions) {
-    return this.http.get<types.GetFollowedArtistsResponse>("/me/following", {
+    return this.http.get<types.GetFollowedArtistsResponse>('/me/following', {
       params: {
         ...options,
-        type: "artist"
-      }
+        type: 'artist',
+      },
     });
   }
 
@@ -90,11 +90,11 @@ export class FollowApi {
    * @param artistIds The Spotify IDs for the artists.
    */
   isFollowingArtists(artistIds: string[]) {
-    return this.http.get<boolean[]>("/me/following/contains", {
+    return this.http.get<boolean[]>('/me/following/contains', {
       params: {
         ids: artistIds,
-        type: "artist"
-      }
+        type: 'artist',
+      },
     });
   }
 
@@ -104,11 +104,11 @@ export class FollowApi {
    * @param userIds The Spotify IDs for the users.
    */
   isFollowingUsers(userIds: string[]) {
-    return this.http.get<boolean[]>("/me/following/contains", {
+    return this.http.get<boolean[]>('/me/following/contains', {
       params: {
         ids: userIds,
-        type: "user"
-      }
+        type: 'user',
+      },
     });
   }
 
@@ -118,13 +118,13 @@ export class FollowApi {
    * @param artistIds The Spotify IDs of the artists.
    */
   unfollowArtists(artistIds: string[]) {
-    return this.http.delete<void>("/me/following", {
+    return this.http.delete<void>('/me/following', {
       params: {
-        type: "artist"
+        type: 'artist',
       },
       data: {
-        ids: artistIds
-      }
+        ids: artistIds,
+      },
     });
   }
 
@@ -143,13 +143,13 @@ export class FollowApi {
    * @param userIds The Spotify IDs of the users.
    */
   unfollowUsers(userIds: string[]) {
-    return this.http.delete<void>("/me/following", {
+    return this.http.delete<void>('/me/following', {
       params: {
-        type: "user"
+        type: 'user',
       },
       data: {
-        ids: userIds
-      }
+        ids: userIds,
+      },
     });
   }
 }

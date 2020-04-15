@@ -1,176 +1,176 @@
-import { Http } from "../helpers/Http";
-import { FollowApi } from "./FollowApi";
+import { Http } from '../helpers/Http';
+import { FollowApi } from './FollowApi';
 
-jest.mock("../helpers/Http");
+jest.mock('../helpers/Http');
 
 const HttpMock = Http as jest.Mocked<typeof Http>;
 
-describe("FollowApi", () => {
-  const http = new HttpMock("token");
+describe('FollowApi', () => {
+  const http = new HttpMock('token');
 
   beforeEach(() => {
     jest.resetAllMocks();
   });
 
-  describe("areFollowingPlaylist", () => {
-    it("should check if one or more users follow a playlist", () => {
+  describe('areFollowingPlaylist', () => {
+    it('should check if one or more users follow a playlist', () => {
       const follow = new FollowApi(http);
-      follow.areFollowingPlaylist("foo", ["bar", "baz"]);
+      follow.areFollowingPlaylist('foo', ['bar', 'baz']);
       expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith("/playlists/foo/followers/contains", {
+      expect(http.get).toBeCalledWith('/playlists/foo/followers/contains', {
         params: {
-          ids: ["bar", "baz"]
-        }
+          ids: ['bar', 'baz'],
+        },
       });
     });
   });
 
-  describe("followArtists", () => {
-    it("should add the current user a follower of one or more artists", () => {
+  describe('followArtists', () => {
+    it('should add the current user a follower of one or more artists', () => {
       const follow = new FollowApi(http);
-      follow.followArtists(["foo", "bar"]);
+      follow.followArtists(['foo', 'bar']);
       expect(http.put).toBeCalledTimes(1);
-      expect(http.put).toBeCalledWith("/me/following", {
+      expect(http.put).toBeCalledWith('/me/following', {
         params: {
-          type: "artist"
+          type: 'artist',
         },
         data: {
-          ids: ["foo", "bar"]
-        }
+          ids: ['foo', 'bar'],
+        },
       });
     });
   });
 
-  describe("followPlaylist", () => {
-    it("should add the current user as a follower of a playlist (without options)", () => {
+  describe('followPlaylist', () => {
+    it('should add the current user as a follower of a playlist (without options)', () => {
       const follow = new FollowApi(http);
-      follow.followPlaylist("foo");
+      follow.followPlaylist('foo');
       expect(http.put).toBeCalledTimes(1);
-      expect(http.put).toBeCalledWith("/playlists/foo/followers", undefined);
+      expect(http.put).toBeCalledWith('/playlists/foo/followers', undefined);
     });
 
-    it("should add the current user as a follower of a playlist (with options)", () => {
+    it('should add the current user as a follower of a playlist (with options)', () => {
       const follow = new FollowApi(http);
-      follow.followPlaylist("foo", {
-        public: false
+      follow.followPlaylist('foo', {
+        public: false,
       });
       expect(http.put).toBeCalledTimes(1);
-      expect(http.put).toBeCalledWith("/playlists/foo/followers", {
+      expect(http.put).toBeCalledWith('/playlists/foo/followers', {
         data: {
-          public: false
-        }
+          public: false,
+        },
       });
     });
   });
 
-  describe("followUsers", () => {
-    it("should add the current user as a follower of one or more Spotify users", () => {
+  describe('followUsers', () => {
+    it('should add the current user as a follower of one or more Spotify users', () => {
       const follow = new FollowApi(http);
-      follow.followUsers(["foo", "bar"]);
+      follow.followUsers(['foo', 'bar']);
       expect(http.put).toBeCalledTimes(1);
-      expect(http.put).toBeCalledWith("/me/following", {
+      expect(http.put).toBeCalledWith('/me/following', {
         params: {
-          type: "user"
+          type: 'user',
         },
         data: {
-          ids: ["foo", "bar"]
-        }
+          ids: ['foo', 'bar'],
+        },
       });
     });
   });
 
-  describe("getFollowedArtists", () => {
+  describe('getFollowedArtists', () => {
     it("should get the current user's followed artists (without options)", () => {
       const follow = new FollowApi(http);
       follow.getFollowedArtists();
       expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith("/me/following", {
+      expect(http.get).toBeCalledWith('/me/following', {
         params: {
-          type: "artist"
-        }
+          type: 'artist',
+        },
       });
     });
 
     it("should get the current user's followed artists (with options)", () => {
       const follow = new FollowApi(http);
       follow.getFollowedArtists({
-        limit: 2
+        limit: 2,
       });
       expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith("/me/following", {
+      expect(http.get).toBeCalledWith('/me/following', {
         params: {
           limit: 2,
-          type: "artist"
-        }
+          type: 'artist',
+        },
       });
     });
   });
 
-  describe("isFollowingArtists", () => {
-    it("should check to see if the current user is following one or more artists", () => {
+  describe('isFollowingArtists', () => {
+    it('should check to see if the current user is following one or more artists', () => {
       const follow = new FollowApi(http);
-      follow.isFollowingArtists(["foo", "bar"]);
+      follow.isFollowingArtists(['foo', 'bar']);
       expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith("/me/following/contains", {
+      expect(http.get).toBeCalledWith('/me/following/contains', {
         params: {
-          ids: ["foo", "bar"],
-          type: "artist"
-        }
+          ids: ['foo', 'bar'],
+          type: 'artist',
+        },
       });
     });
   });
 
-  describe("isFollowingUsers", () => {
-    it("should check to see if the current user is following one or more Spotify users", () => {
+  describe('isFollowingUsers', () => {
+    it('should check to see if the current user is following one or more Spotify users', () => {
       const follow = new FollowApi(http);
-      follow.isFollowingUsers(["foo", "bar"]);
+      follow.isFollowingUsers(['foo', 'bar']);
       expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith("/me/following/contains", {
+      expect(http.get).toBeCalledWith('/me/following/contains', {
         params: {
-          ids: ["foo", "bar"],
-          type: "user"
-        }
+          ids: ['foo', 'bar'],
+          type: 'user',
+        },
       });
     });
   });
 
-  describe("unfollowArtists", () => {
-    it("should remove the current user as a follower of one or more artists", () => {
+  describe('unfollowArtists', () => {
+    it('should remove the current user as a follower of one or more artists', () => {
       const follow = new FollowApi(http);
-      follow.unfollowArtists(["foo", "bar"]);
+      follow.unfollowArtists(['foo', 'bar']);
       expect(http.delete).toBeCalledTimes(1);
-      expect(http.delete).toBeCalledWith("/me/following", {
+      expect(http.delete).toBeCalledWith('/me/following', {
         params: {
-          type: "artist"
+          type: 'artist',
         },
         data: {
-          ids: ["foo", "bar"]
-        }
+          ids: ['foo', 'bar'],
+        },
       });
     });
   });
 
-  describe("unfollowPlaylist", () => {
-    it("should remove the current user as a follower of a playlist", () => {
+  describe('unfollowPlaylist', () => {
+    it('should remove the current user as a follower of a playlist', () => {
       const follow = new FollowApi(http);
-      follow.unfollowPlaylist("foo");
+      follow.unfollowPlaylist('foo');
       expect(http.delete).toBeCalledTimes(1);
-      expect(http.delete).toBeCalledWith("/playlists/foo/followers");
+      expect(http.delete).toBeCalledWith('/playlists/foo/followers');
     });
   });
 
-  describe("unfollowUsers", () => {
-    it("should remove the current user as a follower of one or more Spotify users", () => {
+  describe('unfollowUsers', () => {
+    it('should remove the current user as a follower of one or more Spotify users', () => {
       const follow = new FollowApi(http);
-      follow.unfollowUsers(["foo", "bar"]);
+      follow.unfollowUsers(['foo', 'bar']);
       expect(http.delete).toBeCalledTimes(1);
-      expect(http.delete).toBeCalledWith("/me/following", {
+      expect(http.delete).toBeCalledWith('/me/following', {
         params: {
-          type: "user"
+          type: 'user',
         },
         data: {
-          ids: ["foo", "bar"]
-        }
+          ids: ['foo', 'bar'],
+        },
       });
     });
   });

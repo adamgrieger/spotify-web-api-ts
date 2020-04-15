@@ -1,5 +1,5 @@
-import { Http } from "./helpers/Http";
-import * as apis from "./apis";
+import { Http } from './helpers/Http';
+import * as apis from './apis';
 
 export class SpotifyWebApi {
   private http: Http;

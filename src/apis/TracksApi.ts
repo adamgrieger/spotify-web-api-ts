@@ -1,5 +1,5 @@
-import { Http } from "../helpers/Http";
-import * as types from "../types";
+import { Http } from '../helpers/Http';
+import * as types from '../types';
 
 export class TracksApi {
   private http: Http;
@@ -41,12 +41,12 @@ export class TracksApi {
    */
   getAudioFeaturesForTracks(trackIds: string[]) {
     return this.http.get<types.GetAudioFeaturesForTracksResponse>(
-      "/audio-features",
+      '/audio-features',
       {
         params: {
-          ids: trackIds
-        }
-      }
+          ids: trackIds,
+        },
+      },
     );
   }
 
@@ -62,7 +62,7 @@ export class TracksApi {
   getTrack(trackId: string, options?: types.MarketOptions) {
     return this.http.get<types.Track>(
       `/tracks/${trackId}`,
-      options && { params: options }
+      options && { params: options },
     );
   }
 
@@ -75,11 +75,11 @@ export class TracksApi {
    * @param options Optional request information.
    */
   getTracks(trackIds: string[], options?: types.MarketOptions) {
-    return this.http.get<types.GetTracksResponse>("/tracks", {
+    return this.http.get<types.GetTracksResponse>('/tracks', {
       params: {
         ...options,
-        ids: trackIds
-      }
+        ids: trackIds,
+      },
     });
   }
 }

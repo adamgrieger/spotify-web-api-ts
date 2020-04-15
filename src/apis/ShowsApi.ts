@@ -1,5 +1,5 @@
-import { Http } from "../helpers/Http";
-import * as types from "../types";
+import { Http } from '../helpers/Http';
+import * as types from '../types';
 
 export class ShowsApi {
   private http: Http;
@@ -20,7 +20,7 @@ export class ShowsApi {
   getShow(showId: string, options?: types.MarketOptions) {
     return this.http.get<types.Show>(
       `/shows/${showId}`,
-      options && { params: options }
+      options && { params: options },
     );
   }
 
@@ -35,7 +35,7 @@ export class ShowsApi {
   getShowEpisodes(showId: string, options?: types.GetShowEpisodesOptions) {
     return this.http.get<types.GetShowEpisodesResponse>(
       `/shows/${showId}/episodes`,
-      options && { params: options }
+      options && { params: options },
     );
   }
 
@@ -49,11 +49,11 @@ export class ShowsApi {
    * @param options Optional request information.
    */
   getShows(showIds: string[], options?: types.MarketOptions) {
-    return this.http.get<types.GetShowsResponse>("/shows", {
+    return this.http.get<types.GetShowsResponse>('/shows', {
       params: {
         ...options,
-        ids: showIds
-      }
+        ids: showIds,
+      },
     });
   }
 }

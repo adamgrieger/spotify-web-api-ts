@@ -1,5 +1,5 @@
-import { Http } from "../helpers/Http";
-import * as types from "../types";
+import { Http } from '../helpers/Http';
+import * as types from '../types';
 
 export class LibraryApi {
   private http: Http;
@@ -14,10 +14,10 @@ export class LibraryApi {
    * @param albumIds The Spotify IDs of the albums.
    */
   areAlbumsSaved(albumIds: string[]) {
-    return this.http.get<boolean[]>("/me/albums/contains", {
+    return this.http.get<boolean[]>('/me/albums/contains', {
       params: {
-        ids: albumIds
-      }
+        ids: albumIds,
+      },
     });
   }
 
@@ -27,10 +27,10 @@ export class LibraryApi {
    * @param trackIds The Spotify IDs of the tracks.
    */
   areTracksSaved(trackIds: string[]) {
-    return this.http.get<boolean[]>("/me/tracks/contains", {
+    return this.http.get<boolean[]>('/me/tracks/contains', {
       params: {
-        ids: trackIds
-      }
+        ids: trackIds,
+      },
     });
   }
 
@@ -41,8 +41,8 @@ export class LibraryApi {
    */
   getSavedAlbums(options?: types.LibraryOptions) {
     return this.http.get<types.GetSavedAlbumsResponse>(
-      "/me/albums",
-      options && { params: options }
+      '/me/albums',
+      options && { params: options },
     );
   }
 
@@ -53,8 +53,8 @@ export class LibraryApi {
    */
   getSavedTracks(options?: types.LibraryOptions) {
     return this.http.get<types.GetSavedTracksResponse>(
-      "/me/tracks",
-      options && { params: options }
+      '/me/tracks',
+      options && { params: options },
     );
   }
 
@@ -64,10 +64,10 @@ export class LibraryApi {
    * @param albumIds The Spotify IDs of the albums.
    */
   removeSavedAlbums(albumIds: string[]) {
-    return this.http.delete<void>("/me/albums", {
+    return this.http.delete<void>('/me/albums', {
       data: {
-        ids: albumIds
-      }
+        ids: albumIds,
+      },
     });
   }
 
@@ -77,10 +77,10 @@ export class LibraryApi {
    * @param trackIds The Spotify IDs of the tracks.
    */
   removeSavedTracks(trackIds: string[]) {
-    return this.http.delete<void>("/me/tracks", {
+    return this.http.delete<void>('/me/tracks', {
       data: {
-        ids: trackIds
-      }
+        ids: trackIds,
+      },
     });
   }
 
@@ -90,10 +90,10 @@ export class LibraryApi {
    * @param albumIds The Spotify IDs of the albums.
    */
   saveAlbums(albumIds: string[]) {
-    return this.http.put<void>("/me/albums", {
+    return this.http.put<void>('/me/albums', {
       data: {
-        ids: albumIds
-      }
+        ids: albumIds,
+      },
     });
   }
 
@@ -103,10 +103,10 @@ export class LibraryApi {
    * @param trackIds The Spotify IDs of the tracks.
    */
   saveTracks(trackIds: string[]) {
-    return this.http.put<void>("/me/tracks", {
+    return this.http.put<void>('/me/tracks', {
       data: {
-        ids: trackIds
-      }
+        ids: trackIds,
+      },
     });
   }
 }

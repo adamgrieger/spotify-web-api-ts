@@ -1,4 +1,4 @@
-import * as SpotifyObjects from "./SpotifyObjects";
+import * as SpotifyObjects from './SpotifyObjects';
 
 // +--------+
 // | Albums |

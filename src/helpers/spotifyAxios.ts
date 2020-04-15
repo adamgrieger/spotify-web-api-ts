@@ -1,5 +1,5 @@
-import axios, { Method, AxiosRequestConfig, AxiosError } from "axios";
-import { BASE_URL } from "../config";
+import axios, { Method, AxiosRequestConfig, AxiosError } from 'axios';
+import { BASE_URL } from '../config';
 
 export type SpotifyAxiosConfig = AxiosRequestConfig & { contentType?: string };
 
@@ -7,7 +7,7 @@ export async function spotifyAxios<T>(
   url: string,
   method: Method,
   accessToken: string,
-  config?: SpotifyAxiosConfig
+  config?: SpotifyAxiosConfig,
 ) {
   try {
     const { contentType, ...axiosConfig } = config ?? {};
@@ -16,10 +16,10 @@ export async function spotifyAxios<T>(
       baseURL: BASE_URL,
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "Content-Type": contentType ?? "application/json"
+        'Content-Type': contentType ?? 'application/json',
       },
       url,
-      method
+      method,
     });
 
     return response.data as T;

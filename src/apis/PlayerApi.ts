@@ -1,5 +1,5 @@
-import { Http } from "../helpers/Http";
-import * as types from "../types";
+import { Http } from '../helpers/Http';
+import * as types from '../types';
 
 export class PlayerApi {
   private http: Http;
@@ -15,11 +15,11 @@ export class PlayerApi {
    * @param options A JSON object with optional request information.
    */
   addToQueue(uri: string, options?: types.DeviceIdOptions) {
-    return this.http.post<void>("/me/player/queue", {
+    return this.http.post<void>('/me/player/queue', {
       params: {
         ...options,
-        uri
-      }
+        uri,
+      },
     });
   }
 
@@ -30,8 +30,8 @@ export class PlayerApi {
    */
   getCurrentlyPlayingTrack(options?: types.MarketOptions) {
     return this.http.get<types.CurrentlyPlaying>(
-      "/me/player/currently-playing",
-      options && { params: options }
+      '/me/player/currently-playing',
+      options && { params: options },
     );
   }
 
@@ -39,7 +39,7 @@ export class PlayerApi {
    * Get information about a user's available devices.
    */
   getMyDevices() {
-    return this.http.get<types.Device[]>("/me/player/devices");
+    return this.http.get<types.Device[]>('/me/player/devices');
   }
 
   /**
@@ -50,8 +50,8 @@ export class PlayerApi {
    */
   getPlaybackInfo(options?: types.MarketOptions) {
     return this.http.get<types.CurrentlyPlayingContext>(
-      "/me/player",
-      options && { params: options }
+      '/me/player',
+      options && { params: options },
     );
   }
 
@@ -62,8 +62,8 @@ export class PlayerApi {
    */
   getRecentlyPlayedTracks(options?: types.GetRecentlyPlayedTracksOptions) {
     return this.http.get<types.GetRecentlyPlayedTracksResponse>(
-      "/me/player/recently-played",
-      options && { params: options }
+      '/me/player/recently-played',
+      options && { params: options },
     );
   }
 
@@ -74,8 +74,8 @@ export class PlayerApi {
    */
   next(options?: types.DeviceIdOptions) {
     return this.http.post<void>(
-      "/me/player/next",
-      options && { params: options }
+      '/me/player/next',
+      options && { params: options },
     );
   }
 
@@ -86,8 +86,8 @@ export class PlayerApi {
    */
   pause(options?: types.DeviceIdOptions) {
     return this.http.put<void>(
-      "/me/player/pause",
-      options && { params: options }
+      '/me/player/pause',
+      options && { params: options },
     );
   }
 
@@ -97,14 +97,16 @@ export class PlayerApi {
    * @param options A JSON object with optional request information.
    */
   play(options?: types.PlayOptions) {
+    // eslint-disable-next-line @typescript-eslint/camelcase
     const { device_id, ...bodyParams } = options ?? {};
 
     return this.http.put<void>(
-      "/me/player/play",
+      '/me/player/play',
       options && {
+        // eslint-disable-next-line @typescript-eslint/camelcase
         ...(device_id && { params: { device_id } }),
-        ...(Object.keys(bodyParams).length && { data: bodyParams })
-      }
+        ...(Object.keys(bodyParams).length && { data: bodyParams }),
+      },
     );
   }
 
@@ -115,8 +117,8 @@ export class PlayerApi {
    */
   previous(options?: types.DeviceIdOptions) {
     return this.http.post<void>(
-      "/me/player/previous",
-      options && { params: options }
+      '/me/player/previous',
+      options && { params: options },
     );
   }
 
@@ -127,26 +129,26 @@ export class PlayerApi {
    * @param options A JSON object with optional request information.
    */
   repeat(state: types.RepeatState, options?: types.DeviceIdOptions) {
-    return this.http.put<void>("/me/player/repeat", {
+    return this.http.put<void>('/me/player/repeat', {
       params: {
         ...options,
-        state
-      }
+        state,
+      },
     });
   }
 
   /**
    * Seeks to the given position in the user's currently playing track.
    *
-   * @param position_ms The position in milliseconds to seek to.
+   * @param positionMs The position in milliseconds to seek to.
    * @param options A JSON object with optional request information.
    */
-  seek(position_ms: number, options?: types.DeviceIdOptions) {
-    return this.http.put<void>("/me/player/seek", {
+  seek(positionMs: number, options?: types.DeviceIdOptions) {
+    return this.http.put<void>('/me/player/seek', {
       params: {
         ...options,
-        position_ms
-      }
+        position_ms: positionMs,
+      },
     });
   }
 
@@ -157,44 +159,44 @@ export class PlayerApi {
    * @param options A JSON object with optional request information.
    */
   shuffle(state: boolean, options?: types.DeviceIdOptions) {
-    return this.http.put<void>("/me/player/shuffle", {
+    return this.http.put<void>('/me/player/shuffle', {
       params: {
         ...options,
-        state
-      }
+        state,
+      },
     });
   }
 
   /**
    * Transfer playback to a new device and determine if it should start playing.
    *
-   * @param device_ids An array containing the ID of the device on which playback should be started/transferred.
+   * @param deviceIds An array containing the ID of the device on which playback should be started/transferred.
    * @param options A JSON object with optional request information.
    */
   transferPlayback(
-    device_ids: string[],
-    options?: types.TransferPlaybackOptions
+    deviceIds: string[],
+    options?: types.TransferPlaybackOptions,
   ) {
-    return this.http.put<void>("/me/player", {
+    return this.http.put<void>('/me/player', {
       data: {
         ...options,
-        device_ids
-      }
+        device_ids: deviceIds,
+      },
     });
   }
 
   /**
    * Set the volume for the user's current playback device.
    *
-   * @param volume_percent The volume to set.
+   * @param volumePercent The volume to set.
    * @param options A JSON object with optional request information.
    */
-  volume(volume_percent: number, options?: types.DeviceIdOptions) {
-    return this.http.put<void>("/me/player/volume", {
+  volume(volumePercent: number, options?: types.DeviceIdOptions) {
+    return this.http.put<void>('/me/player/volume', {
       params: {
         ...options,
-        volume_percent
-      }
+        volume_percent: volumePercent,
+      },
     });
   }
 }

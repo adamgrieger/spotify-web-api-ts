@@ -1,5 +1,5 @@
-import { Http } from "../helpers/Http";
-import * as types from "../types";
+import { Http } from '../helpers/Http';
+import * as types from '../types';
 
 export class PersonalizationApi {
   private http: Http;
@@ -15,8 +15,8 @@ export class PersonalizationApi {
    */
   getMyTopArtists(options?: types.PersonalizationOptions) {
     return this.http.get<types.GetMyTopArtistsResponse>(
-      "/me/top/artists",
-      options && { params: options }
+      '/me/top/artists',
+      options && { params: options },
     );
   }
 
@@ -27,8 +27,8 @@ export class PersonalizationApi {
    */
   getMyTopTracks(options?: types.PersonalizationOptions) {
     return this.http.get<types.GetMyTopTracksResponse>(
-      "/me/top/tracks",
-      options && { params: options }
+      '/me/top/tracks',
+      options && { params: options },
     );
   }
 }

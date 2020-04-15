@@ -25,7 +25,7 @@ export type GetAlbumTracksOptions = {
 // +---------+
 
 export type GetArtistAlbumsOptions = {
-  include_groups?: Array<"album" | "single" | "appears_on" | "compilation">;
+  include_groups?: Array<'album' | 'single' | 'appears_on' | 'compilation'>;
   country?: string;
   limit?: number;
   offset?: number;
@@ -144,7 +144,7 @@ export type LibraryOptions = {
 export type PersonalizationOptions = {
   limit?: number;
   offset?: number;
-  time_range?: "long_term" | "medium_term" | "short_term";
+  time_range?: 'long_term' | 'medium_term' | 'short_term';
 };
 
 // +--------+
@@ -190,7 +190,7 @@ export type GetMyPlaylistsOptions = {
 export type GetPlaylistOptions = {
   fields?: string;
   market?: string;
-  additional_types?: Array<"track" | "episode">;
+  additional_types?: Array<'track' | 'episode'>;
 };
 
 export type GetPlaylistTracksOptions = {
@@ -198,7 +198,7 @@ export type GetPlaylistTracksOptions = {
   limit?: number;
   offset?: number;
   market?: string;
-  additional_types?: Array<"track" | "episode">;
+  additional_types?: Array<'track' | 'episode'>;
 };
 
 export type GetUserPlaylistsOptions = {
@@ -223,7 +223,7 @@ export type SearchOptions = {
   market?: string;
   limit?: number;
   offset?: number;
-  include_external?: "audio";
+  include_external?: 'audio';
 };
 
 // +-------+

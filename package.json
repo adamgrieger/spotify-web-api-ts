@@ -2,25 +2,29 @@
   "name": "spotify-web-api-ts",
   "version": "1.0.0",
   "description": "A TypeScript wrapper for Spotify's Web API",
-  "main": "index.js",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "types": "types",
   "repository": "https://github.com/adamgrieger/spotify-web-api-ts.git",
   "author": "Adam Grieger",
   "license": "MIT",
+  "scripts": {
+    "build": "web-scripts build",
+    "commit": "web-scripts commit",
+    "format": "web-scripts format",
+    "lint": "web-scripts lint",
+    "release": "web-scripts release",
+    "test": "web-scripts test"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "web-scripts commitmsg",
+      "pre-commit": "web-scripts precommit"
+    }
+  },
   "devDependencies": {
-    "@types/jest": "^25.1.4",
-    "@types/node": "^13.9.1",
-    "@typescript-eslint/eslint-plugin": "^2.23.0",
-    "@typescript-eslint/parser": "^2.23.0",
-    "codecov": "^3.6.5",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-prettier": "^3.1.2",
-    "jest": "^25.1.0",
-    "prettier": "^1.19.1",
-    "ts-jest": "^25.2.1",
-    "typescript": "^3.8.3"
+    "@spotify/web-scripts": "^6.2.0",
+    "husky": "^4.2.5"
   },
   "dependencies": {
     "axios": "^0.19.2"

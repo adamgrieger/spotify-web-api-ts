@@ -1,5 +1,5 @@
-import { Http } from "../helpers/Http";
-import * as types from "../types";
+import { Http } from '../helpers/Http';
+import * as types from '../types';
 
 export class PlaylistsApi {
   private http: Http;
@@ -20,16 +20,16 @@ export class PlaylistsApi {
   addTracksToPlaylist(
     playlistId: string,
     uris: string[],
-    options?: types.AddTracksToPlaylistOptions
+    options?: types.AddTracksToPlaylistOptions,
   ) {
     return this.http.post<types.SnapshotIdResponse>(
       `/playlists/${playlistId}/tracks`,
       {
         data: {
           ...options,
-          uris
-        }
-      }
+          uris,
+        },
+      },
     );
   }
 
@@ -45,7 +45,7 @@ export class PlaylistsApi {
   changePlaylistDetails(playlistId: string, details: types.PlaylistDetails) {
     return this.http.put<void>(
       `/playlists/${playlistId}`,
-      details && { data: details }
+      details && { data: details },
     );
   }
 
@@ -62,13 +62,13 @@ export class PlaylistsApi {
   createPlaylist(
     userId: string,
     playlistName: string,
-    options?: types.CreatePlaylistOptions
+    options?: types.CreatePlaylistOptions,
   ) {
     return this.http.post<types.Playlist>(`/users/${userId}/playlists`, {
       data: {
         ...options,
-        name: playlistName
-      }
+        name: playlistName,
+      },
     });
   }
 
@@ -81,8 +81,8 @@ export class PlaylistsApi {
    */
   getMyPlaylists(options?: types.GetMyPlaylistsOptions) {
     return this.http.get<types.GetMyPlaylistsResponse>(
-      "/me/playlists",
-      options && { params: options }
+      '/me/playlists',
+      options && { params: options },
     );
   }
 
@@ -97,7 +97,7 @@ export class PlaylistsApi {
   getPlaylist(playlistId: string, options?: types.GetPlaylistOptions) {
     return this.http.get<types.Playlist>(
       `/playlists/${playlistId}`,
-      options && { params: options }
+      options && { params: options },
     );
   }
 
@@ -123,11 +123,11 @@ export class PlaylistsApi {
    */
   getPlaylistTracks(
     playlistId: string,
-    options?: types.GetPlaylistTracksOptions
+    options?: types.GetPlaylistTracksOptions,
   ) {
     return this.http.get<types.GetPlaylistTracksResponse>(
       `/playlists/${playlistId}/tracks`,
-      options && { params: options }
+      options && { params: options },
     );
   }
 
@@ -142,7 +142,7 @@ export class PlaylistsApi {
   getUserPlaylists(userId: string, options?: types.GetUserPlaylistsOptions) {
     return this.http.get(
       `/users/${userId}/playlists`,
-      options && { params: options }
+      options && { params: options },
     );
   }
 
@@ -159,9 +159,9 @@ export class PlaylistsApi {
       `/playlists/${playlistId}/tracks`,
       {
         data: {
-          tracks: trackUris.map(uri => ({ uri }))
-        }
-      }
+          tracks: trackUris.map(uri => ({ uri })),
+        },
+      },
     );
   }
 
@@ -177,16 +177,16 @@ export class PlaylistsApi {
   removePlaylistTracksByPosition(
     playlistId: string,
     tracks: Array<{ uri: string; positions: number[] }>,
-    options?: types.RemovePlaylistTracksByPositionOptions
+    options?: types.RemovePlaylistTracksByPositionOptions,
   ) {
     return this.http.delete<types.SnapshotIdResponse>(
       `/playlists/${playlistId}/tracks`,
       {
         data: {
           ...options,
-          tracks
-        }
-      }
+          tracks,
+        },
+      },
     );
   }
 
@@ -204,7 +204,7 @@ export class PlaylistsApi {
     playlistId: string,
     rangeStart: number,
     insertBefore: number,
-    options?: types.ReorderPlaylistTracksOptions
+    options?: types.ReorderPlaylistTracksOptions,
   ) {
     return this.http.put<types.SnapshotIdResponse>(
       `/playlists/${playlistId}/tracks`,
@@ -212,9 +212,9 @@ export class PlaylistsApi {
         data: {
           ...options,
           range_start: rangeStart,
-          insert_before: insertBefore
-        }
-      }
+          insert_before: insertBefore,
+        },
+      },
     );
   }
 
@@ -229,8 +229,8 @@ export class PlaylistsApi {
   replacePlaylistTracks(playlistId: string, trackUris: string[]) {
     return this.http.put<void>(`/playlists/${playlistId}/tracks`, {
       data: {
-        uris: trackUris
-      }
+        uris: trackUris,
+      },
     });
   }
 
@@ -245,7 +245,7 @@ export class PlaylistsApi {
   uploadPlaylistCover(playlistId: string, image: string) {
     return this.http.put<void>(`/playlists/${playlistId}/images`, {
       data: image,
-      contentType: "image/jpeg"
+      contentType: 'image/jpeg',
     });
   }
 }

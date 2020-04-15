@@ -1,17 +1,17 @@
 export type Action =
-  | "interrupting_playback"
-  | "pausing"
-  | "resuming"
-  | "seeking"
-  | "skipping_next"
-  | "skipping_prev"
-  | "toggling_repeat_context"
-  | "toggling_shuffle"
-  | "toggling_repeat_track"
-  | "transferring_playback";
+  | 'interrupting_playback'
+  | 'pausing'
+  | 'resuming'
+  | 'seeking'
+  | 'skipping_next'
+  | 'skipping_prev'
+  | 'toggling_repeat_context'
+  | 'toggling_shuffle'
+  | 'toggling_repeat_track'
+  | 'transferring_playback';
 
 export type Album = {
-  album_type: "album" | "single" | "compilation";
+  album_type: 'album' | 'single' | 'compilation';
   artists: SimplifiedArtist[];
   available_markets: string[];
   copyrights: Copyright[];
@@ -25,10 +25,10 @@ export type Album = {
   name: string;
   popularity: number;
   release_date: string;
-  release_date_precision: "year" | "month" | "day";
+  release_date_precision: 'year' | 'month' | 'day';
   restrictions: Restrictions;
   tracks: Paging<SimplifiedTrack>;
-  type: "album";
+  type: 'album';
   uri: string;
 };
 
@@ -41,7 +41,7 @@ export type Artist = {
   images: Image[];
   name: string;
   popularity: number;
-  type: "artist";
+  type: 'artist';
   uri: string;
 };
 
@@ -71,7 +71,7 @@ export type AudioFeatures = {
   uri: string;
   track_href: string;
   analysis_url: string;
-  type: "audio_features";
+  type: 'audio_features';
 };
 
 export type Category = {
@@ -85,12 +85,12 @@ export type Context = {
   uri: string;
   href: string | null;
   external_urls: ExternalURL | null;
-  type: "album" | "artist" | "playlist";
+  type: 'album' | 'artist' | 'playlist';
 };
 
 export type Copyright = {
   text: string;
-  type: "C" | "P";
+  type: 'C' | 'P';
 };
 
 export type CurrentlyPlaying = {
@@ -99,20 +99,20 @@ export type CurrentlyPlaying = {
   progress_ms: number | null;
   is_playing: boolean;
   item: Track | null;
-  currently_playing_type: "track" | "episode" | "ad" | "unknown";
+  currently_playing_type: 'track' | 'episode' | 'ad' | 'unknown';
   actions: Disallows;
 };
 
 export type CurrentlyPlayingContext = {
   device: Device;
-  repeat_state: "off" | "track" | "context";
+  repeat_state: 'off' | 'track' | 'context';
   shuffle_state: boolean;
   context: Context | null;
   timestamp: number;
   progress_ms: number | null;
   is_playing: boolean;
   item: Track | null;
-  currently_playing_type: "track" | "episode" | "ad" | "unknown";
+  currently_playing_type: 'track' | 'episode' | 'ad' | 'unknown';
   actions: Disallows;
 };
 
@@ -140,19 +140,19 @@ export type Device = {
 };
 
 export type DeviceType =
-  | "Computer"
-  | "Tablet"
-  | "Smartphone"
-  | "Speaker"
-  | "TV"
-  | "AVR"
-  | "STB"
-  | "AudioDongle"
-  | "GameConsole"
-  | "CastVideo"
-  | "CastAudio"
-  | "Automobile"
-  | "Unknown";
+  | 'Computer'
+  | 'Tablet'
+  | 'Smartphone'
+  | 'Speaker'
+  | 'TV'
+  | 'AVR'
+  | 'STB'
+  | 'AudioDongle'
+  | 'GameConsole'
+  | 'CastVideo'
+  | 'CastAudio'
+  | 'Automobile'
+  | 'Unknown';
 
 export type Disallows = Record<Action, boolean>;
 
@@ -170,10 +170,10 @@ export type Episode = {
   languages: string[];
   name: string;
   release_date: string;
-  release_date_precision: "year" | "month" | "day";
+  release_date_precision: 'year' | 'month' | 'day';
   resume_point: ResumePoint;
   show: SimplifiedShow;
-  type: "episode";
+  type: 'episode';
   uri: string;
 };
 
@@ -231,7 +231,7 @@ export type Playlist = {
   public: boolean | null;
   snapshot_id: string;
   tracks: Paging<PlaylistTrack>;
-  type: "playlist";
+  type: 'playlist';
   uri: string;
 };
 
@@ -259,7 +259,7 @@ export type PrivateUser = {
   id: string;
   images: Image[];
   product?: string;
-  type: "user";
+  type: 'user';
   uri: string;
 };
 
@@ -270,7 +270,7 @@ export type PublicUser = {
   href: string;
   id: string;
   images: Image[];
-  type: "user";
+  type: 'user';
   uri: string;
 };
 
@@ -280,7 +280,7 @@ export type RecommendationSeed = {
   href: string | null;
   id: string;
   initialPoolSize: number;
-  type: "artist" | "track" | "genre";
+  type: 'artist' | 'track' | 'genre';
 };
 
 export type RegularError = {
@@ -290,7 +290,7 @@ export type RegularError = {
   };
 };
 
-export type RepeatState = "track" | "context" | "off";
+export type RepeatState = 'track' | 'context' | 'off';
 
 export type ResumePoint = {
   fully_played: boolean;
@@ -312,12 +312,12 @@ export type SavedTrack = {
 };
 
 export type SearchType =
-  | "album"
-  | "artist"
-  | "playlist"
-  | "track"
-  | "show"
-  | "episode";
+  | 'album'
+  | 'artist'
+  | 'playlist'
+  | 'track'
+  | 'show'
+  | 'episode';
 
 export type Section = {
   start: number;
@@ -361,13 +361,13 @@ export type Show = {
   media_type: string;
   name: string;
   publisher: string;
-  type: "show";
+  type: 'show';
   uri: string;
 };
 
 export type SimplifiedAlbum = {
-  album_group?: "album" | "single" | "compilation" | "appears_on";
-  album_type: "album" | "single" | "compilation";
+  album_group?: 'album' | 'single' | 'compilation' | 'appears_on';
+  album_type: 'album' | 'single' | 'compilation';
   artists: SimplifiedArtist[];
   available_markets: string[];
   external_urls: ExternalURL;
@@ -376,9 +376,9 @@ export type SimplifiedAlbum = {
   images: Image[];
   name: string;
   release_date: string;
-  release_date_precision: "year" | "month" | "day";
+  release_date_precision: 'year' | 'month' | 'day';
   restrictions: Restrictions;
-  type: "album";
+  type: 'album';
   uri: string;
 };
 
@@ -387,7 +387,7 @@ export type SimplifiedArtist = {
   href: string;
   id: string;
   name: string;
-  type: "artist";
+  type: 'artist';
   uri: string;
 };
 
@@ -405,8 +405,8 @@ export type SimplifiedEpisode = {
   languages: string[];
   name: string;
   release_date: string;
-  release_date_precision: "year" | "month" | "day";
-  type: "episode";
+  release_date_precision: 'year' | 'month' | 'day';
+  type: 'episode';
   uri: string;
 };
 
@@ -421,7 +421,7 @@ export type SimplifiedPlaylist = {
   public: boolean | null;
   snapshot_id: string;
   tracks: Tracks;
-  type: "playlist";
+  type: 'playlist';
   uri: string;
 };
 
@@ -439,7 +439,7 @@ export type SimplifiedShow = {
   media_type: string;
   name: string;
   publisher: string;
-  type: "show";
+  type: 'show';
   uri: string;
 };
 
@@ -458,7 +458,7 @@ export type SimplifiedTrack = {
   name: string;
   preview_url: string;
   track_number: number;
-  type: "track";
+  type: 'track';
   uri: string;
   is_local: boolean;
 };
@@ -487,7 +487,7 @@ export type Track = {
   popularity: number;
   preview_url: string | null;
   track_number: number;
-  type: "track";
+  type: 'track';
   uri: string;
   is_local: boolean;
 };
@@ -496,7 +496,7 @@ export type TrackLink = {
   external_urls: ExternalURL;
   href: string;
   id: string;
-  type: "track";
+  type: 'track';
   uri: string;
 };
 

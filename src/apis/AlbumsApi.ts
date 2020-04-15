@@ -1,5 +1,5 @@
-import { Http } from "../helpers/Http";
-import * as types from "../types";
+import { Http } from '../helpers/Http';
+import * as types from '../types';
 
 export class AlbumsApi {
   private http: Http;
@@ -19,7 +19,7 @@ export class AlbumsApi {
   getAlbum(albumId: string, options?: types.MarketOptions) {
     return this.http.get<types.Album>(
       `/albums/${albumId}`,
-      options && { params: options }
+      options && { params: options },
     );
   }
 
@@ -33,11 +33,11 @@ export class AlbumsApi {
    * @param options A JSON object with optional request information.
    */
   getAlbums(albumIds: string[], options?: types.MarketOptions) {
-    return this.http.get<types.GetAlbumsResponse>("/albums", {
+    return this.http.get<types.GetAlbumsResponse>('/albums', {
       params: {
         ...options,
-        ids: albumIds
-      }
+        ids: albumIds,
+      },
     });
   }
 
@@ -52,7 +52,7 @@ export class AlbumsApi {
   getAlbumTracks(albumId: string, options?: types.GetAlbumTracksOptions) {
     return this.http.get<types.GetAlbumTracksResponse>(
       `/albums/${albumId}/tracks`,
-      options && { params: options }
+      options && { params: options },
     );
   }
 }
