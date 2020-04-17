@@ -1,4 +1,4 @@
-import { Http } from '../helpers/Http';
+import { Http } from '../helpers';
 import * as types from '../types';
 
 export class AlbumsApi {
@@ -14,9 +14,9 @@ export class AlbumsApi {
    * Get Spotify catalog information for a single album.
    *
    * @param albumId The Spotify ID for the album.
-   * @param options A JSON object with optional request information.
+   * @param options Optional request information.
    */
-  getAlbum(albumId: string, options?: types.MarketOptions) {
+  async getAlbum(albumId: string, options?: types.MarketOptions) {
     return this.http.get<types.Album>(
       `/albums/${albumId}`,
       options && { params: options },
@@ -30,15 +30,16 @@ export class AlbumsApi {
    * Spotify IDs.
    *
    * @param albumIds The Spotify IDs for the albums.
-   * @param options A JSON object with optional request information.
+   * @param options Optional request information.
    */
-  getAlbums(albumIds: string[], options?: types.MarketOptions) {
-    return this.http.get<types.GetAlbumsResponse>('/albums', {
+  async getAlbums(albumIds: string[], options?: types.MarketOptions) {
+    const response = await this.http.get<types.GetAlbumsResponse>('/albums', {
       params: {
         ...options,
         ids: albumIds,
       },
     });
+    return response.albums;
   }
 
   /**
@@ -47,9 +48,9 @@ export class AlbumsApi {
    * Get Spotify catalog information about an album's tracks.
    *
    * @param albumId The Spotify ID for the album.
-   * @param options A JSON object with optional request information.
+   * @param options Optional request information.
    */
-  getAlbumTracks(albumId: string, options?: types.GetAlbumTracksOptions) {
+  async getAlbumTracks(albumId: string, options?: types.GetAlbumTracksOptions) {
     return this.http.get<types.GetAlbumTracksResponse>(
       `/albums/${albumId}/tracks`,
       options && { params: options },

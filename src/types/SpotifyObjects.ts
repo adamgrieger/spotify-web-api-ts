@@ -26,7 +26,8 @@ export type Album = {
   popularity: number;
   release_date: string;
   release_date_precision: 'year' | 'month' | 'day';
-  restrictions: Restrictions;
+  restrictions?: Restrictions;
+  total_tracks: number;
   tracks: Paging<SimplifiedTrack>;
   type: 'album';
   uri: string;
@@ -452,9 +453,9 @@ export type SimplifiedTrack = {
   external_urls: ExternalURL;
   href: string;
   id: string;
-  is_playable: boolean;
-  linked_from: TrackLink;
-  restrictions: Restrictions;
+  is_playable?: boolean;
+  linked_from?: TrackLink;
+  restrictions?: Restrictions;
   name: string;
   preview_url: string;
   track_number: number;

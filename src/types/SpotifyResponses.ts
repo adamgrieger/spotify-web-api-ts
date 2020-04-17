@@ -5,7 +5,7 @@ import * as SpotifyObjects from './SpotifyObjects';
 // +--------+
 
 export type GetAlbumsResponse = {
-  albums: SpotifyObjects.Album[];
+  albums: Array<SpotifyObjects.Album | null>;
 };
 
 export type GetAlbumTracksResponse = SpotifyObjects.Paging<

@@ -1,32 +1,48 @@
-import { Http } from '../helpers/Http';
+import {
+  albumFixture,
+  getAlbumsFixture,
+  getAlbumTracksFixture,
+} from '../fixtures';
+import { Http, spotifyAxios } from '../helpers';
 import { AlbumsApi } from './AlbumsApi';
 
-jest.mock('../helpers/Http');
+jest.mock('../helpers/spotifyAxios');
 
-const HttpMock = Http as jest.Mocked<typeof Http>;
+const spotifyAxiosMock = spotifyAxios as jest.MockedFunction<
+  typeof spotifyAxios
+>;
+
+beforeEach(() => {
+  jest.resetAllMocks();
+});
 
 describe('AlbumsApi', () => {
-  const http = new HttpMock('token');
-
   beforeEach(() => {
-    jest.resetAllMocks();
+    spotifyAxiosMock.mockResolvedValue(albumFixture);
   });
 
   describe('getAlbum', () => {
-    it('should get an album (without options)', () => {
+    it('should get an album (without options)', async () => {
+      const http = new Http('token');
       const albums = new AlbumsApi(http);
-      albums.getAlbum('foo');
-      expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith('/albums/foo', undefined);
+      const response = await albums.getAlbum('foo');
+
+      expect(response).toEqual(albumFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/albums/foo',
+        'GET',
+        'token',
+        undefined,
+      );
     });
 
-    it('should get an album (with options)', () => {
+    it('should get an album (with options)', async () => {
+      const http = new Http('token');
       const albums = new AlbumsApi(http);
-      albums.getAlbum('foo', {
-        market: 'bar',
-      });
-      expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith('/albums/foo', {
+      const response = await albums.getAlbum('foo', { market: 'bar' });
+
+      expect(response).toEqual(albumFixture);
+      expect(spotifyAxiosMock).toBeCalledWith('/albums/foo', 'GET', 'token', {
         params: {
           market: 'bar',
         },
@@ -35,24 +51,32 @@ describe('AlbumsApi', () => {
   });
 
   describe('getAlbums', () => {
-    it('should get several albums (without options)', () => {
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(getAlbumsFixture);
+    });
+
+    it('should get several albums (without options)', async () => {
+      const http = new Http('token');
       const albums = new AlbumsApi(http);
-      albums.getAlbums(['foo', 'bar']);
-      expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith('/albums', {
+      const response = await albums.getAlbums(['foo', 'bar']);
+
+      expect(response).toEqual(getAlbumsFixture.albums);
+      expect(spotifyAxiosMock).toBeCalledWith('/albums', 'GET', 'token', {
         params: {
           ids: ['foo', 'bar'],
         },
       });
     });
 
-    it('should get several albums (with options)', () => {
+    it('should get several albums (with options)', async () => {
+      const http = new Http('token');
       const albums = new AlbumsApi(http);
-      albums.getAlbums(['foo', 'bar'], {
+      const response = await albums.getAlbums(['foo', 'bar'], {
         market: 'baz',
       });
-      expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith('/albums', {
+
+      expect(response).toEqual(getAlbumsFixture.albums);
+      expect(spotifyAxiosMock).toBeCalledWith('/albums', 'GET', 'token', {
         params: {
           ids: ['foo', 'bar'],
           market: 'baz',
@@ -62,24 +86,40 @@ describe('AlbumsApi', () => {
   });
 
   describe('getAlbumTracks', () => {
-    it("should get an album's tracks (without options)", () => {
-      const albums = new AlbumsApi(http);
-      albums.getAlbumTracks('foo');
-      expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith('/albums/foo/tracks', undefined);
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(getAlbumTracksFixture);
     });
 
-    it("should get an album's tracks (with options)", () => {
+    it("should get an album's tracks (without options)", async () => {
+      const http = new Http('token');
       const albums = new AlbumsApi(http);
-      albums.getAlbumTracks('foo', {
-        market: 'bar',
-      });
-      expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith('/albums/foo/tracks', {
-        params: {
-          market: 'bar',
+      const response = await albums.getAlbumTracks('foo');
+
+      expect(response).toEqual(getAlbumTracksFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/albums/foo/tracks',
+        'GET',
+        'token',
+        undefined,
+      );
+    });
+
+    it("should get an album's tracks (with options)", async () => {
+      const http = new Http('token');
+      const albums = new AlbumsApi(http);
+      const response = await albums.getAlbumTracks('foo', { market: 'bar' });
+
+      expect(response).toEqual(getAlbumTracksFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/albums/foo/tracks',
+        'GET',
+        'token',
+        {
+          params: {
+            market: 'bar',
+          },
         },
-      });
+      );
     });
   });
 });
