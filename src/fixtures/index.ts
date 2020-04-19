@@ -4,6 +4,7 @@
 
 export { albumFixture } from './albumFixture';
 export { artistFixture } from './artistFixture';
+export { categoryFixture } from './categoryFixture';
 
 // +------+
 // | APIs |
@@ -11,3 +12,4 @@ export { artistFixture } from './artistFixture';
 
 export * from './albums';
 export * from './artists';
+export * from './browse';

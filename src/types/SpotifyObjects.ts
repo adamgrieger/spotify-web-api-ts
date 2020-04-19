@@ -267,10 +267,10 @@ export type PrivateUser = {
 export type PublicUser = {
   display_name: string | null;
   external_urls: ExternalURL;
-  followers: Followers;
+  followers?: Followers;
   href: string;
   id: string;
-  images: Image[];
+  images?: Image[];
   type: 'user';
   uri: string;
 };
@@ -281,7 +281,7 @@ export type RecommendationSeed = {
   href: string | null;
   id: string;
   initialPoolSize: number;
-  type: 'artist' | 'track' | 'genre';
+  type: 'artist' | 'ARTIST' | 'track' | 'TRACK' | 'genre' | 'GENRE';
 };
 
 export type RegularError = {
@@ -368,7 +368,13 @@ export type Show = {
 
 export type SimplifiedAlbum = {
   album_group?: 'album' | 'single' | 'compilation' | 'appears_on';
-  album_type: 'album' | 'single' | 'compilation';
+  album_type:
+    | 'album'
+    | 'ALBUM'
+    | 'single'
+    | 'SINGLE'
+    | 'compilation'
+    | 'COMPILATION';
   artists: SimplifiedArtist[];
   available_markets?: string[];
   external_urls: ExternalURL;
@@ -414,12 +420,14 @@ export type SimplifiedEpisode = {
 
 export type SimplifiedPlaylist = {
   collaborative: boolean;
+  description: string | null;
   external_urls: ExternalURL;
   href: string;
   id: string;
   images: Image[];
   name: string;
   owner: PublicUser;
+  primary_color: string | null;
   public: boolean | null;
   snapshot_id: string;
   tracks: Tracks;
@@ -482,7 +490,7 @@ export type Track = {
   external_urls: ExternalURL;
   href: string;
   id: string;
-  is_playable: boolean;
+  is_playable?: boolean;
   linked_from?: TrackLink;
   restrictions?: Restrictions;
   name: string;

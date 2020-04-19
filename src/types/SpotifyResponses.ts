@@ -44,9 +44,9 @@ export type GetCategoriesResponse = {
   categories: SpotifyObjects.Paging<SpotifyObjects.Category>;
 };
 
-export type GetCategoryPlaylistsResponse = SpotifyObjects.Paging<
-  SpotifyObjects.SimplifiedPlaylist
->;
+export type GetCategoryPlaylistsResponse = {
+  playlists: SpotifyObjects.Paging<SpotifyObjects.SimplifiedPlaylist>;
+};
 
 export type GetFeaturedPlaylistsResponse = {
   message: string;
@@ -54,13 +54,12 @@ export type GetFeaturedPlaylistsResponse = {
 };
 
 export type GetNewReleasesResponse = {
-  message: string;
   albums: SpotifyObjects.Paging<SpotifyObjects.SimplifiedAlbum>;
 };
 
 export type GetRecommendationsResponse = {
   seeds: SpotifyObjects.RecommendationSeed[];
-  tracks: SpotifyObjects.SimplifiedTrack[];
+  tracks: SpotifyObjects.Track[];
 };
 
 // +----------+
