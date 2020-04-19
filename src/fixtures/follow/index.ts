@@ -1,0 +1,1 @@
+export { getFollowedArtistsFixture } from './getFollowedArtistsFixture';

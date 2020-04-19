@@ -15,3 +15,4 @@ export * from './albums';
 export * from './artists';
 export * from './browse';
 export * from './episodes';
+export * from './follow';
