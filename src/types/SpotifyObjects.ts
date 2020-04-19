@@ -168,11 +168,12 @@ export type Episode = {
   images: Image[];
   is_externally_hosted: boolean;
   is_playable: boolean;
+  language?: string;
   languages: string[];
   name: string;
   release_date: string;
   release_date_precision: 'year' | 'month' | 'day';
-  resume_point: ResumePoint;
+  resume_point?: ResumePoint;
   show: SimplifiedShow;
   type: 'episode';
   uri: string;

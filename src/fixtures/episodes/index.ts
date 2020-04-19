@@ -1,0 +1,1 @@
+export { getEpisodesFixture } from './getEpisodesFixture';

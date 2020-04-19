@@ -66,7 +66,9 @@ export type GetRecommendationsResponse = {
 // | Episodes |
 // +----------+
 
-export type GetEpisodesResponse = Array<SpotifyObjects.Episode | null>;
+export type GetEpisodesResponse = {
+  episodes: Array<SpotifyObjects.Episode | null>;
+};
 
 // +--------+
 // | Follow |
