@@ -16,7 +16,7 @@ export class ArtistsApi {
    *
    * @param artistId The Spotify ID for the artist.
    */
-  getArtist(artistId: string) {
+  async getArtist(artistId: string) {
     return this.http.get<types.Artist>(`/artists/${artistId}`);
   }
 
@@ -26,9 +26,12 @@ export class ArtistsApi {
    * Get Spotify catalog information about an artist's albums.
    *
    * @param artistId The Spotify ID for the artist.
-   * @param options A JSON object with optional request information.
+   * @param options Optional request information.
    */
-  getArtistAlbums(artistId: string, options?: types.GetArtistAlbumsOptions) {
+  async getArtistAlbums(
+    artistId: string,
+    options?: types.GetArtistAlbumsOptions,
+  ) {
     return this.http.get<types.GetArtistAlbumsResponse>(
       `/artists/${artistId}/albums`,
       options && { params: options },
@@ -36,17 +39,21 @@ export class ArtistsApi {
   }
 
   /**
+   * Get Several Artists
+   *
    * Get Spotify catalog information for several artists based on their
    * Spotify IDs.
    *
    * @param artistIds The Spotify IDs for the artists.
    */
-  getArtists(artistIds: string[]) {
-    return this.http.get<types.GetArtistsResponse>('/artists', {
-      params: {
-        ids: artistIds,
-      },
-    });
+  async getArtists(artistIds: string[]) {
+    return this.http
+      .get<types.GetArtistsResponse>('/artists', {
+        params: {
+          ids: artistIds,
+        },
+      })
+      .then(response => response.artists);
   }
 
   /**
@@ -57,15 +64,17 @@ export class ArtistsApi {
    * @param artistId The Spotify ID for the artist.
    * @param country An ISO 3166-1 alpha-2 country code or the string `from_token`.
    */
-  getArtistTopTracks(artistId: string, country: string) {
-    return this.http.get<types.GetArtistTopTracksResponse>(
-      `/artists/${artistId}/top-tracks`,
-      {
-        params: {
-          country,
+  async getArtistTopTracks(artistId: string, country: string) {
+    return this.http
+      .get<types.GetArtistTopTracksResponse>(
+        `/artists/${artistId}/top-tracks`,
+        {
+          params: {
+            country,
+          },
         },
-      },
-    );
+      )
+      .then(response => response.tracks);
   }
 
   /**
@@ -77,9 +86,11 @@ export class ArtistsApi {
    *
    * @param artistId The Spotify ID for the artist.
    */
-  getRelatedArtists(artistId: string) {
-    return this.http.get<types.GetRelatedArtistsResponse>(
-      `/artists/${artistId}/related-artists`,
-    );
+  async getRelatedArtists(artistId: string) {
+    return this.http
+      .get<types.GetRelatedArtistsResponse>(
+        `/artists/${artistId}/related-artists`,
+      )
+      .then(response => response.artists);
   }
 }

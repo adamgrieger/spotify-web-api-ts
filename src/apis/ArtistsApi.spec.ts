@@ -1,54 +1,95 @@
+import {
+  artistFixture,
+  getArtistAlbumsFixture,
+  getArtistsFixture,
+  getArtistTopTracksFixture,
+  getRelatedArtistsFixture,
+} from '../fixtures';
 import { Http } from '../helpers/Http';
+import { spotifyAxios } from '../helpers/spotifyAxios';
 import { ArtistsApi } from './ArtistsApi';
 
-jest.mock('../helpers/Http');
+jest.mock('../helpers/spotifyAxios');
 
-const HttpMock = Http as jest.Mocked<typeof Http>;
+const spotifyAxiosMock = spotifyAxios as jest.MockedFunction<
+  typeof spotifyAxios
+>;
+
+beforeEach(() => {
+  jest.resetAllMocks();
+});
 
 describe('ArtistsApi', () => {
-  const http = new HttpMock('token');
-
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
-
   describe('getArtist', () => {
-    it('should get an artist', () => {
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(artistFixture);
+    });
+
+    it('should get an artist', async () => {
+      const http = new Http('token');
       const artists = new ArtistsApi(http);
-      artists.getArtist('foo');
-      expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith('/artists/foo');
+      const response = await artists.getArtist('foo');
+
+      expect(response).toEqual(artistFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/artists/foo',
+        'GET',
+        'token',
+        undefined,
+      );
     });
   });
 
   describe('getArtistAlbums', () => {
-    it("should get an artist's albums (without options)", () => {
-      const artists = new ArtistsApi(http);
-      artists.getArtistAlbums('foo');
-      expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith('/artists/foo/albums', undefined);
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(getArtistAlbumsFixture);
     });
 
-    it("should get an artist's albums (with options)", () => {
+    it("should get an artist's albums (without options)", async () => {
+      const http = new Http('token');
       const artists = new ArtistsApi(http);
-      artists.getArtistAlbums('foo', {
-        country: 'bar',
-      });
-      expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith('/artists/foo/albums', {
-        params: {
-          country: 'bar',
+      const response = await artists.getArtistAlbums('foo');
+
+      expect(response).toEqual(getArtistAlbumsFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/artists/foo/albums',
+        'GET',
+        'token',
+        undefined,
+      );
+    });
+
+    it("should get an artist's albums (with options)", async () => {
+      const http = new Http('token');
+      const artists = new ArtistsApi(http);
+      const response = await artists.getArtistAlbums('foo', { country: 'bar' });
+
+      expect(response).toEqual(getArtistAlbumsFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/artists/foo/albums',
+        'GET',
+        'token',
+        {
+          params: {
+            country: 'bar',
+          },
         },
-      });
+      );
     });
   });
 
   describe('getArtists', () => {
-    it('should get several artists', () => {
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(getArtistsFixture);
+    });
+
+    it('should get several artists', async () => {
+      const http = new Http('token');
       const artists = new ArtistsApi(http);
-      artists.getArtists(['foo', 'bar']);
-      expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith('/artists', {
+      const response = await artists.getArtists(['foo', 'bar']);
+
+      expect(response).toEqual(getArtistsFixture.artists);
+      expect(spotifyAxiosMock).toBeCalledWith('/artists', 'GET', 'token', {
         params: {
           ids: ['foo', 'bar'],
         },
@@ -57,24 +98,46 @@ describe('ArtistsApi', () => {
   });
 
   describe('getArtistTopTracks', () => {
-    it("should get an artist's top tracks", () => {
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(getArtistTopTracksFixture);
+    });
+
+    it("should get an artist's top tracks", async () => {
+      const http = new Http('token');
       const artists = new ArtistsApi(http);
-      artists.getArtistTopTracks('foo', 'bar');
-      expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith('/artists/foo/top-tracks', {
-        params: {
-          country: 'bar',
+      const response = await artists.getArtistTopTracks('foo', 'bar');
+
+      expect(response).toEqual(getArtistTopTracksFixture.tracks);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/artists/foo/top-tracks',
+        'GET',
+        'token',
+        {
+          params: {
+            country: 'bar',
+          },
         },
-      });
+      );
     });
   });
 
   describe('getRelatedArtists', () => {
-    it("should get an artist's related artists", () => {
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(getRelatedArtistsFixture);
+    });
+
+    it("should get an artist's related artists", async () => {
+      const http = new Http('token');
       const artists = new ArtistsApi(http);
-      artists.getRelatedArtists('foo');
-      expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith('/artists/foo/related-artists');
+      const response = await artists.getRelatedArtists('foo');
+
+      expect(response).toEqual(getRelatedArtistsFixture.artists);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/artists/foo/related-artists',
+        'GET',
+        'token',
+        undefined,
+      );
     });
   });
 });

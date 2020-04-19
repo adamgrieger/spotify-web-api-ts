@@ -1,4 +1,4 @@
-import { Http } from '../helpers';
+import { Http } from '../helpers/Http';
 import * as types from '../types';
 
 export class AlbumsApi {
@@ -33,13 +33,14 @@ export class AlbumsApi {
    * @param options Optional request information.
    */
   async getAlbums(albumIds: string[], options?: types.MarketOptions) {
-    const response = await this.http.get<types.GetAlbumsResponse>('/albums', {
-      params: {
-        ...options,
-        ids: albumIds,
-      },
-    });
-    return response.albums;
+    return this.http
+      .get<types.GetAlbumsResponse>('/albums', {
+        params: {
+          ...options,
+          ids: albumIds,
+        },
+      })
+      .then(response => response.albums);
   }
 
   /**

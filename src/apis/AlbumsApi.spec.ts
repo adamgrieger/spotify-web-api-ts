@@ -3,7 +3,8 @@ import {
   getAlbumsFixture,
   getAlbumTracksFixture,
 } from '../fixtures';
-import { Http, spotifyAxios } from '../helpers';
+import { Http } from '../helpers/Http';
+import { spotifyAxios } from '../helpers/spotifyAxios';
 import { AlbumsApi } from './AlbumsApi';
 
 jest.mock('../helpers/spotifyAxios');
@@ -17,11 +18,11 @@ beforeEach(() => {
 });
 
 describe('AlbumsApi', () => {
-  beforeEach(() => {
-    spotifyAxiosMock.mockResolvedValue(albumFixture);
-  });
-
   describe('getAlbum', () => {
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(albumFixture);
+    });
+
     it('should get an album (without options)', async () => {
       const http = new Http('token');
       const albums = new AlbumsApi(http);

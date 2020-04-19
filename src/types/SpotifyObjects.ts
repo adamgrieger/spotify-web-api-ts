@@ -370,7 +370,7 @@ export type SimplifiedAlbum = {
   album_group?: 'album' | 'single' | 'compilation' | 'appears_on';
   album_type: 'album' | 'single' | 'compilation';
   artists: SimplifiedArtist[];
-  available_markets: string[];
+  available_markets?: string[];
   external_urls: ExternalURL;
   href: string;
   id: string;
@@ -378,7 +378,8 @@ export type SimplifiedAlbum = {
   name: string;
   release_date: string;
   release_date_precision: 'year' | 'month' | 'day';
-  restrictions: Restrictions;
+  restrictions?: Restrictions;
+  total_tracks: number;
   type: 'album';
   uri: string;
 };
@@ -473,7 +474,7 @@ export type TimeInterval = {
 export type Track = {
   album: SimplifiedAlbum;
   artists: SimplifiedArtist[];
-  available_markets: string[];
+  available_markets?: string[];
   disc_number: number;
   duration_ms: number;
   explicit: boolean;
@@ -482,8 +483,8 @@ export type Track = {
   href: string;
   id: string;
   is_playable: boolean;
-  linked_from: TrackLink;
-  restrictions: Restrictions;
+  linked_from?: TrackLink;
+  restrictions?: Restrictions;
   name: string;
   popularity: number;
   preview_url: string | null;
