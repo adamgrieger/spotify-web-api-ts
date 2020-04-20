@@ -308,6 +308,11 @@ export type SavedAlbum = {
   album: Album;
 };
 
+export type SavedShow = {
+  added_at: string;
+  show: SimplifiedShow;
+};
+
 export type SavedTrack = {
   added_at: string;
   track: Track;

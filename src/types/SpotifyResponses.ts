@@ -86,6 +86,10 @@ export type GetSavedAlbumsResponse = SpotifyObjects.Paging<
   SpotifyObjects.SavedAlbum
 >;
 
+export type GetSavedShowsResponse = SpotifyObjects.Paging<
+  SpotifyObjects.SavedShow
+>;
+
 export type GetSavedTracksResponse = SpotifyObjects.Paging<
   SpotifyObjects.SavedTrack
 >;

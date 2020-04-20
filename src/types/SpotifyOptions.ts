@@ -131,9 +131,24 @@ export type GetFollowedArtistsOptions = {
 // | Library |
 // +---------+
 
-export type LibraryOptions = {
+export type GetSavedAlbumsOptions = {
   limit?: number;
   offset?: number;
+  market?: string;
+};
+
+export type GetSavedShowsOptions = {
+  limit?: number;
+  offset?: number;
+};
+
+export type GetSavedTracksOptions = {
+  limit?: number;
+  offset?: number;
+  market?: string;
+};
+
+export type RemoveSavedShowsOptions = {
   market?: string;
 };
 

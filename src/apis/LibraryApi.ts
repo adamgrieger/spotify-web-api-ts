@@ -9,11 +9,13 @@ export class LibraryApi {
   }
 
   /**
+   * Check User's Saved Albums
+   *
    * Check if one or more albums are saved in the current user's library.
    *
    * @param albumIds The Spotify IDs of the albums.
    */
-  areAlbumsSaved(albumIds: string[]) {
+  async areAlbumsSaved(albumIds: string[]) {
     return this.http.get<boolean[]>('/me/albums/contains', {
       params: {
         ids: albumIds,
@@ -22,11 +24,28 @@ export class LibraryApi {
   }
 
   /**
+   * Check User's Saved Shows
+   *
+   * Check if one or more shows are saved in the current user's library.
+   *
+   * @param showIds The Spotify IDs of the shows.
+   */
+  async areShowsSaved(showIds: string[]) {
+    return this.http.get<boolean[]>('/me/shows/contains', {
+      params: {
+        ids: showIds,
+      },
+    });
+  }
+
+  /**
+   * Check User's Saved Tracks
+   *
    * Check if one or more tracks are saved in the current user's library.
    *
    * @param trackIds The Spotify IDs of the tracks.
    */
-  areTracksSaved(trackIds: string[]) {
+  async areTracksSaved(trackIds: string[]) {
     return this.http.get<boolean[]>('/me/tracks/contains', {
       params: {
         ids: trackIds,
@@ -35,11 +54,13 @@ export class LibraryApi {
   }
 
   /**
-   * Get a list of the albums saved in the current user's library.
+   * Get the Current User's Saved Albums
    *
-   * @param options A JSON object with optional request information.
+   * Get a list of albums saved in the current user's library.
+   *
+   * @param options Optional request information.
    */
-  getSavedAlbums(options?: types.LibraryOptions) {
+  async getSavedAlbums(options?: types.GetSavedAlbumsOptions) {
     return this.http.get<types.GetSavedAlbumsResponse>(
       '/me/albums',
       options && { params: options },
@@ -47,11 +68,27 @@ export class LibraryApi {
   }
 
   /**
-   * Get a list of the tracks saved in the current user's library.
+   * Get the Current User's Saved Shows
    *
-   * @param options A JSON object with optional request information.
+   * Get a list of shows saved in the current user's library.
+   *
+   * @param options Optional request information.
    */
-  getSavedTracks(options?: types.LibraryOptions) {
+  async getSavedShows(options?: types.GetSavedShowsOptions) {
+    return this.http.get<types.GetSavedShowsResponse>(
+      '/me/shows',
+      options && { params: options },
+    );
+  }
+
+  /**
+   * Get the Current User's Saved Tracks
+   *
+   * Get a list of tracks saved in the current user's library.
+   *
+   * @param options Optional request information.
+   */
+  async getSavedTracks(options?: types.GetSavedTracksOptions) {
     return this.http.get<types.GetSavedTracksResponse>(
       '/me/tracks',
       options && { params: options },
@@ -59,11 +96,13 @@ export class LibraryApi {
   }
 
   /**
+   * Remove Albums for the Current User
+   *
    * Remove one or more albums from the current user's library.
    *
    * @param albumIds The Spotify IDs of the albums.
    */
-  removeSavedAlbums(albumIds: string[]) {
+  async removeSavedAlbums(albumIds: string[]) {
     return this.http.delete<void>('/me/albums', {
       data: {
         ids: albumIds,
@@ -72,11 +111,33 @@ export class LibraryApi {
   }
 
   /**
+   * Remove Shows for the Current User
+   *
+   * Remove one or more shows from the current user's library.
+   *
+   * @param showIds The Spotify IDs of the shows.
+   * @param options Optional request information.
+   */
+  async removeSavedShows(
+    showIds: string[],
+    options?: types.RemoveSavedShowsOptions,
+  ) {
+    return this.http.delete<void>('/me/shows', {
+      params: {
+        ...options,
+        ids: showIds,
+      },
+    });
+  }
+
+  /**
+   * Remove Tracks for the Current User
+   *
    * Remove one or more tracks from the current user's library.
    *
    * @param trackIds The Spotify IDs of the tracks.
    */
-  removeSavedTracks(trackIds: string[]) {
+  async removeSavedTracks(trackIds: string[]) {
     return this.http.delete<void>('/me/tracks', {
       data: {
         ids: trackIds,
@@ -85,11 +146,13 @@ export class LibraryApi {
   }
 
   /**
+   * Save Albums for the Current User
+   *
    * Save one or more albums to the current user's library.
    *
    * @param albumIds The Spotify IDs of the albums.
    */
-  saveAlbums(albumIds: string[]) {
+  async saveAlbums(albumIds: string[]) {
     return this.http.put<void>('/me/albums', {
       data: {
         ids: albumIds,
@@ -98,11 +161,28 @@ export class LibraryApi {
   }
 
   /**
+   * Save Shows for the Current User
+   *
+   * Save one or more albums to the current user's library.
+   *
+   * @param showIds The Spotify IDs of the shows.
+   */
+  async saveShows(showIds: string[]) {
+    return this.http.put<void>('/me/shows', {
+      params: {
+        ids: showIds,
+      },
+    });
+  }
+
+  /**
+   * Save Tracks for the Current User
+   *
    * Save one or more tracks to the current user's library.
    *
    * @param trackIds The Spotify IDs of the tracks.
    */
-  saveTracks(trackIds: string[]) {
+  async saveTracks(trackIds: string[]) {
     return this.http.put<void>('/me/tracks', {
       data: {
         ids: trackIds,
