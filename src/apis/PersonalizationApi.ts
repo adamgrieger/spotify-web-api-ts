@@ -9,9 +9,11 @@ export class PersonalizationApi {
   }
 
   /**
+   * Get the Current User's Top Artists
+   *
    * Get the current user's top artists based on calculated affinity.
    *
-   * @param options A JSON object with optional request information.
+   * @param options Optional request information.
    */
   getMyTopArtists(options?: types.PersonalizationOptions) {
     return this.http.get<types.GetMyTopArtistsResponse>(
@@ -21,9 +23,11 @@ export class PersonalizationApi {
   }
 
   /**
+   * Get the Current User's Top Tracks
+   *
    * Get the current user's top tracks based on calculated affinity.
    *
-   * @param options A JSON object with optional request information.
+   * @param options Optional request information.
    */
   getMyTopTracks(options?: types.PersonalizationOptions) {
     return this.http.get<types.GetMyTopTracksResponse>(

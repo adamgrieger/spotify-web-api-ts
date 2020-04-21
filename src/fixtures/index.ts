@@ -17,3 +17,4 @@ export * from './browse';
 export * from './episodes';
 export * from './follow';
 export * from './library';
+export * from './personalization';

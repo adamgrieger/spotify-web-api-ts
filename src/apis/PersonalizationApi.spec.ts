@@ -1,58 +1,92 @@
+import { getMyTopArtistsFixture, getMyTopTracksFixture } from '../fixtures';
 import { Http } from '../helpers/Http';
+import { spotifyAxios } from '../helpers/spotifyAxios';
 import { PersonalizationApi } from './PersonalizationApi';
 
-jest.mock('../helpers/Http');
+jest.mock('../helpers/spotifyAxios');
 
-const HttpMock = Http as jest.Mocked<typeof Http>;
+const spotifyAxiosMock = spotifyAxios as jest.MockedFunction<
+  typeof spotifyAxios
+>;
+
+beforeEach(() => {
+  jest.resetAllMocks();
+});
 
 describe('PersonalizationApi', () => {
-  const http = new HttpMock('token');
-
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
-
   describe('getMyTopArtists', () => {
-    it("should get the current user's top artists (without options)", () => {
-      const personalization = new PersonalizationApi(http);
-      personalization.getMyTopArtists();
-      expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith('/me/top/artists', undefined);
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(getMyTopArtistsFixture);
     });
 
-    it("should get the current user's top artists (with options)", () => {
+    it("should get the current user's top artists (without options)", async () => {
+      const http = new Http('token');
       const personalization = new PersonalizationApi(http);
-      personalization.getMyTopArtists({
-        limit: 2,
-      });
-      expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith('/me/top/artists', {
-        params: {
-          limit: 2,
+      const response = await personalization.getMyTopArtists();
+
+      expect(response).toEqual(getMyTopArtistsFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/me/top/artists',
+        'GET',
+        'token',
+        undefined,
+      );
+    });
+
+    it("should get the current user's top artists (with options)", async () => {
+      const http = new Http('token');
+      const personalization = new PersonalizationApi(http);
+      const response = await personalization.getMyTopArtists({ limit: 2 });
+
+      expect(response).toEqual(getMyTopArtistsFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/me/top/artists',
+        'GET',
+        'token',
+        {
+          params: {
+            limit: 2,
+          },
         },
-      });
+      );
     });
   });
 
   describe('getMyTopTracks', () => {
-    it("should get the current user's top tracks (without options)", () => {
-      const personalization = new PersonalizationApi(http);
-      personalization.getMyTopTracks();
-      expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith('/me/top/tracks', undefined);
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(getMyTopTracksFixture);
     });
 
-    it("should get the current user's top tracks (with options)", () => {
+    it("should get the current user's top tracks (without options)", async () => {
+      const http = new Http('token');
       const personalization = new PersonalizationApi(http);
-      personalization.getMyTopTracks({
-        limit: 2,
-      });
-      expect(http.get).toBeCalledTimes(1);
-      expect(http.get).toBeCalledWith('/me/top/tracks', {
-        params: {
-          limit: 2,
+      const response = await personalization.getMyTopTracks();
+
+      expect(response).toEqual(getMyTopTracksFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/me/top/tracks',
+        'GET',
+        'token',
+        undefined,
+      );
+    });
+
+    it("should get the current user's top tracks (with options)", async () => {
+      const http = new Http('token');
+      const personalization = new PersonalizationApi(http);
+      const response = await personalization.getMyTopTracks({ limit: 2 });
+
+      expect(response).toEqual(getMyTopTracksFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/me/top/tracks',
+        'GET',
+        'token',
+        {
+          params: {
+            limit: 2,
+          },
         },
-      });
+      );
     });
   });
 });
