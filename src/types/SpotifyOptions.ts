@@ -166,6 +166,16 @@ export type PersonalizationOptions = {
 // | Player |
 // +--------+
 
+export type GetCurrentlyPlayingTrackOptions = {
+  market?: string;
+  additional_types?: Array<'episode'>;
+};
+
+export type GetPlaybackInfoOptions = {
+  market?: string;
+  additional_types?: Array<'episode'>;
+};
+
 export type GetRecentlyPlayedTracksOptions = {
   limit?: number;
   after?: number;

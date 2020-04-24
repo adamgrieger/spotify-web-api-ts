@@ -9,12 +9,14 @@ export class PlayerApi {
   }
 
   /**
+   * Add an Item to the User's Playback Queue
+   *
    * Add an item to the end of the user's current playback queue.
    *
    * @param uri The uri of the track or episode to add to the queue.
-   * @param options A JSON object with optional request information.
+   * @param options Optional request information.
    */
-  addToQueue(uri: string, options?: types.DeviceIdOptions) {
+  async addToQueue(uri: string, options?: types.DeviceIdOptions) {
     return this.http.post<void>('/me/player/queue', {
       params: {
         ...options,
@@ -24,11 +26,15 @@ export class PlayerApi {
   }
 
   /**
+   * Get the User's Currently Playing Track
+   *
    * Get the object currently being played on the user's Spotify account.
    *
-   * @param options A JSON object with optional request information.
+   * @param options Optional request information.
    */
-  getCurrentlyPlayingTrack(options?: types.MarketOptions) {
+  async getCurrentlyPlayingTrack(
+    options?: types.GetCurrentlyPlayingTrackOptions,
+  ) {
     return this.http.get<types.CurrentlyPlaying>(
       '/me/player/currently-playing',
       options && { params: options },
@@ -36,19 +42,23 @@ export class PlayerApi {
   }
 
   /**
+   * Get a User's Available Devices
+   *
    * Get information about a user's available devices.
    */
-  getMyDevices() {
+  async getMyDevices() {
     return this.http.get<types.Device[]>('/me/player/devices');
   }
 
   /**
-   * Get information about the user's current playback state, including track,
-   * track progress, and active device.
+   * Get Information About the User's Current Playback
    *
-   * @param options A JSON object with optional request information.
+   * Get information about the user's current playback state, including track
+   * or episode, track progress, and active device.
+   *
+   * @param options Optional request information.
    */
-  getPlaybackInfo(options?: types.MarketOptions) {
+  async getPlaybackInfo(options?: types.GetPlaybackInfoOptions) {
     return this.http.get<types.CurrentlyPlayingContext>(
       '/me/player',
       options && { params: options },
@@ -56,11 +66,15 @@ export class PlayerApi {
   }
 
   /**
-   * Get the current user's recently played tracks.
+   * Get the Current User's Recently Played Tracks
    *
-   * @param options A JSON object with optional request information.
+   * Get tracks from the current user's recently played tracks.
+   *
+   * @param options Optional request information.
    */
-  getRecentlyPlayedTracks(options?: types.GetRecentlyPlayedTracksOptions) {
+  async getRecentlyPlayedTracks(
+    options?: types.GetRecentlyPlayedTracksOptions,
+  ) {
     return this.http.get<types.GetRecentlyPlayedTracksResponse>(
       '/me/player/recently-played',
       options && { params: options },
@@ -68,23 +82,13 @@ export class PlayerApi {
   }
 
   /**
-   * Skips to next track in the user's queue.
+   * Pause a User's Playback
    *
-   * @param options A JSON object with optional request information.
-   */
-  next(options?: types.DeviceIdOptions) {
-    return this.http.post<void>(
-      '/me/player/next',
-      options && { params: options },
-    );
-  }
-
-  /**
    * Pause playback on the user's account.
    *
-   * @param options A JSON object with optional request information.
+   * @param options Optional request information.
    */
-  pause(options?: types.DeviceIdOptions) {
+  async pause(options?: types.DeviceIdOptions) {
     return this.http.put<void>(
       '/me/player/pause',
       options && { params: options },
@@ -92,11 +96,13 @@ export class PlayerApi {
   }
 
   /**
+   * Start or Resume a User's Playback
+   *
    * Start a new context or resume current playback on the user's active device.
    *
-   * @param options A JSON object with optional request information.
+   * @param options Optional request information.
    */
-  play(options?: types.PlayOptions) {
+  async play(options?: types.PlayOptions) {
     // eslint-disable-next-line @typescript-eslint/camelcase
     const { device_id, ...bodyParams } = options ?? {};
 
@@ -111,39 +117,14 @@ export class PlayerApi {
   }
 
   /**
-   * Skips to previous track in the user's queue.
+   * Seek to a Position in the Currently Playing Track
    *
-   * @param options A JSON object with optional request information.
-   */
-  previous(options?: types.DeviceIdOptions) {
-    return this.http.post<void>(
-      '/me/player/previous',
-      options && { params: options },
-    );
-  }
-
-  /**
-   * Set the repeat mode for the user's playback.
-   *
-   * @param state The desired repeat mode.
-   * @param options A JSON object with optional request information.
-   */
-  repeat(state: types.RepeatState, options?: types.DeviceIdOptions) {
-    return this.http.put<void>('/me/player/repeat', {
-      params: {
-        ...options,
-        state,
-      },
-    });
-  }
-
-  /**
    * Seeks to the given position in the user's currently playing track.
    *
    * @param positionMs The position in milliseconds to seek to.
-   * @param options A JSON object with optional request information.
+   * @param options Optional request information.
    */
-  seek(positionMs: number, options?: types.DeviceIdOptions) {
+  async seek(positionMs: number, options?: types.DeviceIdOptions) {
     return this.http.put<void>('/me/player/seek', {
       params: {
         ...options,
@@ -153,12 +134,31 @@ export class PlayerApi {
   }
 
   /**
+   * Set the Repeat Mode for the User's Playback
+   *
+   * Set the repeat mode for the user's playback.
+   *
+   * @param state The desired repeat mode.
+   * @param options Optional request information.
+   */
+  async setRepeat(state: types.RepeatState, options?: types.DeviceIdOptions) {
+    return this.http.put<void>('/me/player/repeat', {
+      params: {
+        ...options,
+        state,
+      },
+    });
+  }
+
+  /**
+   * Toggle Shuffle For User's Playback
+   *
    * Toggle shuffle on or off for user's playback.
    *
    * @param state The desired shuffle state.
-   * @param options A JSON object with optional request information.
+   * @param options Optional request information.
    */
-  shuffle(state: boolean, options?: types.DeviceIdOptions) {
+  async setShuffle(state: boolean, options?: types.DeviceIdOptions) {
     return this.http.put<void>('/me/player/shuffle', {
       params: {
         ...options,
@@ -168,34 +168,66 @@ export class PlayerApi {
   }
 
   /**
-   * Transfer playback to a new device and determine if it should start playing.
+   * Set Volume For User's Playback
    *
-   * @param deviceIds An array containing the ID of the device on which playback should be started/transferred.
-   * @param options A JSON object with optional request information.
+   * Set the volume for the user's current playback device.
+   *
+   * @param volumePercent The volume to set.
+   * @param options Optional request information.
    */
-  transferPlayback(
-    deviceIds: string[],
-    options?: types.TransferPlaybackOptions,
-  ) {
-    return this.http.put<void>('/me/player', {
-      data: {
+  async setVolume(volumePercent: number, options?: types.DeviceIdOptions) {
+    return this.http.put<void>('/me/player/volume', {
+      params: {
         ...options,
-        device_ids: deviceIds,
+        volume_percent: volumePercent,
       },
     });
   }
 
   /**
-   * Set the volume for the user's current playback device.
+   * Skip User's Playback To Next Track
    *
-   * @param volumePercent The volume to set.
-   * @param options A JSON object with optional request information.
+   * Skips to next track in the user's queue.
+   *
+   * @param options Optional request information.
    */
-  volume(volumePercent: number, options?: types.DeviceIdOptions) {
-    return this.http.put<void>('/me/player/volume', {
-      params: {
+  async skipToNext(options?: types.DeviceIdOptions) {
+    return this.http.post<void>(
+      '/me/player/next',
+      options && { params: options },
+    );
+  }
+
+  /**
+   * Skip User's Playback To Previous Track
+   *
+   * Skips to previous track in the user's queue.
+   *
+   * @param options Optional request information.
+   */
+  async skipToPrevious(options?: types.DeviceIdOptions) {
+    return this.http.post<void>(
+      '/me/player/previous',
+      options && { params: options },
+    );
+  }
+
+  /**
+   * Transfer a User's Playback
+   *
+   * Transfer playback to a new device and determine if it should start playing.
+   *
+   * @param deviceId The ID of the device on which playback should be started/transferred.
+   * @param options Optional request information.
+   */
+  async transferPlayback(
+    deviceId: string,
+    options?: types.TransferPlaybackOptions,
+  ) {
+    return this.http.put<void>('/me/player', {
+      data: {
         ...options,
-        volume_percent: volumePercent,
+        device_ids: [deviceId],
       },
     });
   }

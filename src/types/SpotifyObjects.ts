@@ -99,7 +99,7 @@ export type CurrentlyPlaying = {
   timestamp: number;
   progress_ms: number | null;
   is_playing: boolean;
-  item: Track | null;
+  item: Episode | Track | null;
   currently_playing_type: 'track' | 'episode' | 'ad' | 'unknown';
   actions: Disallows;
 };
@@ -119,6 +119,7 @@ export type CurrentlyPlayingContext = {
 
 export type Cursor = {
   after: string;
+  before?: string;
 };
 
 export type CursorBasedPaging<T> = {
@@ -127,7 +128,7 @@ export type CursorBasedPaging<T> = {
   limit: number;
   next: string | null;
   cursors: Cursor;
-  total: number;
+  total?: number;
 };
 
 export type Device = {
@@ -155,7 +156,9 @@ export type DeviceType =
   | 'Automobile'
   | 'Unknown';
 
-export type Disallows = Record<Action, boolean>;
+export type Disallows = {
+  disallows: Partial<Record<Action, boolean>>;
+};
 
 export type Episode = {
   audio_preview_url: string | null;
@@ -215,9 +218,9 @@ export type Paging<T> = {
 };
 
 export type PlayHistory = {
-  track: SimplifiedTrack;
+  track: Track;
   played_at: string;
-  context: Context;
+  context: Context | null;
 };
 
 export type Playlist = {
