@@ -1,86 +1,166 @@
+import {
+  getMyPlaylistsFixture,
+  getPlaylistItemsFixture,
+  getUserPlaylistsFixture,
+  imageFixture,
+  playlistFixture,
+  snapshotIdFixture,
+} from '../fixtures';
 import { Http } from '../helpers/Http';
+import { spotifyAxios } from '../helpers/spotifyAxios';
 import { PlaylistsApi } from './PlaylistsApi';
 
-jest.mock('../helpers/Http');
+jest.mock('../helpers/spotifyAxios');
 
-const HttpMock = Http as jest.Mocked<typeof Http>;
+const spotifyAxiosMock = spotifyAxios as jest.MockedFunction<
+  typeof spotifyAxios
+>;
+
+beforeEach(() => {
+  jest.resetAllMocks();
+});
 
 describe('PlaylistsApi', () => {
-  const http = new HttpMock('token');
-
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
-
-  describe('addTracksToPlaylist', () => {
-    it('should add tracks to a playlist (without options)', () => {
-      const playlists = new PlaylistsApi(http);
-      playlists.addTracksToPlaylist('foo', ['bar', 'baz']);
-      expect(http.post).toBeCalledWith('/playlists/foo/tracks', {
-        data: {
-          uris: ['bar', 'baz'],
-        },
-      });
+  describe('addItemsToPlaylist', () => {
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(snapshotIdFixture);
     });
 
-    it('should add tracks to a playlist (with options)', () => {
+    it('should add items to a playlist (without options)', async () => {
+      const http = new Http('token');
       const playlists = new PlaylistsApi(http);
-      playlists.addTracksToPlaylist('foo', ['bar', 'baz'], { position: 2 });
-      expect(http.post).toBeCalledWith('/playlists/foo/tracks', {
-        data: {
-          uris: ['bar', 'baz'],
-          position: 2,
+      const response = await playlists.addItemsToPlaylist('foo', [
+        'bar',
+        'baz',
+      ]);
+
+      expect(response).toBe(snapshotIdFixture.snapshot_id);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/playlists/foo/tracks',
+        'POST',
+        'token',
+        {
+          data: {
+            uris: ['bar', 'baz'],
+          },
         },
-      });
+      );
+    });
+
+    it('should add items to a playlist (with options)', async () => {
+      const http = new Http('token');
+      const playlists = new PlaylistsApi(http);
+      const response = await playlists.addItemsToPlaylist(
+        'foo',
+        ['bar', 'baz'],
+        { position: 2 },
+      );
+
+      expect(response).toBe(snapshotIdFixture.snapshot_id);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/playlists/foo/tracks',
+        'POST',
+        'token',
+        {
+          data: {
+            uris: ['bar', 'baz'],
+            position: 2,
+          },
+        },
+      );
     });
   });
 
   describe('changePlaylistDetails', () => {
-    it("should change a playlist's details", () => {
+    it("should change a playlist's details", async () => {
+      const http = new Http('token');
       const playlists = new PlaylistsApi(http);
-      playlists.changePlaylistDetails('foo', { description: 'bar' });
-      expect(http.put).toBeCalledWith('/playlists/foo', {
-        data: {
-          description: 'bar',
+      await playlists.changePlaylistDetails('foo', { description: 'bar' });
+
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/playlists/foo',
+        'PUT',
+        'token',
+        {
+          data: {
+            description: 'bar',
+          },
         },
-      });
+      );
     });
   });
 
   describe('createPlaylist', () => {
-    it('should create a playlist (without options)', () => {
-      const playlists = new PlaylistsApi(http);
-      playlists.createPlaylist('foo', 'bar');
-      expect(http.post).toBeCalledWith('/users/foo/playlists', {
-        data: {
-          name: 'bar',
-        },
-      });
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(playlistFixture);
     });
 
-    it('should create a playlist (with options)', () => {
+    it('should create a playlist (without options)', async () => {
+      const http = new Http('token');
       const playlists = new PlaylistsApi(http);
-      playlists.createPlaylist('foo', 'bar', { description: 'baz' });
-      expect(http.post).toBeCalledWith('/users/foo/playlists', {
-        data: {
-          name: 'bar',
-          description: 'baz',
+      const response = await playlists.createPlaylist('foo', 'bar');
+
+      expect(response).toEqual(playlistFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/users/foo/playlists',
+        'POST',
+        'token',
+        {
+          data: {
+            name: 'bar',
+          },
         },
+      );
+    });
+
+    it('should create a playlist (with options)', async () => {
+      const http = new Http('token');
+      const playlists = new PlaylistsApi(http);
+      const response = await playlists.createPlaylist('foo', 'bar', {
+        description: 'baz',
       });
+
+      expect(response).toEqual(playlistFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/users/foo/playlists',
+        'POST',
+        'token',
+        {
+          data: {
+            name: 'bar',
+            description: 'baz',
+          },
+        },
+      );
     });
   });
 
   describe('getMyPlaylists', () => {
-    it("should get a list of the current user's playlists (without options)", () => {
-      const playlists = new PlaylistsApi(http);
-      playlists.getMyPlaylists();
-      expect(http.get).toBeCalledWith('/me/playlists', undefined);
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(getMyPlaylistsFixture);
     });
 
-    it("should get a list of the current user's playlists (with options)", () => {
+    it("should get a list of the current user's playlists (without options)", async () => {
+      const http = new Http('token');
       const playlists = new PlaylistsApi(http);
-      playlists.getMyPlaylists({ limit: 2 });
-      expect(http.get).toBeCalledWith('/me/playlists', {
+      const response = await playlists.getMyPlaylists();
+
+      expect(response).toEqual(getMyPlaylistsFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/me/playlists',
+        'GET',
+        'token',
+        undefined,
+      );
+    });
+
+    it("should get a list of the current user's playlists (with options)", async () => {
+      const http = new Http('token');
+      const playlists = new PlaylistsApi(http);
+      const response = await playlists.getMyPlaylists({ limit: 2 });
+
+      expect(response).toEqual(getMyPlaylistsFixture);
+      expect(spotifyAxiosMock).toBeCalledWith('/me/playlists', 'GET', 'token', {
         params: {
           limit: 2,
         },
@@ -89,153 +169,296 @@ describe('PlaylistsApi', () => {
   });
 
   describe('getPlaylist', () => {
-    it('should get a playlist (without options)', () => {
-      const playlists = new PlaylistsApi(http);
-      playlists.getPlaylist('foo');
-      expect(http.get).toBeCalledWith('/playlists/foo', undefined);
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(playlistFixture);
     });
 
-    it('should get a playlist (with options)', () => {
+    it('should get a playlist (without options)', async () => {
+      const http = new Http('token');
       const playlists = new PlaylistsApi(http);
-      playlists.getPlaylist('foo', { market: 'bar' });
-      expect(http.get).toBeCalledWith('/playlists/foo', {
-        params: {
-          market: 'bar',
+      const response = await playlists.getPlaylist('foo');
+
+      expect(response).toEqual(playlistFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/playlists/foo',
+        'GET',
+        'token',
+        undefined,
+      );
+    });
+
+    it('should get a playlist (with options)', async () => {
+      const http = new Http('token');
+      const playlists = new PlaylistsApi(http);
+      const response = await playlists.getPlaylist('foo', { market: 'bar' });
+
+      expect(response).toEqual(playlistFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/playlists/foo',
+        'GET',
+        'token',
+        {
+          params: {
+            market: 'bar',
+          },
         },
-      });
+      );
     });
   });
 
-  describe('getPlaylistCoverImage', () => {
-    it('should get a playlist cover image', () => {
+  describe('getPlaylistCover', () => {
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue([imageFixture]);
+    });
+
+    it('should get a playlist cover image', async () => {
+      const http = new Http('token');
       const playlists = new PlaylistsApi(http);
-      playlists.getPlaylistCoverImage('foo');
-      expect(http.get).toBeCalledWith('/playlists/foo/images');
+      const response = await playlists.getPlaylistCover('foo');
+
+      expect(response).toEqual([imageFixture]);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/playlists/foo/images',
+        'GET',
+        'token',
+        undefined,
+      );
     });
   });
 
-  describe('getPlaylistTracks', () => {
-    it("should get a playlist's tracks (without options)", () => {
-      const playlists = new PlaylistsApi(http);
-      playlists.getPlaylistTracks('foo');
-      expect(http.get).toBeCalledWith('/playlists/foo/tracks', undefined);
+  describe('getPlaylistItems', () => {
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(getPlaylistItemsFixture);
     });
 
-    it("should get a playlist's tracks (with options)", () => {
+    it("should get a playlist's items (without options)", async () => {
+      const http = new Http('token');
       const playlists = new PlaylistsApi(http);
-      playlists.getPlaylistTracks('foo', { limit: 2 });
-      expect(http.get).toBeCalledWith('/playlists/foo/tracks', {
-        params: {
-          limit: 2,
+      const response = await playlists.getPlaylistItems('foo');
+
+      expect(response).toEqual(getPlaylistItemsFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/playlists/foo/tracks',
+        'GET',
+        'token',
+        undefined,
+      );
+    });
+
+    it("should get a playlist's items (with options)", async () => {
+      const http = new Http('token');
+      const playlists = new PlaylistsApi(http);
+      const response = await playlists.getPlaylistItems('foo', { limit: 2 });
+
+      expect(response).toEqual(getPlaylistItemsFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/playlists/foo/tracks',
+        'GET',
+        'token',
+        {
+          params: {
+            limit: 2,
+          },
         },
-      });
+      );
     });
   });
 
   describe('getUserPlaylists', () => {
-    it("should get a list of a user's playlists (without options)", () => {
-      const playlists = new PlaylistsApi(http);
-      playlists.getUserPlaylists('foo');
-      expect(http.get).toBeCalledWith('/users/foo/playlists', undefined);
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(getUserPlaylistsFixture);
     });
 
-    it("should get a list of a user's playlists (with options)", () => {
+    it("should get a list of a user's playlists (without options)", async () => {
+      const http = new Http('token');
       const playlists = new PlaylistsApi(http);
-      playlists.getUserPlaylists('foo', { limit: 2 });
-      expect(http.get).toBeCalledWith('/users/foo/playlists', {
-        params: {
-          limit: 2,
+      const response = await playlists.getUserPlaylists('foo');
+
+      expect(response).toEqual(getUserPlaylistsFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/users/foo/playlists',
+        'GET',
+        'token',
+        undefined,
+      );
+    });
+
+    it("should get a list of a user's playlists (with options)", async () => {
+      const http = new Http('token');
+      const playlists = new PlaylistsApi(http);
+      const response = await playlists.getUserPlaylists('foo', { limit: 2 });
+
+      expect(response).toEqual(getUserPlaylistsFixture);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/users/foo/playlists',
+        'GET',
+        'token',
+        {
+          params: {
+            limit: 2,
+          },
         },
-      });
+      );
     });
   });
 
-  describe('removePlaylistTracks', () => {
-    it("should remove one or more tracks from a user's playlist", () => {
+  describe('removePlaylistItems', () => {
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(snapshotIdFixture);
+    });
+
+    it('should remove items from a playlist', async () => {
+      const http = new Http('token');
       const playlists = new PlaylistsApi(http);
-      playlists.removePlaylistTracks('foo', ['bar', 'baz']);
-      expect(http.delete).toBeCalledWith('/playlists/foo/tracks', {
-        data: {
-          tracks: [{ uri: 'bar' }, { uri: 'baz' }],
+      const response = await playlists.removePlaylistItems('foo', [
+        'bar',
+        'baz',
+      ]);
+
+      expect(response).toBe(snapshotIdFixture.snapshot_id);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/playlists/foo/tracks',
+        'DELETE',
+        'token',
+        {
+          data: {
+            tracks: [{ uri: 'bar' }, { uri: 'baz' }],
+          },
         },
-      });
+      );
     });
   });
 
-  describe('removePlaylistTracksByPosition', () => {
-    it("should remove one or more tracks from a user's playlist by position (without options)", () => {
+  describe('removePlaylistItemsByPosition', () => {
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(snapshotIdFixture);
+    });
+
+    it('should remove items from a playlist by position (without options)', async () => {
+      const http = new Http('token');
       const playlists = new PlaylistsApi(http);
-      playlists.removePlaylistTracksByPosition('foo', [
+      const response = await playlists.removePlaylistItemsByPosition('foo', [
         { uri: 'bar', positions: [1, 3] },
       ]);
-      expect(http.delete).toBeCalledWith('/playlists/foo/tracks', {
-        data: {
-          tracks: [{ uri: 'bar', positions: [1, 3] }],
+
+      expect(response).toBe(snapshotIdFixture.snapshot_id);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/playlists/foo/tracks',
+        'DELETE',
+        'token',
+        {
+          data: {
+            tracks: [{ uri: 'bar', positions: [1, 3] }],
+          },
         },
-      });
+      );
     });
 
-    it("should remove one or more tracks from a user's playlist by position (with options)", () => {
+    it('should remove items from a playlist by position (with options)', async () => {
+      const http = new Http('token');
       const playlists = new PlaylistsApi(http);
-      playlists.removePlaylistTracksByPosition(
+      const response = await playlists.removePlaylistItemsByPosition(
         'foo',
         [{ uri: 'bar', positions: [1, 3] }],
         { snapshot_id: 'baz' },
       );
-      expect(http.delete).toBeCalledWith('/playlists/foo/tracks', {
-        data: {
-          tracks: [{ uri: 'bar', positions: [1, 3] }],
-          snapshot_id: 'baz',
+
+      expect(response).toBe(snapshotIdFixture.snapshot_id);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/playlists/foo/tracks',
+        'DELETE',
+        'token',
+        {
+          data: {
+            tracks: [{ uri: 'bar', positions: [1, 3] }],
+            snapshot_id: 'baz',
+          },
         },
-      });
+      );
     });
   });
 
-  describe('reorderPlaylistTracks', () => {
-    it('should reorder a track or a group of tracks in a playlist (without options)', () => {
-      const playlists = new PlaylistsApi(http);
-      playlists.reorderPlaylistTracks('foo', 3, 2);
-      expect(http.put).toBeCalledWith('/playlists/foo/tracks', {
-        data: {
-          range_start: 3,
-          insert_before: 2,
-        },
-      });
+  describe('reorderPlaylistItems', () => {
+    beforeEach(() => {
+      spotifyAxiosMock.mockResolvedValue(snapshotIdFixture);
     });
 
-    it('should reorder a track or a group of tracks in a playlist (with options)', () => {
+    it("should reorder a playlist's items (without options)", async () => {
+      const http = new Http('token');
       const playlists = new PlaylistsApi(http);
-      playlists.reorderPlaylistTracks('foo', 3, 2, { snapshot_id: 'bar' });
-      expect(http.put).toBeCalledWith('/playlists/foo/tracks', {
-        data: {
-          range_start: 3,
-          insert_before: 2,
-          snapshot_id: 'bar',
+      const response = await playlists.reorderPlaylistItems('foo', 3, 2);
+
+      expect(response).toBe(snapshotIdFixture.snapshot_id);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/playlists/foo/tracks',
+        'PUT',
+        'token',
+        {
+          data: {
+            range_start: 3,
+            insert_before: 2,
+          },
         },
+      );
+    });
+
+    it("should reorder a playlist's items (with options)", async () => {
+      const http = new Http('token');
+      const playlists = new PlaylistsApi(http);
+      const response = await playlists.reorderPlaylistItems('foo', 3, 2, {
+        snapshot_id: 'bar',
       });
+
+      expect(response).toBe(snapshotIdFixture.snapshot_id);
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/playlists/foo/tracks',
+        'PUT',
+        'token',
+        {
+          data: {
+            range_start: 3,
+            insert_before: 2,
+            snapshot_id: 'bar',
+          },
+        },
+      );
     });
   });
 
-  describe('replacePlaylistTracks', () => {
-    it("should replace a playlist's tracks", () => {
+  describe('replacePlaylistItems', () => {
+    it("should replace a playlist's items", async () => {
+      const http = new Http('token');
       const playlists = new PlaylistsApi(http);
-      playlists.replacePlaylistTracks('foo', ['bar', 'baz']);
-      expect(http.put).toBeCalledWith('/playlists/foo/tracks', {
-        data: {
-          uris: ['bar', 'baz'],
+      await playlists.replacePlaylistItems('foo', ['bar', 'baz']);
+
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/playlists/foo/tracks',
+        'PUT',
+        'token',
+        {
+          data: {
+            uris: ['bar', 'baz'],
+          },
         },
-      });
+      );
     });
   });
 
   describe('uploadPlaylistCover', () => {
-    it('should upload a custom playlist cover image', () => {
+    it('should upload a custom playlist cover image', async () => {
+      const http = new Http('token');
       const playlists = new PlaylistsApi(http);
-      playlists.uploadPlaylistCover('foo', 'bar');
-      expect(http.put).toBeCalledWith('/playlists/foo/images', {
-        data: 'bar',
-        contentType: 'image/jpeg',
-      });
+      await playlists.uploadPlaylistCover('foo', 'bar');
+
+      expect(spotifyAxiosMock).toBeCalledWith(
+        '/playlists/foo/images',
+        'PUT',
+        'token',
+        {
+          data: 'bar',
+          contentType: 'image/jpeg',
+        },
+      );
     });
   });
 });

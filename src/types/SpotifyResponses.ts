@@ -122,8 +122,12 @@ export type GetMyPlaylistsResponse = SpotifyObjects.Paging<
   SpotifyObjects.SimplifiedPlaylist
 >;
 
-export type GetPlaylistTracksResponse = SpotifyObjects.Paging<
-  Array<SpotifyObjects.Track | SpotifyObjects.Episode>
+export type GetPlaylistItemsResponse = SpotifyObjects.Paging<
+  SpotifyObjects.PlaylistItem
+>;
+
+export type GetUserPlaylistsResponse = SpotifyObjects.Paging<
+  SpotifyObjects.SimplifiedPlaylist
 >;
 
 export type SnapshotIdResponse = {

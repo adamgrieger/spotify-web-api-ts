@@ -233,9 +233,10 @@ export type Playlist = {
   images: Image[];
   name: string;
   owner: PublicUser;
+  primary_color?: string | null;
   public: boolean | null;
   snapshot_id: string;
-  tracks: Paging<PlaylistTrack>;
+  tracks: Paging<PlaylistItem>;
   type: 'playlist';
   uri: string;
 };
@@ -247,11 +248,13 @@ export type PlaylistDetails = {
   description?: string;
 };
 
-export type PlaylistTrack = {
+export type PlaylistItem = {
   added_at: string | null;
   added_by: PublicUser | null;
   is_local: boolean;
+  primary_color?: string | null;
   track: Track | Episode;
+  video_thumbnail?: VideoThumbnail;
 };
 
 export type PrivateUser = {
@@ -269,7 +272,7 @@ export type PrivateUser = {
 };
 
 export type PublicUser = {
-  display_name: string | null;
+  display_name?: string | null;
   external_urls: ExternalURL;
   followers?: Followers;
   href: string;
@@ -494,6 +497,7 @@ export type Track = {
   available_markets?: string[];
   disc_number: number;
   duration_ms: number;
+  episode?: boolean;
   explicit: boolean;
   external_ids: ExternalID;
   external_urls: ExternalURL;
@@ -505,6 +509,7 @@ export type Track = {
   name: string;
   popularity: number;
   preview_url: string | null;
+  track?: boolean;
   track_number: number;
   type: 'track';
   uri: string;
@@ -522,4 +527,8 @@ export type TrackLink = {
 export type Tracks = {
   href: string;
   total: number;
+};
+
+export type VideoThumbnail = {
+  url: string | null;
 };

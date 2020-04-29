@@ -197,7 +197,7 @@ export type TransferPlaybackOptions = {
 // | Playlists |
 // +-----------+
 
-export type AddTracksToPlaylistOptions = {
+export type AddItemsToPlaylistOptions = {
   position?: number;
 };
 
@@ -215,15 +215,15 @@ export type GetMyPlaylistsOptions = {
 export type GetPlaylistOptions = {
   fields?: string;
   market?: string;
-  additional_types?: Array<'track' | 'episode'>;
+  additional_types?: Array<'episode'>;
 };
 
-export type GetPlaylistTracksOptions = {
+export type GetPlaylistItemsOptions = {
   fields?: string;
   limit?: number;
   offset?: number;
   market?: string;
-  additional_types?: Array<'track' | 'episode'>;
+  additional_types?: Array<'episode'>;
 };
 
 export type GetUserPlaylistsOptions = {
@@ -231,11 +231,11 @@ export type GetUserPlaylistsOptions = {
   offset?: number;
 };
 
-export type RemovePlaylistTracksByPositionOptions = {
+export type RemovePlaylistItemsByPositionOptions = {
   snapshot_id?: string;
 };
 
-export type ReorderPlaylistTracksOptions = {
+export type ReorderPlaylistItemsOptions = {
   range_length?: number;
   snapshot_id?: string;
 };

@@ -9,6 +9,9 @@ export { currentlyPlayingContextFixture } from './currentlyPlayingContextFixture
 export { currentlyPlayingFixture } from './currentlyPlayingFixture';
 export { deviceFixture } from './deviceFixture';
 export { episodeFixture } from './episodeFixture';
+export { imageFixture } from './imageFixture';
+export { playlistFixture } from './playlistFixture';
+export { snapshotIdFixture } from './snapshotIdFixture';
 
 // +------+
 // | APIs |
@@ -22,3 +25,4 @@ export * from './follow';
 export * from './library';
 export * from './personalization';
 export * from './player';
+export * from './playlists';
