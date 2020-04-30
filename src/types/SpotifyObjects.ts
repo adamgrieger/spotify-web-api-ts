@@ -427,6 +427,7 @@ export type SimplifiedEpisode = {
   name: string;
   release_date: string;
   release_date_precision: 'year' | 'month' | 'day';
+  resume_point?: ResumePoint;
   type: 'episode';
   uri: string;
 };

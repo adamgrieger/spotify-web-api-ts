@@ -48,12 +48,13 @@ export class ShowsApi {
    * @param showIds The Spotify IDs for the shows.
    * @param options Optional request information.
    */
-  getShows(showIds: string[], options?: types.MarketOptions) {
-    return this.http.get<types.GetShowsResponse>('/shows', {
+  async getShows(showIds: string[], options?: types.MarketOptions) {
+    const response = await this.http.get<types.GetShowsResponse>('/shows', {
       params: {
         ...options,
         ids: showIds,
       },
     });
+    return response.shows;
   }
 }

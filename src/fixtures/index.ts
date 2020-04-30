@@ -11,6 +11,7 @@ export { deviceFixture } from './deviceFixture';
 export { episodeFixture } from './episodeFixture';
 export { imageFixture } from './imageFixture';
 export { playlistFixture } from './playlistFixture';
+export { showFixture } from './showFixture';
 export { snapshotIdFixture } from './snapshotIdFixture';
 
 // +------+
@@ -27,3 +28,4 @@ export * from './personalization';
 export * from './player';
 export * from './playlists';
 export * from './search';
+export * from './shows';
