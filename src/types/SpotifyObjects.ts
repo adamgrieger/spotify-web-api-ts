@@ -422,6 +422,7 @@ export type SimplifiedEpisode = {
   images: Image[];
   is_externally_hosted: boolean;
   is_playable: boolean;
+  language?: string;
   languages: string[];
   name: string;
   release_date: string;

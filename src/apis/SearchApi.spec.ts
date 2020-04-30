@@ -1,39 +1,56 @@
+import {
+  searchAlbumsFixture,
+  searchArtistsFixture,
+  searchEpisodesFixture,
+  searchFixture,
+  searchPlaylistsFixture,
+  searchShowsFixture,
+  searchTracksFixture,
+} from '../fixtures';
 import { Http } from '../helpers/Http';
-import { SearchApi } from './SearchApi';
 import { searchHelper } from '../helpers/searchHelper';
+import { SearchApi } from './SearchApi';
 
-jest.mock('../helpers/Http');
 jest.mock('../helpers/searchHelper');
 
-const HttpMock = Http as jest.MockedClass<typeof Http>;
 const searchHelperMock = searchHelper as jest.MockedFunction<
   typeof searchHelper
 >;
 
-describe(SearchApi.name, () => {
-  const httpMock = new HttpMock('token');
+beforeEach(() => {
+  jest.resetAllMocks();
+});
 
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
-
+describe('SearchApi', () => {
   describe('search', () => {
-    it('should search for an item (without options)', () => {
-      const search = new SearchApi(httpMock);
-      search.search('foo', ['album', 'artist']);
+    beforeEach(() => {
+      searchHelperMock.mockResolvedValue(searchFixture);
+    });
+
+    it('should search for an item (without options)', async () => {
+      const http = new Http('token');
+      const search = new SearchApi(http);
+      const response = await search.search('foo', ['album', 'artist']);
+
+      expect(response).toEqual(searchFixture);
       expect(searchHelperMock).toBeCalledWith(
-        httpMock,
+        http,
         'foo',
         ['album', 'artist'],
         undefined,
       );
     });
 
-    it('should search for an item (with options)', () => {
-      const search = new SearchApi(httpMock);
-      search.search('foo', ['album', 'artist'], { limit: 2 });
+    it('should search for an item (with options)', async () => {
+      const http = new Http('token');
+      const search = new SearchApi(http);
+      const response = await search.search('foo', ['album', 'artist'], {
+        limit: 2,
+      });
+
+      expect(response).toEqual(searchFixture);
       expect(searchHelperMock).toBeCalledWith(
-        httpMock,
+        http,
         'foo',
         ['album', 'artist'],
         { limit: 2 },
@@ -42,126 +59,181 @@ describe(SearchApi.name, () => {
   });
 
   describe('searchAlbums', () => {
-    it('should search for an album (without options)', () => {
-      const search = new SearchApi(httpMock);
-      search.searchAlbums('foo');
+    beforeEach(() => {
+      searchHelperMock.mockResolvedValue(searchAlbumsFixture);
+    });
+
+    it('should search for an album (without options)', async () => {
+      const http = new Http('token');
+      const search = new SearchApi(http);
+      const response = await search.searchAlbums('foo');
+
+      expect(response).toEqual(searchAlbumsFixture.albums);
       expect(searchHelperMock).toBeCalledWith(
-        httpMock,
+        http,
         'foo',
         ['album'],
         undefined,
       );
     });
 
-    it('should search for an album (with options)', () => {
-      const search = new SearchApi(httpMock);
-      search.searchAlbums('foo', { limit: 2 });
-      expect(searchHelperMock).toBeCalledWith(httpMock, 'foo', ['album'], {
+    it('should search for an album (with options)', async () => {
+      const http = new Http('token');
+      const search = new SearchApi(http);
+      const response = await search.searchAlbums('foo', { limit: 2 });
+
+      expect(response).toEqual(searchAlbumsFixture.albums);
+      expect(searchHelperMock).toBeCalledWith(http, 'foo', ['album'], {
         limit: 2,
       });
     });
   });
 
   describe('searchArtists', () => {
-    it('should search for an artist (without options)', () => {
-      const search = new SearchApi(httpMock);
-      search.searchArtists('foo');
+    beforeEach(() => {
+      searchHelperMock.mockResolvedValue(searchArtistsFixture);
+    });
+
+    it('should search for an artist (without options)', async () => {
+      const http = new Http('token');
+      const search = new SearchApi(http);
+      const response = await search.searchArtists('foo');
+
+      expect(response).toEqual(searchArtistsFixture.artists);
       expect(searchHelperMock).toBeCalledWith(
-        httpMock,
+        http,
         'foo',
         ['artist'],
         undefined,
       );
     });
 
-    it('should search for an artist (with options)', () => {
-      const search = new SearchApi(httpMock);
-      search.searchArtists('foo', { limit: 2 });
-      expect(searchHelperMock).toBeCalledWith(httpMock, 'foo', ['artist'], {
+    it('should search for an artist (with options)', async () => {
+      const http = new Http('token');
+      const search = new SearchApi(http);
+      const response = await search.searchArtists('foo', { limit: 2 });
+
+      expect(response).toEqual(searchArtistsFixture.artists);
+      expect(searchHelperMock).toBeCalledWith(http, 'foo', ['artist'], {
         limit: 2,
       });
     });
   });
 
   describe('searchEpisodes', () => {
-    it('should search for an episode (without options)', () => {
-      const search = new SearchApi(httpMock);
-      search.searchEpisodes('foo');
+    beforeEach(() => {
+      searchHelperMock.mockResolvedValue(searchEpisodesFixture);
+    });
+
+    it('should search for an episode (without options)', async () => {
+      const http = new Http('token');
+      const search = new SearchApi(http);
+      const response = await search.searchEpisodes('foo');
+
+      expect(response).toEqual(searchEpisodesFixture.episodes);
       expect(searchHelperMock).toBeCalledWith(
-        httpMock,
+        http,
         'foo',
         ['episode'],
         undefined,
       );
     });
 
-    it('should search for an episode (with options)', () => {
-      const search = new SearchApi(httpMock);
-      search.searchEpisodes('foo', { limit: 2 });
-      expect(searchHelperMock).toBeCalledWith(httpMock, 'foo', ['episode'], {
+    it('should search for an episode (with options)', async () => {
+      const http = new Http('token');
+      const search = new SearchApi(http);
+      const response = await search.searchEpisodes('foo', { limit: 2 });
+
+      expect(response).toEqual(searchEpisodesFixture.episodes);
+      expect(searchHelperMock).toBeCalledWith(http, 'foo', ['episode'], {
         limit: 2,
       });
     });
   });
 
   describe('searchPlaylists', () => {
-    it('should search for a playlist (without options)', () => {
-      const search = new SearchApi(httpMock);
-      search.searchPlaylists('foo');
+    beforeEach(() => {
+      searchHelperMock.mockResolvedValue(searchPlaylistsFixture);
+    });
+
+    it('should search for a playlist (without options)', async () => {
+      const http = new Http('token');
+      const search = new SearchApi(http);
+      const response = await search.searchPlaylists('foo');
+
+      expect(response).toEqual(searchPlaylistsFixture.playlists);
       expect(searchHelperMock).toBeCalledWith(
-        httpMock,
+        http,
         'foo',
         ['playlist'],
         undefined,
       );
     });
 
-    it('should search for a playlist (with options)', () => {
-      const search = new SearchApi(httpMock);
-      search.searchPlaylists('foo', { limit: 2 });
-      expect(searchHelperMock).toBeCalledWith(httpMock, 'foo', ['playlist'], {
+    it('should search for a playlist (with options)', async () => {
+      const http = new Http('token');
+      const search = new SearchApi(http);
+      const response = await search.searchPlaylists('foo', { limit: 2 });
+
+      expect(response).toEqual(searchPlaylistsFixture.playlists);
+      expect(searchHelperMock).toBeCalledWith(http, 'foo', ['playlist'], {
         limit: 2,
       });
     });
   });
 
   describe('searchShows', () => {
-    it('should search for a show (without options)', () => {
-      const search = new SearchApi(httpMock);
-      search.searchShows('foo');
-      expect(searchHelperMock).toBeCalledWith(
-        httpMock,
-        'foo',
-        ['show'],
-        undefined,
-      );
+    beforeEach(() => {
+      searchHelperMock.mockResolvedValue(searchShowsFixture);
     });
 
-    it('should search for a show (with options)', () => {
-      const search = new SearchApi(httpMock);
-      search.searchShows('foo', { limit: 2 });
-      expect(searchHelperMock).toBeCalledWith(httpMock, 'foo', ['show'], {
+    it('should search for a show (without options)', async () => {
+      const http = new Http('token');
+      const search = new SearchApi(http);
+      const response = await search.searchShows('foo');
+
+      expect(response).toEqual(searchShowsFixture.shows);
+      expect(searchHelperMock).toBeCalledWith(http, 'foo', ['show'], undefined);
+    });
+
+    it('should search for a show (with options)', async () => {
+      const http = new Http('token');
+      const search = new SearchApi(http);
+      const response = await search.searchShows('foo', { limit: 2 });
+
+      expect(response).toEqual(searchShowsFixture.shows);
+      expect(searchHelperMock).toBeCalledWith(http, 'foo', ['show'], {
         limit: 2,
       });
     });
   });
 
   describe('searchTracks', () => {
-    it('should search for a track (without options)', () => {
-      const search = new SearchApi(httpMock);
-      search.searchTracks('foo');
+    beforeEach(() => {
+      searchHelperMock.mockResolvedValue(searchTracksFixture);
+    });
+
+    it('should search for a track (without options)', async () => {
+      const http = new Http('token');
+      const search = new SearchApi(http);
+      const response = await search.searchTracks('foo');
+
+      expect(response).toEqual(searchTracksFixture.tracks);
       expect(searchHelperMock).toBeCalledWith(
-        httpMock,
+        http,
         'foo',
         ['track'],
         undefined,
       );
     });
 
-    it('should search for a track (with options)', () => {
-      const search = new SearchApi(httpMock);
-      search.searchTracks('foo', { limit: 2 });
-      expect(searchHelperMock).toBeCalledWith(httpMock, 'foo', ['track'], {
+    it('should search for a track (with options)', async () => {
+      const http = new Http('token');
+      const search = new SearchApi(http);
+      const response = await search.searchTracks('foo', { limit: 2 });
+
+      expect(response).toEqual(searchTracksFixture.tracks);
+      expect(searchHelperMock).toBeCalledWith(http, 'foo', ['track'], {
         limit: 2,
       });
     });

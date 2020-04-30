@@ -26,3 +26,4 @@ export * from './library';
 export * from './personalization';
 export * from './player';
 export * from './playlists';
+export * from './search';

@@ -1,20 +1,23 @@
-import { searchHelper } from './searchHelper';
 import { Http } from './Http';
+import { searchHelper } from './searchHelper';
+import { spotifyAxios } from './spotifyAxios';
 
-jest.mock('./Http');
+jest.mock('./spotifyAxios');
 
-const HttpMock = Http as jest.MockedClass<typeof Http>;
+const spotifyAxiosMock = spotifyAxios as jest.MockedFunction<
+  typeof spotifyAxios
+>;
 
-describe(searchHelper.name, () => {
-  const httpMock = new HttpMock('token');
+beforeEach(() => {
+  jest.resetAllMocks();
+});
 
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
+describe('searchHelper', () => {
+  it('should search for an item (without options)', async () => {
+    const http = new Http('token');
+    await searchHelper(http, 'foo', ['album', 'artist']);
 
-  it('should search for an item (without options)', () => {
-    searchHelper(httpMock, 'foo', ['album', 'artist']);
-    expect(httpMock.get).toBeCalledWith('/search', {
+    expect(spotifyAxiosMock).toBeCalledWith('/search', 'GET', 'token', {
       params: {
         q: 'foo',
         type: ['album', 'artist'],
@@ -22,9 +25,11 @@ describe(searchHelper.name, () => {
     });
   });
 
-  it('should search for an item (with options)', () => {
-    searchHelper(httpMock, 'foo', ['album', 'artist'], { limit: 2 });
-    expect(httpMock.get).toBeCalledWith('/search', {
+  it('should search for an item (with options)', async () => {
+    const http = new Http('token');
+    await searchHelper(http, 'foo', ['album', 'artist'], { limit: 2 });
+
+    expect(spotifyAxiosMock).toBeCalledWith('/search', 'GET', 'token', {
       params: {
         q: 'foo',
         type: ['album', 'artist'],

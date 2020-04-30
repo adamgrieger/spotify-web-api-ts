@@ -1,6 +1,6 @@
 import { Http } from '../helpers/Http';
-import * as types from '../types';
 import { searchHelper } from '../helpers/searchHelper';
+import * as types from '../types';
 
 export class SearchApi {
   private http: Http;
@@ -35,13 +35,14 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  searchAlbums(query: string, options?: types.SearchOptions) {
-    return searchHelper<types.SearchAlbumsResponse>(
+  async searchAlbums(query: string, options?: types.SearchOptions) {
+    const response = await searchHelper<types.SearchAlbumsResponse>(
       this.http,
       query,
       ['album'],
       options,
     );
+    return response.albums;
   }
 
   /**
@@ -52,13 +53,14 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  searchArtists(query: string, options?: types.SearchOptions) {
-    return searchHelper<types.SearchArtistsResponse>(
+  async searchArtists(query: string, options?: types.SearchOptions) {
+    const response = await searchHelper<types.SearchArtistsResponse>(
       this.http,
       query,
       ['artist'],
       options,
     );
+    return response.artists;
   }
 
   /**
@@ -69,13 +71,14 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  searchEpisodes(query: string, options?: types.SearchOptions) {
-    return searchHelper<types.SearchEpisodesResponse>(
+  async searchEpisodes(query: string, options?: types.SearchOptions) {
+    const response = await searchHelper<types.SearchEpisodesResponse>(
       this.http,
       query,
       ['episode'],
       options,
     );
+    return response.episodes;
   }
 
   /**
@@ -86,13 +89,14 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  searchPlaylists(query: string, options?: types.SearchOptions) {
-    return searchHelper<types.SearchPlaylistsResponse>(
+  async searchPlaylists(query: string, options?: types.SearchOptions) {
+    const response = await searchHelper<types.SearchPlaylistsResponse>(
       this.http,
       query,
       ['playlist'],
       options,
     );
+    return response.playlists;
   }
 
   /**
@@ -103,13 +107,14 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  searchShows(query: string, options?: types.SearchOptions) {
-    return searchHelper<types.SearchShowsResponse>(
+  async searchShows(query: string, options?: types.SearchOptions) {
+    const response = await searchHelper<types.SearchShowsResponse>(
       this.http,
       query,
       ['show'],
       options,
     );
+    return response.shows;
   }
 
   /**
@@ -120,12 +125,13 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  searchTracks(query: string, options?: types.SearchOptions) {
-    return searchHelper<types.SearchTracksResponse>(
+  async searchTracks(query: string, options?: types.SearchOptions) {
+    const response = await searchHelper<types.SearchTracksResponse>(
       this.http,
       query,
       ['track'],
       options,
     );
+    return response.tracks;
   }
 }

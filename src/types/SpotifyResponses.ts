@@ -138,36 +138,38 @@ export type SnapshotIdResponse = {
 // | Search |
 // +--------+
 
-export type SearchResponse = SpotifyObjects.Paging<
-  | SpotifyObjects.SimplifiedAlbum
-  | SpotifyObjects.Artist
-  | SpotifyObjects.SimplifiedEpisode
-  | SpotifyObjects.SimplifiedPlaylist
-  | SpotifyObjects.SimplifiedShow
-  | SpotifyObjects.Track
+export type SearchResponse = Partial<
+  SearchAlbumsResponse &
+    SearchArtistsResponse &
+    SearchEpisodesResponse &
+    SearchPlaylistsResponse &
+    SearchShowsResponse &
+    SearchTracksResponse
 >;
 
-export type SearchAlbumsResponse = SpotifyObjects.Paging<
-  SpotifyObjects.SimplifiedAlbum
->;
+export type SearchAlbumsResponse = {
+  albums: SpotifyObjects.Paging<SpotifyObjects.SimplifiedAlbum>;
+};
 
-export type SearchArtistsResponse = SpotifyObjects.Paging<
-  SpotifyObjects.Artist
->;
+export type SearchArtistsResponse = {
+  artists: SpotifyObjects.Paging<SpotifyObjects.Artist>;
+};
 
-export type SearchEpisodesResponse = SpotifyObjects.Paging<
-  SpotifyObjects.SimplifiedEpisode
->;
+export type SearchEpisodesResponse = {
+  episodes: SpotifyObjects.Paging<SpotifyObjects.SimplifiedEpisode>;
+};
 
-export type SearchPlaylistsResponse = SpotifyObjects.Paging<
-  SpotifyObjects.SimplifiedPlaylist
->;
+export type SearchPlaylistsResponse = {
+  playlists: SpotifyObjects.Paging<SpotifyObjects.SimplifiedPlaylist>;
+};
 
-export type SearchShowsResponse = SpotifyObjects.Paging<
-  SpotifyObjects.SimplifiedShow
->;
+export type SearchShowsResponse = {
+  shows: SpotifyObjects.Paging<SpotifyObjects.SimplifiedShow>;
+};
 
-export type SearchTracksResponse = SpotifyObjects.Paging<SpotifyObjects.Track>;
+export type SearchTracksResponse = {
+  tracks: SpotifyObjects.Paging<SpotifyObjects.Track>;
+};
 
 // +-------+
 // | Shows |
