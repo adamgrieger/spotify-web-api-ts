@@ -184,6 +184,11 @@ export type Episode = {
   uri: string;
 };
 
+export type ExplicitContent = {
+  filter_enabled: boolean;
+  filter_locked: boolean;
+};
+
 export type ExternalID = {
   [key: string]: string;
 };
@@ -260,9 +265,11 @@ export type PlaylistItem = {
 };
 
 export type PrivateUser = {
+  birthdate?: string;
   country?: string;
   display_name: string | null;
   email?: string;
+  explicit_content?: ExplicitContent;
   external_urls: ExternalURL;
   followers: Followers;
   href: string;
