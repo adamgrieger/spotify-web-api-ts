@@ -49,9 +49,11 @@ export type Artist = {
 export type AudioAnalysis = {
   bars: TimeInterval[];
   beats: TimeInterval[];
+  meta?: unknown;
   sections: Section[];
   segments: Segment[];
   tatums: TimeInterval[];
+  track?: unknown;
 };
 
 export type AudioFeatures = {

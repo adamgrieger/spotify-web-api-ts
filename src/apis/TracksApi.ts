@@ -39,15 +39,15 @@ export class TracksApi {
    *
    * @param trackIds The Spotify IDs for the tracks.
    */
-  getAudioFeaturesForTracks(trackIds: string[]) {
-    return this.http.get<types.GetAudioFeaturesForTracksResponse>(
-      '/audio-features',
-      {
-        params: {
-          ids: trackIds,
-        },
+  async getAudioFeaturesForTracks(trackIds: string[]) {
+    const response = await this.http.get<
+      types.GetAudioFeaturesForTracksResponse
+    >('/audio-features', {
+      params: {
+        ids: trackIds,
       },
-    );
+    });
+    return response.audio_features;
   }
 
   /**
@@ -70,16 +70,18 @@ export class TracksApi {
    * Get Several Tracks
    *
    * Get Spotify catalog information for multiple tracks based on their Spotify
-   * IDS.
+   * IDs.
+   *
    * @param trackIds The Spotify IDs for the tracks.
    * @param options Optional request information.
    */
-  getTracks(trackIds: string[], options?: types.MarketOptions) {
-    return this.http.get<types.GetTracksResponse>('/tracks', {
+  async getTracks(trackIds: string[], options?: types.MarketOptions) {
+    const response = await this.http.get<types.GetTracksResponse>('/tracks', {
       params: {
         ...options,
         ids: trackIds,
       },
     });
+    return response.tracks;
   }
 }
