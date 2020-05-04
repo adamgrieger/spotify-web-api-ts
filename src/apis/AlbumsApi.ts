@@ -16,7 +16,7 @@ export class AlbumsApi {
    * @param albumId The Spotify ID for the album.
    * @param options Optional request information.
    */
-  async getAlbum(albumId: string, options?: types.MarketOptions) {
+  getAlbum(albumId: string, options?: types.MarketOptions) {
     return this.http.get<types.Album>(
       `/albums/${albumId}`,
       options && { params: options },
@@ -33,14 +33,13 @@ export class AlbumsApi {
    * @param options Optional request information.
    */
   async getAlbums(albumIds: string[], options?: types.MarketOptions) {
-    return this.http
-      .get<types.GetAlbumsResponse>('/albums', {
-        params: {
-          ...options,
-          ids: albumIds,
-        },
-      })
-      .then(response => response.albums);
+    const response = await this.http.get<types.GetAlbumsResponse>('/albums', {
+      params: {
+        ...options,
+        ids: albumIds,
+      },
+    });
+    return response.albums;
   }
 
   /**
@@ -51,7 +50,7 @@ export class AlbumsApi {
    * @param albumId The Spotify ID for the album.
    * @param options Optional request information.
    */
-  async getAlbumTracks(albumId: string, options?: types.GetAlbumTracksOptions) {
+  getAlbumTracks(albumId: string, options?: types.GetAlbumTracksOptions) {
     return this.http.get<types.GetAlbumTracksResponse>(
       `/albums/${albumId}/tracks`,
       options && { params: options },

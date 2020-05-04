@@ -15,7 +15,7 @@ export class PersonalizationApi {
    *
    * @param options Optional request information.
    */
-  async getMyTopArtists(options?: types.PersonalizationOptions) {
+  getMyTopArtists(options?: types.PersonalizationOptions) {
     return this.http.get<types.GetMyTopArtistsResponse>(
       '/me/top/artists',
       options && { params: options },
@@ -29,7 +29,7 @@ export class PersonalizationApi {
    *
    * @param options Optional request information.
    */
-  async getMyTopTracks(options?: types.PersonalizationOptions) {
+  getMyTopTracks(options?: types.PersonalizationOptions) {
     return this.http.get<types.GetMyTopTracksResponse>(
       '/me/top/tracks',
       options && { params: options },

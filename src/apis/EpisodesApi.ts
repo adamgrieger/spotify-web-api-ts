@@ -16,7 +16,7 @@ export class EpisodesApi {
    *
    * @param options Optional request information.
    */
-  async getEpisode(episodeId: string, options?: types.MarketOptions) {
+  getEpisode(episodeId: string, options?: types.MarketOptions) {
     return this.http.get<types.Episode>(
       `/episodes/${episodeId}`,
       options && { params: options },
@@ -33,13 +33,15 @@ export class EpisodesApi {
    * @param options Optional request information.
    */
   async getEpisodes(episodeIds: string[], options?: types.MarketOptions) {
-    return this.http
-      .get<types.GetEpisodesResponse>('/episodes', {
+    const response = await this.http.get<types.GetEpisodesResponse>(
+      '/episodes',
+      {
         params: {
           ...options,
           ids: episodeIds,
         },
-      })
-      .then(response => response.episodes);
+      },
+    );
+    return response.episodes;
   }
 }

@@ -16,7 +16,7 @@ export class ArtistsApi {
    *
    * @param artistId The Spotify ID for the artist.
    */
-  async getArtist(artistId: string) {
+  getArtist(artistId: string) {
     return this.http.get<types.Artist>(`/artists/${artistId}`);
   }
 
@@ -28,10 +28,7 @@ export class ArtistsApi {
    * @param artistId The Spotify ID for the artist.
    * @param options Optional request information.
    */
-  async getArtistAlbums(
-    artistId: string,
-    options?: types.GetArtistAlbumsOptions,
-  ) {
+  getArtistAlbums(artistId: string, options?: types.GetArtistAlbumsOptions) {
     return this.http.get<types.GetArtistAlbumsResponse>(
       `/artists/${artistId}/albums`,
       options && { params: options },
@@ -47,13 +44,12 @@ export class ArtistsApi {
    * @param artistIds The Spotify IDs for the artists.
    */
   async getArtists(artistIds: string[]) {
-    return this.http
-      .get<types.GetArtistsResponse>('/artists', {
-        params: {
-          ids: artistIds,
-        },
-      })
-      .then(response => response.artists);
+    const response = await this.http.get<types.GetArtistsResponse>('/artists', {
+      params: {
+        ids: artistIds,
+      },
+    });
+    return response.artists;
   }
 
   /**
@@ -65,16 +61,15 @@ export class ArtistsApi {
    * @param country An ISO 3166-1 alpha-2 country code or the string `from_token`.
    */
   async getArtistTopTracks(artistId: string, country: string) {
-    return this.http
-      .get<types.GetArtistTopTracksResponse>(
-        `/artists/${artistId}/top-tracks`,
-        {
-          params: {
-            country,
-          },
+    const response = await this.http.get<types.GetArtistTopTracksResponse>(
+      `/artists/${artistId}/top-tracks`,
+      {
+        params: {
+          country,
         },
-      )
-      .then(response => response.tracks);
+      },
+    );
+    return response.tracks;
   }
 
   /**
@@ -87,10 +82,9 @@ export class ArtistsApi {
    * @param artistId The Spotify ID for the artist.
    */
   async getRelatedArtists(artistId: string) {
-    return this.http
-      .get<types.GetRelatedArtistsResponse>(
-        `/artists/${artistId}/related-artists`,
-      )
-      .then(response => response.artists);
+    const response = await this.http.get<types.GetRelatedArtistsResponse>(
+      `/artists/${artistId}/related-artists`,
+    );
+    return response.artists;
   }
 }
