@@ -13,6 +13,7 @@
     "commit": "web-scripts commit",
     "format": "web-scripts format",
     "lint": "web-scripts lint",
+    "prepare": "web-scripts audit",
     "release": "web-scripts release",
     "test": "web-scripts test"
   },
