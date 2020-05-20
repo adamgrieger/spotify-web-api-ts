@@ -25,9 +25,11 @@
   },
   "devDependencies": {
     "@spotify/web-scripts": "^7.0.0",
+    "@types/qs": "^6.9.2",
     "husky": "^4.2.5"
   },
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "qs": "^6.9.4"
   }
 }

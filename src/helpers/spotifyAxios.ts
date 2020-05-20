@@ -1,5 +1,5 @@
 import axios, { Method, AxiosRequestConfig, AxiosError } from 'axios';
-import { BASE_URL } from '../config';
+import { BASE_API_URL } from '../constants';
 
 export type SpotifyAxiosConfig = AxiosRequestConfig & { contentType?: string };
 
@@ -13,7 +13,7 @@ export async function spotifyAxios<T>(
     const { contentType, ...axiosConfig } = config ?? {};
     const response = await axios({
       ...axiosConfig,
-      baseURL: BASE_URL,
+      baseURL: BASE_API_URL,
       headers: {
         Authorization: `Bearer ${accessToken}`,
         'Content-Type': contentType ?? 'application/json',

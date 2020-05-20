@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { spotifyAxios } from './spotifyAxios';
-import { BASE_URL } from '../config';
+import { BASE_API_URL } from '../constants';
 
 jest.mock('axios');
 
@@ -22,7 +22,7 @@ describe('spotifyAxios', () => {
       params: {
         bar: 'baz',
       },
-      baseURL: BASE_URL,
+      baseURL: BASE_API_URL,
       headers: {
         Authorization: 'Bearer token',
         'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ describe('spotifyAxios', () => {
     });
     expect(axiosMock).toBeCalledWith({
       data: 'bar',
-      baseURL: BASE_URL,
+      baseURL: BASE_API_URL,
       headers: {
         Authorization: 'Bearer token',
         'Content-Type': 'image/jpeg',
