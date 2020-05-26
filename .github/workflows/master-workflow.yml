@@ -17,6 +17,7 @@ jobs:
       - run: yarn lint
       - run: yarn test --coverage
       - uses: codecov/codecov-action@v1.0.6
+      - run: yarn build
       - run: yarn release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}

@@ -8,6 +8,11 @@
   "repository": "https://github.com/adamgrieger/spotify-web-api-ts.git",
   "author": "Adam Grieger",
   "license": "MIT",
+  "files": [
+    "cjs",
+    "esm",
+    "types"
+  ],
   "scripts": {
     "build": "web-scripts build",
     "commit": "web-scripts commit",
