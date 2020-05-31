@@ -127,7 +127,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/1042671/src/apis/PlayerApi.ts#L5">apis/PlayerApi.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/71af7ee/src/apis/PlayerApi.ts#L19">apis/PlayerApi.ts:19</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -149,7 +149,7 @@
 					<div class="tsd-signature tsd-kind-icon">http<span class="tsd-signature-symbol">:</span> <a href="_helpers_http_.http.html" class="tsd-signature-type">Http</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/1042671/src/apis/PlayerApi.ts#L5">apis/PlayerApi.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/71af7ee/src/apis/PlayerApi.ts#L19">apis/PlayerApi.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -160,13 +160,13 @@
 					<a name="addtoqueue" class="tsd-anchor"></a>
 					<h3>add<wbr>ToQueue</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">add<wbr>ToQueue<span class="tsd-signature-symbol">(</span>uri<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">types.DeviceIdOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">add<wbr>ToQueue<span class="tsd-signature-symbol">(</span>uri<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><a href="../modules/_types_spotifyoptions_.html#deviceidoptions" class="tsd-signature-type">DeviceIdOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/1042671/src/apis/PlayerApi.ts#L19">apis/PlayerApi.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/71af7ee/src/apis/PlayerApi.ts#L33">apis/PlayerApi.ts:33</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -184,7 +184,7 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">types.DeviceIdOptions</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../modules/_types_spotifyoptions_.html#deviceidoptions" class="tsd-signature-type">DeviceIdOptions</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Optional request information.</p>
 									</div>
@@ -198,13 +198,13 @@
 					<a name="getcurrentlyplayingtrack" class="tsd-anchor"></a>
 					<h3>get<wbr>Currently<wbr>Playing<wbr>Track</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Currently<wbr>Playing<wbr>Track<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">types.GetCurrentlyPlayingTrackOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>actions<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#disallows" class="tsd-signature-type">Disallows</a><span class="tsd-signature-symbol">; </span>context<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#context" class="tsd-signature-type">Context</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>currently_playing_type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"track"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"episode"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"ad"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"unknown"</span><span class="tsd-signature-symbol">; </span>is_playing<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>item<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#episode" class="tsd-signature-type">Episode</a><span class="tsd-signature-symbol"> | </span><a href="../modules/_types_spotifyobjects_.html#track-4" class="tsd-signature-type">Track</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>progress_ms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Currently<wbr>Playing<wbr>Track<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../modules/_types_spotifyoptions_.html#getcurrentlyplayingtrackoptions" class="tsd-signature-type">GetCurrentlyPlayingTrackOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_types_spotifyobjects_.html#currentlyplaying" class="tsd-signature-type">CurrentlyPlaying</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/1042671/src/apis/PlayerApi.ts#L35">apis/PlayerApi.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/71af7ee/src/apis/PlayerApi.ts#L49">apis/PlayerApi.ts:49</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -216,13 +216,13 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">types.GetCurrentlyPlayingTrackOptions</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../modules/_types_spotifyoptions_.html#getcurrentlyplayingtrackoptions" class="tsd-signature-type">GetCurrentlyPlayingTrackOptions</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Optional request information.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>actions<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#disallows" class="tsd-signature-type">Disallows</a><span class="tsd-signature-symbol">; </span>context<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#context" class="tsd-signature-type">Context</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>currently_playing_type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"track"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"episode"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"ad"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"unknown"</span><span class="tsd-signature-symbol">; </span>is_playing<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>item<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#episode" class="tsd-signature-type">Episode</a><span class="tsd-signature-symbol"> | </span><a href="../modules/_types_spotifyobjects_.html#track-4" class="tsd-signature-type">Track</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>progress_ms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_types_spotifyobjects_.html#currentlyplaying" class="tsd-signature-type">CurrentlyPlaying</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -230,13 +230,13 @@
 					<a name="getmydevices" class="tsd-anchor"></a>
 					<h3>get<wbr>MyDevices</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>MyDevices<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>is_active<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>is_private_session<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>is_restricted<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#devicetype" class="tsd-signature-type">DeviceType</a><span class="tsd-signature-symbol">; </span>volume_percent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>MyDevices<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_types_spotifyobjects_.html#device-1" class="tsd-signature-type">Device</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/1042671/src/apis/PlayerApi.ts#L47">apis/PlayerApi.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/71af7ee/src/apis/PlayerApi.ts#L63">apis/PlayerApi.ts:63</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -245,7 +245,7 @@
 								</div>
 								<p>Get information about a user&#39;s available devices.</p>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>is_active<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>is_private_session<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>is_restricted<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#devicetype" class="tsd-signature-type">DeviceType</a><span class="tsd-signature-symbol">; </span>volume_percent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_types_spotifyobjects_.html#device-1" class="tsd-signature-type">Device</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -253,13 +253,13 @@
 					<a name="getplaybackinfo" class="tsd-anchor"></a>
 					<h3>get<wbr>Playback<wbr>Info</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Playback<wbr>Info<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">types.GetPlaybackInfoOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>actions<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#disallows" class="tsd-signature-type">Disallows</a><span class="tsd-signature-symbol">; </span>context<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#context" class="tsd-signature-type">Context</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>currently_playing_type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"track"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"episode"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"ad"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"unknown"</span><span class="tsd-signature-symbol">; </span>device<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#device-1" class="tsd-signature-type">Device</a><span class="tsd-signature-symbol">; </span>is_playing<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>item<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#track-4" class="tsd-signature-type">Track</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>progress_ms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>repeat_state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"off"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"track"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"context"</span><span class="tsd-signature-symbol">; </span>shuffle_state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Playback<wbr>Info<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../modules/_types_spotifyoptions_.html#getplaybackinfooptions" class="tsd-signature-type">GetPlaybackInfoOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_types_spotifyobjects_.html#currentlyplayingcontext" class="tsd-signature-type">CurrentlyPlayingContext</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/1042671/src/apis/PlayerApi.ts#L59">apis/PlayerApi.ts:59</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/71af7ee/src/apis/PlayerApi.ts#L75">apis/PlayerApi.ts:75</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -272,13 +272,13 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">types.GetPlaybackInfoOptions</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../modules/_types_spotifyoptions_.html#getplaybackinfooptions" class="tsd-signature-type">GetPlaybackInfoOptions</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Optional request information.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>actions<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#disallows" class="tsd-signature-type">Disallows</a><span class="tsd-signature-symbol">; </span>context<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#context" class="tsd-signature-type">Context</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>currently_playing_type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"track"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"episode"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"ad"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"unknown"</span><span class="tsd-signature-symbol">; </span>device<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#device-1" class="tsd-signature-type">Device</a><span class="tsd-signature-symbol">; </span>is_playing<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>item<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#track-4" class="tsd-signature-type">Track</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>progress_ms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>repeat_state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"off"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"track"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"context"</span><span class="tsd-signature-symbol">; </span>shuffle_state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>timestamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_types_spotifyobjects_.html#currentlyplayingcontext" class="tsd-signature-type">CurrentlyPlayingContext</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -286,13 +286,13 @@
 					<a name="getrecentlyplayedtracks" class="tsd-anchor"></a>
 					<h3>get<wbr>Recently<wbr>Played<wbr>Tracks</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Recently<wbr>Played<wbr>Tracks<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">types.GetRecentlyPlayedTracksOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>cursors<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#cursor" class="tsd-signature-type">Cursor</a><span class="tsd-signature-symbol">; </span>href<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>items<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>limit<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>next<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>total<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Recently<wbr>Played<wbr>Tracks<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../modules/_types_spotifyoptions_.html#getrecentlyplayedtracksoptions" class="tsd-signature-type">GetRecentlyPlayedTracksOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_types_spotifyresponses_.html#getrecentlyplayedtracksresponse" class="tsd-signature-type">GetRecentlyPlayedTracksResponse</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/1042671/src/apis/PlayerApi.ts#L73">apis/PlayerApi.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/71af7ee/src/apis/PlayerApi.ts#L91">apis/PlayerApi.ts:91</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -304,13 +304,13 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">types.GetRecentlyPlayedTracksOptions</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../modules/_types_spotifyoptions_.html#getrecentlyplayedtracksoptions" class="tsd-signature-type">GetRecentlyPlayedTracksOptions</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Optional request information.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>cursors<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#cursor" class="tsd-signature-type">Cursor</a><span class="tsd-signature-symbol">; </span>href<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>items<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>limit<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>next<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>total<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../modules/_types_spotifyresponses_.html#getrecentlyplayedtracksresponse" class="tsd-signature-type">GetRecentlyPlayedTracksResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -318,13 +318,13 @@
 					<a name="pause" class="tsd-anchor"></a>
 					<h3>pause</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">pause<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">types.DeviceIdOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">pause<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../modules/_types_spotifyoptions_.html#deviceidoptions" class="tsd-signature-type">DeviceIdOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/1042671/src/apis/PlayerApi.ts#L87">apis/PlayerApi.ts:87</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/71af7ee/src/apis/PlayerApi.ts#L107">apis/PlayerApi.ts:107</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -336,7 +336,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">types.DeviceIdOptions</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../modules/_types_spotifyoptions_.html#deviceidoptions" class="tsd-signature-type">DeviceIdOptions</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Optional request information.</p>
 									</div>
@@ -350,13 +350,13 @@
 					<a name="play" class="tsd-anchor"></a>
 					<h3>play</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">play<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">types.PlayOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">play<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../modules/_types_spotifyoptions_.html#playoptions" class="tsd-signature-type">PlayOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/1042671/src/apis/PlayerApi.ts#L101">apis/PlayerApi.ts:101</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/71af7ee/src/apis/PlayerApi.ts#L121">apis/PlayerApi.ts:121</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -368,7 +368,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">types.PlayOptions</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../modules/_types_spotifyoptions_.html#playoptions" class="tsd-signature-type">PlayOptions</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Optional request information.</p>
 									</div>
@@ -382,13 +382,13 @@
 					<a name="seek" class="tsd-anchor"></a>
 					<h3>seek</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">seek<span class="tsd-signature-symbol">(</span>positionMs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">types.DeviceIdOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">seek<span class="tsd-signature-symbol">(</span>positionMs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, options<span class="tsd-signature-symbol">?: </span><a href="../modules/_types_spotifyoptions_.html#deviceidoptions" class="tsd-signature-type">DeviceIdOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/1042671/src/apis/PlayerApi.ts#L123">apis/PlayerApi.ts:123</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/71af7ee/src/apis/PlayerApi.ts#L143">apis/PlayerApi.ts:143</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -406,7 +406,7 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">types.DeviceIdOptions</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../modules/_types_spotifyoptions_.html#deviceidoptions" class="tsd-signature-type">DeviceIdOptions</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Optional request information.</p>
 									</div>
@@ -420,13 +420,13 @@
 					<a name="setrepeat" class="tsd-anchor"></a>
 					<h3>set<wbr>Repeat</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Repeat<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">types.RepeatState</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">types.DeviceIdOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Repeat<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><a href="../modules/_types_spotifyobjects_.html#repeatstate" class="tsd-signature-type">RepeatState</a>, options<span class="tsd-signature-symbol">?: </span><a href="../modules/_types_spotifyoptions_.html#deviceidoptions" class="tsd-signature-type">DeviceIdOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/1042671/src/apis/PlayerApi.ts#L140">apis/PlayerApi.ts:140</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/71af7ee/src/apis/PlayerApi.ts#L160">apis/PlayerApi.ts:160</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -438,13 +438,13 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>state: <span class="tsd-signature-type">types.RepeatState</span></h5>
+									<h5>state: <a href="../modules/_types_spotifyobjects_.html#repeatstate" class="tsd-signature-type">RepeatState</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The desired repeat mode.</p>
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">types.DeviceIdOptions</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../modules/_types_spotifyoptions_.html#deviceidoptions" class="tsd-signature-type">DeviceIdOptions</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Optional request information.</p>
 									</div>
@@ -458,13 +458,13 @@
 					<a name="setshuffle" class="tsd-anchor"></a>
 					<h3>set<wbr>Shuffle</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Shuffle<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">types.DeviceIdOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Shuffle<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, options<span class="tsd-signature-symbol">?: </span><a href="../modules/_types_spotifyoptions_.html#deviceidoptions" class="tsd-signature-type">DeviceIdOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/1042671/src/apis/PlayerApi.ts#L157">apis/PlayerApi.ts:157</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/71af7ee/src/apis/PlayerApi.ts#L177">apis/PlayerApi.ts:177</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -482,7 +482,7 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">types.DeviceIdOptions</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../modules/_types_spotifyoptions_.html#deviceidoptions" class="tsd-signature-type">DeviceIdOptions</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Optional request information.</p>
 									</div>
@@ -496,13 +496,13 @@
 					<a name="setvolume" class="tsd-anchor"></a>
 					<h3>set<wbr>Volume</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Volume<span class="tsd-signature-symbol">(</span>volumePercent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">types.DeviceIdOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Volume<span class="tsd-signature-symbol">(</span>volumePercent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, options<span class="tsd-signature-symbol">?: </span><a href="../modules/_types_spotifyoptions_.html#deviceidoptions" class="tsd-signature-type">DeviceIdOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/1042671/src/apis/PlayerApi.ts#L174">apis/PlayerApi.ts:174</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/71af7ee/src/apis/PlayerApi.ts#L194">apis/PlayerApi.ts:194</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -520,7 +520,7 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">types.DeviceIdOptions</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../modules/_types_spotifyoptions_.html#deviceidoptions" class="tsd-signature-type">DeviceIdOptions</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Optional request information.</p>
 									</div>
@@ -534,13 +534,13 @@
 					<a name="skiptonext" class="tsd-anchor"></a>
 					<h3>skip<wbr>ToNext</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">skip<wbr>ToNext<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">types.DeviceIdOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">skip<wbr>ToNext<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../modules/_types_spotifyoptions_.html#deviceidoptions" class="tsd-signature-type">DeviceIdOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/1042671/src/apis/PlayerApi.ts#L190">apis/PlayerApi.ts:190</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/71af7ee/src/apis/PlayerApi.ts#L210">apis/PlayerApi.ts:210</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -552,7 +552,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">types.DeviceIdOptions</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../modules/_types_spotifyoptions_.html#deviceidoptions" class="tsd-signature-type">DeviceIdOptions</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Optional request information.</p>
 									</div>
@@ -566,13 +566,13 @@
 					<a name="skiptoprevious" class="tsd-anchor"></a>
 					<h3>skip<wbr>ToPrevious</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">skip<wbr>ToPrevious<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">types.DeviceIdOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">skip<wbr>ToPrevious<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../modules/_types_spotifyoptions_.html#deviceidoptions" class="tsd-signature-type">DeviceIdOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/1042671/src/apis/PlayerApi.ts#L204">apis/PlayerApi.ts:204</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/71af7ee/src/apis/PlayerApi.ts#L224">apis/PlayerApi.ts:224</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -584,7 +584,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">types.DeviceIdOptions</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../modules/_types_spotifyoptions_.html#deviceidoptions" class="tsd-signature-type">DeviceIdOptions</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Optional request information.</p>
 									</div>
@@ -598,13 +598,13 @@
 					<a name="transferplayback" class="tsd-anchor"></a>
 					<h3>transfer<wbr>Playback</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">transfer<wbr>Playback<span class="tsd-signature-symbol">(</span>deviceId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">types.TransferPlaybackOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">transfer<wbr>Playback<span class="tsd-signature-symbol">(</span>deviceId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><a href="../modules/_types_spotifyoptions_.html#transferplaybackoptions" class="tsd-signature-type">TransferPlaybackOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/1042671/src/apis/PlayerApi.ts#L219">apis/PlayerApi.ts:219</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/71af7ee/src/apis/PlayerApi.ts#L239">apis/PlayerApi.ts:239</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -622,7 +622,7 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">types.TransferPlaybackOptions</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../modules/_types_spotifyoptions_.html#transferplaybackoptions" class="tsd-signature-type">TransferPlaybackOptions</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>Optional request information.</p>
 									</div>
