@@ -14,7 +14,7 @@
     "types"
   ],
   "scripts": {
-    "build": "web-scripts build",
+    "build": "web-scripts build --project tsconfig.build.json",
     "commit": "web-scripts commit",
     "format": "web-scripts format",
     "lint": "web-scripts lint",
