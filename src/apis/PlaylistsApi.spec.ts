@@ -2,9 +2,9 @@ import {
   getMyPlaylistsFixture,
   getPlaylistItemsFixture,
   getUserPlaylistsFixture,
-  imageFixture,
   playlistFixture,
   snapshotIdFixture,
+  spotifyImageFixture,
 } from '../fixtures';
 import { Http } from '../helpers/Http';
 import { spotifyAxios } from '../helpers/spotifyAxios';
@@ -208,7 +208,7 @@ describe('PlaylistsApi', () => {
 
   describe('getPlaylistCover', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue([imageFixture]);
+      spotifyAxiosMock.mockResolvedValue([spotifyImageFixture]);
     });
 
     it('should get a playlist cover image', async () => {
@@ -216,7 +216,7 @@ describe('PlaylistsApi', () => {
       const playlists = new PlaylistsApi(http);
       const response = await playlists.getPlaylistCover('foo');
 
-      expect(response).toEqual([imageFixture]);
+      expect(response).toEqual([spotifyImageFixture]);
       expect(spotifyAxiosMock).toBeCalledWith(
         '/playlists/foo/images',
         'GET',

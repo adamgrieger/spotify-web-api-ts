@@ -1,5 +1,10 @@
 import { Http } from '../helpers/Http';
-import * as types from '../types';
+import { AudioAnalysis, AudioFeatures, Track } from '../types/SpotifyObjects';
+import { MarketOptions } from '../types/SpotifyOptions';
+import {
+  GetAudioFeaturesForTracksResponse,
+  GetTracksResponse,
+} from '../types/SpotifyResponses';
 
 export class TracksApi {
   private http: Http;
@@ -16,8 +21,8 @@ export class TracksApi {
    *
    * @param trackId The Spotify ID for the track.
    */
-  getAudioAnalysisForTrack(trackId: string) {
-    return this.http.get<types.AudioAnalysis>(`/audio-analysis/${trackId}`);
+  getAudioAnalysisForTrack(trackId: string): Promise<AudioAnalysis> {
+    return this.http.get<AudioAnalysis>(`/audio-analysis/${trackId}`);
   }
 
   /**
@@ -28,8 +33,8 @@ export class TracksApi {
    *
    * @param trackId The Spotify ID for the track.
    */
-  getAudioFeaturesForTrack(trackId: string) {
-    return this.http.get<types.AudioFeatures>(`/audio-features/${trackId}`);
+  getAudioFeaturesForTrack(trackId: string): Promise<AudioFeatures> {
+    return this.http.get<AudioFeatures>(`/audio-features/${trackId}`);
   }
 
   /**
@@ -39,14 +44,17 @@ export class TracksApi {
    *
    * @param trackIds The Spotify IDs for the tracks.
    */
-  async getAudioFeaturesForTracks(trackIds: string[]) {
-    const response = await this.http.get<
-      types.GetAudioFeaturesForTracksResponse
-    >('/audio-features', {
-      params: {
-        ids: trackIds,
+  async getAudioFeaturesForTracks(
+    trackIds: string[],
+  ): Promise<Array<AudioFeatures | null>> {
+    const response = await this.http.get<GetAudioFeaturesForTracksResponse>(
+      '/audio-features',
+      {
+        params: {
+          ids: trackIds,
+        },
       },
-    });
+    );
     return response.audio_features;
   }
 
@@ -59,8 +67,8 @@ export class TracksApi {
    * @param trackId The Spotify ID for the track.
    * @param options Optional request information.
    */
-  getTrack(trackId: string, options?: types.MarketOptions) {
-    return this.http.get<types.Track>(
+  getTrack(trackId: string, options?: MarketOptions): Promise<Track> {
+    return this.http.get<Track>(
       `/tracks/${trackId}`,
       options && { params: options },
     );
@@ -75,8 +83,11 @@ export class TracksApi {
    * @param trackIds The Spotify IDs for the tracks.
    * @param options Optional request information.
    */
-  async getTracks(trackIds: string[], options?: types.MarketOptions) {
-    const response = await this.http.get<types.GetTracksResponse>('/tracks', {
+  async getTracks(
+    trackIds: string[],
+    options?: MarketOptions,
+  ): Promise<Array<Track | null>> {
+    const response = await this.http.get<GetTracksResponse>('/tracks', {
       params: {
         ...options,
         ids: trackIds,

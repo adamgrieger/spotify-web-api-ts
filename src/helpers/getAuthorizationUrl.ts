@@ -1,6 +1,6 @@
 import qs from 'qs';
 import { AUTHORIZE_URL } from '../constants';
-import { AuthorizationScope } from '../types';
+import { AuthorizationScope } from '../types/SpotifyAuthorization';
 
 export type GetAuthorizationUrlOptions = {
   scope?: AuthorizationScope[];

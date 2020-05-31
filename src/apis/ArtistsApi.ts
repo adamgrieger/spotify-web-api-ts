@@ -1,5 +1,12 @@
 import { Http } from '../helpers/Http';
-import * as types from '../types';
+import { Artist, Track } from '../types/SpotifyObjects';
+import { GetArtistAlbumsOptions } from '../types/SpotifyOptions';
+import {
+  GetArtistAlbumsResponse,
+  GetArtistsResponse,
+  GetArtistTopTracksResponse,
+  GetRelatedArtistsResponse,
+} from '../types/SpotifyResponses';
 
 export class ArtistsApi {
   private http: Http;
@@ -16,8 +23,8 @@ export class ArtistsApi {
    *
    * @param artistId The Spotify ID for the artist.
    */
-  getArtist(artistId: string) {
-    return this.http.get<types.Artist>(`/artists/${artistId}`);
+  getArtist(artistId: string): Promise<Artist> {
+    return this.http.get<Artist>(`/artists/${artistId}`);
   }
 
   /**
@@ -28,8 +35,11 @@ export class ArtistsApi {
    * @param artistId The Spotify ID for the artist.
    * @param options Optional request information.
    */
-  getArtistAlbums(artistId: string, options?: types.GetArtistAlbumsOptions) {
-    return this.http.get<types.GetArtistAlbumsResponse>(
+  getArtistAlbums(
+    artistId: string,
+    options?: GetArtistAlbumsOptions,
+  ): Promise<GetArtistAlbumsResponse> {
+    return this.http.get<GetArtistAlbumsResponse>(
       `/artists/${artistId}/albums`,
       options && { params: options },
     );
@@ -43,8 +53,8 @@ export class ArtistsApi {
    *
    * @param artistIds The Spotify IDs for the artists.
    */
-  async getArtists(artistIds: string[]) {
-    const response = await this.http.get<types.GetArtistsResponse>('/artists', {
+  async getArtists(artistIds: string[]): Promise<Artist[]> {
+    const response = await this.http.get<GetArtistsResponse>('/artists', {
       params: {
         ids: artistIds,
       },
@@ -60,8 +70,11 @@ export class ArtistsApi {
    * @param artistId The Spotify ID for the artist.
    * @param country An ISO 3166-1 alpha-2 country code or the string `from_token`.
    */
-  async getArtistTopTracks(artistId: string, country: string) {
-    const response = await this.http.get<types.GetArtistTopTracksResponse>(
+  async getArtistTopTracks(
+    artistId: string,
+    country: string,
+  ): Promise<Track[]> {
+    const response = await this.http.get<GetArtistTopTracksResponse>(
       `/artists/${artistId}/top-tracks`,
       {
         params: {
@@ -81,8 +94,8 @@ export class ArtistsApi {
    *
    * @param artistId The Spotify ID for the artist.
    */
-  async getRelatedArtists(artistId: string) {
-    const response = await this.http.get<types.GetRelatedArtistsResponse>(
+  async getRelatedArtists(artistId: string): Promise<Artist[]> {
+    const response = await this.http.get<GetRelatedArtistsResponse>(
       `/artists/${artistId}/related-artists`,
     );
     return response.artists;

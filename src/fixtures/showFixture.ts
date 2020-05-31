@@ -1,4 +1,4 @@
-import { Show } from '../types';
+import { Show } from '../types/SpotifyObjects';
 
 export const showFixture: Show = {
   available_markets: [

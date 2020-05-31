@@ -1,6 +1,6 @@
 {
   "name": "spotify-web-api-ts",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "An isomorphic TypeScript wrapper for Spotify's Web API",
   "main": "cjs/SpotifyWebApi.js",
   "module": "esm/SpotifyWebApi.js",

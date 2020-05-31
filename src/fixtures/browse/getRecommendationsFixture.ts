@@ -1,4 +1,4 @@
-import { GetRecommendationsResponse } from '../../types';
+import { GetRecommendationsResponse } from '../../types/SpotifyResponses';
 
 export const getRecommendationsFixture: GetRecommendationsResponse = {
   tracks: [

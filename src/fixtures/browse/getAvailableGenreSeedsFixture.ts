@@ -1,4 +1,4 @@
-import { GetAvailableGenreSeedsResponse } from '../../types';
+import { GetAvailableGenreSeedsResponse } from '../../types/SpotifyResponses';
 
 export const getAvailableGenreSeedsFixture: GetAvailableGenreSeedsResponse = {
   genres: [

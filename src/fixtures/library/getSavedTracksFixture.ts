@@ -1,4 +1,4 @@
-import { GetSavedTracksResponse } from '../../types';
+import { GetSavedTracksResponse } from '../../types/SpotifyResponses';
 
 export const getSavedTracksFixture: GetSavedTracksResponse = {
   href: 'https://api.spotify.com/v1/me/tracks?offset=0&limit=2',

@@ -1,4 +1,4 @@
-import { PrivateUser } from '../types';
+import { PrivateUser } from '../types/SpotifyObjects';
 
 export const privateUserFixture: PrivateUser = {
   birthdate: '',

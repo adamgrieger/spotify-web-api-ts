@@ -1,4 +1,4 @@
-import { SearchShowsResponse } from '../../types';
+import { SearchShowsResponse } from '../../types/SpotifyResponses';
 
 export const searchShowsFixture: SearchShowsResponse = {
   shows: {

@@ -1,4 +1,4 @@
-import { GetSavedAlbumsResponse } from '../../types';
+import { GetSavedAlbumsResponse } from '../../types/SpotifyResponses';
 
 export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
   href: 'https://api.spotify.com/v1/me/albums?offset=0&limit=1',

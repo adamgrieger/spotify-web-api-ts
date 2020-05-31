@@ -1,4 +1,4 @@
-import { GetArtistAlbumsResponse } from '../../types';
+import { GetArtistAlbumsResponse } from '../../types/SpotifyResponses';
 
 export const getArtistAlbumsFixture: GetArtistAlbumsResponse = {
   href:

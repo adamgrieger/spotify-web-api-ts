@@ -1,4 +1,4 @@
-import { Category } from '../types';
+import { Category } from '../types/SpotifyObjects';
 
 export const categoryFixture: Category = {
   href: 'https://api.spotify.com/v1/browse/categories/gaming',

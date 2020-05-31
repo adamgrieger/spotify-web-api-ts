@@ -1,35 +1,51 @@
-import * as SpotifyObjects from './SpotifyObjects';
+import {
+  Album,
+  Artist,
+  AudioFeatures,
+  Category,
+  CursorBasedPaging,
+  Episode,
+  Paging,
+  PlayHistory,
+  PlaylistItem,
+  RecommendationSeed,
+  SavedAlbum,
+  SavedShow,
+  SavedTrack,
+  SimplifiedAlbum,
+  SimplifiedEpisode,
+  SimplifiedPlaylist,
+  SimplifiedShow,
+  SimplifiedTrack,
+  Track,
+} from './SpotifyObjects';
 
 // +--------+
 // | Albums |
 // +--------+
 
 export type GetAlbumsResponse = {
-  albums: Array<SpotifyObjects.Album | null>;
+  albums: Array<Album | null>;
 };
 
-export type GetAlbumTracksResponse = SpotifyObjects.Paging<
-  SpotifyObjects.SimplifiedTrack
->;
+export type GetAlbumTracksResponse = Paging<SimplifiedTrack>;
 
 // +---------+
 // | Artists |
 // +---------+
 
-export type GetArtistAlbumsResponse = SpotifyObjects.Paging<
-  SpotifyObjects.SimplifiedAlbum
->;
+export type GetArtistAlbumsResponse = Paging<SimplifiedAlbum>;
 
 export type GetArtistsResponse = {
-  artists: SpotifyObjects.Artist[];
+  artists: Artist[];
 };
 
 export type GetArtistTopTracksResponse = {
-  tracks: SpotifyObjects.Track[];
+  tracks: Track[];
 };
 
 export type GetRelatedArtistsResponse = {
-  artists: SpotifyObjects.Artist[];
+  artists: Artist[];
 };
 
 // +--------+
@@ -41,25 +57,25 @@ export type GetAvailableGenreSeedsResponse = {
 };
 
 export type GetCategoriesResponse = {
-  categories: SpotifyObjects.Paging<SpotifyObjects.Category>;
+  categories: Paging<Category>;
 };
 
 export type GetCategoryPlaylistsResponse = {
-  playlists: SpotifyObjects.Paging<SpotifyObjects.SimplifiedPlaylist>;
+  playlists: Paging<SimplifiedPlaylist>;
 };
 
 export type GetFeaturedPlaylistsResponse = {
   message: string;
-  playlists: SpotifyObjects.Paging<SpotifyObjects.SimplifiedPlaylist>;
+  playlists: Paging<SimplifiedPlaylist>;
 };
 
 export type GetNewReleasesResponse = {
-  albums: SpotifyObjects.Paging<SpotifyObjects.SimplifiedAlbum>;
+  albums: Paging<SimplifiedAlbum>;
 };
 
 export type GetRecommendationsResponse = {
-  seeds: SpotifyObjects.RecommendationSeed[];
-  tracks: SpotifyObjects.Track[];
+  seeds: RecommendationSeed[];
+  tracks: Track[];
 };
 
 // +----------+
@@ -67,7 +83,7 @@ export type GetRecommendationsResponse = {
 // +----------+
 
 export type GetEpisodesResponse = {
-  episodes: Array<SpotifyObjects.Episode | null>;
+  episodes: Array<Episode | null>;
 };
 
 // +--------+
@@ -75,60 +91,42 @@ export type GetEpisodesResponse = {
 // +--------+
 
 export type GetFollowedArtistsResponse = {
-  artists: SpotifyObjects.CursorBasedPaging<SpotifyObjects.Artist>;
+  artists: CursorBasedPaging<Artist>;
 };
 
 // +---------+
 // | Library |
 // +---------+
 
-export type GetSavedAlbumsResponse = SpotifyObjects.Paging<
-  SpotifyObjects.SavedAlbum
->;
+export type GetSavedAlbumsResponse = Paging<SavedAlbum>;
 
-export type GetSavedShowsResponse = SpotifyObjects.Paging<
-  SpotifyObjects.SavedShow
->;
+export type GetSavedShowsResponse = Paging<SavedShow>;
 
-export type GetSavedTracksResponse = SpotifyObjects.Paging<
-  SpotifyObjects.SavedTrack
->;
+export type GetSavedTracksResponse = Paging<SavedTrack>;
 
 // +-----------------+
 // | Personalization |
 // +-----------------+
 
-export type GetMyTopArtistsResponse = SpotifyObjects.Paging<
-  SpotifyObjects.Artist
->;
+export type GetMyTopArtistsResponse = Paging<Artist>;
 
-export type GetMyTopTracksResponse = SpotifyObjects.Paging<
-  SpotifyObjects.Track
->;
+export type GetMyTopTracksResponse = Paging<Track>;
 
 // +--------+
 // | Player |
 // +--------+
 
-export type GetRecentlyPlayedTracksResponse = SpotifyObjects.CursorBasedPaging<
-  SpotifyObjects.PlayHistory
->;
+export type GetRecentlyPlayedTracksResponse = CursorBasedPaging<PlayHistory>;
 
 // +-----------+
 // | Playlists |
 // +-----------+
 
-export type GetMyPlaylistsResponse = SpotifyObjects.Paging<
-  SpotifyObjects.SimplifiedPlaylist
->;
+export type GetMyPlaylistsResponse = Paging<SimplifiedPlaylist>;
 
-export type GetPlaylistItemsResponse = SpotifyObjects.Paging<
-  SpotifyObjects.PlaylistItem
->;
+export type GetPlaylistItemsResponse = Paging<PlaylistItem>;
 
-export type GetUserPlaylistsResponse = SpotifyObjects.Paging<
-  SpotifyObjects.SimplifiedPlaylist
->;
+export type GetUserPlaylistsResponse = Paging<SimplifiedPlaylist>;
 
 export type SnapshotIdResponse = {
   snapshot_id: string;
@@ -148,27 +146,27 @@ export type SearchResponse = Partial<
 >;
 
 export type SearchAlbumsResponse = {
-  albums: SpotifyObjects.Paging<SpotifyObjects.SimplifiedAlbum>;
+  albums: Paging<SimplifiedAlbum>;
 };
 
 export type SearchArtistsResponse = {
-  artists: SpotifyObjects.Paging<SpotifyObjects.Artist>;
+  artists: Paging<Artist>;
 };
 
 export type SearchEpisodesResponse = {
-  episodes: SpotifyObjects.Paging<SpotifyObjects.SimplifiedEpisode>;
+  episodes: Paging<SimplifiedEpisode>;
 };
 
 export type SearchPlaylistsResponse = {
-  playlists: SpotifyObjects.Paging<SpotifyObjects.SimplifiedPlaylist>;
+  playlists: Paging<SimplifiedPlaylist>;
 };
 
 export type SearchShowsResponse = {
-  shows: SpotifyObjects.Paging<SpotifyObjects.SimplifiedShow>;
+  shows: Paging<SimplifiedShow>;
 };
 
 export type SearchTracksResponse = {
-  tracks: SpotifyObjects.Paging<SpotifyObjects.Track>;
+  tracks: Paging<Track>;
 };
 
 // +-------+
@@ -176,21 +174,19 @@ export type SearchTracksResponse = {
 // +-------+
 
 export type GetShowsResponse = {
-  shows: Array<SpotifyObjects.SimplifiedShow | null>;
+  shows: Array<SimplifiedShow | null>;
 };
 
-export type GetShowEpisodesResponse = SpotifyObjects.Paging<
-  SpotifyObjects.SimplifiedEpisode
->;
+export type GetShowEpisodesResponse = Paging<SimplifiedEpisode>;
 
 // +--------+
 // | Tracks |
 // +--------+
 
 export type GetAudioFeaturesForTracksResponse = {
-  audio_features: Array<SpotifyObjects.AudioFeatures | null>;
+  audio_features: Array<AudioFeatures | null>;
 };
 
 export type GetTracksResponse = {
-  tracks: Array<SpotifyObjects.Track | null>;
+  tracks: Array<Track | null>;
 };

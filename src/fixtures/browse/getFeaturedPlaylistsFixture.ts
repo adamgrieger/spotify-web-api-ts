@@ -1,4 +1,4 @@
-import { GetFeaturedPlaylistsResponse } from '../../types';
+import { GetFeaturedPlaylistsResponse } from '../../types/SpotifyResponses';
 
 export const getFeaturedPlaylistsFixture: GetFeaturedPlaylistsResponse = {
   message: "Editor's picks",

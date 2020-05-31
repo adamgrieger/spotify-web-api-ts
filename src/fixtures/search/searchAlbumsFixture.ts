@@ -1,4 +1,4 @@
-import { SearchAlbumsResponse } from '../../types';
+import { SearchAlbumsResponse } from '../../types/SpotifyResponses';
 
 export const searchAlbumsFixture: SearchAlbumsResponse = {
   albums: {

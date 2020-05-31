@@ -11,12 +11,12 @@ export { currentlyPlayingContextFixture } from './currentlyPlayingContextFixture
 export { currentlyPlayingFixture } from './currentlyPlayingFixture';
 export { deviceFixture } from './deviceFixture';
 export { episodeFixture } from './episodeFixture';
-export { imageFixture } from './imageFixture';
 export { playlistFixture } from './playlistFixture';
 export { privateUserFixture } from './privateUserFixture';
 export { publicUserFixture } from './publicUserFixture';
 export { showFixture } from './showFixture';
 export { snapshotIdFixture } from './snapshotIdFixture';
+export { spotifyImageFixture } from './spotifyImageFixture';
 export { trackFixture } from './trackFixture';
 
 // +------+

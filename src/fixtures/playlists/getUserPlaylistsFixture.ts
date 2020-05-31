@@ -1,4 +1,4 @@
-import { GetUserPlaylistsResponse } from '../../types';
+import { GetUserPlaylistsResponse } from '../../types/SpotifyResponses';
 
 export const getUserPlaylistsFixture: GetUserPlaylistsResponse = {
   href: 'https://api.spotify.com/v1/users/griegs/playlists?offset=1&limit=1',

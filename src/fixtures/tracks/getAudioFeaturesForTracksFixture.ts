@@ -1,4 +1,4 @@
-import { GetAudioFeaturesForTracksResponse } from '../../types';
+import { GetAudioFeaturesForTracksResponse } from '../../types/SpotifyResponses';
 
 export const getAudioFeaturesForTracksFixture: GetAudioFeaturesForTracksResponse = {
   audio_features: [

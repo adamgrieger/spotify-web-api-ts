@@ -1,4 +1,4 @@
-import { GetCategoriesResponse } from '../../types';
+import { GetCategoriesResponse } from '../../types/SpotifyResponses';
 
 export const getCategoriesFixture: GetCategoriesResponse = {
   categories: {

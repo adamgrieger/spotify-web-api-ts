@@ -1,6 +1,25 @@
 import { Http } from '../helpers/Http';
 import { searchHelper } from '../helpers/searchHelper';
-import * as types from '../types';
+import {
+  Artist,
+  Paging,
+  SearchType,
+  SimplifiedAlbum,
+  SimplifiedEpisode,
+  SimplifiedPlaylist,
+  SimplifiedShow,
+  Track,
+} from '../types/SpotifyObjects';
+import { SearchOptions } from '../types/SpotifyOptions';
+import {
+  SearchAlbumsResponse,
+  SearchArtistsResponse,
+  SearchEpisodesResponse,
+  SearchPlaylistsResponse,
+  SearchResponse,
+  SearchShowsResponse,
+  SearchTracksResponse,
+} from '../types/SpotifyResponses';
 
 export class SearchApi {
   private http: Http;
@@ -21,10 +40,10 @@ export class SearchApi {
    */
   search(
     query: string,
-    type: types.SearchType[],
-    options?: types.SearchOptions,
-  ) {
-    return searchHelper<types.SearchResponse>(this.http, query, type, options);
+    type: SearchType[],
+    options?: SearchOptions,
+  ): Promise<SearchResponse> {
+    return searchHelper<SearchResponse>(this.http, query, type, options);
   }
 
   /**
@@ -35,8 +54,11 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchAlbums(query: string, options?: types.SearchOptions) {
-    const response = await searchHelper<types.SearchAlbumsResponse>(
+  async searchAlbums(
+    query: string,
+    options?: SearchOptions,
+  ): Promise<Paging<SimplifiedAlbum>> {
+    const response = await searchHelper<SearchAlbumsResponse>(
       this.http,
       query,
       ['album'],
@@ -53,8 +75,11 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchArtists(query: string, options?: types.SearchOptions) {
-    const response = await searchHelper<types.SearchArtistsResponse>(
+  async searchArtists(
+    query: string,
+    options?: SearchOptions,
+  ): Promise<Paging<Artist>> {
+    const response = await searchHelper<SearchArtistsResponse>(
       this.http,
       query,
       ['artist'],
@@ -71,8 +96,11 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchEpisodes(query: string, options?: types.SearchOptions) {
-    const response = await searchHelper<types.SearchEpisodesResponse>(
+  async searchEpisodes(
+    query: string,
+    options?: SearchOptions,
+  ): Promise<Paging<SimplifiedEpisode>> {
+    const response = await searchHelper<SearchEpisodesResponse>(
       this.http,
       query,
       ['episode'],
@@ -89,8 +117,11 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchPlaylists(query: string, options?: types.SearchOptions) {
-    const response = await searchHelper<types.SearchPlaylistsResponse>(
+  async searchPlaylists(
+    query: string,
+    options?: SearchOptions,
+  ): Promise<Paging<SimplifiedPlaylist>> {
+    const response = await searchHelper<SearchPlaylistsResponse>(
       this.http,
       query,
       ['playlist'],
@@ -107,8 +138,11 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchShows(query: string, options?: types.SearchOptions) {
-    const response = await searchHelper<types.SearchShowsResponse>(
+  async searchShows(
+    query: string,
+    options?: SearchOptions,
+  ): Promise<Paging<SimplifiedShow>> {
+    const response = await searchHelper<SearchShowsResponse>(
       this.http,
       query,
       ['show'],
@@ -125,8 +159,11 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchTracks(query: string, options?: types.SearchOptions) {
-    const response = await searchHelper<types.SearchTracksResponse>(
+  async searchTracks(
+    query: string,
+    options?: SearchOptions,
+  ): Promise<Paging<Track>> {
+    const response = await searchHelper<SearchTracksResponse>(
       this.http,
       query,
       ['track'],

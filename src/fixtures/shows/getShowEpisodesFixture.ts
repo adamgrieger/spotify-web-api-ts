@@ -1,4 +1,4 @@
-import { GetShowEpisodesResponse } from '../../types';
+import { GetShowEpisodesResponse } from '../../types/SpotifyResponses';
 
 export const getShowEpisodesFixture: GetShowEpisodesResponse = {
   href:

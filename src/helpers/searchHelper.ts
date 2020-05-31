@@ -1,11 +1,12 @@
+import { SearchType } from '../types/SpotifyObjects';
+import { SearchOptions } from '../types/SpotifyOptions';
 import { Http } from './Http';
-import * as types from '../types';
 
 export function searchHelper<T>(
   http: Http,
   query: string,
-  type: types.SearchType[],
-  options?: types.SearchOptions,
+  type: SearchType[],
+  options?: SearchOptions,
 ) {
   return http.get<T>('/search', {
     params: {

@@ -1,4 +1,4 @@
-import { GetArtistTopTracksResponse } from '../../types';
+import { GetArtistTopTracksResponse } from '../../types/SpotifyResponses';
 
 export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
   tracks: [

@@ -1,4 +1,4 @@
-import { SearchArtistsResponse } from '../../types';
+import { SearchArtistsResponse } from '../../types/SpotifyResponses';
 
 export const searchArtistsFixture: SearchArtistsResponse = {
   artists: {

@@ -1,4 +1,4 @@
-import { CurrentlyPlaying } from '../types';
+import { CurrentlyPlaying } from '../types/SpotifyObjects';
 
 export const currentlyPlayingFixture: CurrentlyPlaying = {
   timestamp: 1587438536283,

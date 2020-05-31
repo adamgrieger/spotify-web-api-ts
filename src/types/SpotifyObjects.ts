@@ -20,7 +20,7 @@ export type Album = {
   genres: string[];
   href: string;
   id: string;
-  images: Image[];
+  images: SpotifyImage[];
   label: string;
   name: string;
   popularity: number;
@@ -39,7 +39,7 @@ export type Artist = {
   genres: string[];
   href: string;
   id: string;
-  images: Image[];
+  images: SpotifyImage[];
   name: string;
   popularity: number;
   type: 'artist';
@@ -79,7 +79,7 @@ export type AudioFeatures = {
 
 export type Category = {
   href: string;
-  icons: Image[];
+  icons: SpotifyImage[];
   id: string;
   name: string;
 };
@@ -170,7 +170,7 @@ export type Episode = {
   external_urls: ExternalURL;
   href: string;
   id: string;
-  images: Image[];
+  images: SpotifyImage[];
   is_externally_hosted: boolean;
   is_playable: boolean;
   language?: string;
@@ -208,12 +208,6 @@ export type GetRecommendationsSeeds = {
   seed_tracks?: string[];
 };
 
-export type Image = {
-  height: number | null;
-  url: string;
-  width: number | null;
-};
-
 export type Paging<T> = {
   href: string;
   items: T[];
@@ -237,7 +231,7 @@ export type Playlist = {
   followers: Followers;
   href: string;
   id: string;
-  images: Image[];
+  images: SpotifyImage[];
   name: string;
   owner: PublicUser;
   primary_color?: string | null;
@@ -274,7 +268,7 @@ export type PrivateUser = {
   followers: Followers;
   href: string;
   id: string;
-  images: Image[];
+  images: SpotifyImage[];
   product?: string;
   type: 'user';
   uri: string;
@@ -286,7 +280,7 @@ export type PublicUser = {
   followers?: Followers;
   href: string;
   id: string;
-  images?: Image[];
+  images?: SpotifyImage[];
   type: 'user';
   uri: string;
 };
@@ -377,7 +371,7 @@ export type Show = {
   external_urls: ExternalURL;
   href: string;
   id: string;
-  images: Image[];
+  images: SpotifyImage[];
   is_externally_hosted: boolean | null;
   languages: string[];
   media_type: string;
@@ -401,7 +395,7 @@ export type SimplifiedAlbum = {
   external_urls: ExternalURL;
   href: string;
   id: string;
-  images: Image[];
+  images: SpotifyImage[];
   name: string;
   release_date: string;
   release_date_precision: 'year' | 'month' | 'day';
@@ -428,7 +422,7 @@ export type SimplifiedEpisode = {
   external_urls: ExternalURL;
   href: string;
   id: string;
-  images: Image[];
+  images: SpotifyImage[];
   is_externally_hosted: boolean;
   is_playable: boolean;
   language?: string;
@@ -447,7 +441,7 @@ export type SimplifiedPlaylist = {
   external_urls: ExternalURL;
   href: string;
   id: string;
-  images: Image[];
+  images: SpotifyImage[];
   name: string;
   owner: PublicUser;
   primary_color: string | null;
@@ -466,7 +460,7 @@ export type SimplifiedShow = {
   external_urls: ExternalURL;
   href: string;
   id: string;
-  images: Image[];
+  images: SpotifyImage[];
   is_externally_hosted: boolean | null;
   languages: string[];
   media_type: string;
@@ -494,6 +488,12 @@ export type SimplifiedTrack = {
   type: 'track';
   uri: string;
   is_local: boolean;
+};
+
+export type SpotifyImage = {
+  height: number | null;
+  url: string;
+  width: number | null;
 };
 
 export type TimeInterval = {
