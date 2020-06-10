@@ -1,13 +1,17 @@
+import { getFollowedArtistsFixture } from '../fixtures';
 import { Http } from '../helpers/Http';
 import { FollowApi } from './FollowApi';
-import { spotifyAxios } from '../helpers/spotifyAxios';
-import { getFollowedArtistsFixture } from '../fixtures';
 
-jest.mock('../helpers/spotifyAxios');
+jest.mock('../helpers/Http');
 
-const spotifyAxiosMock = spotifyAxios as jest.MockedFunction<
-  typeof spotifyAxios
->;
+const HttpMock = Http as jest.MockedClass<typeof Http>;
+
+function setup() {
+  const httpMock = new HttpMock('token');
+  const follow = new FollowApi(httpMock);
+
+  return { httpMock, follow };
+}
 
 beforeEach(() => {
   jest.resetAllMocks();
@@ -16,35 +20,30 @@ beforeEach(() => {
 describe('FollowApi', () => {
   describe('areFollowingPlaylist', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue([true, false]);
+      HttpMock.prototype.get.mockResolvedValue([true, false]);
     });
 
     it('should check if users follow a playlist', async () => {
-      const http = new Http('token');
-      const follow = new FollowApi(http);
+      const { httpMock, follow } = setup();
+
       const response = await follow.areFollowingPlaylist('foo', ['bar', 'baz']);
 
       expect(response).toEqual([true, false]);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/playlists/foo/followers/contains',
-        'GET',
-        'token',
-        {
-          params: {
-            ids: ['bar', 'baz'],
-          },
+      expect(httpMock.get).toBeCalledWith('/playlists/foo/followers/contains', {
+        params: {
+          ids: ['bar', 'baz'],
         },
-      );
+      });
     });
   });
 
   describe('followArtists', () => {
     it('should follow artists', async () => {
-      const http = new Http('token');
-      const follow = new FollowApi(http);
+      const { httpMock, follow } = setup();
+
       await follow.followArtists(['foo', 'bar']);
 
-      expect(spotifyAxiosMock).toBeCalledWith('/me/following', 'PUT', 'token', {
+      expect(httpMock.put).toBeCalledWith('/me/following', {
         params: {
           type: 'artist',
         },
@@ -57,43 +56,36 @@ describe('FollowApi', () => {
 
   describe('followPlaylist', () => {
     it('should follow a playlist (without options)', async () => {
-      const http = new Http('token');
-      const follow = new FollowApi(http);
+      const { httpMock, follow } = setup();
+
       await follow.followPlaylist('foo');
 
-      expect(spotifyAxiosMock).toBeCalledWith(
+      expect(httpMock.put).toBeCalledWith(
         '/playlists/foo/followers',
-        'PUT',
-        'token',
         undefined,
       );
     });
 
     it('should follow a playlist (with options)', async () => {
-      const http = new Http('token');
-      const follow = new FollowApi(http);
+      const { httpMock, follow } = setup();
+
       await follow.followPlaylist('foo', { public: false });
 
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/playlists/foo/followers',
-        'PUT',
-        'token',
-        {
-          data: {
-            public: false,
-          },
+      expect(httpMock.put).toBeCalledWith('/playlists/foo/followers', {
+        data: {
+          public: false,
         },
-      );
+      });
     });
   });
 
   describe('followUsers', () => {
     it('should follow users', async () => {
-      const http = new Http('token');
-      const follow = new FollowApi(http);
+      const { httpMock, follow } = setup();
+
       await follow.followUsers(['foo', 'bar']);
 
-      expect(spotifyAxiosMock).toBeCalledWith('/me/following', 'PUT', 'token', {
+      expect(httpMock.put).toBeCalledWith('/me/following', {
         params: {
           type: 'user',
         },
@@ -106,16 +98,16 @@ describe('FollowApi', () => {
 
   describe('getFollowedArtists', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue(getFollowedArtistsFixture);
+      HttpMock.prototype.get.mockResolvedValue(getFollowedArtistsFixture);
     });
 
     it("should get user's followed artists (without options)", async () => {
-      const http = new Http('token');
-      const follow = new FollowApi(http);
+      const { httpMock, follow } = setup();
+
       const response = await follow.getFollowedArtists();
 
       expect(response).toEqual(getFollowedArtistsFixture.artists);
-      expect(spotifyAxiosMock).toBeCalledWith('/me/following', 'GET', 'token', {
+      expect(httpMock.get).toBeCalledWith('/me/following', {
         params: {
           type: 'artist',
         },
@@ -123,12 +115,12 @@ describe('FollowApi', () => {
     });
 
     it("should get user's followed artists (with options)", async () => {
-      const http = new Http('token');
-      const follow = new FollowApi(http);
+      const { httpMock, follow } = setup();
+
       const response = await follow.getFollowedArtists({ limit: 2 });
 
       expect(response).toEqual(getFollowedArtistsFixture.artists);
-      expect(spotifyAxiosMock).toBeCalledWith('/me/following', 'GET', 'token', {
+      expect(httpMock.get).toBeCalledWith('/me/following', {
         params: {
           limit: 2,
           type: 'artist',
@@ -139,110 +131,85 @@ describe('FollowApi', () => {
 
   describe('isFollowingArtists', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue([true, false]);
+      HttpMock.prototype.get.mockResolvedValue([true, false]);
     });
 
     it('should check if current user follows artists', async () => {
-      const http = new Http('token');
-      const follow = new FollowApi(http);
+      const { httpMock, follow } = setup();
+
       const response = await follow.isFollowingArtists(['foo', 'bar']);
 
       expect(response).toEqual([true, false]);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/me/following/contains',
-        'GET',
-        'token',
-        {
-          params: {
-            ids: ['foo', 'bar'],
-            type: 'artist',
-          },
+      expect(httpMock.get).toBeCalledWith('/me/following/contains', {
+        params: {
+          ids: ['foo', 'bar'],
+          type: 'artist',
         },
-      );
+      });
     });
   });
 
   describe('isFollowingUsers', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue([true, false]);
+      HttpMock.prototype.get.mockResolvedValue([true, false]);
     });
 
     it('should check if current user follows users', async () => {
-      const http = new Http('token');
-      const follow = new FollowApi(http);
+      const { httpMock, follow } = setup();
+
       const response = await follow.isFollowingUsers(['foo', 'bar']);
 
       expect(response).toEqual([true, false]);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/me/following/contains',
-        'GET',
-        'token',
-        {
-          params: {
-            ids: ['foo', 'bar'],
-            type: 'user',
-          },
+      expect(httpMock.get).toBeCalledWith('/me/following/contains', {
+        params: {
+          ids: ['foo', 'bar'],
+          type: 'user',
         },
-      );
+      });
     });
   });
 
   describe('unfollowArtists', () => {
     it('should unfollow artists', async () => {
-      const http = new Http('token');
-      const follow = new FollowApi(http);
+      const { httpMock, follow } = setup();
+
       await follow.unfollowArtists(['foo', 'bar']);
 
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/me/following',
-        'DELETE',
-        'token',
-        {
-          params: {
-            type: 'artist',
-          },
-          data: {
-            ids: ['foo', 'bar'],
-          },
+      expect(httpMock.delete).toBeCalledWith('/me/following', {
+        params: {
+          type: 'artist',
         },
-      );
+        data: {
+          ids: ['foo', 'bar'],
+        },
+      });
     });
   });
 
   describe('unfollowPlaylist', () => {
     it('should unfollow a playlist', async () => {
-      const http = new Http('token');
-      const follow = new FollowApi(http);
+      const { httpMock, follow } = setup();
+
       await follow.unfollowPlaylist('foo');
 
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/playlists/foo/followers',
-        'DELETE',
-        'token',
-        undefined,
-      );
+      expect(httpMock.delete).toBeCalledWith('/playlists/foo/followers');
     });
   });
 
   describe('unfollowUsers', () => {
     it('should unfollow users', async () => {
-      const http = new Http('token');
-      const follow = new FollowApi(http);
+      const { httpMock, follow } = setup();
+
       await follow.unfollowUsers(['foo', 'bar']);
 
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/me/following',
-        'DELETE',
-        'token',
-        {
-          params: {
-            type: 'user',
-          },
-          data: {
-            ids: ['foo', 'bar'],
-          },
+      expect(httpMock.delete).toBeCalledWith('/me/following', {
+        params: {
+          type: 'user',
         },
-      );
+        data: {
+          ids: ['foo', 'bar'],
+        },
+      });
     });
   });
 });

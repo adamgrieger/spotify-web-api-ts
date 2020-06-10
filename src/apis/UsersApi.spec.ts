@@ -1,13 +1,17 @@
 import { privateUserFixture, publicUserFixture } from '../fixtures';
 import { Http } from '../helpers/Http';
-import { spotifyAxios } from '../helpers/spotifyAxios';
 import { UsersApi } from './UsersApi';
 
-jest.mock('../helpers/spotifyAxios');
+jest.mock('../helpers/Http');
 
-const spotifyAxiosMock = spotifyAxios as jest.MockedFunction<
-  typeof spotifyAxios
->;
+const HttpMock = Http as jest.MockedClass<typeof Http>;
+
+function setup() {
+  const httpMock = new HttpMock('token');
+  const users = new UsersApi(httpMock);
+
+  return { httpMock, users };
+}
 
 beforeEach(() => {
   jest.resetAllMocks();
@@ -16,36 +20,31 @@ beforeEach(() => {
 describe(UsersApi.name, () => {
   describe('getMe', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue(privateUserFixture);
+      HttpMock.prototype.get.mockResolvedValue(privateUserFixture);
     });
 
     it("should get the current user's profile", async () => {
-      const http = new Http('token');
-      const users = new UsersApi(http);
+      const { httpMock, users } = setup();
+
       const response = await users.getMe();
 
       expect(response).toEqual(privateUserFixture);
-      expect(spotifyAxiosMock).toBeCalledWith('/me', 'GET', 'token', undefined);
+      expect(httpMock.get).toBeCalledWith('/me');
     });
   });
 
   describe('getUser', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue(publicUserFixture);
+      HttpMock.prototype.get.mockResolvedValue(publicUserFixture);
     });
 
     it("should get a user's profile", async () => {
-      const http = new Http('token');
-      const users = new UsersApi(http);
+      const { httpMock, users } = setup();
+
       const response = await users.getUser('foo');
 
       expect(response).toEqual(publicUserFixture);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/users/foo',
-        'GET',
-        'token',
-        undefined,
-      );
+      expect(httpMock.get).toBeCalledWith('/users/foo');
     });
   });
 });

@@ -1,21 +1,25 @@
-import { Http } from '../helpers/Http';
-import { BrowseApi } from './BrowseApi';
-import { spotifyAxios } from '../helpers/spotifyAxios';
 import {
+  categoryFixture,
   getAvailableGenreSeedsFixture,
   getCategoriesFixture,
-  categoryFixture,
   getCategoryPlaylistsFixture,
   getFeaturedPlaylistsFixture,
   getNewReleasesFixture,
   getRecommendationsFixture,
 } from '../fixtures';
+import { Http } from '../helpers/Http';
+import { BrowseApi } from './BrowseApi';
 
-jest.mock('../helpers/spotifyAxios');
+jest.mock('../helpers/Http');
 
-const spotifyAxiosMock = spotifyAxios as jest.MockedFunction<
-  typeof spotifyAxios
->;
+const HttpMock = Http as jest.MockedClass<typeof Http>;
+
+function setup() {
+  const httpMock = new HttpMock('token');
+  const browse = new BrowseApi(httpMock);
+
+  return { httpMock, browse };
+}
 
 beforeEach(() => {
   jest.resetAllMocks();
@@ -24,244 +28,192 @@ beforeEach(() => {
 describe('BrowseApi', () => {
   describe('getAvailableGenreSeeds', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue(getAvailableGenreSeedsFixture);
+      HttpMock.prototype.get.mockResolvedValue(getAvailableGenreSeedsFixture);
     });
 
     it('should get available genre seeds', async () => {
-      const http = new Http('token');
-      const browse = new BrowseApi(http);
+      const { httpMock, browse } = setup();
+
       const response = await browse.getAvailableGenreSeeds();
 
       expect(response).toEqual(getAvailableGenreSeedsFixture.genres);
-      expect(spotifyAxiosMock).toBeCalledWith(
+      expect(httpMock.get).toBeCalledWith(
         '/recommendations/available-genre-seeds',
-        'GET',
-        'token',
-        undefined,
       );
     });
   });
 
   describe('getCategories', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue(getCategoriesFixture);
+      HttpMock.prototype.get.mockResolvedValue(getCategoriesFixture);
     });
 
     it('should get a list of categories (without options)', async () => {
-      const http = new Http('token');
-      const browse = new BrowseApi(http);
+      const { httpMock, browse } = setup();
+
       const response = await browse.getCategories();
 
       expect(response).toEqual(getCategoriesFixture.categories);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/browse/categories',
-        'GET',
-        'token',
-        undefined,
-      );
+      expect(httpMock.get).toBeCalledWith('/browse/categories', undefined);
     });
 
     it('should get a list of categories (with options)', async () => {
-      const http = new Http('token');
-      const browse = new BrowseApi(http);
+      const { httpMock, browse } = setup();
+
       const response = await browse.getCategories({ country: 'foo' });
 
       expect(response).toEqual(getCategoriesFixture.categories);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/browse/categories',
-        'GET',
-        'token',
-        {
-          params: {
-            country: 'foo',
-          },
+      expect(httpMock.get).toBeCalledWith('/browse/categories', {
+        params: {
+          country: 'foo',
         },
-      );
+      });
     });
   });
 
   describe('getCategory', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue(categoryFixture);
+      HttpMock.prototype.get.mockResolvedValue(categoryFixture);
     });
 
     it('should get a category (without options)', async () => {
-      const http = new Http('token');
-      const browse = new BrowseApi(http);
+      const { httpMock, browse } = setup();
+
       const response = await browse.getCategory('foo');
 
       expect(response).toEqual(categoryFixture);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/browse/categories/foo',
-        'GET',
-        'token',
-        undefined,
-      );
+      expect(httpMock.get).toBeCalledWith('/browse/categories/foo', undefined);
     });
 
     it('should get a category (with options)', async () => {
-      const http = new Http('token');
-      const browse = new BrowseApi(http);
+      const { httpMock, browse } = setup();
+
       const response = await browse.getCategory('foo', { country: 'bar' });
 
       expect(response).toEqual(categoryFixture);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/browse/categories/foo',
-        'GET',
-        'token',
-        {
-          params: {
-            country: 'bar',
-          },
+      expect(httpMock.get).toBeCalledWith('/browse/categories/foo', {
+        params: {
+          country: 'bar',
         },
-      );
+      });
     });
   });
 
   describe('getCategoryPlaylists', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue(getCategoryPlaylistsFixture);
+      HttpMock.prototype.get.mockResolvedValue(getCategoryPlaylistsFixture);
     });
 
     it("should get a category's playlists (without options)", async () => {
-      const http = new Http('token');
-      const browse = new BrowseApi(http);
+      const { httpMock, browse } = setup();
+
       const response = await browse.getCategoryPlaylists('foo');
 
       expect(response).toEqual(getCategoryPlaylistsFixture.playlists);
-      expect(spotifyAxiosMock).toBeCalledWith(
+      expect(httpMock.get).toBeCalledWith(
         '/browse/categories/foo/playlists',
-        'GET',
-        'token',
         undefined,
       );
     });
 
     it("should get a category's playlists (with options)", async () => {
-      const http = new Http('token');
-      const browse = new BrowseApi(http);
+      const { httpMock, browse } = setup();
+
       const response = await browse.getCategoryPlaylists('foo', {
         country: 'bar',
       });
 
       expect(response).toEqual(getCategoryPlaylistsFixture.playlists);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/browse/categories/foo/playlists',
-        'GET',
-        'token',
-        {
-          params: {
-            country: 'bar',
-          },
+      expect(httpMock.get).toBeCalledWith('/browse/categories/foo/playlists', {
+        params: {
+          country: 'bar',
         },
-      );
+      });
     });
   });
 
   describe('getFeaturedPlaylists', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue(getFeaturedPlaylistsFixture);
+      HttpMock.prototype.get.mockResolvedValue(getFeaturedPlaylistsFixture);
     });
 
     it('should get a list of featured playlists (without options)', async () => {
-      const http = new Http('token');
-      const browse = new BrowseApi(http);
+      const { httpMock, browse } = setup();
+
       const response = await browse.getFeaturedPlaylists();
 
       expect(response).toEqual(getFeaturedPlaylistsFixture);
-      expect(spotifyAxiosMock).toBeCalledWith(
+      expect(httpMock.get).toBeCalledWith(
         '/browse/featured-playlists',
-        'GET',
-        'token',
         undefined,
       );
     });
 
     it('should get a list of featured playlists (with options)', async () => {
-      const http = new Http('token');
-      const browse = new BrowseApi(http);
+      const { httpMock, browse } = setup();
+
       const response = await browse.getFeaturedPlaylists({ country: 'foo' });
 
       expect(response).toEqual(getFeaturedPlaylistsFixture);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/browse/featured-playlists',
-        'GET',
-        'token',
-        {
-          params: {
-            country: 'foo',
-          },
+      expect(httpMock.get).toBeCalledWith('/browse/featured-playlists', {
+        params: {
+          country: 'foo',
         },
-      );
+      });
     });
   });
 
   describe('getNewReleases', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue(getNewReleasesFixture);
+      HttpMock.prototype.get.mockResolvedValue(getNewReleasesFixture);
     });
 
     it('should get a list of new releases (without options)', async () => {
-      const http = new Http('token');
-      const browse = new BrowseApi(http);
+      const { httpMock, browse } = setup();
+
       const response = await browse.getNewReleases();
 
       expect(response).toEqual(getNewReleasesFixture.albums);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/browse/new-releases',
-        'GET',
-        'token',
-        undefined,
-      );
+      expect(httpMock.get).toBeCalledWith('/browse/new-releases', undefined);
     });
 
     it('should get a list of new releases (with options)', async () => {
-      const http = new Http('token');
-      const browse = new BrowseApi(http);
+      const { httpMock, browse } = setup();
+
       const response = await browse.getNewReleases({ country: 'foo' });
 
       expect(response).toEqual(getNewReleasesFixture.albums);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/browse/new-releases',
-        'GET',
-        'token',
-        {
-          params: {
-            country: 'foo',
-          },
+      expect(httpMock.get).toBeCalledWith('/browse/new-releases', {
+        params: {
+          country: 'foo',
         },
-      );
+      });
     });
   });
 
   describe('getRecommendations', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue(getRecommendationsFixture);
+      HttpMock.prototype.get.mockResolvedValue(getRecommendationsFixture);
     });
 
     it('should get recommendations based on seeds (without options)', async () => {
-      const http = new Http('token');
-      const browse = new BrowseApi(http);
+      const { httpMock, browse } = setup();
+
       const response = await browse.getRecommendations({
         seed_artists: ['foo', 'bar'],
       });
 
       expect(response).toEqual(getRecommendationsFixture);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/recommendations',
-        'GET',
-        'token',
-        {
-          params: {
-            seed_artists: ['foo', 'bar'],
-          },
+      expect(httpMock.get).toBeCalledWith('/recommendations', {
+        params: {
+          seed_artists: ['foo', 'bar'],
         },
-      );
+      });
     });
 
     it('should get recommendations based on seeds (with options)', async () => {
-      const http = new Http('token');
-      const browse = new BrowseApi(http);
+      const { httpMock, browse } = setup();
+
       const response = await browse.getRecommendations(
         {
           seed_artists: ['foo', 'bar'],
@@ -272,17 +224,12 @@ describe('BrowseApi', () => {
       );
 
       expect(response).toEqual(getRecommendationsFixture);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/recommendations',
-        'GET',
-        'token',
-        {
-          params: {
-            seed_artists: ['foo', 'bar'],
-            market: 'baz',
-          },
+      expect(httpMock.get).toBeCalledWith('/recommendations', {
+        params: {
+          seed_artists: ['foo', 'bar'],
+          market: 'baz',
         },
-      );
+      });
     });
   });
 });

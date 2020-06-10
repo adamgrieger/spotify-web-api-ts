@@ -17,6 +17,13 @@ const searchHelperMock = searchHelper as jest.MockedFunction<
   typeof searchHelper
 >;
 
+function setup() {
+  const http = new Http('token');
+  const search = new SearchApi(http);
+
+  return { http, search };
+}
+
 beforeEach(() => {
   jest.resetAllMocks();
 });
@@ -28,8 +35,8 @@ describe('SearchApi', () => {
     });
 
     it('should search for an item (without options)', async () => {
-      const http = new Http('token');
-      const search = new SearchApi(http);
+      const { http, search } = setup();
+
       const response = await search.search('foo', ['album', 'artist']);
 
       expect(response).toEqual(searchFixture);
@@ -42,8 +49,8 @@ describe('SearchApi', () => {
     });
 
     it('should search for an item (with options)', async () => {
-      const http = new Http('token');
-      const search = new SearchApi(http);
+      const { http, search } = setup();
+
       const response = await search.search('foo', ['album', 'artist'], {
         limit: 2,
       });
@@ -64,8 +71,8 @@ describe('SearchApi', () => {
     });
 
     it('should search for an album (without options)', async () => {
-      const http = new Http('token');
-      const search = new SearchApi(http);
+      const { http, search } = setup();
+
       const response = await search.searchAlbums('foo');
 
       expect(response).toEqual(searchAlbumsFixture.albums);
@@ -78,8 +85,8 @@ describe('SearchApi', () => {
     });
 
     it('should search for an album (with options)', async () => {
-      const http = new Http('token');
-      const search = new SearchApi(http);
+      const { http, search } = setup();
+
       const response = await search.searchAlbums('foo', { limit: 2 });
 
       expect(response).toEqual(searchAlbumsFixture.albums);
@@ -95,8 +102,8 @@ describe('SearchApi', () => {
     });
 
     it('should search for an artist (without options)', async () => {
-      const http = new Http('token');
-      const search = new SearchApi(http);
+      const { http, search } = setup();
+
       const response = await search.searchArtists('foo');
 
       expect(response).toEqual(searchArtistsFixture.artists);
@@ -109,8 +116,8 @@ describe('SearchApi', () => {
     });
 
     it('should search for an artist (with options)', async () => {
-      const http = new Http('token');
-      const search = new SearchApi(http);
+      const { http, search } = setup();
+
       const response = await search.searchArtists('foo', { limit: 2 });
 
       expect(response).toEqual(searchArtistsFixture.artists);
@@ -126,8 +133,8 @@ describe('SearchApi', () => {
     });
 
     it('should search for an episode (without options)', async () => {
-      const http = new Http('token');
-      const search = new SearchApi(http);
+      const { http, search } = setup();
+
       const response = await search.searchEpisodes('foo');
 
       expect(response).toEqual(searchEpisodesFixture.episodes);
@@ -140,8 +147,8 @@ describe('SearchApi', () => {
     });
 
     it('should search for an episode (with options)', async () => {
-      const http = new Http('token');
-      const search = new SearchApi(http);
+      const { http, search } = setup();
+
       const response = await search.searchEpisodes('foo', { limit: 2 });
 
       expect(response).toEqual(searchEpisodesFixture.episodes);
@@ -157,8 +164,8 @@ describe('SearchApi', () => {
     });
 
     it('should search for a playlist (without options)', async () => {
-      const http = new Http('token');
-      const search = new SearchApi(http);
+      const { http, search } = setup();
+
       const response = await search.searchPlaylists('foo');
 
       expect(response).toEqual(searchPlaylistsFixture.playlists);
@@ -171,8 +178,8 @@ describe('SearchApi', () => {
     });
 
     it('should search for a playlist (with options)', async () => {
-      const http = new Http('token');
-      const search = new SearchApi(http);
+      const { http, search } = setup();
+
       const response = await search.searchPlaylists('foo', { limit: 2 });
 
       expect(response).toEqual(searchPlaylistsFixture.playlists);
@@ -188,8 +195,8 @@ describe('SearchApi', () => {
     });
 
     it('should search for a show (without options)', async () => {
-      const http = new Http('token');
-      const search = new SearchApi(http);
+      const { http, search } = setup();
+
       const response = await search.searchShows('foo');
 
       expect(response).toEqual(searchShowsFixture.shows);
@@ -197,8 +204,8 @@ describe('SearchApi', () => {
     });
 
     it('should search for a show (with options)', async () => {
-      const http = new Http('token');
-      const search = new SearchApi(http);
+      const { http, search } = setup();
+
       const response = await search.searchShows('foo', { limit: 2 });
 
       expect(response).toEqual(searchShowsFixture.shows);
@@ -214,8 +221,8 @@ describe('SearchApi', () => {
     });
 
     it('should search for a track (without options)', async () => {
-      const http = new Http('token');
-      const search = new SearchApi(http);
+      const { http, search } = setup();
+
       const response = await search.searchTracks('foo');
 
       expect(response).toEqual(searchTracksFixture.tracks);
@@ -228,8 +235,8 @@ describe('SearchApi', () => {
     });
 
     it('should search for a track (with options)', async () => {
-      const http = new Http('token');
-      const search = new SearchApi(http);
+      const { http, search } = setup();
+
       const response = await search.searchTracks('foo', { limit: 2 });
 
       expect(response).toEqual(searchTracksFixture.tracks);

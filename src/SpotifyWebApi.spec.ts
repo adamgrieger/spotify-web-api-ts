@@ -69,6 +69,7 @@ describe('SpotifyWebApi', () => {
         clientId: 'foo',
         redirectUri: 'bar',
       });
+
       spotify.getRefreshableAuthorizationUrl({ state: 'baz' });
 
       expect(getAuthorizationUrlMock).toBeCalledWith('foo', 'bar', 'code', {
@@ -99,6 +100,7 @@ describe('SpotifyWebApi', () => {
         clientId: 'foo',
         redirectUri: 'bar',
       });
+
       spotify.getTemporaryAuthorizationUrl({ state: 'baz' });
 
       expect(getAuthorizationUrlMock).toBeCalledWith('foo', 'bar', 'token', {

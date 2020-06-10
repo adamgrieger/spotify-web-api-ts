@@ -6,14 +6,18 @@ import {
   trackFixture,
 } from '../fixtures';
 import { Http } from '../helpers/Http';
-import { spotifyAxios } from '../helpers/spotifyAxios';
 import { TracksApi } from './TracksApi';
 
-jest.mock('../helpers/spotifyAxios');
+jest.mock('../helpers/Http');
 
-const spotifyAxiosMock = spotifyAxios as jest.MockedFunction<
-  typeof spotifyAxios
->;
+const HttpMock = Http as jest.MockedClass<typeof Http>;
+
+function setup() {
+  const httpMock = new HttpMock('token');
+  const tracks = new TracksApi(httpMock);
+
+  return { httpMock, tracks };
+}
 
 beforeEach(() => {
   jest.resetAllMocks();
@@ -22,94 +26,76 @@ beforeEach(() => {
 describe('TracksApi', () => {
   describe('getAudioAnalysisForTrack', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue(audioAnalysisFixture);
+      HttpMock.prototype.get.mockResolvedValue(audioAnalysisFixture);
     });
 
     it('should get audio analysis for a track', async () => {
-      const http = new Http('token');
-      const tracks = new TracksApi(http);
+      const { httpMock, tracks } = setup();
+
       const response = await tracks.getAudioAnalysisForTrack('foo');
 
       expect(response).toEqual(audioAnalysisFixture);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/audio-analysis/foo',
-        'GET',
-        'token',
-        undefined,
-      );
+      expect(httpMock.get).toBeCalledWith('/audio-analysis/foo');
     });
   });
 
   describe('getAudioFeaturesForTrack', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue(audioFeaturesFixture);
+      HttpMock.prototype.get.mockResolvedValue(audioFeaturesFixture);
     });
 
     it('should get audio features for a track', async () => {
-      const http = new Http('token');
-      const tracks = new TracksApi(http);
+      const { httpMock, tracks } = setup();
+
       const response = await tracks.getAudioFeaturesForTrack('foo');
 
       expect(response).toEqual(audioFeaturesFixture);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/audio-features/foo',
-        'GET',
-        'token',
-        undefined,
-      );
+      expect(httpMock.get).toBeCalledWith('/audio-features/foo');
     });
   });
 
   describe('getAudioFeaturesForTracks', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue(getAudioFeaturesForTracksFixture);
+      HttpMock.prototype.get.mockResolvedValue(
+        getAudioFeaturesForTracksFixture,
+      );
     });
 
     it('should get audio features for several tracks', async () => {
-      const http = new Http('token');
-      const tracks = new TracksApi(http);
+      const { httpMock, tracks } = setup();
+
       const response = await tracks.getAudioFeaturesForTracks(['foo', 'bar']);
 
       expect(response).toEqual(getAudioFeaturesForTracksFixture.audio_features);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/audio-features',
-        'GET',
-        'token',
-        {
-          params: {
-            ids: ['foo', 'bar'],
-          },
+      expect(httpMock.get).toBeCalledWith('/audio-features', {
+        params: {
+          ids: ['foo', 'bar'],
         },
-      );
+      });
     });
   });
 
   describe('getTrack', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue(trackFixture);
+      HttpMock.prototype.get.mockResolvedValue(trackFixture);
     });
 
     it('should get a track (without options)', async () => {
-      const http = new Http('token');
-      const tracks = new TracksApi(http);
+      const { httpMock, tracks } = setup();
+
       const response = await tracks.getTrack('foo');
 
       expect(response).toEqual(trackFixture);
-      expect(spotifyAxiosMock).toBeCalledWith(
-        '/tracks/foo',
-        'GET',
-        'token',
-        undefined,
-      );
+      expect(httpMock.get).toBeCalledWith('/tracks/foo', undefined);
     });
 
     it('should get a track (with options)', async () => {
-      const http = new Http('token');
-      const tracks = new TracksApi(http);
+      const { httpMock, tracks } = setup();
+
       const response = await tracks.getTrack('foo', { market: 'bar' });
 
       expect(response).toEqual(trackFixture);
-      expect(spotifyAxiosMock).toBeCalledWith('/tracks/foo', 'GET', 'token', {
+      expect(httpMock.get).toBeCalledWith('/tracks/foo', {
         params: {
           market: 'bar',
         },
@@ -119,16 +105,16 @@ describe('TracksApi', () => {
 
   describe('getTracks', () => {
     beforeEach(() => {
-      spotifyAxiosMock.mockResolvedValue(getTracksFixture);
+      HttpMock.prototype.get.mockResolvedValue(getTracksFixture);
     });
 
     it('should get several tracks (without options)', async () => {
-      const http = new Http('token');
-      const tracks = new TracksApi(http);
+      const { httpMock, tracks } = setup();
+
       const response = await tracks.getTracks(['foo', 'bar']);
 
       expect(response).toEqual(getTracksFixture.tracks);
-      expect(spotifyAxiosMock).toBeCalledWith('/tracks', 'GET', 'token', {
+      expect(httpMock.get).toBeCalledWith('/tracks', {
         params: {
           ids: ['foo', 'bar'],
         },
@@ -136,14 +122,14 @@ describe('TracksApi', () => {
     });
 
     it('should get several tracks (with options)', async () => {
-      const http = new Http('token');
-      const tracks = new TracksApi(http);
+      const { httpMock, tracks } = setup();
+
       const response = await tracks.getTracks(['foo', 'bar'], {
         market: 'baz',
       });
 
       expect(response).toEqual(getTracksFixture.tracks);
-      expect(spotifyAxiosMock).toBeCalledWith('/tracks', 'GET', 'token', {
+      expect(httpMock.get).toBeCalledWith('/tracks', {
         params: {
           ids: ['foo', 'bar'],
           market: 'baz',
