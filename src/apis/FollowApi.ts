@@ -36,6 +36,17 @@ export class FollowApi {
   }
 
   /**
+   * Follow Artist
+   *
+   * Add the current user as a follower of an artist.
+   *
+   * @param artistId The Spotify ID of the artist.
+   */
+  followArtist(artistId: string): Promise<void> {
+    return this.followArtists([artistId]);
+  }
+
+  /**
    * Follow Artists
    *
    * Add the current user as a follower of one or more artists.

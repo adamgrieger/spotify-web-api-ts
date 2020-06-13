@@ -37,6 +37,23 @@ describe('FollowApi', () => {
     });
   });
 
+  describe('followArtist', () => {
+    it('should follow an artist', async () => {
+      const { httpMock, follow } = setup();
+
+      await follow.followArtist('foo');
+
+      expect(httpMock.put).toBeCalledWith('/me/following', {
+        params: {
+          type: 'artist',
+        },
+        data: {
+          ids: ['foo'],
+        },
+      });
+    });
+  });
+
   describe('followArtists', () => {
     it('should follow artists', async () => {
       const { httpMock, follow } = setup();
