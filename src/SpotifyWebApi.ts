@@ -1,5 +1,4 @@
 import axios from 'axios';
-import qs from 'qs';
 import { AlbumsApi } from './apis/AlbumsApi';
 import { ArtistsApi } from './apis/ArtistsApi';
 import { BrowseApi } from './apis/BrowseApi';
@@ -25,6 +24,7 @@ import {
   GetRefreshedAccessTokenResponse,
   GetTemporaryAppTokensResponse,
 } from './types/SpotifyAuthorization';
+import { stringifyParams } from './helpers/stringifyParams';
 
 type SpotifyWebApiOptions = {
   accessToken?: string;
@@ -150,7 +150,7 @@ export class SpotifyWebApi {
   ): Promise<GetRefreshableUserTokensResponse> {
     const response = await axios.post<GetRefreshableUserTokensResponse>(
       TOKEN_URL,
-      qs.stringify({
+      stringifyParams({
         code,
         grant_type: 'authorization_code',
         redirect_uri: this.redirectUri,
@@ -179,7 +179,7 @@ export class SpotifyWebApi {
   ): Promise<GetRefreshedAccessTokenResponse> {
     const response = await axios.post<GetRefreshedAccessTokenResponse>(
       TOKEN_URL,
-      qs.stringify({
+      stringifyParams({
         grant_type: 'refresh_token',
         refresh_token: refreshToken,
       }),
@@ -210,7 +210,7 @@ export class SpotifyWebApi {
   async getTemporaryAppTokens(): Promise<GetTemporaryAppTokensResponse> {
     const response = await axios.post<GetTemporaryAppTokensResponse>(
       TOKEN_URL,
-      qs.stringify({
+      stringifyParams({
         grant_type: 'client_credentials',
       }),
       {

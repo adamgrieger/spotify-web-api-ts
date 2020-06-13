@@ -31,12 +31,10 @@
   },
   "devDependencies": {
     "@spotify/web-scripts": "^7.0.1",
-    "@types/qs": "^6.9.3",
     "husky": "^4.2.5",
     "typedoc": "^0.17.7"
   },
   "dependencies": {
-    "axios": "^0.19.2",
-    "qs": "^6.9.4"
+    "axios": "^0.19.2"
   }
 }
