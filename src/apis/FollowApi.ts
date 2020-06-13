@@ -162,6 +162,18 @@ export class FollowApi {
   }
 
   /**
+   * Check if Current User Follows User
+   *
+   * Check to see if the current user is following a Spotify user.
+   *
+   * @param userId The Spotify ID for the user.
+   */
+  async isFollowingUser(userId: string): Promise<boolean> {
+    const response = await this.isFollowingUsers([userId]);
+    return response[0];
+  }
+
+  /**
    * Check if Current User Follows Users
    *
    * Check to see if the current user is following one or more Spotify users.

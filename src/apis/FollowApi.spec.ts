@@ -203,6 +203,26 @@ describe('FollowApi', () => {
     });
   });
 
+  describe('isFollowingUser', () => {
+    beforeEach(() => {
+      HttpMock.prototype.get.mockResolvedValue([true]);
+    });
+
+    it('should check if the current user follows a user', async () => {
+      const { httpMock, follow } = setup();
+
+      const response = await follow.isFollowingUser('foo');
+
+      expect(response).toBe(true);
+      expect(httpMock.get).toBeCalledWith('/me/following/contains', {
+        params: {
+          ids: ['foo'],
+          type: 'user',
+        },
+      });
+    });
+  });
+
   describe('isFollowingUsers', () => {
     beforeEach(() => {
       HttpMock.prototype.get.mockResolvedValue([true, false]);
