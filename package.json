@@ -2,8 +2,8 @@
   "name": "spotify-web-api-ts",
   "version": "1.0.0",
   "description": "An isomorphic TypeScript wrapper for Spotify's Web API",
-  "main": "cjs/SpotifyWebApi.js",
-  "module": "esm/SpotifyWebApi.js",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
   "types": "types",
   "repository": "https://github.com/adamgrieger/spotify-web-api-ts.git",
   "author": "Adam Grieger",
@@ -21,7 +21,7 @@
     "prepare": "web-scripts audit",
     "release": "web-scripts release",
     "test": "web-scripts test",
-    "generate-docs": "typedoc --out docs src/SpotifyWebApi.ts"
+    "generate-docs": "typedoc --out docs src/index.ts"
   },
   "husky": {
     "hooks": {

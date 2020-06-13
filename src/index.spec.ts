@@ -1,8 +1,8 @@
 import axios from 'axios';
+import { SpotifyWebApi } from '.';
 import { TOKEN_URL } from './constants';
 import { encodeToBase64 } from './helpers/encodeToBase64';
 import { getAuthorizationUrl } from './helpers/getAuthorizationUrl';
-import { SpotifyWebApi } from './SpotifyWebApi';
 
 jest.mock('axios');
 jest.mock('./helpers/getAuthorizationUrl');
