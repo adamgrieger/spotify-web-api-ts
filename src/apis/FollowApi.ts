@@ -162,6 +162,22 @@ export class FollowApi {
   }
 
   /**
+   * Check if User Follows a Playlist
+   *
+   * Check to see if a Spotify user is following a specified playlist.
+   *
+   * @param playlistId The Spotify ID of the playlist.
+   * @param userId The Spotify ID of the user.
+   */
+  async isFollowingPlaylist(
+    playlistId: string,
+    userId: string,
+  ): Promise<boolean> {
+    const response = await this.areFollowingPlaylist(playlistId, [userId]);
+    return response[0];
+  }
+
+  /**
    * Check if Current User Follows User
    *
    * Check to see if the current user is following a Spotify user.
