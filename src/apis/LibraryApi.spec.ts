@@ -330,6 +330,20 @@ describe('LibraryApi', () => {
     });
   });
 
+  describe('saveAlbum', () => {
+    it('should save an album for the current user', async () => {
+      const { httpMock, library } = setup();
+
+      await library.saveAlbum('foo');
+
+      expect(httpMock.put).toBeCalledWith('/me/albums', {
+        data: {
+          ids: ['foo'],
+        },
+      });
+    });
+  });
+
   describe('saveAlbums', () => {
     it('should save albums for the current user', async () => {
       const { httpMock, library } = setup();
@@ -344,6 +358,20 @@ describe('LibraryApi', () => {
     });
   });
 
+  describe('saveShow', () => {
+    it('should save a show for the current user', async () => {
+      const { httpMock, library } = setup();
+
+      await library.saveShow('foo');
+
+      expect(httpMock.put).toBeCalledWith('/me/shows', {
+        params: {
+          ids: ['foo'],
+        },
+      });
+    });
+  });
+
   describe('saveShows', () => {
     it('should save shows for the current user', async () => {
       const { httpMock, library } = setup();
@@ -353,6 +381,20 @@ describe('LibraryApi', () => {
       expect(httpMock.put).toBeCalledWith('/me/shows', {
         params: {
           ids: ['foo', 'bar'],
+        },
+      });
+    });
+  });
+
+  describe('saveTrack', () => {
+    it('should save a track for the current user', async () => {
+      const { httpMock, library } = setup();
+
+      await library.saveTrack('foo');
+
+      expect(httpMock.put).toBeCalledWith('/me/tracks', {
+        data: {
+          ids: ['foo'],
         },
       });
     });

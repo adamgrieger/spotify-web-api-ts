@@ -235,6 +235,17 @@ export class LibraryApi {
   }
 
   /**
+   * Save Album for the Current User
+   *
+   * Save an album to the current user's library.
+   *
+   * @param albumId The Spotify ID of the album.
+   */
+  saveAlbum(albumId: string): Promise<void> {
+    return this.saveAlbums([albumId]);
+  }
+
+  /**
    * Save Albums for the Current User
    *
    * Save one or more albums to the current user's library.
@@ -250,9 +261,20 @@ export class LibraryApi {
   }
 
   /**
+   * Save Show for the Current User
+   *
+   * Save a show to the current user's library.
+   *
+   * @param showId The Spotify ID of the show.
+   */
+  saveShow(showId: string): Promise<void> {
+    return this.saveShows([showId]);
+  }
+
+  /**
    * Save Shows for the Current User
    *
-   * Save one or more albums to the current user's library.
+   * Save one or more shows to the current user's library.
    *
    * @param showIds The Spotify IDs of the shows.
    */
@@ -262,6 +284,17 @@ export class LibraryApi {
         ids: showIds,
       },
     });
+  }
+
+  /**
+   * Save Track for the Current User
+   *
+   * Save a track to the current user's library.
+   *
+   * @param trackId The Spotify ID of the track.
+   */
+  saveTrack(trackId: string): Promise<void> {
+    return this.saveTracks([trackId]);
   }
 
   /**
