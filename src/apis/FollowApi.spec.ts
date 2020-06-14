@@ -262,6 +262,23 @@ describe('FollowApi', () => {
     });
   });
 
+  describe('unfollowArtist', () => {
+    it('should unfollow an artist', async () => {
+      const { httpMock, follow } = setup();
+
+      await follow.unfollowArtist('foo');
+
+      expect(httpMock.delete).toBeCalledWith('/me/following', {
+        params: {
+          type: 'artist',
+        },
+        data: {
+          ids: ['foo'],
+        },
+      });
+    });
+  });
+
   describe('unfollowArtists', () => {
     it('should unfollow artists', async () => {
       const { httpMock, follow } = setup();
