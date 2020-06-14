@@ -112,6 +112,18 @@ export class LibraryApi {
   }
 
   /**
+   * Check User's Saved Albums
+   *
+   * Check if an album is saved in the current user's library.
+   *
+   * @param albumId The Spotify ID of the album.
+   */
+  async isAlbumSaved(albumId: string): Promise<boolean> {
+    const response = await this.areAlbumsSaved([albumId]);
+    return response[0];
+  }
+
+  /**
    * Remove Albums for the Current User
    *
    * Remove one or more albums from the current user's library.
