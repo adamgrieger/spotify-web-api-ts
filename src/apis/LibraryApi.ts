@@ -124,6 +124,18 @@ export class LibraryApi {
   }
 
   /**
+   * Check User's Saved Shows
+   *
+   * Check if a shows is saved in the current user's library.
+   *
+   * @param showId The Spotify ID of the show.
+   */
+  async isShowSaved(showId: string): Promise<boolean> {
+    const response = await this.areShowsSaved([showId]);
+    return response[0];
+  }
+
+  /**
    * Remove Albums for the Current User
    *
    * Remove one or more albums from the current user's library.

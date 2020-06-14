@@ -182,6 +182,25 @@ describe('LibraryApi', () => {
     });
   });
 
+  describe('isShowSaved', () => {
+    beforeEach(() => {
+      HttpMock.prototype.get.mockResolvedValue([true]);
+    });
+
+    it("should check the user's saved shows", async () => {
+      const { httpMock, library } = setup();
+
+      const response = await library.isShowSaved('foo');
+
+      expect(response).toBe(true);
+      expect(httpMock.get).toBeCalledWith('/me/shows/contains', {
+        params: {
+          ids: ['foo'],
+        },
+      });
+    });
+  });
+
   describe('removeSavedAlbums', () => {
     it('should remove albums for the current user', async () => {
       const { httpMock, library } = setup();
