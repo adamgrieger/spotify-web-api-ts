@@ -246,6 +246,17 @@ export class FollowApi {
   }
 
   /**
+   * Unfollow User
+   *
+   * Remove the current user as a follower of a Spotify user.
+   *
+   * @param userId The Spotify ID of the user.
+   */
+  unfollowUser(userId: string): Promise<void> {
+    return this.unfollowUsers([userId]);
+  }
+
+  /**
    * Unfollow Users
    *
    * Remove the current user as a follower of one or more Spotify users.
