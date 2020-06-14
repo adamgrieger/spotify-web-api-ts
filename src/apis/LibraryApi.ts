@@ -148,6 +148,17 @@ export class LibraryApi {
   }
 
   /**
+   * Remove Album for the Current User
+   *
+   * Remove an album from the current user's library.
+   *
+   * @param albumId The Spotify ID of the album.
+   */
+  removeSavedAlbum(albumId: string): Promise<void> {
+    return this.removeSavedAlbums([albumId]);
+  }
+
+  /**
    * Remove Albums for the Current User
    *
    * Remove one or more albums from the current user's library.
@@ -160,6 +171,21 @@ export class LibraryApi {
         ids: albumIds,
       },
     });
+  }
+
+  /**
+   * Remove Show for the Current User
+   *
+   * Remove a show from the current user's library.
+   *
+   * @param showId The Spotify ID of the show.
+   * @param options Optional request information.
+   */
+  removeSavedShow(
+    showId: string,
+    options?: RemoveSavedShowsOptions,
+  ): Promise<void> {
+    return this.removeSavedShows([showId], options);
   }
 
   /**
@@ -180,6 +206,17 @@ export class LibraryApi {
         ids: showIds,
       },
     });
+  }
+
+  /**
+   * Remove Track for the Current User
+   *
+   * Remove a track from the current user's library.
+   *
+   * @param trackId The Spotify ID of the track.
+   */
+  removeSavedTrack(trackId: string): Promise<void> {
+    return this.removeSavedTracks([trackId]);
   }
 
   /**

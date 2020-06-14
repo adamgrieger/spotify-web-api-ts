@@ -220,6 +220,20 @@ describe('LibraryApi', () => {
     });
   });
 
+  describe('removeSavedAlbum', () => {
+    it('should remove an album for the current user', async () => {
+      const { httpMock, library } = setup();
+
+      await library.removeSavedAlbum('foo');
+
+      expect(httpMock.delete).toBeCalledWith('/me/albums', {
+        data: {
+          ids: ['foo'],
+        },
+      });
+    });
+  });
+
   describe('removeSavedAlbums', () => {
     it('should remove albums for the current user', async () => {
       const { httpMock, library } = setup();
@@ -229,6 +243,33 @@ describe('LibraryApi', () => {
       expect(httpMock.delete).toBeCalledWith('/me/albums', {
         data: {
           ids: ['foo', 'bar'],
+        },
+      });
+    });
+  });
+
+  describe('removeSavedShow', () => {
+    it('should remove a show for the current user (without options)', async () => {
+      const { httpMock, library } = setup();
+
+      await library.removeSavedShow('foo');
+
+      expect(httpMock.delete).toBeCalledWith('/me/shows', {
+        params: {
+          ids: ['foo'],
+        },
+      });
+    });
+
+    it('should remove a show for the current user (with options)', async () => {
+      const { httpMock, library } = setup();
+
+      await library.removeSavedShow('foo', { market: 'bar' });
+
+      expect(httpMock.delete).toBeCalledWith('/me/shows', {
+        params: {
+          ids: ['foo'],
+          market: 'bar',
         },
       });
     });
@@ -256,6 +297,20 @@ describe('LibraryApi', () => {
         params: {
           ids: ['foo', 'bar'],
           market: 'baz',
+        },
+      });
+    });
+  });
+
+  describe('removeSavedTrack', () => {
+    it('should remove a track for the current user', async () => {
+      const { httpMock, library } = setup();
+
+      await library.removeSavedTrack('foo');
+
+      expect(httpMock.delete).toBeCalledWith('/me/tracks', {
+        data: {
+          ids: ['foo'],
         },
       });
     });
