@@ -126,12 +126,24 @@ export class LibraryApi {
   /**
    * Check User's Saved Shows
    *
-   * Check if a shows is saved in the current user's library.
+   * Check if a show is saved in the current user's library.
    *
    * @param showId The Spotify ID of the show.
    */
   async isShowSaved(showId: string): Promise<boolean> {
     const response = await this.areShowsSaved([showId]);
+    return response[0];
+  }
+
+  /**
+   * Check User's Saved Tracks
+   *
+   * Check if a track is saved in the current user's library.
+   *
+   * @param trackId The Spotify ID of the track.
+   */
+  async isTrackSaved(trackId: string): Promise<boolean> {
+    const response = await this.areTracksSaved([trackId]);
     return response[0];
   }
 

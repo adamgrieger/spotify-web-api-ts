@@ -201,6 +201,25 @@ describe('LibraryApi', () => {
     });
   });
 
+  describe('isTrackSaved', () => {
+    beforeEach(() => {
+      HttpMock.prototype.get.mockResolvedValue([true]);
+    });
+
+    it("should check the user's saved tracks", async () => {
+      const { httpMock, library } = setup();
+
+      const response = await library.isTrackSaved('foo');
+
+      expect(response).toBe(true);
+      expect(httpMock.get).toBeCalledWith('/me/tracks/contains', {
+        params: {
+          ids: ['foo'],
+        },
+      });
+    });
+  });
+
   describe('removeSavedAlbums', () => {
     it('should remove albums for the current user', async () => {
       const { httpMock, library } = setup();
