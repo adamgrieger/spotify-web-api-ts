@@ -231,9 +231,32 @@ export class PlaylistsApi {
   }
 
   /**
+   * Remove Item from a Playlist by Position
+   *
+   * Remove an item from a user's playlist by position.
+   *
+   * @param playlistId The Spotify ID for the playlist.
+   * @param uri The Spotify track or episode URI to remove.
+   * @param positions The positions of the item to remove.
+   * @param options Optional request information.
+   */
+  removePlaylistItemByPosition(
+    playlistId: string,
+    uri: string,
+    positions: number[],
+    options?: RemovePlaylistItemsByPositionOptions,
+  ): Promise<string> {
+    return this.removePlaylistItemsByPosition(
+      playlistId,
+      [{ uri, positions }],
+      options,
+    );
+  }
+
+  /**
    * Remove Items from a Playlist by Position
    *
-   * Remove one or more itmems from a user's playlist by position.
+   * Remove one or more items from a user's playlist by position.
    *
    * @param playlistId The Spotify ID for the playlist.
    * @param items The Spotify track or episode URIs and positions to remove.

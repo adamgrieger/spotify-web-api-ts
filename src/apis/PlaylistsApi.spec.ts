@@ -316,6 +316,48 @@ describe('PlaylistsApi', () => {
     });
   });
 
+  describe('removePlaylistItemByPosition', () => {
+    beforeEach(() => {
+      HttpMock.prototype.delete.mockResolvedValue(snapshotIdFixture);
+    });
+
+    it('should remove an item from a playlist by position (without options)', async () => {
+      const { httpMock, playlists } = setup();
+
+      const response = await playlists.removePlaylistItemByPosition(
+        'foo',
+        'bar',
+        [1, 3],
+      );
+
+      expect(response).toBe(snapshotIdFixture.snapshot_id);
+      expect(httpMock.delete).toBeCalledWith('/playlists/foo/tracks', {
+        data: {
+          tracks: [{ uri: 'bar', positions: [1, 3] }],
+        },
+      });
+    });
+
+    it('should remove an item from a playlist by position (with options)', async () => {
+      const { httpMock, playlists } = setup();
+
+      const response = await playlists.removePlaylistItemByPosition(
+        'foo',
+        'bar',
+        [1, 3],
+        { snapshot_id: 'baz' },
+      );
+
+      expect(response).toBe(snapshotIdFixture.snapshot_id);
+      expect(httpMock.delete).toBeCalledWith('/playlists/foo/tracks', {
+        data: {
+          tracks: [{ uri: 'bar', positions: [1, 3] }],
+          snapshot_id: 'baz',
+        },
+      });
+    });
+  });
+
   describe('removePlaylistItemsByPosition', () => {
     beforeEach(() => {
       HttpMock.prototype.delete.mockResolvedValue(snapshotIdFixture);
