@@ -196,6 +196,18 @@ export class PlaylistsApi {
   }
 
   /**
+   * Remove Item from a Playlist
+   *
+   * Remove an item from a user's playlist.
+   *
+   * @param playlistId The Spotify ID for the playlist.
+   * @param uri The Spotify track or episode URI to remove.
+   */
+  removePlaylistItem(playlistId: string, uri: string): Promise<string> {
+    return this.removePlaylistItems(playlistId, [uri]);
+  }
+
+  /**
    * Remove Items from a Playlist
    *
    * Remove one or more items from a user's playlist.

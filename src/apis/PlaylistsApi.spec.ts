@@ -275,6 +275,25 @@ describe('PlaylistsApi', () => {
     });
   });
 
+  describe('removePlaylistItem', () => {
+    beforeEach(() => {
+      HttpMock.prototype.delete.mockResolvedValue(snapshotIdFixture);
+    });
+
+    it('should remove an item from a playlist', async () => {
+      const { httpMock, playlists } = setup();
+
+      const response = await playlists.removePlaylistItem('foo', 'bar');
+
+      expect(response).toBe(snapshotIdFixture.snapshot_id);
+      expect(httpMock.delete).toBeCalledWith('/playlists/foo/tracks', {
+        data: {
+          tracks: [{ uri: 'bar' }],
+        },
+      });
+    });
+  });
+
   describe('removePlaylistItems', () => {
     beforeEach(() => {
       HttpMock.prototype.delete.mockResolvedValue(snapshotIdFixture);
