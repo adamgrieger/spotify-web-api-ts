@@ -25,6 +25,40 @@ beforeEach(() => {
 });
 
 describe('PlaylistsApi', () => {
+  describe('addItemToPlaylist', () => {
+    beforeEach(() => {
+      HttpMock.prototype.post.mockResolvedValue(snapshotIdFixture);
+    });
+
+    it('should add an item to a playlist (without options)', async () => {
+      const { httpMock, playlists } = setup();
+
+      const response = await playlists.addItemToPlaylist('foo', 'bar');
+
+      expect(response).toBe(snapshotIdFixture.snapshot_id);
+      expect(httpMock.post).toBeCalledWith('/playlists/foo/tracks', {
+        data: {
+          uris: ['bar'],
+        },
+      });
+    });
+
+    it('should add an item to a playlist (with options)', async () => {
+      const { httpMock, playlists } = setup();
+
+      const response = await playlists.addItemToPlaylist('foo', 'bar', {
+        position: 2,
+      });
+
+      expect(response).toBe(snapshotIdFixture.snapshot_id);
+      expect(httpMock.post).toBeCalledWith('/playlists/foo/tracks', {
+        data: {
+          uris: ['bar'],
+          position: 2,
+        },
+      });
+    });
+  });
   describe('addItemsToPlaylist', () => {
     beforeEach(() => {
       HttpMock.prototype.post.mockResolvedValue(snapshotIdFixture);

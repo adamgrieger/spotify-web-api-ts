@@ -29,6 +29,23 @@ export class PlaylistsApi {
   }
 
   /**
+   * Add Item to a Playlist
+   *
+   * Add an item to a user's playlist.
+   *
+   * @param playlistId The Spotify ID for the playlist.
+   * @param uri The Spotify track or episode URI to add.
+   * @param options Optional request information.
+   */
+  addItemToPlaylist(
+    playlistId: string,
+    uri: string,
+    options?: AddItemsToPlaylistOptions,
+  ): Promise<string> {
+    return this.addItemsToPlaylist(playlistId, [uri], options);
+  }
+
+  /**
    * Add Items to a Playlist
    *
    * Add one or more items to a user's playlist.
