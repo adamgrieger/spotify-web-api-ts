@@ -44,7 +44,7 @@ export class AlbumsApi {
     const response = await this.http.get<GetAlbumsResponse>('/albums', {
       params: {
         ...options,
-        ids: albumIds,
+        ids: albumIds.join(','),
       },
     });
     return response.albums;

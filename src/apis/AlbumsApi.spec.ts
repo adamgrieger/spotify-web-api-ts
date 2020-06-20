@@ -63,7 +63,7 @@ describe('AlbumsApi', () => {
       expect(response).toEqual(getAlbumsFixture.albums);
       expect(httpMock.get).toBeCalledWith('/albums', {
         params: {
-          ids: ['foo', 'bar'],
+          ids: 'foo,bar',
         },
       });
     });
@@ -78,7 +78,7 @@ describe('AlbumsApi', () => {
       expect(response).toEqual(getAlbumsFixture.albums);
       expect(httpMock.get).toBeCalledWith('/albums', {
         params: {
-          ids: ['foo', 'bar'],
+          ids: 'foo,bar',
           market: 'baz',
         },
       });
