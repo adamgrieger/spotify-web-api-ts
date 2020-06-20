@@ -62,3 +62,8 @@ typings/
 
 # Visual Studio Code settings
 .vscode
+
+# Build output
+cjs
+esm
+types
