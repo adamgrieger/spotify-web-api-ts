@@ -11,7 +11,8 @@
   "files": [
     "cjs",
     "esm",
-    "types"
+    "types",
+    "assets"
   ],
   "scripts": {
     "build": "web-scripts build --project tsconfig.build.json",
