@@ -64,11 +64,52 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<a href="#spotify-web-api-ts" id="spotify-web-api-ts" style="color: inherit; text-decoration: none;">
-					<h1>spotify-web-api-ts</h1>
+				<p align="center">
+					<a href="https://github.com/adamgrieger/spotify-web-api-ts">
+						<img src="assets/logo.svg" height="100">
+					</a>
+					<h3 align="center">spotify-web-api-ts</h3>
+					<p align="center">
+						An isomorphic TypeScript wrapper for Spotify's Web API
+						<br />
+						<a href="https://adamgrieger.github.io/spotify-web-api-ts/"><strong>View the docs »</strong></a>
+						<br />
+						<p align="center">
+							<img alt="npm" src="https://badgen.net/npm/v/spotify-web-api-ts"/>
+							<img alt="minzipped size" src="https://badgen.net/bundlephobia/minzip/spotify-web-api-ts">
+							<img alt="license" src="https://badgen.net/github/license/adamgrieger/spotify-web-api-ts">
+						</p>
+						<p align="center">
+							<img alt="Master Workflow" src="https://github.com/adamgrieger/spotify-web-api-ts/workflows/Master%20Workflow/badge.svg"/>
+							<img alt="codecov" src="https://codecov.io/gh/adamgrieger/spotify-web-api-ts/branch/master/graph/badge.svg"/>
+							<img alt="semantic-release" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg">
+						</p>
+					</p>
+				</p>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
 				</a>
-				<p><img src="https://github.com/adamgrieger/spotify-web-api-ts/workflows/Master%20Workflow/badge.svg" alt="Master Workflow">
-				<a href="https://codecov.io/gh/adamgrieger/spotify-web-api-ts"><img src="https://codecov.io/gh/adamgrieger/spotify-web-api-ts/branch/master/graph/badge.svg" alt="codecov"></a></p>
+				<a href="#yarn" id="yarn" style="color: inherit; text-decoration: none;">
+					<h3>yarn</h3>
+				</a>
+				<pre><code class="language-sh">yarn add spotify-web-api-ts</code></pre>
+				<a href="#npm" id="npm" style="color: inherit; text-decoration: none;">
+					<h3>npm</h3>
+				</a>
+				<pre><code class="language-sh">npm install spotify-web-api-ts</code></pre>
+				<a href="#basic-example" id="basic-example" style="color: inherit; text-decoration: none;">
+					<h2>Basic Example</h2>
+				</a>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { SpotifyWebApi } <span class="hljs-keyword">from</span> <span class="hljs-string">'spotify-web-api-ts'</span>;
+
+<span class="hljs-keyword">const</span> spotify = <span class="hljs-keyword">new</span> SpotifyWebApi({
+  accessToken: <span class="hljs-string">'&lt;YOUR_ACCESS_TOKEN_HERE&gt;'</span>,
+});
+
+<span class="hljs-keyword">const</span> { artists } = <span class="hljs-keyword">await</span> spotify.albums.getAlbum(<span class="hljs-string">'1uzfGk9vxMXfaZ2avqwxod'</span>);
+
+<span class="hljs-built_in">console</span>.log(artists.map(<span class="hljs-function"><span class="hljs-params">artist</span> =&gt;</span> artist.name));
+<span class="hljs-comment">// ['Against All Logic']</span></code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
