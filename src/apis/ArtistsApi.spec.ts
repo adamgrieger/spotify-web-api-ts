@@ -80,7 +80,7 @@ describe('ArtistsApi', () => {
       expect(response).toEqual(getArtistsFixture.artists);
       expect(httpMock.get).toBeCalledWith('/artists', {
         params: {
-          ids: ['foo', 'bar'],
+          ids: 'foo,bar',
         },
       });
     });
