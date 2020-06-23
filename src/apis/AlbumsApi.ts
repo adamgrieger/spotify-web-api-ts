@@ -68,9 +68,16 @@ export class AlbumsApi {
   }
 
   /**
-   * Get an Album's Tracks
+   * ### Get an Album's Tracks
    *
    * Get Spotify catalog information about an album's tracks.
+   *
+   * @example
+   * ```ts
+   * const tracks = await spotify.albums.getAlbumTracks('76254F4WYdKOm0pVAVvp0x');
+   * console.log(tracks.items.map(track => track.name));
+   * // Array [ "4D", "MTI" ]
+   * ```
    *
    * @param albumId The Spotify ID for the album.
    * @param options Optional request information.
