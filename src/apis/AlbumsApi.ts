@@ -14,9 +14,16 @@ export class AlbumsApi {
   }
 
   /**
-   * Get an Album
+   * ### Get an Album
    *
    * Get Spotify catalog information for a single album.
+   *
+   * @example
+   * ```ts
+   * const album = await spotify.albums.getAlbum('53VKICyqCf91sVkTdFrzKX');
+   * console.log(album.name);
+   * // 'Titanic Rising'
+   * ```
    *
    * @param albumId The Spotify ID for the album.
    * @param options Optional request information.
