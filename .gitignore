@@ -67,3 +67,6 @@ typings/
 cjs
 esm
 types
+
+# Generated documentation
+docs
