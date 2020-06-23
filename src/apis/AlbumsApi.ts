@@ -22,7 +22,7 @@ export class AlbumsApi {
    * ```ts
    * const album = await spotify.albums.getAlbum('53VKICyqCf91sVkTdFrzKX');
    * console.log(album.name);
-   * // 'Titanic Rising'
+   * // "Titanic Rising"
    * ```
    *
    * @param albumId The Spotify ID for the album.
@@ -36,10 +36,20 @@ export class AlbumsApi {
   }
 
   /**
-   * Get Several Albums
+   * ### Get Several Albums
    *
    * Get Spotify catalog information for multiple albums identified by their
    * Spotify IDs.
+   *
+   * @example
+   * ```ts
+   * const albums = await spotify.albums.getAlbums([
+   *   '0FO3N0KhhvXY7SORYneGbw',
+   *   '3FND6DpDA79Fox7bv8LvRC',
+   * ]);
+   * console.log(albums.map(album => album.name));
+   * // Array [ "What's There", "Heat Division" ]
+   * ```
    *
    * @param albumIds The Spotify IDs for the albums.
    * @param options Optional request information.
