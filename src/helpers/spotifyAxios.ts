@@ -1,4 +1,5 @@
-import axios, { Method, AxiosRequestConfig, AxiosError } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, Method } from 'axios';
+import qs from 'qs';
 import { BASE_API_URL } from '../constants';
 
 export type SpotifyAxiosConfig = AxiosRequestConfig & { contentType?: string };
@@ -18,6 +19,7 @@ export async function spotifyAxios<T>(
         Authorization: `Bearer ${accessToken}`,
         'Content-Type': contentType ?? 'application/json',
       },
+      paramsSerializer,
       url,
       method,
     });
@@ -27,4 +29,8 @@ export async function spotifyAxios<T>(
     const err = error as AxiosError;
     throw new Error(err.message);
   }
+}
+
+export function paramsSerializer(params: any) {
+  return qs.stringify(params, { arrayFormat: 'comma' });
 }

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { spotifyAxios } from './spotifyAxios';
 import { BASE_API_URL } from '../constants';
+import { paramsSerializer, spotifyAxios } from './spotifyAxios';
 
 jest.mock('axios');
 
@@ -27,6 +27,7 @@ describe('spotifyAxios', () => {
         Authorization: 'Bearer token',
         'Content-Type': 'application/json',
       },
+      paramsSerializer,
       url: 'foo',
       method: 'GET',
     });
@@ -45,6 +46,7 @@ describe('spotifyAxios', () => {
         Authorization: 'Bearer token',
         'Content-Type': 'image/jpeg',
       },
+      paramsSerializer,
       url: 'foo',
       method: 'GET',
     });
@@ -54,5 +56,11 @@ describe('spotifyAxios', () => {
     const testError = { message: 'foo' };
     axiosMock.mockRejectedValue(testError);
     await expect(spotifyAxios('bar', 'GET', 'token')).rejects.toThrow('foo');
+  });
+});
+
+describe('paramsSerializer', () => {
+  it('should stringify arrays using the comma format', () => {
+    expect(paramsSerializer({ foo: ['bar', 'baz'] })).toEqual('foo=bar%2Cbaz');
   });
 });

@@ -18,12 +18,12 @@ describe('getAuthorizationUrl', () => {
         state: 'baz',
       }),
     ).toBe(
-      AUTHORIZE_URL.concat('?client_id=foo')
-        .concat('&redirect_uri=bar')
-        .concat('&response_type=token')
-        .concat('&scope=streaming%20app-remote-control')
+      AUTHORIZE_URL.concat('?scope=streaming%20app-remote-control')
         .concat('&show_dialog=true')
-        .concat('&state=baz'),
+        .concat('&state=baz')
+        .concat('&client_id=foo')
+        .concat('&redirect_uri=bar')
+        .concat('&response_type=token'),
     );
   });
 });
