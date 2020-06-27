@@ -16,10 +16,17 @@ export class ArtistsApi {
   }
 
   /**
-   * Get an Artist
+   * ### Get an Artist
    *
    * Get Spotify catalog information for a single artist identified by their
    * unique Spotify ID.
+   *
+   * @example
+   * ```ts
+   * const artist = await spotify.artists.getArtist('4Ge8xMJNwt6EEXOzVXju9a');
+   * console.log(artist.name);
+   * // "Caroline Polachek"
+   * ```
    *
    * @param artistId The Spotify ID for the artist.
    */
