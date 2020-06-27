@@ -102,14 +102,12 @@
 				</a>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { SpotifyWebApi } <span class="hljs-keyword">from</span> <span class="hljs-string">'spotify-web-api-ts'</span>;
 
-<span class="hljs-keyword">const</span> spotify = <span class="hljs-keyword">new</span> SpotifyWebApi({
-  accessToken: <span class="hljs-string">'&lt;YOUR_ACCESS_TOKEN_HERE&gt;'</span>,
-});
+<span class="hljs-keyword">const</span> spotify = <span class="hljs-keyword">new</span> SpotifyWebApi({ accessToken: <span class="hljs-string">'&lt;YOUR_ACCESS_TOKEN_HERE&gt;'</span> });
 
 <span class="hljs-keyword">const</span> { artists } = <span class="hljs-keyword">await</span> spotify.albums.getAlbum(<span class="hljs-string">'1uzfGk9vxMXfaZ2avqwxod'</span>);
 
 <span class="hljs-built_in">console</span>.log(artists.map(<span class="hljs-function"><span class="hljs-params">artist</span> =&gt;</span> artist.name));
-<span class="hljs-comment">// ['Against All Logic']</span></code></pre>
+<span class="hljs-comment">// Array [ "Against All Logic" ]</span></code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -183,9 +181,6 @@
 					</li>
 					<li class=" tsd-kind-module tsd-is-external">
 						<a href="modules/_helpers_spotifyaxios_.html">&quot;helpers/spotify<wbr>Axios&quot;</a>
-					</li>
-					<li class=" tsd-kind-module tsd-is-external">
-						<a href="modules/_helpers_stringifyparams_.html">&quot;helpers/stringify<wbr>Params&quot;</a>
 					</li>
 					<li class=" tsd-kind-module tsd-is-external">
 						<a href="modules/_types_spotifyauthorization_.html">&quot;types/<wbr>Spotify<wbr>Authorization&quot;</a>
