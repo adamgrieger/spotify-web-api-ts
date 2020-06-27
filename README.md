@@ -42,12 +42,10 @@ npm install spotify-web-api-ts
 ```typescript
 import { SpotifyWebApi } from 'spotify-web-api-ts';
 
-const spotify = new SpotifyWebApi({
-  accessToken: '<YOUR_ACCESS_TOKEN_HERE>',
-});
+const spotify = new SpotifyWebApi({ accessToken: '<YOUR_ACCESS_TOKEN_HERE>' });
 
 const { artists } = await spotify.albums.getAlbum('1uzfGk9vxMXfaZ2avqwxod');
 
 console.log(artists.map(artist => artist.name));
-// ['Against All Logic']
+// Array [ "Against All Logic" ]
 ```
