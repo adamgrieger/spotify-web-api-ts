@@ -73,7 +73,7 @@ export class ArtistsApi {
   async getArtists(artistIds: string[]): Promise<Artist[]> {
     const response = await this.http.get<GetArtistsResponse>('/artists', {
       params: {
-        ids: artistIds.join(','),
+        ids: artistIds,
       },
     });
     return response.artists;
