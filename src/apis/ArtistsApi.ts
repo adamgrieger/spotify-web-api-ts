@@ -101,8 +101,8 @@ export class ArtistsApi {
    *   '2h93pZq0e7k5yf4dywlkpM',
    *   'US',
    * );
-   * console.log(tracks.slice(0, 3).map(track => track.name));
-   * // Array [ "Chanel", "Nights", "Ivy" ]
+   * console.log(tracks.map(track => track.name));
+   * // Array [ "Chanel", "Nights", "Ivy", ... ]
    * ```
    *
    * @param artistId The Spotify ID for the artist.
@@ -135,8 +135,8 @@ export class ArtistsApi {
    * const artists = await spotify.artists.getRelatedArtists(
    *   '6kBDZFXuLrZgHnvmPu9NsG',
    * );
-   * console.log(artists.slice(0, 3).map(artist => artist.name));
-   * // Array [ "AFX", "Squarepusher", "Boards of Canada" ]
+   * console.log(artists.map(artist => artist.name));
+   * // Array [ "AFX", "Squarepusher", "Boards of Canada", ... ]
    * ```
    *
    * @param artistId The Spotify ID for the artist.
