@@ -91,9 +91,19 @@ export class ArtistsApi {
   }
 
   /**
-   * Get an Artist's Top Tracks
+   * ### Get an Artist's Top Tracks
    *
    * Get Spotify catalog information about an artist's top tracks by country.
+   *
+   * @example
+   * ```ts
+   * const tracks = await spotify.artists.getArtistTopTracks(
+   *   '2h93pZq0e7k5yf4dywlkpM',
+   *   'US',
+   * );
+   * console.log(tracks.slice(0, 3).map(track => track.name));
+   * // Array [ "Chanel", "Nights", "Ivy" ]
+   * ```
    *
    * @param artistId The Spotify ID for the artist.
    * @param country An ISO 3166-1 alpha-2 country code or the string `from_token`.
