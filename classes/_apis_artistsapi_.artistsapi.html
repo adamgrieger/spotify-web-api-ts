@@ -118,7 +118,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/064b379/src/apis/ArtistsApi.ts#L12">apis/ArtistsApi.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/5a43bf4/src/apis/ArtistsApi.ts#L12">apis/ArtistsApi.ts:12</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -140,7 +140,7 @@
 					<div class="tsd-signature tsd-kind-icon">http<span class="tsd-signature-symbol">:</span> <a href="_helpers_http_.http.html" class="tsd-signature-type">Http</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/064b379/src/apis/ArtistsApi.ts#L12">apis/ArtistsApi.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/5a43bf4/src/apis/ArtistsApi.ts#L12">apis/ArtistsApi.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -157,7 +157,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/064b379/src/apis/ArtistsApi.ts#L33">apis/ArtistsApi.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/5a43bf4/src/apis/ArtistsApi.ts#L33">apis/ArtistsApi.ts:33</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -199,7 +199,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/064b379/src/apis/ArtistsApi.ts#L55">apis/ArtistsApi.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/5a43bf4/src/apis/ArtistsApi.ts#L55">apis/ArtistsApi.ts:55</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -249,14 +249,26 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/064b379/src/apis/ArtistsApi.ts#L90">apis/ArtistsApi.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/5a43bf4/src/apis/ArtistsApi.ts#L111">apis/ArtistsApi.ts:111</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get an Artist&#39;s Top Tracks</p>
+									<a href="#get-an-artist39s-top-tracks" id="get-an-artist39s-top-tracks" style="color: inherit; text-decoration: none;">
+										<h3>Get an Artist&#39;s Top Tracks</h3>
+									</a>
 								</div>
 								<p>Get Spotify catalog information about an artist&#39;s top tracks by country.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> tracks = <span class="hljs-keyword">await</span> spotify.artists.getArtistTopTracks(
+  <span class="hljs-string">'2h93pZq0e7k5yf4dywlkpM'</span>,
+  <span class="hljs-string">'US'</span>,
+);
+<span class="hljs-built_in">console</span>.log(tracks.slice(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>).map(<span class="hljs-function"><span class="hljs-params">track</span> =&gt;</span> track.name));
+<span class="hljs-comment">// Array [ "Chanel", "Nights", "Ivy" ]</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -287,15 +299,28 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/064b379/src/apis/ArtistsApi.ts#L73">apis/ArtistsApi.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/5a43bf4/src/apis/ArtistsApi.ts#L84">apis/ArtistsApi.ts:84</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get Several Artists</p>
+									<a href="#get-several-artists" id="get-several-artists" style="color: inherit; text-decoration: none;">
+										<h3>Get Several Artists</h3>
+									</a>
 								</div>
 								<p>Get Spotify catalog information for several artists based on their
 								Spotify IDs.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> artists = <span class="hljs-keyword">await</span> spotify.artists.getArtists([
+  <span class="hljs-string">'4iCwCMnqsNZ6atvRiADgtn'</span>,
+  <span class="hljs-string">'6ns6XAOsw4B0nDUIovAOUO'</span>,
+  <span class="hljs-string">'2yQf6b8hxahZaT5dHlWaB1'</span>,
+]);
+<span class="hljs-built_in">console</span>.log(artists.map(<span class="hljs-function"><span class="hljs-params">artist</span> =&gt;</span> artist.name));
+<span class="hljs-comment">// Array [ "RZA", "GZA", "Raekwon" ]</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -320,16 +345,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/064b379/src/apis/ArtistsApi.ts#L114">apis/ArtistsApi.ts:114</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/5a43bf4/src/apis/ArtistsApi.ts#L144">apis/ArtistsApi.ts:144</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get an Artist&#39;s Related Artists</p>
+									<a href="#get-an-artist39s-related-artists" id="get-an-artist39s-related-artists" style="color: inherit; text-decoration: none;">
+										<h3>Get an Artist&#39;s Related Artists</h3>
+									</a>
 								</div>
 								<p>Get Spotify catalog information about artists similar to a given artist.
 									Similarity is based on analysis of the Spotify community&#39;s listening
 								history.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> artists = <span class="hljs-keyword">await</span> spotify.artists.getRelatedArtists(
+  <span class="hljs-string">'6kBDZFXuLrZgHnvmPu9NsG'</span>,
+);
+<span class="hljs-built_in">console</span>.log(artists.slice(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>).map(<span class="hljs-function"><span class="hljs-params">artist</span> =&gt;</span> artist.name));
+<span class="hljs-comment">// Array [ "AFX", "Squarepusher", "Boards of Canada" ]</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
