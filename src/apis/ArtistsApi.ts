@@ -35,9 +35,19 @@ export class ArtistsApi {
   }
 
   /**
-   * Get an Artist's Albums
+   * ### Get an Artist's Albums
    *
    * Get Spotify catalog information about an artist's albums.
+   *
+   * @example
+   * ```ts
+   * const albums = await spotify.artists.getArtistAlbums('2mHjhKyKCLh6MZELuCe1Es', {
+   *   country: ['US'],
+   *   include_groups: ['album'],
+   * });
+   * console.log(albums.items.map(album => album.name));
+   * // Array [ "Beware of the Dogs" ]
+   * ```
    *
    * @param artistId The Spotify ID for the artist.
    * @param options Optional request information.
