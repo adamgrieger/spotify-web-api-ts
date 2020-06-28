@@ -124,11 +124,20 @@ export class ArtistsApi {
   }
 
   /**
-   * Get an Artist's Related Artists
+   * ### Get an Artist's Related Artists
    *
    * Get Spotify catalog information about artists similar to a given artist.
    * Similarity is based on analysis of the Spotify community's listening
    * history.
+   *
+   * @example
+   * ```ts
+   * const artists = await spotify.artists.getRelatedArtists(
+   *   '6kBDZFXuLrZgHnvmPu9NsG',
+   * );
+   * console.log(artists.slice(0, 3).map(artist => artist.name));
+   * // Array [ "AFX", "Squarepusher", "Boards of Canada" ]
+   * ```
    *
    * @param artistId The Spotify ID for the artist.
    */
