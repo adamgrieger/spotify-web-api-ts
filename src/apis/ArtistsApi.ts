@@ -63,10 +63,21 @@ export class ArtistsApi {
   }
 
   /**
-   * Get Several Artists
+   * ### Get Several Artists
    *
    * Get Spotify catalog information for several artists based on their
    * Spotify IDs.
+   *
+   * @example
+   * ```ts
+   * const artists = await spotify.artists.getArtists([
+   *   '4iCwCMnqsNZ6atvRiADgtn',
+   *   '6ns6XAOsw4B0nDUIovAOUO',
+   *   '2yQf6b8hxahZaT5dHlWaB1',
+   * ]);
+   * console.log(artists.map(artist => artist.name));
+   * // Array [ "RZA", "GZA", "Raekwon" ]
+   * ```
    *
    * @param artistIds The Spotify IDs for the artists.
    */
