@@ -35,6 +35,12 @@ export class BrowseApi {
    *
    * Retrieve a list of available genres seed parameter values for
    * recommendations.
+   *
+   * @example
+   * ```ts
+   * console.log(await spotify.browse.getAvailableGenreSeeds());
+   * // Array [ "acoustic", "afrobeat", ... ]
+   * ```
    */
   async getAvailableGenreSeeds(): Promise<string[]> {
     const response = await this.http.get<GetAvailableGenreSeedsResponse>(
