@@ -31,7 +31,7 @@ export class BrowseApi {
   }
 
   /**
-   * Get Available Genre Seeds
+   * ### Get Available Genre Seeds
    *
    * Retrieve a list of available genres seed parameter values for
    * recommendations.
@@ -50,10 +50,17 @@ export class BrowseApi {
   }
 
   /**
-   * Get a List of Categories
+   * ### Get a List of Categories
    *
    * Get a list of categories used to tag items in Spotify (on, for example,
    * the Spotify player's "Browse" tab).
+   *
+   * @example
+   * ```ts
+   * const categories = await spotify.browse.getCategories();
+   * console.log(categories.items.map(category => category.name));
+   * // Array [ "Top Lists", "Black History Is Now", ... ]
+   * ```
    *
    * @param options Optional request information.
    */
