@@ -75,10 +75,17 @@ export class BrowseApi {
   }
 
   /**
-   * Get a Category
+   * ### Get a Category
    *
    * Get a single category used to tag items in Spotify (on, for example,
    * the Spotify player's "Browse" tab).
+   *
+   * @example
+   * ```ts
+   * const category = await spotify.browse.getCategory('at_home');
+   * console.log(category.name);
+   * // "At Home"
+   * ```
    *
    * @param categoryId The Spotify category ID for the category.
    * @param options Optional request information.
