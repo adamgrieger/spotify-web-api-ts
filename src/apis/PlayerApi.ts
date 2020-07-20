@@ -119,13 +119,11 @@ export class PlayerApi {
    * @param options Optional request information.
    */
   play(options?: PlayOptions): Promise<void> {
-    // eslint-disable-next-line @typescript-eslint/camelcase
     const { device_id, ...bodyParams } = options ?? {};
 
     return this.http.put<void>(
       '/me/player/play',
       options && {
-        // eslint-disable-next-line @typescript-eslint/camelcase
         ...(device_id && { params: { device_id } }),
         ...(Object.keys(bodyParams).length && { data: bodyParams }),
       },
