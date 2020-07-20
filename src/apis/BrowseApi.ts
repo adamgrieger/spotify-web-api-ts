@@ -101,9 +101,16 @@ export class BrowseApi {
   }
 
   /**
-   * Get a Category's Playlists
+   * ### Get a Category's Playlists
    *
    * Get a list of Spotify playlists tagged with a particular category.
+   *
+   * @example
+   * ```ts
+   * const playlists = await spotify.browse.getCategoryPlaylists('sleep');
+   * console.log(playlists.items.map(playlist => playlist.name));
+   * // Array [ "Sleep", "Deep Sleep", "Night Rain", ... ]
+   * ```
    *
    * @param categoryId The Spotify category ID for the category.
    * @param options Optional request information.
