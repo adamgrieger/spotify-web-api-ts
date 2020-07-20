@@ -127,10 +127,17 @@ export class BrowseApi {
   }
 
   /**
-   * Get a List of Featured Playlists
+   * ### Get a List of Featured Playlists
    *
    * Get a list of Spotify featured playlists (shown, for example, on a Spotify
    * player's "Browse" tab).
+   *
+   * @example
+   * ```ts
+   * const { playlists } = await spotify.browse.getFeaturedPlaylists();
+   * console.log(playlists.items.map(playlist => playlist.name));
+   * // Array [ "Calm Vibes", "Sleep", "Bliss", ... ]
+   * ```
    *
    * @param options Optional request information.
    */
