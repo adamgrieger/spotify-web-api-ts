@@ -151,10 +151,17 @@ export class BrowseApi {
   }
 
   /**
-   * Get a List of New Releases
+   * ### Get a List of New Releases
    *
    * Get a list of new album releases featured in Spotify (shown, for example,
    * on a Spotify player's "Browse" tab).
+   *
+   * @example
+   * ```ts
+   * const releases = await spotify.browse.getNewReleases();
+   * console.log(releases.items.map(release => release.name));
+   * // Array [ "POPSTAR (feat. Drake)", "Brightest Blue", ... ]
+   * ```
    *
    * @param options Optional request information.
    */
