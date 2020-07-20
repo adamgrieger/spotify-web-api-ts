@@ -176,7 +176,7 @@ export class BrowseApi {
   }
 
   /**
-   * Get Recommendations Based on Seeds
+   * ### Get Recommendations Based on Seeds
    *
    * Create a playlist-style listening experience based on seed artists, tracks,
    * and genres.
@@ -188,6 +188,15 @@ export class BrowseApi {
    *
    * For artists and tracks that are very new or obscure there might not be
    * enough data to generate a list of tracks.
+   *
+   * @example
+   * ```ts
+   * const recommendations = await spotify.browse.getRecommendations({
+   *   seed_artists: ['5LhTec3c7dcqBvpLRWbMcf', '0IVcLMMbm05VIjnzPkGCyp'],
+   * });
+   * console.log(recommendations.tracks.map(track => track.name));
+   * // [ "J's Day Theme #3 (Support)", "People", "Guv'nor", ... ]
+   * ```
    *
    * @param seeds Artists, genres, and/or tracks to use as seeds for recommendations.
    * @param options Optional request information.
