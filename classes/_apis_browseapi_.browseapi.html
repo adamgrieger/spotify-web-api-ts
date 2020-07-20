@@ -120,7 +120,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/50cecd2/src/apis/BrowseApi.ts#L27">apis/BrowseApi.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/41afe34/src/apis/BrowseApi.ts#L27">apis/BrowseApi.ts:27</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -142,7 +142,7 @@
 					<div class="tsd-signature tsd-kind-icon">http<span class="tsd-signature-symbol">:</span> <a href="_helpers_http_.http.html" class="tsd-signature-type">Http</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/50cecd2/src/apis/BrowseApi.ts#L27">apis/BrowseApi.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/41afe34/src/apis/BrowseApi.ts#L27">apis/BrowseApi.ts:27</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -159,15 +159,23 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/50cecd2/src/apis/BrowseApi.ts#L39">apis/BrowseApi.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/41afe34/src/apis/BrowseApi.ts#L45">apis/BrowseApi.ts:45</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get Available Genre Seeds</p>
+									<a href="#get-available-genre-seeds" id="get-available-genre-seeds" style="color: inherit; text-decoration: none;">
+										<h3>Get Available Genre Seeds</h3>
+									</a>
 								</div>
 								<p>Retrieve a list of available genres seed parameter values for
 								recommendations.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> spotify.browse.getAvailableGenreSeeds());
+<span class="hljs-comment">// Array [ "acoustic", "afrobeat", ... ]</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
@@ -183,15 +191,24 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/50cecd2/src/apis/BrowseApi.ts#L54">apis/BrowseApi.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/41afe34/src/apis/BrowseApi.ts#L67">apis/BrowseApi.ts:67</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get a List of Categories</p>
+									<a href="#get-a-list-of-categories" id="get-a-list-of-categories" style="color: inherit; text-decoration: none;">
+										<h3>Get a List of Categories</h3>
+									</a>
 								</div>
 								<p>Get a list of categories used to tag items in Spotify (on, for example,
 								the Spotify player&#39;s &quot;Browse&quot; tab).</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> categories = <span class="hljs-keyword">await</span> spotify.browse.getCategories();
+<span class="hljs-built_in">console</span>.log(categories.items.map(<span class="hljs-function"><span class="hljs-params">category</span> =&gt;</span> category.name));
+<span class="hljs-comment">// Array [ "Top Lists", "Black History Is Now", ... ]</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -216,15 +233,24 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/50cecd2/src/apis/BrowseApi.ts#L73">apis/BrowseApi.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/41afe34/src/apis/BrowseApi.ts#L93">apis/BrowseApi.ts:93</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get a Category</p>
+									<a href="#get-a-category" id="get-a-category" style="color: inherit; text-decoration: none;">
+										<h3>Get a Category</h3>
+									</a>
 								</div>
 								<p>Get a single category used to tag items in Spotify (on, for example,
 								the Spotify player&#39;s &quot;Browse&quot; tab).</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> category = <span class="hljs-keyword">await</span> spotify.browse.getCategory(<span class="hljs-string">'at_home'</span>);
+<span class="hljs-built_in">console</span>.log(category.name);
+<span class="hljs-comment">// "At Home"</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -255,14 +281,23 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/50cecd2/src/apis/BrowseApi.ts#L91">apis/BrowseApi.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/41afe34/src/apis/BrowseApi.ts#L118">apis/BrowseApi.ts:118</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get a Category&#39;s Playlists</p>
+									<a href="#get-a-category39s-playlists" id="get-a-category39s-playlists" style="color: inherit; text-decoration: none;">
+										<h3>Get a Category&#39;s Playlists</h3>
+									</a>
 								</div>
 								<p>Get a list of Spotify playlists tagged with a particular category.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> playlists = <span class="hljs-keyword">await</span> spotify.browse.getCategoryPlaylists(<span class="hljs-string">'sleep'</span>);
+<span class="hljs-built_in">console</span>.log(playlists.items.map(<span class="hljs-function"><span class="hljs-params">playlist</span> =&gt;</span> playlist.name));
+<span class="hljs-comment">// Array [ "Sleep", "Deep Sleep", "Night Rain", ... ]</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -293,15 +328,24 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/50cecd2/src/apis/BrowseApi.ts#L110">apis/BrowseApi.ts:110</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/41afe34/src/apis/BrowseApi.ts#L144">apis/BrowseApi.ts:144</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get a List of Featured Playlists</p>
+									<a href="#get-a-list-of-featured-playlists" id="get-a-list-of-featured-playlists" style="color: inherit; text-decoration: none;">
+										<h3>Get a List of Featured Playlists</h3>
+									</a>
 								</div>
 								<p>Get a list of Spotify featured playlists (shown, for example, on a Spotify
 								player&#39;s &quot;Browse&quot; tab).</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> { playlists } = <span class="hljs-keyword">await</span> spotify.browse.getFeaturedPlaylists();
+<span class="hljs-built_in">console</span>.log(playlists.items.map(<span class="hljs-function"><span class="hljs-params">playlist</span> =&gt;</span> playlist.name));
+<span class="hljs-comment">// Array [ "Calm Vibes", "Sleep", "Bliss", ... ]</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -326,15 +370,24 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/50cecd2/src/apis/BrowseApi.ts#L127">apis/BrowseApi.ts:127</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/41afe34/src/apis/BrowseApi.ts#L168">apis/BrowseApi.ts:168</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get a List of New Releases</p>
+									<a href="#get-a-list-of-new-releases" id="get-a-list-of-new-releases" style="color: inherit; text-decoration: none;">
+										<h3>Get a List of New Releases</h3>
+									</a>
 								</div>
 								<p>Get a list of new album releases featured in Spotify (shown, for example,
 								on a Spotify player&#39;s &quot;Browse&quot; tab).</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> releases = <span class="hljs-keyword">await</span> spotify.browse.getNewReleases();
+<span class="hljs-built_in">console</span>.log(releases.items.map(<span class="hljs-function"><span class="hljs-params">release</span> =&gt;</span> release.name));
+<span class="hljs-comment">// Array [ "POPSTAR (feat. Drake)", "Brightest Blue", ... ]</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -359,12 +412,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/50cecd2/src/apis/BrowseApi.ts#L154">apis/BrowseApi.ts:154</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/41afe34/src/apis/BrowseApi.ts#L204">apis/BrowseApi.ts:204</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get Recommendations Based on Seeds</p>
+									<a href="#get-recommendations-based-on-seeds" id="get-recommendations-based-on-seeds" style="color: inherit; text-decoration: none;">
+										<h3>Get Recommendations Based on Seeds</h3>
+									</a>
 								</div>
 								<p>Create a playlist-style listening experience based on seed artists, tracks,
 								and genres.</p>
@@ -374,6 +429,15 @@
 								be returned together with pool size details.</p>
 								<p>For artists and tracks that are very new or obscure there might not be
 								enough data to generate a list of tracks.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> recommendations = <span class="hljs-keyword">await</span> spotify.browse.getRecommendations({
+  seed_artists: [<span class="hljs-string">'5LhTec3c7dcqBvpLRWbMcf'</span>, <span class="hljs-string">'0IVcLMMbm05VIjnzPkGCyp'</span>],
+});
+<span class="hljs-built_in">console</span>.log(recommendations.tracks.map(<span class="hljs-function"><span class="hljs-params">track</span> =&gt;</span> track.name));
+<span class="hljs-comment">// [ "J's Day Theme #3 (Support)", "People", "Guv'nor", ... ]</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -468,6 +532,5 @@
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
