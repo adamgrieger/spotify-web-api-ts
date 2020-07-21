@@ -21,6 +21,8 @@ export class ArtistsApi {
    * Get Spotify catalog information for a single artist identified by their
    * unique Spotify ID.
    *
+   * **Required Scopes:** None.
+   *
    * @example
    * ```ts
    * const artist = await spotify.artists.getArtist('4Ge8xMJNwt6EEXOzVXju9a');
@@ -38,6 +40,8 @@ export class ArtistsApi {
    * ### Get an Artist's Albums
    *
    * Get Spotify catalog information about an artist's albums.
+   *
+   * **Required Scopes:** None.
    *
    * @example
    * ```ts
@@ -68,6 +72,8 @@ export class ArtistsApi {
    * Get Spotify catalog information for several artists based on their
    * Spotify IDs.
    *
+   * **Required Scopes:** None.
+   *
    * @example
    * ```ts
    * const artists = await spotify.artists.getArtists([
@@ -94,6 +100,8 @@ export class ArtistsApi {
    * ### Get an Artist's Top Tracks
    *
    * Get Spotify catalog information about an artist's top tracks by country.
+   *
+   * **Required Scopes:** None.
    *
    * @example
    * ```ts
@@ -129,6 +137,8 @@ export class ArtistsApi {
    * Get Spotify catalog information about artists similar to a given artist.
    * Similarity is based on analysis of the Spotify community's listening
    * history.
+   *
+   * **Required Scopes:** None.
    *
    * @example
    * ```ts
