@@ -18,6 +18,8 @@ export class AlbumsApi {
    *
    * Get Spotify catalog information for a single album.
    *
+   * **Required Scopes:** None.
+   *
    * @example
    * ```ts
    * const album = await spotify.albums.getAlbum('53VKICyqCf91sVkTdFrzKX');
@@ -40,6 +42,8 @@ export class AlbumsApi {
    *
    * Get Spotify catalog information for multiple albums identified by their
    * Spotify IDs.
+   *
+   * **Required Scopes:** None.
    *
    * @example
    * ```ts
@@ -71,6 +75,8 @@ export class AlbumsApi {
    * ### Get an Album's Tracks
    *
    * Get Spotify catalog information about an album's tracks.
+   *
+   * **Required Scopes:** None.
    *
    * @example
    * ```ts
