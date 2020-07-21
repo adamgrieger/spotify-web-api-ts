@@ -36,6 +36,8 @@ export class BrowseApi {
    * Retrieve a list of available genres seed parameter values for
    * recommendations.
    *
+   * **Required Scopes:** None.
+   *
    * @example
    * ```ts
    * console.log(await spotify.browse.getAvailableGenreSeeds());
@@ -54,6 +56,8 @@ export class BrowseApi {
    *
    * Get a list of categories used to tag items in Spotify (on, for example,
    * the Spotify player's "Browse" tab).
+   *
+   * **Required Scopes:** None.
    *
    * @example
    * ```ts
@@ -80,6 +84,8 @@ export class BrowseApi {
    * Get a single category used to tag items in Spotify (on, for example,
    * the Spotify player's "Browse" tab).
    *
+   * **Required Scopes:** None.
+   *
    * @example
    * ```ts
    * const category = await spotify.browse.getCategory('at_home');
@@ -104,6 +110,8 @@ export class BrowseApi {
    * ### Get a Category's Playlists
    *
    * Get a list of Spotify playlists tagged with a particular category.
+   *
+   * **Required Scopes:** None.
    *
    * @example
    * ```ts
@@ -132,6 +140,8 @@ export class BrowseApi {
    * Get a list of Spotify featured playlists (shown, for example, on a Spotify
    * player's "Browse" tab).
    *
+   * **Required Scopes:** None.
+   *
    * @example
    * ```ts
    * const { playlists } = await spotify.browse.getFeaturedPlaylists();
@@ -155,6 +165,8 @@ export class BrowseApi {
    *
    * Get a list of new album releases featured in Spotify (shown, for example,
    * on a Spotify player's "Browse" tab).
+   *
+   * **Required Scopes:** None.
    *
    * @example
    * ```ts
@@ -188,6 +200,8 @@ export class BrowseApi {
    *
    * For artists and tracks that are very new or obscure there might not be
    * enough data to generate a list of tracks.
+   *
+   * **Required Scopes:** None.
    *
    * @example
    * ```ts
