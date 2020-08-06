@@ -130,7 +130,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L10">apis/FollowApi.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L10">apis/FollowApi.ts:10</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -152,7 +152,7 @@
 					<div class="tsd-signature tsd-kind-icon">http<span class="tsd-signature-symbol">:</span> <a href="_helpers_http_.http.html" class="tsd-signature-type">Http</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L10">apis/FollowApi.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L10">apis/FollowApi.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -169,14 +169,28 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L24">apis/FollowApi.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L37">apis/FollowApi.ts:37</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Check if Users Follow a Playlist</p>
+									<a href="#check-if-users-follow-a-playlist" id="check-if-users-follow-a-playlist" style="color: inherit; text-decoration: none;">
+										<h3>Check if Users Follow a Playlist</h3>
+									</a>
 								</div>
 								<p>Check to see if one or more Spotify users are following a specified playlist.</p>
+								<p><strong>Required Scopes:</strong> <code>playlist-read-private</code> when checking if the current
+								user is privately following a playlist.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> spotify.follow.areFollowingPlaylist(
+  <span class="hljs-string">'7fdQkum2nvXwcaCKnBZ7rR'</span>,
+  [<span class="hljs-string">'griegs'</span>, <span class="hljs-string">'jmperezperez'</span>],
+);
+<span class="hljs-built_in">console</span>.log(response);
+<span class="hljs-comment">// Array [ true, false ]</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -207,14 +221,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L45">apis/FollowApi.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L65">apis/FollowApi.ts:65</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Follow Artist</p>
+									<a href="#follow-artist" id="follow-artist" style="color: inherit; text-decoration: none;">
+										<h3>Follow Artist</h3>
+									</a>
 								</div>
 								<p>Add the current user as a follower of an artist.</p>
+								<p><strong>Required Scopes:</strong> <code>user-follow-modify</code>.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">await</span> spotify.follow.followArtist(<span class="hljs-string">'029y4wr8YYFoqPBahe8Ddz'</span>);</code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -239,14 +261,25 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L56">apis/FollowApi.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L86">apis/FollowApi.ts:86</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Follow Artists</p>
+									<a href="#follow-artists" id="follow-artists" style="color: inherit; text-decoration: none;">
+										<h3>Follow Artists</h3>
+									</a>
 								</div>
 								<p>Add the current user as a follower of one or more artists.</p>
+								<p><strong>Required Scopes:</strong> <code>user-follow-modify</code>.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">await</span> spotify.follow.followArtists([
+  <span class="hljs-string">'029y4wr8YYFoqPBahe8Ddz'</span>,
+  <span class="hljs-string">'1SlPJ2l80sMnCHpz1wB8nT'</span>,
+]);</code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -271,14 +304,23 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L75">apis/FollowApi.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L113">apis/FollowApi.ts:113</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Follow a Playlist</p>
+									<a href="#follow-a-playlist" id="follow-a-playlist" style="color: inherit; text-decoration: none;">
+										<h3>Follow a Playlist</h3>
+									</a>
 								</div>
 								<p>Add the current user as a follower of a playlist.</p>
+								<p><strong>Required Scopes:</strong> <code>playlist-modify-public</code> when publicly following a
+								playlist. <code>playlist-modify-private</code> when privately following a playlist.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">await</span> spotify.follow.followPlaylist(<span class="hljs-string">'0USISVmfwjRpmY980WkNW4'</span>);</code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -309,14 +351,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L92">apis/FollowApi.ts:92</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L137">apis/FollowApi.ts:137</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Follow User</p>
+									<a href="#follow-user" id="follow-user" style="color: inherit; text-decoration: none;">
+										<h3>Follow User</h3>
+									</a>
 								</div>
 								<p>Add the current user as a follower of a Spotify user.</p>
+								<p><strong>Required Scopes:</strong> <code>user-follow-modify</code>.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">await</span> spotify.follow.followUser(<span class="hljs-string">'griegs'</span>);</code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -341,14 +391,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L103">apis/FollowApi.ts:103</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L155">apis/FollowApi.ts:155</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Follow Users</p>
+									<a href="#follow-users" id="follow-users" style="color: inherit; text-decoration: none;">
+										<h3>Follow Users</h3>
+									</a>
 								</div>
 								<p>Add the current user as a follower of one or more Spotify users.</p>
+								<p><strong>Required Scopes:</strong> <code>user-follow-modify</code>.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">await</span> spotify.follow.followUsers([<span class="hljs-string">'griegs'</span>, <span class="hljs-string">'jmperezperez'</span>]);</code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -373,14 +431,24 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L121">apis/FollowApi.ts:121</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L182">apis/FollowApi.ts:182</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get User&#39;s Followed Artists</p>
+									<a href="#get-user39s-followed-artists" id="get-user39s-followed-artists" style="color: inherit; text-decoration: none;">
+										<h3>Get User&#39;s Followed Artists</h3>
+									</a>
 								</div>
 								<p>Get the current user&#39;s followed artists.</p>
+								<p><strong>Required Scopes:</strong> <code>user-follow-read</code>.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> artists = <span class="hljs-keyword">await</span> spotify.follow.getFollowedArtists();
+<span class="hljs-built_in">console</span>.log(artists.items.map(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item.name));
+<span class="hljs-comment">// Array [ "Common Market", "Teebs", "Mount Kimbie", ... ]</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -405,14 +473,26 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L143">apis/FollowApi.ts:143</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L215">apis/FollowApi.ts:215</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Check if Current User Follows Artist</p>
+									<a href="#check-if-current-user-follows-artist" id="check-if-current-user-follows-artist" style="color: inherit; text-decoration: none;">
+										<h3>Check if Current User Follows Artist</h3>
+									</a>
 								</div>
 								<p>Check to see if the current user is following an artist.</p>
+								<p><strong>Required Scopes:</strong> <code>user-follow-read</code>.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> spotify.follow.isFollowingArtist(
+  <span class="hljs-string">'7rZjYMRC5pTV089WKn1Y4s'</span>,
+);
+<span class="hljs-built_in">console</span>.log(response);
+<span class="hljs-comment">// true</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -437,14 +517,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L155">apis/FollowApi.ts:155</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L239">apis/FollowApi.ts:239</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Check if Current User Follows Artists</p>
+									<a href="#check-if-current-user-follows-artists" id="check-if-current-user-follows-artists" style="color: inherit; text-decoration: none;">
+										<h3>Check if Current User Follows Artists</h3>
+									</a>
 								</div>
 								<p>Check to see if the current user is following one or more artists.</p>
+								<p><strong>Required Scopes:</strong> <code>user-follow-read</code>.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> spotify.follow.isFollowingArtists([
+  <span class="hljs-string">'2leze82lbuNUn3K4c7nS1B'</span>,
+  <span class="hljs-string">'77bG3jpmWXOxpmZcVjPayy'</span>,
+]);
+<span class="hljs-built_in">console</span>.log(response);
+<span class="hljs-comment">// Array [ true, false ]</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -469,14 +562,28 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L172">apis/FollowApi.ts:172</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L269">apis/FollowApi.ts:269</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Check if User Follows a Playlist</p>
+									<a href="#check-if-user-follows-a-playlist" id="check-if-user-follows-a-playlist" style="color: inherit; text-decoration: none;">
+										<h3>Check if User Follows a Playlist</h3>
+									</a>
 								</div>
 								<p>Check to see if a Spotify user is following a specified playlist.</p>
+								<p><strong>Required Scopes:</strong> <code>playlist-read-private</code> when checking if the current
+								user is privately following a playlist.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> spotify.follow.isFollowingPlaylist(
+  <span class="hljs-string">'4xOF7TTAG2McFFJDixc3Lt'</span>,
+  <span class="hljs-string">'griegs'</span>,
+);
+<span class="hljs-built_in">console</span>.log(response);
+<span class="hljs-comment">// true</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -507,14 +614,24 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L187">apis/FollowApi.ts:187</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L293">apis/FollowApi.ts:293</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Check if Current User Follows User</p>
+									<a href="#check-if-current-user-follows-user" id="check-if-current-user-follows-user" style="color: inherit; text-decoration: none;">
+										<h3>Check if Current User Follows User</h3>
+									</a>
 								</div>
 								<p>Check to see if the current user is following a Spotify user.</p>
+								<p><strong>Required Scopes:</strong> <code>user-follow-read</code>.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> spotify.follow.isFollowingUser(<span class="hljs-string">'griegs'</span>);
+<span class="hljs-built_in">console</span>.log(response);
+<span class="hljs-comment">// true</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -539,14 +656,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L199">apis/FollowApi.ts:199</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L317">apis/FollowApi.ts:317</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Check if Current User Follows Users</p>
+									<a href="#check-if-current-user-follows-users" id="check-if-current-user-follows-users" style="color: inherit; text-decoration: none;">
+										<h3>Check if Current User Follows Users</h3>
+									</a>
 								</div>
 								<p>Check to see if the current user is following one or more Spotify users.</p>
+								<p><strong>Required Scopes:</strong> <code>user-follow-read</code>.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> spotify.follow.isFollowingUsers([
+  <span class="hljs-string">'griegs'</span>,
+  <span class="hljs-string">'jmperezperez'</span>,
+]);
+<span class="hljs-built_in">console</span>.log(response);
+<span class="hljs-comment">// Array [ true, true ]</span></code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -571,14 +701,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L215">apis/FollowApi.ts:215</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L340">apis/FollowApi.ts:340</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Unfollow Artist</p>
+									<a href="#unfollow-artist" id="unfollow-artist" style="color: inherit; text-decoration: none;">
+										<h3>Unfollow Artist</h3>
+									</a>
 								</div>
 								<p>Remove the current user as a follower of an artist.</p>
+								<p><strong>Required Scopes:</strong> <code>user-follow-modify</code>.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">await</span> spotify.follow.unfollowArtist(<span class="hljs-string">'3bU97PoqnxjKD45CrfwmC9'</span>);</code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -603,14 +741,17 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L226">apis/FollowApi.ts:226</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L353">apis/FollowApi.ts:353</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Unfollow Artists</p>
+									<a href="#unfollow-artists" id="unfollow-artists" style="color: inherit; text-decoration: none;">
+										<h3>Unfollow Artists</h3>
+									</a>
 								</div>
 								<p>Remove the current user as a follower of one or more artists.</p>
+								<p><strong>Required Scopes:</strong> <code>user-follow-modify</code>.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -635,14 +776,24 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L244">apis/FollowApi.ts:244</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L380">apis/FollowApi.ts:380</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Unfollow a Playlist</p>
+									<a href="#unfollow-a-playlist" id="unfollow-a-playlist" style="color: inherit; text-decoration: none;">
+										<h3>Unfollow a Playlist</h3>
+									</a>
 								</div>
 								<p>Remove the current user as a follower of a playlist.</p>
+								<p><strong>Required Scopes:</strong> <code>playlist-modify-public</code> when unfollowing a publicly
+									followed playlist. <code>playlist-modify-private</code> when unfollowing a privately
+								followed playlist.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">await</span> spotify.follow.unfollowPlaylist(<span class="hljs-string">'6SAtV2bMjUbQTV37X51F3u'</span>);</code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -667,14 +818,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L255">apis/FollowApi.ts:255</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L398">apis/FollowApi.ts:398</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Unfollow User</p>
+									<a href="#unfollow-user" id="unfollow-user" style="color: inherit; text-decoration: none;">
+										<h3>Unfollow User</h3>
+									</a>
 								</div>
 								<p>Remove the current user as a follower of a Spotify user.</p>
+								<p><strong>Required Scopes:</strong> <code>user-follow-modify</code>.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">await</span> spotify.follow.unfollowUser(<span class="hljs-string">'griegs'</span>);</code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -699,14 +858,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/aaa40db/src/apis/FollowApi.ts#L266">apis/FollowApi.ts:266</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/b7d3f4f/src/apis/FollowApi.ts#L416">apis/FollowApi.ts:416</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Unfollow Users</p>
+									<a href="#unfollow-users" id="unfollow-users" style="color: inherit; text-decoration: none;">
+										<h3>Unfollow Users</h3>
+									</a>
 								</div>
 								<p>Remove the current user as a follower of one or more Spotify users.</p>
+								<p><strong>Required Scopes:</strong> <code>user-follow-modify</code>.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">await</span> spotify.follow.unfollowUsers([<span class="hljs-string">'griegs'</span>, <span class="hljs-string">'jmperezperez'</span>]);</code></pre>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
