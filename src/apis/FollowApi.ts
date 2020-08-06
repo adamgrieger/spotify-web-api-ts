@@ -14,9 +14,22 @@ export class FollowApi {
   }
 
   /**
-   * Check if Users Follow a Playlist
+   * ### Check if Users Follow a Playlist
    *
    * Check to see if one or more Spotify users are following a specified playlist.
+   *
+   * **Required Scopes:** `playlist-read-private` when checking if the current
+   * user is privately following a playlist.
+   *
+   * @example
+   * ```ts
+   * const response = await spotify.follow.areFollowingPlaylist(
+   *   '7fdQkum2nvXwcaCKnBZ7rR',
+   *   ['griegs', 'jmperezperez'],
+   * );
+   * console.log(response);
+   * // Array [ true, false ]
+   * ```
    *
    * @param playlistId The Spotify ID of the playlist.
    * @param userIds The Spotify IDs of the users.
@@ -36,9 +49,16 @@ export class FollowApi {
   }
 
   /**
-   * Follow Artist
+   * ### Follow Artist
    *
    * Add the current user as a follower of an artist.
+   *
+   * **Required Scopes:** `user-follow-modify`.
+   *
+   * @example
+   * ```ts
+   * await spotify.follow.followArtist('029y4wr8YYFoqPBahe8Ddz');
+   * ```
    *
    * @param artistId The Spotify ID of the artist.
    */
@@ -47,9 +67,19 @@ export class FollowApi {
   }
 
   /**
-   * Follow Artists
+   * ### Follow Artists
    *
    * Add the current user as a follower of one or more artists.
+   *
+   * **Required Scopes:** `user-follow-modify`.
+   *
+   * @example
+   * ```ts
+   * await spotify.follow.followArtists([
+   *   '029y4wr8YYFoqPBahe8Ddz',
+   *   '1SlPJ2l80sMnCHpz1wB8nT',
+   * ]);
+   * ```
    *
    * @param artistIds The Spotify IDs of the artists.
    */
@@ -65,9 +95,17 @@ export class FollowApi {
   }
 
   /**
-   * Follow a Playlist
+   * ### Follow a Playlist
    *
    * Add the current user as a follower of a playlist.
+   *
+   * **Required Scopes:** `playlist-modify-public` when publicly following a
+   * playlist. `playlist-modify-private` when privately following a playlist.
+   *
+   * @example
+   * ```ts
+   * await spotify.follow.followPlaylist('0USISVmfwjRpmY980WkNW4');
+   * ```
    *
    * @param playlistId The Spotify ID of the playlist.
    * @param options Optional request information.
@@ -83,9 +121,16 @@ export class FollowApi {
   }
 
   /**
-   * Follow User
+   * ### Follow User
    *
    * Add the current user as a follower of a Spotify user.
+   *
+   * **Required Scopes:** `user-follow-modify`.
+   *
+   * @example
+   * ```ts
+   * await spotify.follow.followUser('griegs');
+   * ```
    *
    * @param userId The Spotify ID of the user.
    */
@@ -94,9 +139,16 @@ export class FollowApi {
   }
 
   /**
-   * Follow Users
+   * ### Follow Users
    *
    * Add the current user as a follower of one or more Spotify users.
+   *
+   * **Required Scopes:** `user-follow-modify`.
+   *
+   * @example
+   * ```ts
+   * await spotify.follow.followUsers(['griegs', 'jmperezperez']);
+   * ```
    *
    * @param userIds The Spotify IDs of the users.
    */
@@ -112,9 +164,18 @@ export class FollowApi {
   }
 
   /**
-   * Get User's Followed Artists
+   * ### Get User's Followed Artists
    *
    * Get the current user's followed artists.
+   *
+   * **Required Scopes:** `user-follow-read`.
+   *
+   * @example
+   * ```ts
+   * const artists = await spotify.follow.getFollowedArtists();
+   * console.log(artists.items.map(item => item.name));
+   * // Array [ "Common Market", "Teebs", "Mount Kimbie", ... ]
+   * ```
    *
    * @param options Optional request information.
    */
@@ -134,9 +195,20 @@ export class FollowApi {
   }
 
   /**
-   * Check if Current User Follows Artist
+   * ### Check if Current User Follows Artist
    *
    * Check to see if the current user is following an artist.
+   *
+   * **Required Scopes:** `user-follow-read`.
+   *
+   * @example
+   * ```ts
+   * const response = await spotify.follow.isFollowingArtist(
+   *   '7rZjYMRC5pTV089WKn1Y4s',
+   * );
+   * console.log(response);
+   * // true
+   * ```
    *
    * @param artistId The Spotify ID for the artist.
    */
@@ -146,9 +218,21 @@ export class FollowApi {
   }
 
   /**
-   * Check if Current User Follows Artists
+   * ### Check if Current User Follows Artists
    *
    * Check to see if the current user is following one or more artists.
+   *
+   * **Required Scopes:** `user-follow-read`.
+   *
+   * @example
+   * ```ts
+   * const response = await spotify.follow.isFollowingArtists([
+   *   '2leze82lbuNUn3K4c7nS1B',
+   *   '77bG3jpmWXOxpmZcVjPayy',
+   * ]);
+   * console.log(response);
+   * // Array [ true, false ]
+   * ```
    *
    * @param artistIds The Spotify IDs for the artists.
    */
@@ -162,9 +246,22 @@ export class FollowApi {
   }
 
   /**
-   * Check if User Follows a Playlist
+   * ### Check if User Follows a Playlist
    *
    * Check to see if a Spotify user is following a specified playlist.
+   *
+   * **Required Scopes:** `playlist-read-private` when checking if the current
+   * user is privately following a playlist.
+   *
+   * @example
+   * ```ts
+   * const response = await spotify.follow.isFollowingPlaylist(
+   *   '4xOF7TTAG2McFFJDixc3Lt',
+   *   'griegs',
+   * );
+   * console.log(response);
+   * // true
+   * ```
    *
    * @param playlistId The Spotify ID of the playlist.
    * @param userId The Spotify ID of the user.
@@ -178,9 +275,18 @@ export class FollowApi {
   }
 
   /**
-   * Check if Current User Follows User
+   * ### Check if Current User Follows User
    *
    * Check to see if the current user is following a Spotify user.
+   *
+   * **Required Scopes:** `user-follow-read`.
+   *
+   * @example
+   * ```ts
+   * const response = await spotify.follow.isFollowingUser('griegs');
+   * console.log(response);
+   * // true
+   * ```
    *
    * @param userId The Spotify ID for the user.
    */
@@ -190,9 +296,21 @@ export class FollowApi {
   }
 
   /**
-   * Check if Current User Follows Users
+   * ### Check if Current User Follows Users
    *
    * Check to see if the current user is following one or more Spotify users.
+   *
+   * **Required Scopes:** `user-follow-read`.
+   *
+   * @example
+   * ```ts
+   * const response = await spotify.follow.isFollowingUsers([
+   *   'griegs',
+   *   'jmperezperez',
+   * ]);
+   * console.log(response);
+   * // Array [ true, true ]
+   * ```
    *
    * @param userIds The Spotify IDs for the users.
    */
@@ -206,9 +324,16 @@ export class FollowApi {
   }
 
   /**
-   * Unfollow Artist
+   * ### Unfollow Artist
    *
    * Remove the current user as a follower of an artist.
+   *
+   * **Required Scopes:** `user-follow-modify`.
+   *
+   * @example
+   * ```ts
+   * await spotify.follow.unfollowArtist('3bU97PoqnxjKD45CrfwmC9');
+   * ```
    *
    * @param artistId The Spotify ID of the artist.
    */
@@ -217,9 +342,11 @@ export class FollowApi {
   }
 
   /**
-   * Unfollow Artists
+   * ### Unfollow Artists
    *
    * Remove the current user as a follower of one or more artists.
+   *
+   * **Required Scopes:** `user-follow-modify`.
    *
    * @param artistIds The Spotify IDs of the artists.
    */
@@ -235,9 +362,18 @@ export class FollowApi {
   }
 
   /**
-   * Unfollow a Playlist
+   * ### Unfollow a Playlist
    *
    * Remove the current user as a follower of a playlist.
+   *
+   * **Required Scopes:** `playlist-modify-public` when unfollowing a publicly
+   * followed playlist. `playlist-modify-private` when unfollowing a privately
+   * followed playlist.
+   *
+   * @example
+   * ```ts
+   * await spotify.follow.unfollowPlaylist('6SAtV2bMjUbQTV37X51F3u');
+   * ```
    *
    * @param playlistId The Spotify ID of the playlist.
    */
@@ -246,9 +382,16 @@ export class FollowApi {
   }
 
   /**
-   * Unfollow User
+   * ### Unfollow User
    *
    * Remove the current user as a follower of a Spotify user.
+   *
+   * **Required Scopes:** `user-follow-modify`.
+   *
+   * @example
+   * ```ts
+   * await spotify.follow.unfollowUser('griegs');
+   * ```
    *
    * @param userId The Spotify ID of the user.
    */
@@ -257,9 +400,16 @@ export class FollowApi {
   }
 
   /**
-   * Unfollow Users
+   * ### Unfollow Users
    *
    * Remove the current user as a follower of one or more Spotify users.
+   *
+   * **Required Scopes:** `user-follow-modify`.
+   *
+   * @example
+   * ```ts
+   * await spotify.follow.unfollowUsers(['griegs', 'jmperezperez']);
+   * ```
    *
    * @param userIds The Spotify IDs of the users.
    */
