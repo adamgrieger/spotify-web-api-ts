@@ -116,7 +116,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/af7cc25/src/apis/AlbumsApi.ts#L10">apis/AlbumsApi.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/7acdc46/src/apis/AlbumsApi.ts#L10">apis/AlbumsApi.ts:10</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -138,7 +138,7 @@
 					<div class="tsd-signature tsd-kind-icon">http<span class="tsd-signature-symbol">:</span> <a href="_helpers_http_.http.html" class="tsd-signature-type">Http</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/af7cc25/src/apis/AlbumsApi.ts#L10">apis/AlbumsApi.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/7acdc46/src/apis/AlbumsApi.ts#L10">apis/AlbumsApi.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -155,7 +155,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/af7cc25/src/apis/AlbumsApi.ts#L33">apis/AlbumsApi.ts:33</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/7acdc46/src/apis/AlbumsApi.ts#L33">apis/AlbumsApi.ts:33</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -168,9 +168,9 @@
 								<p><strong>Required Scopes:</strong> None.</p>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> album = <span class="hljs-keyword">await</span> spotify.albums.getAlbum(<span class="hljs-string">'53VKICyqCf91sVkTdFrzKX'</span>);
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> album = <span class="hljs-keyword">await</span> spotify.albums.getAlbum(<span class="hljs-string">&#x27;53VKICyqCf91sVkTdFrzKX&#x27;</span>);
 <span class="hljs-built_in">console</span>.log(album.name);
-<span class="hljs-comment">// "Titanic Rising"</span></code></pre>
+<span class="hljs-comment">// &quot;Titanic Rising&quot;</span></code></pre>
 									</dd>
 								</dl>
 							</div>
@@ -203,7 +203,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/af7cc25/src/apis/AlbumsApi.ts#L91">apis/AlbumsApi.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/7acdc46/src/apis/AlbumsApi.ts#L91">apis/AlbumsApi.ts:91</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -216,9 +216,9 @@
 								<p><strong>Required Scopes:</strong> None.</p>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> tracks = <span class="hljs-keyword">await</span> spotify.albums.getAlbumTracks(<span class="hljs-string">'76254F4WYdKOm0pVAVvp0x'</span>);
+									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> tracks = <span class="hljs-keyword">await</span> spotify.albums.getAlbumTracks(<span class="hljs-string">&#x27;76254F4WYdKOm0pVAVvp0x&#x27;</span>);
 <span class="hljs-built_in">console</span>.log(tracks.items.map(<span class="hljs-function"><span class="hljs-params">track</span> =&gt;</span> track.name));
-<span class="hljs-comment">// Array [ "4D", "MTI" ]</span></code></pre>
+<span class="hljs-comment">// Array [ &quot;4D&quot;, &quot;MTI&quot; ]</span></code></pre>
 									</dd>
 								</dl>
 							</div>
@@ -251,7 +251,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/af7cc25/src/apis/AlbumsApi.ts#L61">apis/AlbumsApi.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/adamgrieger/spotify-web-api-ts/blob/7acdc46/src/apis/AlbumsApi.ts#L61">apis/AlbumsApi.ts:61</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -266,11 +266,11 @@
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
 									<dd><pre><code class="language-ts"><span class="hljs-keyword">const</span> albums = <span class="hljs-keyword">await</span> spotify.albums.getAlbums([
-  <span class="hljs-string">'0FO3N0KhhvXY7SORYneGbw'</span>,
-  <span class="hljs-string">'3FND6DpDA79Fox7bv8LvRC'</span>,
+  <span class="hljs-string">&#x27;0FO3N0KhhvXY7SORYneGbw&#x27;</span>,
+  <span class="hljs-string">&#x27;3FND6DpDA79Fox7bv8LvRC&#x27;</span>,
 ]);
 <span class="hljs-built_in">console</span>.log(albums.map(<span class="hljs-function"><span class="hljs-params">album</span> =&gt;</span> album.name));
-<span class="hljs-comment">// Array [ "What's There", "Heat Division" ]</span></code></pre>
+<span class="hljs-comment">// Array [ &quot;What&#x27;s There&quot;, &quot;Heat Division&quot; ]</span></code></pre>
 									</dd>
 								</dl>
 							</div>
