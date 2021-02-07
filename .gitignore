@@ -1,3 +1,7 @@
+# This project uses yarn. Do not
+# include npm package lock.
+package-lock.json
+
 # Logs
 logs
 *.log
