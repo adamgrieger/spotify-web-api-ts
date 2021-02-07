@@ -48,7 +48,7 @@ export class PlayerApi {
    */
   getCurrentlyPlayingTrack(
     options?: GetCurrentlyPlayingTrackOptions,
-  ): Promise<CurrentlyPlaying> {
+  ): Promise<CurrentlyPlaying | string> {
     return this.http.get<CurrentlyPlaying>(
       '/me/player/currently-playing',
       options && { params: options },
