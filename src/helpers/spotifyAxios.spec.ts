@@ -57,6 +57,24 @@ describe('spotifyAxios', () => {
     axiosMock.mockRejectedValue(testError);
     await expect(spotifyAxios('bar', 'GET', 'token')).rejects.toThrow('foo');
   });
+
+  it('should handle errors and the spotify error message', async () => {
+    const testError = {
+      message: 'foo',
+      response: {
+        data: {
+          error: {
+            status: 400,
+            message: 'Error message from Spotify',
+          },
+        },
+      },
+    };
+    axiosMock.mockRejectedValue(testError);
+    await expect(spotifyAxios('bar', 'GET', 'token')).rejects.toThrow(
+      'foo: Error message from Spotify',
+    );
+  });
 });
 
 describe('paramsSerializer', () => {
