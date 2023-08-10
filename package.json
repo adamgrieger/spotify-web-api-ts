@@ -24,20 +24,12 @@
     "test": "web-scripts test",
     "generate-docs": "typedoc --out docs src/index.ts"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "web-scripts commitmsg",
-      "pre-commit": "web-scripts precommit"
-    }
-  },
-  "devDependencies": {
-    "@spotify/web-scripts": "^8.0.2",
-    "@types/qs": "^6.9.4",
-    "husky": "^4.2.5",
-    "typedoc": "^0.18.0"
-  },
   "dependencies": {
     "axios": "^0.21.1",
     "qs": "^6.9.4"
+  },
+  "devDependencies": {
+    "@types/qs": "^6.9.4",
+    "typedoc": "^0.18.0"
   }
 }
