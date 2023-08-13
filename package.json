@@ -23,6 +23,7 @@
     "qs": "^6.9.4"
   },
   "devDependencies": {
+    "@inferrinizzard/eslint-config": "inferrinizzard/eslint-config",
     "@types/qs": "^6.9.4",
     "eslint": "^8.47.0",
     "prettier": "^3.0.1",
