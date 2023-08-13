@@ -23,8 +23,13 @@ describe('Http', () => {
     it(`should correctly call spotifyAxios for GET requests (without config)`, () => {
       const http = new Http('token');
       http.get('foo');
-      expect(spotifyAxiosMock).toBeCalledTimes(1);
-      expect(spotifyAxiosMock).toBeCalledWith('foo', 'GET', 'token', undefined);
+      expect(spotifyAxiosMock).toHaveBeenCalledTimes(1);
+      expect(spotifyAxiosMock).toHaveBeenCalledWith(
+        'foo',
+        'GET',
+        'token',
+        undefined,
+      );
     });
 
     it(`should correctly call spotifyAxios for GET requests (with config)`, () => {
@@ -32,8 +37,8 @@ describe('Http', () => {
       http.get('foo', {
         baseURL: 'bar',
       });
-      expect(spotifyAxiosMock).toBeCalledTimes(1);
-      expect(spotifyAxiosMock).toBeCalledWith('foo', 'GET', 'token', {
+      expect(spotifyAxiosMock).toHaveBeenCalledTimes(1);
+      expect(spotifyAxiosMock).toHaveBeenCalledWith('foo', 'GET', 'token', {
         baseURL: 'bar',
       });
     });
@@ -43,8 +48,8 @@ describe('Http', () => {
     it(`should correctly call spotifyAxios for POST requests (without config)`, () => {
       const http = new Http('token');
       http.post('foo');
-      expect(spotifyAxiosMock).toBeCalledTimes(1);
-      expect(spotifyAxiosMock).toBeCalledWith(
+      expect(spotifyAxiosMock).toHaveBeenCalledTimes(1);
+      expect(spotifyAxiosMock).toHaveBeenCalledWith(
         'foo',
         'POST',
         'token',
@@ -57,8 +62,8 @@ describe('Http', () => {
       http.post('foo', {
         baseURL: 'bar',
       });
-      expect(spotifyAxiosMock).toBeCalledTimes(1);
-      expect(spotifyAxiosMock).toBeCalledWith('foo', 'POST', 'token', {
+      expect(spotifyAxiosMock).toHaveBeenCalledTimes(1);
+      expect(spotifyAxiosMock).toHaveBeenCalledWith('foo', 'POST', 'token', {
         baseURL: 'bar',
       });
     });
@@ -68,8 +73,13 @@ describe('Http', () => {
     it(`should correctly call spotifyAxios for PUT requests (without config)`, () => {
       const http = new Http('token');
       http.put('foo');
-      expect(spotifyAxiosMock).toBeCalledTimes(1);
-      expect(spotifyAxiosMock).toBeCalledWith('foo', 'PUT', 'token', undefined);
+      expect(spotifyAxiosMock).toHaveBeenCalledTimes(1);
+      expect(spotifyAxiosMock).toHaveBeenCalledWith(
+        'foo',
+        'PUT',
+        'token',
+        undefined,
+      );
     });
 
     it(`should correctly call spotifyAxios for PUT requests (with config)`, () => {
@@ -77,8 +87,8 @@ describe('Http', () => {
       http.put('foo', {
         baseURL: 'bar',
       });
-      expect(spotifyAxiosMock).toBeCalledTimes(1);
-      expect(spotifyAxiosMock).toBeCalledWith('foo', 'PUT', 'token', {
+      expect(spotifyAxiosMock).toHaveBeenCalledTimes(1);
+      expect(spotifyAxiosMock).toHaveBeenCalledWith('foo', 'PUT', 'token', {
         baseURL: 'bar',
       });
     });
@@ -88,8 +98,8 @@ describe('Http', () => {
     it(`should correctly call spotifyAxios for DELETE requests (without config)`, () => {
       const http = new Http('token');
       http.delete('foo');
-      expect(spotifyAxiosMock).toBeCalledTimes(1);
-      expect(spotifyAxiosMock).toBeCalledWith(
+      expect(spotifyAxiosMock).toHaveBeenCalledTimes(1);
+      expect(spotifyAxiosMock).toHaveBeenCalledWith(
         'foo',
         'DELETE',
         'token',
@@ -102,8 +112,8 @@ describe('Http', () => {
       http.delete('foo', {
         baseURL: 'bar',
       });
-      expect(spotifyAxiosMock).toBeCalledTimes(1);
-      expect(spotifyAxiosMock).toBeCalledWith('foo', 'DELETE', 'token', {
+      expect(spotifyAxiosMock).toHaveBeenCalledTimes(1);
+      expect(spotifyAxiosMock).toHaveBeenCalledWith('foo', 'DELETE', 'token', {
         baseURL: 'bar',
       });
     });

@@ -32,11 +32,14 @@ describe('FollowApi', () => {
       const response = await follow.areFollowingPlaylist('foo', ['bar', 'baz']);
 
       expect(response).toEqual([true, false]);
-      expect(httpMock.get).toBeCalledWith('/playlists/foo/followers/contains', {
-        params: {
-          ids: ['bar', 'baz'],
+      expect(httpMock.get).toHaveBeenCalledWith(
+        '/playlists/foo/followers/contains',
+        {
+          params: {
+            ids: ['bar', 'baz'],
+          },
         },
-      });
+      );
     });
   });
 
@@ -46,7 +49,7 @@ describe('FollowApi', () => {
 
       await follow.followArtist('foo');
 
-      expect(httpMock.put).toBeCalledWith('/me/following', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/following', {
         params: {
           type: 'artist',
         },
@@ -63,7 +66,7 @@ describe('FollowApi', () => {
 
       await follow.followArtists(['foo', 'bar']);
 
-      expect(httpMock.put).toBeCalledWith('/me/following', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/following', {
         params: {
           type: 'artist',
         },
@@ -80,7 +83,7 @@ describe('FollowApi', () => {
 
       await follow.followPlaylist('foo');
 
-      expect(httpMock.put).toBeCalledWith(
+      expect(httpMock.put).toHaveBeenCalledWith(
         '/playlists/foo/followers',
         undefined,
       );
@@ -91,7 +94,7 @@ describe('FollowApi', () => {
 
       await follow.followPlaylist('foo', { public: false });
 
-      expect(httpMock.put).toBeCalledWith('/playlists/foo/followers', {
+      expect(httpMock.put).toHaveBeenCalledWith('/playlists/foo/followers', {
         data: {
           public: false,
         },
@@ -105,7 +108,7 @@ describe('FollowApi', () => {
 
       await follow.followUser('foo');
 
-      expect(httpMock.put).toBeCalledWith('/me/following', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/following', {
         params: {
           type: 'user',
         },
@@ -122,7 +125,7 @@ describe('FollowApi', () => {
 
       await follow.followUsers(['foo', 'bar']);
 
-      expect(httpMock.put).toBeCalledWith('/me/following', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/following', {
         params: {
           type: 'user',
         },
@@ -144,7 +147,7 @@ describe('FollowApi', () => {
       const response = await follow.getFollowedArtists();
 
       expect(response).toEqual(getFollowedArtistsFixture.artists);
-      expect(httpMock.get).toBeCalledWith('/me/following', {
+      expect(httpMock.get).toHaveBeenCalledWith('/me/following', {
         params: {
           type: 'artist',
         },
@@ -157,7 +160,7 @@ describe('FollowApi', () => {
       const response = await follow.getFollowedArtists({ limit: 2 });
 
       expect(response).toEqual(getFollowedArtistsFixture.artists);
-      expect(httpMock.get).toBeCalledWith('/me/following', {
+      expect(httpMock.get).toHaveBeenCalledWith('/me/following', {
         params: {
           limit: 2,
           type: 'artist',
@@ -176,8 +179,8 @@ describe('FollowApi', () => {
 
       const response = await follow.isFollowingArtist('foo');
 
-      expect(response).toBe(true);
-      expect(httpMock.get).toBeCalledWith('/me/following/contains', {
+      expect(response).toBeTruthy();
+      expect(httpMock.get).toHaveBeenCalledWith('/me/following/contains', {
         params: {
           ids: ['foo'],
           type: 'artist',
@@ -197,7 +200,7 @@ describe('FollowApi', () => {
       const response = await follow.isFollowingArtists(['foo', 'bar']);
 
       expect(response).toEqual([true, false]);
-      expect(httpMock.get).toBeCalledWith('/me/following/contains', {
+      expect(httpMock.get).toHaveBeenCalledWith('/me/following/contains', {
         params: {
           ids: ['foo', 'bar'],
           type: 'artist',
@@ -216,12 +219,15 @@ describe('FollowApi', () => {
 
       const response = await follow.isFollowingPlaylist('foo', 'bar');
 
-      expect(response).toBe(true);
-      expect(httpMock.get).toBeCalledWith('/playlists/foo/followers/contains', {
-        params: {
-          ids: ['bar'],
+      expect(response).toBeTruthy();
+      expect(httpMock.get).toHaveBeenCalledWith(
+        '/playlists/foo/followers/contains',
+        {
+          params: {
+            ids: ['bar'],
+          },
         },
-      });
+      );
     });
   });
 
@@ -235,8 +241,8 @@ describe('FollowApi', () => {
 
       const response = await follow.isFollowingUser('foo');
 
-      expect(response).toBe(true);
-      expect(httpMock.get).toBeCalledWith('/me/following/contains', {
+      expect(response).toBeTruthy();
+      expect(httpMock.get).toHaveBeenCalledWith('/me/following/contains', {
         params: {
           ids: ['foo'],
           type: 'user',
@@ -256,7 +262,7 @@ describe('FollowApi', () => {
       const response = await follow.isFollowingUsers(['foo', 'bar']);
 
       expect(response).toEqual([true, false]);
-      expect(httpMock.get).toBeCalledWith('/me/following/contains', {
+      expect(httpMock.get).toHaveBeenCalledWith('/me/following/contains', {
         params: {
           ids: ['foo', 'bar'],
           type: 'user',
@@ -271,7 +277,7 @@ describe('FollowApi', () => {
 
       await follow.unfollowArtist('foo');
 
-      expect(httpMock.delete).toBeCalledWith('/me/following', {
+      expect(httpMock.delete).toHaveBeenCalledWith('/me/following', {
         params: {
           type: 'artist',
         },
@@ -288,7 +294,7 @@ describe('FollowApi', () => {
 
       await follow.unfollowArtists(['foo', 'bar']);
 
-      expect(httpMock.delete).toBeCalledWith('/me/following', {
+      expect(httpMock.delete).toHaveBeenCalledWith('/me/following', {
         params: {
           type: 'artist',
         },
@@ -305,7 +311,7 @@ describe('FollowApi', () => {
 
       await follow.unfollowPlaylist('foo');
 
-      expect(httpMock.delete).toBeCalledWith('/playlists/foo/followers');
+      expect(httpMock.delete).toHaveBeenCalledWith('/playlists/foo/followers');
     });
   });
 
@@ -315,7 +321,7 @@ describe('FollowApi', () => {
 
       await follow.unfollowUser('foo');
 
-      expect(httpMock.delete).toBeCalledWith('/me/following', {
+      expect(httpMock.delete).toHaveBeenCalledWith('/me/following', {
         params: {
           type: 'user',
         },
@@ -332,7 +338,7 @@ describe('FollowApi', () => {
 
       await follow.unfollowUsers(['foo', 'bar']);
 
-      expect(httpMock.delete).toBeCalledWith('/me/following', {
+      expect(httpMock.delete).toHaveBeenCalledWith('/me/following', {
         params: {
           type: 'user',
         },

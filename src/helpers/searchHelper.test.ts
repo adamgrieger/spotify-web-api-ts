@@ -17,7 +17,7 @@ describe('searchHelper', () => {
 
     await searchHelper(httpMock, 'foo', ['album', 'artist']);
 
-    expect(httpMock.get).toBeCalledWith('/search', {
+    expect(httpMock.get).toHaveBeenCalledWith('/search', {
       params: {
         q: 'foo',
         type: ['album', 'artist'],
@@ -30,7 +30,7 @@ describe('searchHelper', () => {
 
     await searchHelper(httpMock, 'foo', ['album', 'artist'], { limit: 2 });
 
-    expect(httpMock.get).toBeCalledWith('/search', {
+    expect(httpMock.get).toHaveBeenCalledWith('/search', {
       params: {
         q: 'foo',
         type: ['album', 'artist'],

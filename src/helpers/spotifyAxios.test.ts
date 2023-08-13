@@ -21,7 +21,7 @@ describe('spotifyAxios', () => {
         bar: 'baz',
       },
     });
-    expect(axiosMock).toBeCalledWith({
+    expect(axiosMock).toHaveBeenCalledWith({
       params: {
         bar: 'baz',
       },
@@ -42,7 +42,7 @@ describe('spotifyAxios', () => {
       contentType: 'image/jpeg',
       data: 'bar',
     });
-    expect(axiosMock).toBeCalledWith({
+    expect(axiosMock).toHaveBeenCalledWith({
       data: 'bar',
       baseURL: BASE_API_URL,
       headers: {

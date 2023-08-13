@@ -32,7 +32,7 @@ describe('EpisodesApi', () => {
       const response = await episodes.getEpisode('foo');
 
       expect(response).toEqual(episodeFixture);
-      expect(httpMock.get).toBeCalledWith('/episodes/foo', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith('/episodes/foo', undefined);
     });
 
     it('should get an episode (with options)', async () => {
@@ -41,7 +41,7 @@ describe('EpisodesApi', () => {
       const response = await episodes.getEpisode('foo', { market: 'bar' });
 
       expect(response).toEqual(episodeFixture);
-      expect(httpMock.get).toBeCalledWith('/episodes/foo', {
+      expect(httpMock.get).toHaveBeenCalledWith('/episodes/foo', {
         params: {
           market: 'bar',
         },
@@ -60,7 +60,7 @@ describe('EpisodesApi', () => {
       const response = await episodes.getEpisodes(['foo', 'bar']);
 
       expect(response).toEqual(getEpisodesFixture.episodes);
-      expect(httpMock.get).toBeCalledWith('/episodes', {
+      expect(httpMock.get).toHaveBeenCalledWith('/episodes', {
         params: {
           ids: ['foo', 'bar'],
         },
@@ -75,7 +75,7 @@ describe('EpisodesApi', () => {
       });
 
       expect(response).toEqual(getEpisodesFixture.episodes);
-      expect(httpMock.get).toBeCalledWith('/episodes', {
+      expect(httpMock.get).toHaveBeenCalledWith('/episodes', {
         params: {
           ids: ['foo', 'bar'],
           market: 'baz',

@@ -39,7 +39,7 @@ describe('PlaylistsApi', () => {
       const response = await playlists.addItemToPlaylist('foo', 'bar');
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.post).toBeCalledWith('/playlists/foo/tracks', {
+      expect(httpMock.post).toHaveBeenCalledWith('/playlists/foo/tracks', {
         data: {
           uris: ['bar'],
         },
@@ -54,7 +54,7 @@ describe('PlaylistsApi', () => {
       });
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.post).toBeCalledWith('/playlists/foo/tracks', {
+      expect(httpMock.post).toHaveBeenCalledWith('/playlists/foo/tracks', {
         data: {
           uris: ['bar'],
           position: 2,
@@ -76,7 +76,7 @@ describe('PlaylistsApi', () => {
       ]);
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.post).toBeCalledWith('/playlists/foo/tracks', {
+      expect(httpMock.post).toHaveBeenCalledWith('/playlists/foo/tracks', {
         data: {
           uris: ['bar', 'baz'],
         },
@@ -93,7 +93,7 @@ describe('PlaylistsApi', () => {
       );
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.post).toBeCalledWith('/playlists/foo/tracks', {
+      expect(httpMock.post).toHaveBeenCalledWith('/playlists/foo/tracks', {
         data: {
           uris: ['bar', 'baz'],
           position: 2,
@@ -108,7 +108,7 @@ describe('PlaylistsApi', () => {
 
       await playlists.changePlaylistDetails('foo', { description: 'bar' });
 
-      expect(httpMock.put).toBeCalledWith('/playlists/foo', {
+      expect(httpMock.put).toHaveBeenCalledWith('/playlists/foo', {
         data: {
           description: 'bar',
         },
@@ -127,7 +127,7 @@ describe('PlaylistsApi', () => {
       const response = await playlists.createPlaylist('foo', 'bar');
 
       expect(response).toEqual(playlistFixture);
-      expect(httpMock.post).toBeCalledWith('/users/foo/playlists', {
+      expect(httpMock.post).toHaveBeenCalledWith('/users/foo/playlists', {
         data: {
           name: 'bar',
         },
@@ -142,7 +142,7 @@ describe('PlaylistsApi', () => {
       });
 
       expect(response).toEqual(playlistFixture);
-      expect(httpMock.post).toBeCalledWith('/users/foo/playlists', {
+      expect(httpMock.post).toHaveBeenCalledWith('/users/foo/playlists', {
         data: {
           name: 'bar',
           description: 'baz',
@@ -162,7 +162,7 @@ describe('PlaylistsApi', () => {
       const response = await playlists.getMyPlaylists();
 
       expect(response).toEqual(getMyPlaylistsFixture);
-      expect(httpMock.get).toBeCalledWith('/me/playlists', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith('/me/playlists', undefined);
     });
 
     it("should get a list of the current user's playlists (with options)", async () => {
@@ -171,7 +171,7 @@ describe('PlaylistsApi', () => {
       const response = await playlists.getMyPlaylists({ limit: 2 });
 
       expect(response).toEqual(getMyPlaylistsFixture);
-      expect(httpMock.get).toBeCalledWith('/me/playlists', {
+      expect(httpMock.get).toHaveBeenCalledWith('/me/playlists', {
         params: {
           limit: 2,
         },
@@ -190,7 +190,7 @@ describe('PlaylistsApi', () => {
       const response = await playlists.getPlaylist('foo');
 
       expect(response).toEqual(playlistFixture);
-      expect(httpMock.get).toBeCalledWith('/playlists/foo', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith('/playlists/foo', undefined);
     });
 
     it('should get a playlist (with options)', async () => {
@@ -199,7 +199,7 @@ describe('PlaylistsApi', () => {
       const response = await playlists.getPlaylist('foo', { market: 'bar' });
 
       expect(response).toEqual(playlistFixture);
-      expect(httpMock.get).toBeCalledWith('/playlists/foo', {
+      expect(httpMock.get).toHaveBeenCalledWith('/playlists/foo', {
         params: {
           market: 'bar',
         },
@@ -218,7 +218,7 @@ describe('PlaylistsApi', () => {
       const response = await playlists.getPlaylistCover('foo');
 
       expect(response).toEqual([spotifyImageFixture]);
-      expect(httpMock.get).toBeCalledWith('/playlists/foo/images');
+      expect(httpMock.get).toHaveBeenCalledWith('/playlists/foo/images');
     });
   });
 
@@ -233,7 +233,10 @@ describe('PlaylistsApi', () => {
       const response = await playlists.getPlaylistItems('foo');
 
       expect(response).toEqual(getPlaylistItemsFixture);
-      expect(httpMock.get).toBeCalledWith('/playlists/foo/tracks', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith(
+        '/playlists/foo/tracks',
+        undefined,
+      );
     });
 
     it("should get a playlist's items (with options)", async () => {
@@ -242,7 +245,7 @@ describe('PlaylistsApi', () => {
       const response = await playlists.getPlaylistItems('foo', { limit: 2 });
 
       expect(response).toEqual(getPlaylistItemsFixture);
-      expect(httpMock.get).toBeCalledWith('/playlists/foo/tracks', {
+      expect(httpMock.get).toHaveBeenCalledWith('/playlists/foo/tracks', {
         params: {
           limit: 2,
         },
@@ -261,7 +264,10 @@ describe('PlaylistsApi', () => {
       const response = await playlists.getUserPlaylists('foo');
 
       expect(response).toEqual(getUserPlaylistsFixture);
-      expect(httpMock.get).toBeCalledWith('/users/foo/playlists', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith(
+        '/users/foo/playlists',
+        undefined,
+      );
     });
 
     it("should get a list of a user's playlists (with options)", async () => {
@@ -270,7 +276,7 @@ describe('PlaylistsApi', () => {
       const response = await playlists.getUserPlaylists('foo', { limit: 2 });
 
       expect(response).toEqual(getUserPlaylistsFixture);
-      expect(httpMock.get).toBeCalledWith('/users/foo/playlists', {
+      expect(httpMock.get).toHaveBeenCalledWith('/users/foo/playlists', {
         params: {
           limit: 2,
         },
@@ -289,7 +295,7 @@ describe('PlaylistsApi', () => {
       const response = await playlists.removePlaylistItem('foo', 'bar');
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.delete).toBeCalledWith('/playlists/foo/tracks', {
+      expect(httpMock.delete).toHaveBeenCalledWith('/playlists/foo/tracks', {
         data: {
           tracks: [{ uri: 'bar' }],
         },
@@ -311,7 +317,7 @@ describe('PlaylistsApi', () => {
       ]);
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.delete).toBeCalledWith('/playlists/foo/tracks', {
+      expect(httpMock.delete).toHaveBeenCalledWith('/playlists/foo/tracks', {
         data: {
           tracks: [{ uri: 'bar' }, { uri: 'baz' }],
         },
@@ -334,7 +340,7 @@ describe('PlaylistsApi', () => {
       );
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.delete).toBeCalledWith('/playlists/foo/tracks', {
+      expect(httpMock.delete).toHaveBeenCalledWith('/playlists/foo/tracks', {
         data: {
           tracks: [{ uri: 'bar', positions: [1, 3] }],
         },
@@ -352,7 +358,7 @@ describe('PlaylistsApi', () => {
       );
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.delete).toBeCalledWith('/playlists/foo/tracks', {
+      expect(httpMock.delete).toHaveBeenCalledWith('/playlists/foo/tracks', {
         data: {
           tracks: [{ uri: 'bar', positions: [1, 3] }],
           snapshot_id: 'baz',
@@ -374,7 +380,7 @@ describe('PlaylistsApi', () => {
       ]);
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.delete).toBeCalledWith('/playlists/foo/tracks', {
+      expect(httpMock.delete).toHaveBeenCalledWith('/playlists/foo/tracks', {
         data: {
           tracks: [{ uri: 'bar', positions: [1, 3] }],
         },
@@ -391,7 +397,7 @@ describe('PlaylistsApi', () => {
       );
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.delete).toBeCalledWith('/playlists/foo/tracks', {
+      expect(httpMock.delete).toHaveBeenCalledWith('/playlists/foo/tracks', {
         data: {
           tracks: [{ uri: 'bar', positions: [1, 3] }],
           snapshot_id: 'baz',
@@ -411,7 +417,7 @@ describe('PlaylistsApi', () => {
       const response = await playlists.reorderPlaylistItems('foo', 3, 2);
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.put).toBeCalledWith('/playlists/foo/tracks', {
+      expect(httpMock.put).toHaveBeenCalledWith('/playlists/foo/tracks', {
         data: {
           range_start: 3,
           insert_before: 2,
@@ -427,7 +433,7 @@ describe('PlaylistsApi', () => {
       });
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.put).toBeCalledWith('/playlists/foo/tracks', {
+      expect(httpMock.put).toHaveBeenCalledWith('/playlists/foo/tracks', {
         data: {
           range_start: 3,
           insert_before: 2,
@@ -443,7 +449,7 @@ describe('PlaylistsApi', () => {
 
       await playlists.replacePlaylistItems('foo', ['bar', 'baz']);
 
-      expect(httpMock.put).toBeCalledWith('/playlists/foo/tracks', {
+      expect(httpMock.put).toHaveBeenCalledWith('/playlists/foo/tracks', {
         data: {
           uris: ['bar', 'baz'],
         },
@@ -457,7 +463,7 @@ describe('PlaylistsApi', () => {
 
       await playlists.uploadPlaylistCover('foo', 'bar');
 
-      expect(httpMock.put).toBeCalledWith('/playlists/foo/images', {
+      expect(httpMock.put).toHaveBeenCalledWith('/playlists/foo/images', {
         data: 'bar',
         contentType: 'image/jpeg',
       });

@@ -32,7 +32,7 @@ describe('PersonalizationApi', () => {
       const response = await personalization.getMyTopArtists();
 
       expect(response).toEqual(getMyTopArtistsFixture);
-      expect(httpMock.get).toBeCalledWith('/me/top/artists', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith('/me/top/artists', undefined);
     });
 
     it("should get the current user's top artists (with options)", async () => {
@@ -41,7 +41,7 @@ describe('PersonalizationApi', () => {
       const response = await personalization.getMyTopArtists({ limit: 2 });
 
       expect(response).toEqual(getMyTopArtistsFixture);
-      expect(httpMock.get).toBeCalledWith('/me/top/artists', {
+      expect(httpMock.get).toHaveBeenCalledWith('/me/top/artists', {
         params: {
           limit: 2,
         },
@@ -60,7 +60,7 @@ describe('PersonalizationApi', () => {
       const response = await personalization.getMyTopTracks();
 
       expect(response).toEqual(getMyTopTracksFixture);
-      expect(httpMock.get).toBeCalledWith('/me/top/tracks', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith('/me/top/tracks', undefined);
     });
 
     it("should get the current user's top tracks (with options)", async () => {
@@ -69,7 +69,7 @@ describe('PersonalizationApi', () => {
       const response = await personalization.getMyTopTracks({ limit: 2 });
 
       expect(response).toEqual(getMyTopTracksFixture);
-      expect(httpMock.get).toBeCalledWith('/me/top/tracks', {
+      expect(httpMock.get).toHaveBeenCalledWith('/me/top/tracks', {
         params: {
           limit: 2,
         },

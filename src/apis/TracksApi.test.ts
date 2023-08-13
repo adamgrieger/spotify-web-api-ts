@@ -38,7 +38,7 @@ describe('TracksApi', () => {
       const response = await tracks.getAudioAnalysisForTrack('foo');
 
       expect(response).toEqual(audioAnalysisFixture);
-      expect(httpMock.get).toBeCalledWith('/audio-analysis/foo');
+      expect(httpMock.get).toHaveBeenCalledWith('/audio-analysis/foo');
     });
   });
 
@@ -53,7 +53,7 @@ describe('TracksApi', () => {
       const response = await tracks.getAudioFeaturesForTrack('foo');
 
       expect(response).toEqual(audioFeaturesFixture);
-      expect(httpMock.get).toBeCalledWith('/audio-features/foo');
+      expect(httpMock.get).toHaveBeenCalledWith('/audio-features/foo');
     });
   });
 
@@ -70,7 +70,7 @@ describe('TracksApi', () => {
       const response = await tracks.getAudioFeaturesForTracks(['foo', 'bar']);
 
       expect(response).toEqual(getAudioFeaturesForTracksFixture.audio_features);
-      expect(httpMock.get).toBeCalledWith('/audio-features', {
+      expect(httpMock.get).toHaveBeenCalledWith('/audio-features', {
         params: {
           ids: ['foo', 'bar'],
         },
@@ -89,7 +89,7 @@ describe('TracksApi', () => {
       const response = await tracks.getTrack('foo');
 
       expect(response).toEqual(trackFixture);
-      expect(httpMock.get).toBeCalledWith('/tracks/foo', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith('/tracks/foo', undefined);
     });
 
     it('should get a track (with options)', async () => {
@@ -98,7 +98,7 @@ describe('TracksApi', () => {
       const response = await tracks.getTrack('foo', { market: 'bar' });
 
       expect(response).toEqual(trackFixture);
-      expect(httpMock.get).toBeCalledWith('/tracks/foo', {
+      expect(httpMock.get).toHaveBeenCalledWith('/tracks/foo', {
         params: {
           market: 'bar',
         },
@@ -117,7 +117,7 @@ describe('TracksApi', () => {
       const response = await tracks.getTracks(['foo', 'bar']);
 
       expect(response).toEqual(getTracksFixture.tracks);
-      expect(httpMock.get).toBeCalledWith('/tracks', {
+      expect(httpMock.get).toHaveBeenCalledWith('/tracks', {
         params: {
           ids: ['foo', 'bar'],
         },
@@ -132,7 +132,7 @@ describe('TracksApi', () => {
       });
 
       expect(response).toEqual(getTracksFixture.tracks);
-      expect(httpMock.get).toBeCalledWith('/tracks', {
+      expect(httpMock.get).toHaveBeenCalledWith('/tracks', {
         params: {
           ids: ['foo', 'bar'],
           market: 'baz',

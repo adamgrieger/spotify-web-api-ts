@@ -36,7 +36,7 @@ describe('ShowsApi', () => {
       const response = await shows.getShow('foo');
 
       expect(response).toEqual(showFixture);
-      expect(httpMock.get).toBeCalledWith('/shows/foo', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith('/shows/foo', undefined);
     });
 
     it('should get a show (with options)', async () => {
@@ -45,7 +45,7 @@ describe('ShowsApi', () => {
       const response = await shows.getShow('foo', { market: 'bar' });
 
       expect(response).toEqual(showFixture);
-      expect(httpMock.get).toBeCalledWith('/shows/foo', {
+      expect(httpMock.get).toHaveBeenCalledWith('/shows/foo', {
         params: {
           market: 'bar',
         },
@@ -64,7 +64,10 @@ describe('ShowsApi', () => {
       const response = await shows.getShowEpisodes('foo');
 
       expect(response).toEqual(getShowEpisodesFixture);
-      expect(httpMock.get).toBeCalledWith('/shows/foo/episodes', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith(
+        '/shows/foo/episodes',
+        undefined,
+      );
     });
 
     it("should get a show's episodes (with options)", async () => {
@@ -73,7 +76,7 @@ describe('ShowsApi', () => {
       const response = await shows.getShowEpisodes('foo', { limit: 2 });
 
       expect(response).toEqual(getShowEpisodesFixture);
-      expect(httpMock.get).toBeCalledWith('/shows/foo/episodes', {
+      expect(httpMock.get).toHaveBeenCalledWith('/shows/foo/episodes', {
         params: {
           limit: 2,
         },
@@ -92,7 +95,7 @@ describe('ShowsApi', () => {
       const response = await shows.getShows(['foo', 'bar']);
 
       expect(response).toEqual(getShowsFixture.shows);
-      expect(httpMock.get).toBeCalledWith('/shows', {
+      expect(httpMock.get).toHaveBeenCalledWith('/shows', {
         params: {
           ids: ['foo', 'bar'],
         },
@@ -105,7 +108,7 @@ describe('ShowsApi', () => {
       const response = await shows.getShows(['foo', 'bar'], { market: 'baz' });
 
       expect(response).toEqual(getShowsFixture.shows);
-      expect(httpMock.get).toBeCalledWith('/shows', {
+      expect(httpMock.get).toHaveBeenCalledWith('/shows', {
         params: {
           ids: ['foo', 'bar'],
           market: 'baz',

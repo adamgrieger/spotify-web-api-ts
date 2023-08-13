@@ -38,7 +38,7 @@ describe('ArtistsApi', () => {
       const response = await artists.getArtist('foo');
 
       expect(response).toEqual(artistFixture);
-      expect(httpMock.get).toBeCalledWith('/artists/foo');
+      expect(httpMock.get).toHaveBeenCalledWith('/artists/foo');
     });
   });
 
@@ -53,7 +53,10 @@ describe('ArtistsApi', () => {
       const response = await artists.getArtistAlbums('foo');
 
       expect(response).toEqual(getArtistAlbumsFixture);
-      expect(httpMock.get).toBeCalledWith('/artists/foo/albums', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith(
+        '/artists/foo/albums',
+        undefined,
+      );
     });
 
     it("should get an artist's albums (with options)", async () => {
@@ -62,7 +65,7 @@ describe('ArtistsApi', () => {
       const response = await artists.getArtistAlbums('foo', { country: 'bar' });
 
       expect(response).toEqual(getArtistAlbumsFixture);
-      expect(httpMock.get).toBeCalledWith('/artists/foo/albums', {
+      expect(httpMock.get).toHaveBeenCalledWith('/artists/foo/albums', {
         params: {
           country: 'bar',
         },
@@ -81,7 +84,7 @@ describe('ArtistsApi', () => {
       const response = await artists.getArtists(['foo', 'bar']);
 
       expect(response).toEqual(getArtistsFixture.artists);
-      expect(httpMock.get).toBeCalledWith('/artists', {
+      expect(httpMock.get).toHaveBeenCalledWith('/artists', {
         params: {
           ids: ['foo', 'bar'],
         },
@@ -100,7 +103,7 @@ describe('ArtistsApi', () => {
       const response = await artists.getArtistTopTracks('foo', 'bar');
 
       expect(response).toEqual(getArtistTopTracksFixture.tracks);
-      expect(httpMock.get).toBeCalledWith('/artists/foo/top-tracks', {
+      expect(httpMock.get).toHaveBeenCalledWith('/artists/foo/top-tracks', {
         params: {
           country: 'bar',
         },
@@ -119,7 +122,7 @@ describe('ArtistsApi', () => {
       const response = await artists.getRelatedArtists('foo');
 
       expect(response).toEqual(getRelatedArtistsFixture.artists);
-      expect(httpMock.get).toBeCalledWith('/artists/foo/related-artists');
+      expect(httpMock.get).toHaveBeenCalledWith('/artists/foo/related-artists');
     });
   });
 });
