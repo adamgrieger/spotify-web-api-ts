@@ -1,4 +1,4 @@
-import { defineConfig } from "vite"
+import { defineConfig } from "vitest/config"
 
 export default defineConfig({
 	cacheDir: './node_modules/.vite',
@@ -9,7 +9,7 @@ export default defineConfig({
 			dir: './node_modules/.vitest'
 		},
 		environment: 'jsdom',
-		include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts}'],
+		include: ['src/**/*.test.{js,mjs,cjs,ts,mts,cts}'],
 		typecheck: {tsconfig: './tsconfig.test.json'}
 	}
 })
