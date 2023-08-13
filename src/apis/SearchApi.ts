@@ -24,7 +24,7 @@ import { type Http } from '../helpers/Http';
 export class SearchApi {
   private readonly http: Http;
 
-  constructor(http: Http) {
+  public constructor(http: Http) {
     this.http = http;
   }
 
@@ -38,7 +38,7 @@ export class SearchApi {
    * @param type The item types to search across.
    * @param options Optional request information.
    */
-  async search(
+  public async search(
     query: string,
     type: SearchType[],
     options?: SearchOptions,
@@ -54,7 +54,7 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchAlbums(
+  public async searchAlbums(
     query: string,
     options?: SearchOptions,
   ): Promise<Paging<SimplifiedAlbum>> {
@@ -75,7 +75,7 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchArtists(
+  public async searchArtists(
     query: string,
     options?: SearchOptions,
   ): Promise<Paging<Artist>> {
@@ -96,7 +96,7 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchEpisodes(
+  public async searchEpisodes(
     query: string,
     options?: SearchOptions,
   ): Promise<Paging<SimplifiedEpisode>> {
@@ -117,7 +117,7 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchPlaylists(
+  public async searchPlaylists(
     query: string,
     options?: SearchOptions,
   ): Promise<Paging<SimplifiedPlaylist>> {
@@ -138,7 +138,7 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchShows(
+  public async searchShows(
     query: string,
     options?: SearchOptions,
   ): Promise<Paging<SimplifiedShow>> {
@@ -159,7 +159,7 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchTracks(
+  public async searchTracks(
     query: string,
     options?: SearchOptions,
   ): Promise<Paging<Track>> {

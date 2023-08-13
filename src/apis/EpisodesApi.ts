@@ -6,7 +6,7 @@ import { type GetEpisodesResponse } from '../types/SpotifyResponses';
 export class EpisodesApi {
   private readonly http: Http;
 
-  constructor(http: Http) {
+  public constructor(http: Http) {
     this.http = http;
   }
 
@@ -28,7 +28,7 @@ export class EpisodesApi {
    *
    * @param options Optional request information.
    */
-  async getEpisode(
+  public async getEpisode(
     episodeId: string,
     options?: MarketOptions,
   ): Promise<Episode> {
@@ -60,7 +60,7 @@ export class EpisodesApi {
    * @param episodeIds A list of the Spotify IDs for the episodes.
    * @param options Optional request information.
    */
-  async getEpisodes(
+  public async getEpisodes(
     episodeIds: string[],
     options?: MarketOptions,
   ): Promise<Array<Episode | null>> {

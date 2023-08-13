@@ -1,4 +1,5 @@
 import { type MockedClass } from 'vitest';
+
 import {
   getShowEpisodesFixture,
   getShowsFixture,

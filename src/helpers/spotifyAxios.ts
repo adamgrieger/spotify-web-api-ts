@@ -1,6 +1,9 @@
-import axios from 'axios';
+import axios, {
+  type AxiosError,
+  type AxiosRequestConfig,
+  type Method,
+} from 'axios';
 import qs from 'qs';
-import { type AxiosError, type AxiosRequestConfig, type Method } from 'axios';
 
 import { BASE_API_URL } from '../constants';
 
@@ -33,6 +36,6 @@ export async function spotifyAxios<T>(
   }
 }
 
-export function paramsSerializer(params: any) {
+export function paramsSerializer(params: unknown) {
   return qs.stringify(params, { arrayFormat: 'comma' });
 }

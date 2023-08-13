@@ -13,7 +13,7 @@ import {
 export class TracksApi {
   private readonly http: Http;
 
-  constructor(http: Http) {
+  public constructor(http: Http) {
     this.http = http;
   }
 
@@ -25,7 +25,9 @@ export class TracksApi {
    *
    * @param trackId The Spotify ID for the track.
    */
-  async getAudioAnalysisForTrack(trackId: string): Promise<AudioAnalysis> {
+  public async getAudioAnalysisForTrack(
+    trackId: string,
+  ): Promise<AudioAnalysis> {
     return await this.http.get<AudioAnalysis>(`/audio-analysis/${trackId}`);
   }
 
@@ -37,7 +39,9 @@ export class TracksApi {
    *
    * @param trackId The Spotify ID for the track.
    */
-  async getAudioFeaturesForTrack(trackId: string): Promise<AudioFeatures> {
+  public async getAudioFeaturesForTrack(
+    trackId: string,
+  ): Promise<AudioFeatures> {
     return await this.http.get<AudioFeatures>(`/audio-features/${trackId}`);
   }
 
@@ -48,7 +52,7 @@ export class TracksApi {
    *
    * @param trackIds The Spotify IDs for the tracks.
    */
-  async getAudioFeaturesForTracks(
+  public async getAudioFeaturesForTracks(
     trackIds: string[],
   ): Promise<Array<AudioFeatures | null>> {
     const response = await this.http.get<GetAudioFeaturesForTracksResponse>(
@@ -71,7 +75,10 @@ export class TracksApi {
    * @param trackId The Spotify ID for the track.
    * @param options Optional request information.
    */
-  async getTrack(trackId: string, options?: MarketOptions): Promise<Track> {
+  public async getTrack(
+    trackId: string,
+    options?: MarketOptions,
+  ): Promise<Track> {
     return await this.http.get<Track>(
       `/tracks/${trackId}`,
       options && { params: options },
@@ -87,7 +94,7 @@ export class TracksApi {
    * @param trackIds The Spotify IDs for the tracks.
    * @param options Optional request information.
    */
-  async getTracks(
+  public async getTracks(
     trackIds: string[],
     options?: MarketOptions,
   ): Promise<Array<Track | null>> {

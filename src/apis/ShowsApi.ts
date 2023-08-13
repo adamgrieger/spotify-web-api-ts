@@ -12,7 +12,7 @@ import {
 export class ShowsApi {
   private readonly http: Http;
 
-  constructor(http: Http) {
+  public constructor(http: Http) {
     this.http = http;
   }
 
@@ -25,7 +25,7 @@ export class ShowsApi {
    * @param showId The Spotify ID for the show.
    * @param options Optional request information.
    */
-  async getShow(showId: string, options?: MarketOptions): Promise<Show> {
+  public async getShow(showId: string, options?: MarketOptions): Promise<Show> {
     return await this.http.get<Show>(
       `/shows/${showId}`,
       options && { params: options },
@@ -40,7 +40,7 @@ export class ShowsApi {
    * @param showId The Spotify ID for the show.
    * @param options Optional request information.
    */
-  async getShowEpisodes(
+  public async getShowEpisodes(
     showId: string,
     options?: GetShowEpisodesOptions,
   ): Promise<GetShowEpisodesResponse> {
@@ -59,7 +59,7 @@ export class ShowsApi {
    * @param showIds The Spotify IDs for the shows.
    * @param options Optional request information.
    */
-  async getShows(
+  public async getShows(
     showIds: string[],
     options?: MarketOptions,
   ): Promise<Array<SimplifiedShow | null>> {

@@ -26,7 +26,7 @@ import {
 export class BrowseApi {
   private readonly http: Http;
 
-  constructor(http: Http) {
+  public constructor(http: Http) {
     this.http = http;
   }
 
@@ -44,7 +44,7 @@ export class BrowseApi {
    * // Array [ "acoustic", "afrobeat", ... ]
    * ```
    */
-  async getAvailableGenreSeeds(): Promise<string[]> {
+  public async getAvailableGenreSeeds(): Promise<string[]> {
     const response = await this.http.get<GetAvailableGenreSeedsResponse>(
       '/recommendations/available-genre-seeds',
     );
@@ -68,7 +68,7 @@ export class BrowseApi {
    *
    * @param options Optional request information.
    */
-  async getCategories(
+  public async getCategories(
     options?: GetCategoriesOptions,
   ): Promise<Paging<Category>> {
     const response = await this.http.get<GetCategoriesResponse>(
@@ -96,7 +96,7 @@ export class BrowseApi {
    * @param categoryId The Spotify category ID for the category.
    * @param options Optional request information.
    */
-  async getCategory(
+  public async getCategory(
     categoryId: string,
     options?: GetCategoryOptions,
   ): Promise<Category> {
@@ -123,7 +123,7 @@ export class BrowseApi {
    * @param categoryId The Spotify category ID for the category.
    * @param options Optional request information.
    */
-  async getCategoryPlaylists(
+  public async getCategoryPlaylists(
     categoryId: string,
     options?: GetCategoryPlaylistsOptions,
   ): Promise<Paging<SimplifiedPlaylist>> {
@@ -151,7 +151,7 @@ export class BrowseApi {
    *
    * @param options Optional request information.
    */
-  async getFeaturedPlaylists(
+  public async getFeaturedPlaylists(
     options?: GetFeaturedPlaylistsOptions,
   ): Promise<GetFeaturedPlaylistsResponse> {
     return await this.http.get<GetFeaturedPlaylistsResponse>(
@@ -177,7 +177,7 @@ export class BrowseApi {
    *
    * @param options Optional request information.
    */
-  async getNewReleases(
+  public async getNewReleases(
     options?: GetNewReleasesOptions,
   ): Promise<Paging<SimplifiedAlbum>> {
     const response = await this.http.get<GetNewReleasesResponse>(
@@ -215,7 +215,7 @@ export class BrowseApi {
    * @param seeds Artists, genres, and/or tracks to use as seeds for recommendations.
    * @param options Optional request information.
    */
-  async getRecommendations(
+  public async getRecommendations(
     seeds: GetRecommendationsSeeds,
     options?: GetRecommendationsOptions,
   ): Promise<GetRecommendationsResponse> {

@@ -1,4 +1,5 @@
 import { type MockedClass } from 'vitest';
+
 import { getFollowedArtistsFixture } from '../fixtures';
 import { Http } from '../helpers/Http';
 

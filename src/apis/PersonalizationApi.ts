@@ -8,7 +8,7 @@ import {
 export class PersonalizationApi {
   private readonly http: Http;
 
-  constructor(http: Http) {
+  public constructor(http: Http) {
     this.http = http;
   }
 
@@ -19,7 +19,7 @@ export class PersonalizationApi {
    *
    * @param options Optional request information.
    */
-  async getMyTopArtists(
+  public async getMyTopArtists(
     options?: PersonalizationOptions,
   ): Promise<GetMyTopArtistsResponse> {
     return await this.http.get<GetMyTopArtistsResponse>(
@@ -35,7 +35,7 @@ export class PersonalizationApi {
    *
    * @param options Optional request information.
    */
-  async getMyTopTracks(
+  public async getMyTopTracks(
     options?: PersonalizationOptions,
   ): Promise<GetMyTopTracksResponse> {
     return await this.http.get<GetMyTopTracksResponse>(

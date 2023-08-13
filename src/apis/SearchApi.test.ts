@@ -1,4 +1,5 @@
 import { type MockedFunction } from 'vitest';
+
 import {
   searchAlbumsFixture,
   searchArtistsFixture,
@@ -15,9 +16,7 @@ import { SearchApi } from './SearchApi';
 
 vi.mock('../helpers/searchHelper');
 
-const searchHelperMock = searchHelper as MockedFunction<
-  typeof searchHelper
->;
+const searchHelperMock = searchHelper as MockedFunction<typeof searchHelper>;
 
 function setup() {
   const http = new Http('token');

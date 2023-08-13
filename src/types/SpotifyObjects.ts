@@ -73,8 +73,8 @@ export interface AudioFeatures {
   time_signature: number;
   track_href: string;
   type: 'audio_features';
-  valence: number;
   uri: string;
+  valence: number;
 }
 
 export interface Category {

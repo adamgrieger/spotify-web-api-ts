@@ -16,14 +16,16 @@ import { TracksApi } from './apis/TracksApi';
 import { UsersApi } from './apis/UsersApi';
 import { TOKEN_URL } from './constants';
 import { encodeToBase64 } from './helpers/encodeToBase64';
-import { getAuthorizationUrl } from './helpers/getAuthorizationUrl';
+import {
+  type GetAuthorizationUrlOptions,
+  getAuthorizationUrl,
+} from './helpers/getAuthorizationUrl';
 import { Http } from './helpers/Http';
 import {
   type GetRefreshableUserTokensResponse,
   type GetRefreshedAccessTokenResponse,
   type GetTemporaryAppTokensResponse,
 } from './types/SpotifyAuthorization';
-import { type GetAuthorizationUrlOptions } from './helpers/getAuthorizationUrl';
 
 interface SpotifyWebApiOptions {
   accessToken?: string;
@@ -67,7 +69,7 @@ export class SpotifyWebApi {
 
   public users: UsersApi;
 
-  constructor(options?: SpotifyWebApiOptions) {
+  public constructor(options?: SpotifyWebApiOptions) {
     this.clientId = options?.clientId ?? '';
     this.clientSecret = options?.clientSecret ?? '';
     this.redirectUri = options?.redirectUri ?? '';
@@ -89,23 +91,23 @@ export class SpotifyWebApi {
     this.users = new UsersApi(this.http);
   }
 
-  getAccessToken() {
+  public getAccessToken() {
     return this.http.getAccessToken();
   }
 
-  setAccessToken(accessToken: string) {
+  public setAccessToken(accessToken: string) {
     this.http.setAccessToken(accessToken);
   }
 
-  getClientId() {
+  public getClientId() {
     return this.clientId;
   }
 
-  getClientSecret() {
+  public getClientSecret() {
     return this.clientSecret;
   }
 
-  getRedirectUri() {
+  public getRedirectUri() {
     return this.redirectUri;
   }
 
@@ -118,7 +120,9 @@ export class SpotifyWebApi {
    *
    * @param options Optional URL parameters.
    */
-  getRefreshableAuthorizationUrl(options?: GetAuthorizationUrlOptions): string {
+  public getRefreshableAuthorizationUrl(
+    options?: GetAuthorizationUrlOptions,
+  ): string {
     return getAuthorizationUrl(
       this.clientId,
       this.redirectUri,
@@ -133,7 +137,9 @@ export class SpotifyWebApi {
    *
    * @param options Optional URL parameters.
    */
-  getTemporaryAuthorizationUrl(options?: GetAuthorizationUrlOptions): string {
+  public getTemporaryAuthorizationUrl(
+    options?: GetAuthorizationUrlOptions,
+  ): string {
     return getAuthorizationUrl(
       this.clientId,
       this.redirectUri,
@@ -158,7 +164,7 @@ export class SpotifyWebApi {
    * @param code The authorization code returned from the initial request to
    *             the authorization endpoint.
    */
-  async getRefreshableUserTokens(
+  public async getRefreshableUserTokens(
     code: string,
   ): Promise<GetRefreshableUserTokensResponse> {
     const response = await axios.post<GetRefreshableUserTokensResponse>(
@@ -187,7 +193,7 @@ export class SpotifyWebApi {
    * @param refreshToken The refresh token returned from the authorization code
    *                     exchange.
    */
-  async getRefreshedAccessToken(
+  public async getRefreshedAccessToken(
     refreshToken: string,
   ): Promise<GetRefreshedAccessTokenResponse> {
     const response = await axios.post<GetRefreshedAccessTokenResponse>(
@@ -220,7 +226,7 @@ export class SpotifyWebApi {
    * advantage here in comparison with requests to the Web API made without an
    * access token, is that a higher rate limit is applied.
    */
-  async getTemporaryAppTokens(): Promise<GetTemporaryAppTokensResponse> {
+  public async getTemporaryAppTokens(): Promise<GetTemporaryAppTokensResponse> {
     const response = await axios.post<GetTemporaryAppTokensResponse>(
       TOKEN_URL,
       qs.stringify({
