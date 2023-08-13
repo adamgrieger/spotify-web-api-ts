@@ -9,6 +9,7 @@ vi.mock('../helpers/Http');
 
 const HttpMock = Http as MockedClass<typeof Http>;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function setup() {
   const httpMock = new HttpMock('token');
   const episodes = new EpisodesApi(httpMock);
@@ -16,11 +17,11 @@ function setup() {
   return { httpMock, episodes };
 }
 
-beforeEach(() => {
-  vi.resetAllMocks();
-});
-
 describe('EpisodesApi', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   describe('getEpisode', () => {
     beforeEach(() => {
       HttpMock.prototype.get.mockResolvedValue(episodeFixture);

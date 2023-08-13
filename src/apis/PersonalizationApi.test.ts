@@ -9,6 +9,7 @@ vi.mock('../helpers/Http');
 
 const HttpMock = Http as MockedClass<typeof Http>;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function setup() {
   const httpMock = new HttpMock('token');
   const personalization = new PersonalizationApi(httpMock);
@@ -16,11 +17,11 @@ function setup() {
   return { httpMock, personalization };
 }
 
-beforeEach(() => {
-  vi.resetAllMocks();
-});
-
 describe('PersonalizationApi', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   describe('getMyTopArtists', () => {
     beforeEach(() => {
       HttpMock.prototype.get.mockResolvedValue(getMyTopArtistsFixture);

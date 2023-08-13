@@ -7,11 +7,11 @@ vi.mock('./Http');
 
 const HttpMock = Http as MockedClass<typeof Http>;
 
-beforeEach(() => {
-  vi.resetAllMocks();
-});
-
 describe('searchHelper', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   it('should search for an item (without options)', async () => {
     const httpMock = new HttpMock('token');
 

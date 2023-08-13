@@ -14,6 +14,7 @@ vi.mock('../helpers/Http');
 
 const HttpMock = Http as MockedClass<typeof Http>;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function setup() {
   const httpMock = new HttpMock('token');
   const player = new PlayerApi(httpMock);
@@ -21,11 +22,11 @@ function setup() {
   return { httpMock, player };
 }
 
-beforeEach(() => {
-  vi.resetAllMocks();
-});
-
 describe('PlayerApi', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   describe('addToQueue', () => {
     it("should add an item to the user's playback queue (without options)", async () => {
       const { httpMock, player } = setup();

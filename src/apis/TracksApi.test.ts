@@ -15,6 +15,7 @@ vi.mock('../helpers/Http');
 
 const HttpMock = Http as MockedClass<typeof Http>;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function setup() {
   const httpMock = new HttpMock('token');
   const tracks = new TracksApi(httpMock);
@@ -22,11 +23,11 @@ function setup() {
   return { httpMock, tracks };
 }
 
-beforeEach(() => {
-  vi.resetAllMocks();
-});
-
 describe('TracksApi', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   describe('getAudioAnalysisForTrack', () => {
     beforeEach(() => {
       HttpMock.prototype.get.mockResolvedValue(audioAnalysisFixture);

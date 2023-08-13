@@ -18,6 +18,7 @@ vi.mock('../helpers/searchHelper');
 
 const searchHelperMock = searchHelper as MockedFunction<typeof searchHelper>;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function setup() {
   const http = new Http('token');
   const search = new SearchApi(http);
@@ -25,11 +26,11 @@ function setup() {
   return { http, search };
 }
 
-beforeEach(() => {
-  vi.resetAllMocks();
-});
-
 describe('SearchApi', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   describe('search', () => {
     beforeEach(() => {
       searchHelperMock.mockResolvedValue(searchFixture);

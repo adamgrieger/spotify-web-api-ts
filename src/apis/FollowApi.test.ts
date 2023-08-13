@@ -9,6 +9,7 @@ vi.mock('../helpers/Http');
 
 const HttpMock = Http as MockedClass<typeof Http>;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function setup() {
   const httpMock = new HttpMock('token');
   const follow = new FollowApi(httpMock);
@@ -16,11 +17,11 @@ function setup() {
   return { httpMock, follow };
 }
 
-beforeEach(() => {
-  vi.resetAllMocks();
-});
-
 describe('FollowApi', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   describe('areFollowingPlaylist', () => {
     beforeEach(() => {
       HttpMock.prototype.get.mockResolvedValue([true, false]);

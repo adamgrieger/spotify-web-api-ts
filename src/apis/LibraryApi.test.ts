@@ -13,6 +13,7 @@ vi.mock('../helpers/Http');
 
 const HttpMock = Http as MockedClass<typeof Http>;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function setup() {
   const httpMock = new HttpMock('token');
   const library = new LibraryApi(httpMock);
@@ -20,11 +21,11 @@ function setup() {
   return { httpMock, library };
 }
 
-beforeEach(() => {
-  vi.resetAllMocks();
-});
-
 describe('LibraryApi', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   describe('areAlbumsSaved', () => {
     beforeEach(() => {
       HttpMock.prototype.get.mockResolvedValue([true, false]);
