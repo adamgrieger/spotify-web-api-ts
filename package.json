@@ -15,8 +15,8 @@
     "assets"
   ],
   "scripts": {
-    "lint": "eslint",
-    "lint:fix": "eslint --fix",
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
     "types": "tsc --project tsconfig.json",
     "generate-docs": "typedoc --out docs src/index.ts"
   },

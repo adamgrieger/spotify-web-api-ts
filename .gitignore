@@ -43,7 +43,6 @@ jspm_packages/
 # Build output
 cjs
 esm
-types
 dist
 
 # Generated documentation
