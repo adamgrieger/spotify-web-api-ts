@@ -15,13 +15,6 @@
     "assets"
   ],
   "scripts": {
-    "build": "web-scripts build --project tsconfig.build.json",
-    "commit": "web-scripts commit",
-    "format": "web-scripts format",
-    "lint": "web-scripts lint",
-    "prepare": "web-scripts audit",
-    "release": "web-scripts release",
-    "test": "web-scripts test",
     "generate-docs": "typedoc --out docs src/index.ts"
   },
   "dependencies": {
