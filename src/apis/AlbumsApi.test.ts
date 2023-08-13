@@ -1,3 +1,4 @@
+import { type MockedClass } from 'vitest';
 import {
   albumFixture,
   getAlbumsFixture,
@@ -6,9 +7,9 @@ import {
 import { Http } from '../helpers/Http';
 import { AlbumsApi } from './AlbumsApi';
 
-jest.mock('../helpers/Http');
+vi.mock('../helpers/Http');
 
-const HttpMock = Http as jest.MockedClass<typeof Http>;
+const HttpMock = Http as MockedClass<typeof Http>;
 
 function setup() {
   const httpMock = new HttpMock('token');
@@ -18,7 +19,7 @@ function setup() {
 }
 
 beforeEach(() => {
-  jest.resetAllMocks();
+  vi.resetAllMocks();
 });
 
 describe('AlbumsApi', () => {

@@ -15,6 +15,9 @@
     "assets"
   ],
   "scripts": {
+		"test:dom": "vitest run --environment jsdom",
+    "test:node": "vitest run --environment node",
+		"test": "yarn test:dom && yarn test:node",
     "types": "tsc --project tsconfig.json",
     "generate-docs": "typedoc --out docs src/index.ts"
   },
@@ -24,7 +27,10 @@
   },
   "devDependencies": {
     "@types/qs": "^6.9.4",
+    "jsdom": "^22.1.0",
     "typedoc": "^0.18.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vite": "^4.4.9",
+    "vitest": "^0.34.1"
   }
 }

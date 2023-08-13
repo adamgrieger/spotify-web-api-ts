@@ -3,17 +3,18 @@ import { SpotifyWebApi } from '.';
 import { TOKEN_URL } from './constants';
 import { encodeToBase64 } from './helpers/encodeToBase64';
 import { getAuthorizationUrl } from './helpers/getAuthorizationUrl';
+import { type Mocked, type MockedFunction } from 'vitest';
 
-jest.mock('axios');
-jest.mock('./helpers/getAuthorizationUrl');
+vi.mock('axios');
+vi.mock('./helpers/getAuthorizationUrl');
 
-const axiosMock = axios as jest.Mocked<typeof axios>;
-const getAuthorizationUrlMock = getAuthorizationUrl as jest.MockedFunction<
+const axiosMock = axios as Mocked<typeof axios>;
+const getAuthorizationUrlMock = getAuthorizationUrl as MockedFunction<
   typeof getAuthorizationUrl
 >;
 
 beforeEach(() => {
-  jest.resetAllMocks();
+  vi.resetAllMocks();
 });
 
 describe('SpotifyWebApi', () => {

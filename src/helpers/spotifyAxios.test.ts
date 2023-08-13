@@ -1,14 +1,15 @@
 import axios from 'axios';
 import { BASE_API_URL } from '../constants';
 import { paramsSerializer, spotifyAxios } from './spotifyAxios';
+import { type Mock } from 'vitest';
 
-jest.mock('axios');
+vi.mock('axios');
 
-const axiosMock = (axios as unknown) as jest.Mock;
+const axiosMock = (axios as unknown) as Mock;
 
 describe('spotifyAxios', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("should successfully call Spotify's Web API with the default content type", async () => {
