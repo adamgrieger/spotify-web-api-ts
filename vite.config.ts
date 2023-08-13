@@ -10,6 +10,6 @@ export default defineConfig({
 		},
 		environment: 'jsdom', // ?
 		include: ['src/**/*.test.{js,mjs,cjs,ts,mts,cts}'],
-		typecheck: {tsconfig: './tsconfig.json'}
+		typecheck: {tsconfig: './tsconfig.test.json'}
 	}
 })
