@@ -11,9 +11,9 @@ import { Http } from '../helpers/Http';
 import { searchHelper } from '../helpers/searchHelper';
 import { SearchApi } from './SearchApi';
 
-jest.mock('../helpers/searchHelper');
+vi.mock('../helpers/searchHelper');
 
-const searchHelperMock = searchHelper as jest.MockedFunction<
+const searchHelperMock = searchHelper as vi.MockedFunction<
   typeof searchHelper
 >;
 
@@ -25,7 +25,7 @@ function setup() {
 }
 
 beforeEach(() => {
-  jest.resetAllMocks();
+  vi.resetAllMocks();
 });
 
 describe('SearchApi', () => {

@@ -10,9 +10,9 @@ import {
 import { Http } from '../helpers/Http';
 import { BrowseApi } from './BrowseApi';
 
-jest.mock('../helpers/Http');
+vi.mock('../helpers/Http');
 
-const HttpMock = Http as jest.MockedClass<typeof Http>;
+const HttpMock = Http as vi.MockedClass<typeof Http>;
 
 function setup() {
   const httpMock = new HttpMock('token');
@@ -22,7 +22,7 @@ function setup() {
 }
 
 beforeEach(() => {
-  jest.resetAllMocks();
+  vi.resetAllMocks();
 });
 
 describe('BrowseApi', () => {

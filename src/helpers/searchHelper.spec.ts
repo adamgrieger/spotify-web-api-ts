@@ -1,12 +1,12 @@
 import { Http } from './Http';
 import { searchHelper } from './searchHelper';
 
-jest.mock('./Http');
+vi.mock('./Http');
 
-const HttpMock = Http as jest.MockedClass<typeof Http>;
+const HttpMock = Http as vi.MockedClass<typeof Http>;
 
 beforeEach(() => {
-  jest.resetAllMocks();
+  vi.resetAllMocks();
 });
 
 describe('searchHelper', () => {

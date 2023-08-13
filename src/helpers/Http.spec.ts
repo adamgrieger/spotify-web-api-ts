@@ -1,13 +1,13 @@
 import { Http } from './Http';
 import { spotifyAxios } from './spotifyAxios';
 
-jest.mock('./spotifyAxios');
+vi.mock('./spotifyAxios');
 
-const spotifyAxiosMock = spotifyAxios as jest.Mock;
+const spotifyAxiosMock = spotifyAxios as vi.Mock;
 
 describe('Http', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it('should get and set the access token', () => {
