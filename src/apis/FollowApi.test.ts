@@ -1,10 +1,11 @@
+import { type MockedClass } from 'vitest';
 import { getFollowedArtistsFixture } from '../fixtures';
 import { Http } from '../helpers/Http';
 import { FollowApi } from './FollowApi';
 
 vi.mock('../helpers/Http');
 
-const HttpMock = Http as vi.MockedClass<typeof Http>;
+const HttpMock = Http as MockedClass<typeof Http>;
 
 function setup() {
   const httpMock = new HttpMock('token');

@@ -1,9 +1,10 @@
+import { type MockedClass } from 'vitest';
 import { Http } from './Http';
 import { searchHelper } from './searchHelper';
 
 vi.mock('./Http');
 
-const HttpMock = Http as vi.MockedClass<typeof Http>;
+const HttpMock = Http as MockedClass<typeof Http>;
 
 beforeEach(() => {
   vi.resetAllMocks();

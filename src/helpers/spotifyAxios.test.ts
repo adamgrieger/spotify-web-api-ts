@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { BASE_API_URL } from '../constants';
 import { paramsSerializer, spotifyAxios } from './spotifyAxios';
+import { type Mock } from 'vitest';
 
 vi.mock('axios');
 
-const axiosMock = (axios as unknown) as vi.Mock;
+const axiosMock = (axios as unknown) as Mock;
 
 describe('spotifyAxios', () => {
   beforeEach(() => {

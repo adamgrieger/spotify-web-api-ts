@@ -3,12 +3,13 @@ import { SpotifyWebApi } from '.';
 import { TOKEN_URL } from './constants';
 import { encodeToBase64 } from './helpers/encodeToBase64';
 import { getAuthorizationUrl } from './helpers/getAuthorizationUrl';
+import { type Mocked, type MockedFunction } from 'vitest';
 
 vi.mock('axios');
 vi.mock('./helpers/getAuthorizationUrl');
 
-const axiosMock = axios as vi.Mocked<typeof axios>;
-const getAuthorizationUrlMock = getAuthorizationUrl as vi.MockedFunction<
+const axiosMock = axios as Mocked<typeof axios>;
+const getAuthorizationUrlMock = getAuthorizationUrl as MockedFunction<
   typeof getAuthorizationUrl
 >;
 

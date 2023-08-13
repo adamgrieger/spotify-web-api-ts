@@ -1,3 +1,4 @@
+import { type MockedClass } from 'vitest';
 import {
   audioAnalysisFixture,
   audioFeaturesFixture,
@@ -10,7 +11,7 @@ import { TracksApi } from './TracksApi';
 
 vi.mock('../helpers/Http');
 
-const HttpMock = Http as vi.MockedClass<typeof Http>;
+const HttpMock = Http as MockedClass<typeof Http>;
 
 function setup() {
   const httpMock = new HttpMock('token');

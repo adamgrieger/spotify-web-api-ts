@@ -1,3 +1,4 @@
+import { type MockedClass } from 'vitest';
 import {
   getShowEpisodesFixture,
   getShowsFixture,
@@ -8,7 +9,7 @@ import { ShowsApi } from './ShowsApi';
 
 vi.mock('../helpers/Http');
 
-const HttpMock = Http as vi.MockedClass<typeof Http>;
+const HttpMock = Http as MockedClass<typeof Http>;
 
 function setup() {
   const httpMock = new HttpMock('token');

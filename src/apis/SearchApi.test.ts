@@ -1,3 +1,4 @@
+import { type MockedFunction } from 'vitest';
 import {
   searchAlbumsFixture,
   searchArtistsFixture,
@@ -13,7 +14,7 @@ import { SearchApi } from './SearchApi';
 
 vi.mock('../helpers/searchHelper');
 
-const searchHelperMock = searchHelper as vi.MockedFunction<
+const searchHelperMock = searchHelper as MockedFunction<
   typeof searchHelper
 >;
 

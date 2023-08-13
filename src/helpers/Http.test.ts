@@ -1,9 +1,10 @@
+import { type Mock } from 'vitest';
 import { Http } from './Http';
 import { spotifyAxios } from './spotifyAxios';
 
 vi.mock('./spotifyAxios');
 
-const spotifyAxiosMock = spotifyAxios as vi.Mock;
+const spotifyAxiosMock = spotifyAxios as Mock;
 
 describe('Http', () => {
   beforeEach(() => {
