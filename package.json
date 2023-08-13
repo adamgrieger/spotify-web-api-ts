@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@types/qs": "^6.9.4",
-    "typedoc": "^0.18.0"
+    "typedoc": "^0.18.0",
+    "typescript": "^5.1.6"
   }
 }
