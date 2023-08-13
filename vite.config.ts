@@ -8,8 +8,8 @@ export default defineConfig({
 		cache: {
 			dir: './node_modules/.vitest'
 		},
-		environment: 'jsdom', // ?
-		include: ['src/**/*.test.{js,mjs,cjs,ts,mts,cts}'],
+		environment: 'jsdom',
+		include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts}'],
 		typecheck: {tsconfig: './tsconfig.test.json'}
 	}
 })
