@@ -8,7 +8,7 @@ export async function searchHelper<T>(
   query: string,
   type: SearchType[],
   options?: SearchOptions,
-) {
+): Promise<T> {
   return await http.get<T>('/search', {
     params: {
       ...options,

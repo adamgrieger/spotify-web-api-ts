@@ -14,7 +14,7 @@ export function getAuthorizationUrl(
   redirectUri: string,
   responseType: 'code' | 'token',
   options?: GetAuthorizationUrlOptions,
-) {
+): string {
   return `${AUTHORIZE_URL}?${qs.stringify({
     ...options,
     client_id: clientId,

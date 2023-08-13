@@ -91,23 +91,23 @@ export class SpotifyWebApi {
     this.users = new UsersApi(this.http);
   }
 
-  public getAccessToken() {
+  public getAccessToken(): string {
     return this.http.getAccessToken();
   }
 
-  public setAccessToken(accessToken: string) {
+  public setAccessToken(accessToken: string): void {
     this.http.setAccessToken(accessToken);
   }
 
-  public getClientId() {
+  public getClientId(): string {
     return this.clientId;
   }
 
-  public getClientSecret() {
+  public getClientSecret(): string {
     return this.clientSecret;
   }
 
-  public getRedirectUri() {
+  public getRedirectUri(): string {
     return this.redirectUri;
   }
 

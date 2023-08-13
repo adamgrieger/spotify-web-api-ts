@@ -14,7 +14,7 @@ export async function spotifyAxios<T>(
   method: Method,
   accessToken: string,
   config?: SpotifyAxiosConfig,
-) {
+): Promise<T> {
   try {
     const { contentType, ...axiosConfig } = config ?? {};
     const response = await axios({
@@ -36,6 +36,6 @@ export async function spotifyAxios<T>(
   }
 }
 
-export function paramsSerializer(params: unknown) {
+export function paramsSerializer(params: unknown): string {
   return qs.stringify(params, { arrayFormat: 'comma' });
 }
