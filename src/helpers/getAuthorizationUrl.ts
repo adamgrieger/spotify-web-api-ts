@@ -1,12 +1,13 @@
 import qs from 'qs';
-import { AUTHORIZE_URL } from '../constants';
-import { AuthorizationScope } from '../types/SpotifyAuthorization';
 
-export type GetAuthorizationUrlOptions = {
+import { AUTHORIZE_URL } from '../constants';
+import { type AuthorizationScope } from '../types/SpotifyAuthorization';
+
+export interface GetAuthorizationUrlOptions {
   scope?: AuthorizationScope[];
   show_dialog?: boolean;
   state?: string;
-};
+}
 
 export function getAuthorizationUrl(
   clientId: string,

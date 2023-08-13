@@ -1,5 +1,6 @@
-import { getAuthorizationUrl } from './getAuthorizationUrl';
 import { AUTHORIZE_URL } from '../constants';
+
+import { getAuthorizationUrl } from './getAuthorizationUrl';
 
 describe('getAuthorizationUrl', () => {
   it('should get the Spotify authorization URL (without options)', () => {

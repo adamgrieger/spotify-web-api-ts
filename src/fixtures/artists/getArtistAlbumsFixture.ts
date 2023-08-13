@@ -1,8 +1,7 @@
-import { GetArtistAlbumsResponse } from '../../types/SpotifyResponses';
+import { type GetArtistAlbumsResponse } from '../../types/SpotifyResponses';
 
 export const getArtistAlbumsFixture: GetArtistAlbumsResponse = {
-  href:
-    'https://api.spotify.com/v1/artists/2aoFQUeHD1U7pL098lRsDU/albums?offset=0&limit=20&include_groups=album,single,compilation,appears_on',
+  href: 'https://api.spotify.com/v1/artists/2aoFQUeHD1U7pL098lRsDU/albums?offset=0&limit=20&include_groups=album,single,compilation,appears_on',
   items: [
     {
       album_group: 'album',
@@ -108,20 +107,17 @@ export const getArtistAlbumsFixture: GetArtistAlbumsResponse = {
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/ab67616d0000b273577433f060dc061ac1322496',
+          url: 'https://i.scdn.co/image/ab67616d0000b273577433f060dc061ac1322496',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/ab67616d00001e02577433f060dc061ac1322496',
+          url: 'https://i.scdn.co/image/ab67616d00001e02577433f060dc061ac1322496',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/ab67616d00004851577433f060dc061ac1322496',
+          url: 'https://i.scdn.co/image/ab67616d00004851577433f060dc061ac1322496',
           width: 64,
         },
       ],
@@ -236,20 +232,17 @@ export const getArtistAlbumsFixture: GetArtistAlbumsResponse = {
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/ab67616d0000b273d8d377c5499bb95770d7acd2',
+          url: 'https://i.scdn.co/image/ab67616d0000b273d8d377c5499bb95770d7acd2',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/ab67616d00001e02d8d377c5499bb95770d7acd2',
+          url: 'https://i.scdn.co/image/ab67616d00001e02d8d377c5499bb95770d7acd2',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/ab67616d00004851d8d377c5499bb95770d7acd2',
+          url: 'https://i.scdn.co/image/ab67616d00004851d8d377c5499bb95770d7acd2',
           width: 64,
         },
       ],
@@ -364,20 +357,17 @@ export const getArtistAlbumsFixture: GetArtistAlbumsResponse = {
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/ab67616d0000b27382222510029565a4816998b9',
+          url: 'https://i.scdn.co/image/ab67616d0000b27382222510029565a4816998b9',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/ab67616d00001e0282222510029565a4816998b9',
+          url: 'https://i.scdn.co/image/ab67616d00001e0282222510029565a4816998b9',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/ab67616d0000485182222510029565a4816998b9',
+          url: 'https://i.scdn.co/image/ab67616d0000485182222510029565a4816998b9',
           width: 64,
         },
       ],
@@ -492,20 +482,17 @@ export const getArtistAlbumsFixture: GetArtistAlbumsResponse = {
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/ab67616d0000b2734a9defc26882dc1487a106ec',
+          url: 'https://i.scdn.co/image/ab67616d0000b2734a9defc26882dc1487a106ec',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/ab67616d00001e024a9defc26882dc1487a106ec',
+          url: 'https://i.scdn.co/image/ab67616d00001e024a9defc26882dc1487a106ec',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/ab67616d000048514a9defc26882dc1487a106ec',
+          url: 'https://i.scdn.co/image/ab67616d000048514a9defc26882dc1487a106ec',
           width: 64,
         },
       ],
@@ -620,20 +607,17 @@ export const getArtistAlbumsFixture: GetArtistAlbumsResponse = {
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/ab67616d0000b27383cc29a0683427328cd522bc',
+          url: 'https://i.scdn.co/image/ab67616d0000b27383cc29a0683427328cd522bc',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/ab67616d00001e0283cc29a0683427328cd522bc',
+          url: 'https://i.scdn.co/image/ab67616d00001e0283cc29a0683427328cd522bc',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/ab67616d0000485183cc29a0683427328cd522bc',
+          url: 'https://i.scdn.co/image/ab67616d0000485183cc29a0683427328cd522bc',
           width: 64,
         },
       ],
@@ -758,20 +742,17 @@ export const getArtistAlbumsFixture: GetArtistAlbumsResponse = {
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/ab67616d0000b2730c54dccddc8d8af4c371ff7b',
+          url: 'https://i.scdn.co/image/ab67616d0000b2730c54dccddc8d8af4c371ff7b',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/ab67616d00001e020c54dccddc8d8af4c371ff7b',
+          url: 'https://i.scdn.co/image/ab67616d00001e020c54dccddc8d8af4c371ff7b',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/ab67616d000048510c54dccddc8d8af4c371ff7b',
+          url: 'https://i.scdn.co/image/ab67616d000048510c54dccddc8d8af4c371ff7b',
           width: 64,
         },
       ],

@@ -1,13 +1,17 @@
-import { Http } from '../helpers/Http';
-import { AudioAnalysis, AudioFeatures, Track } from '../types/SpotifyObjects';
-import { MarketOptions } from '../types/SpotifyOptions';
+import { type Http } from '../helpers/Http';
 import {
-  GetAudioFeaturesForTracksResponse,
-  GetTracksResponse,
+  type AudioAnalysis,
+  type AudioFeatures,
+  type Track,
+} from '../types/SpotifyObjects';
+import { type MarketOptions } from '../types/SpotifyOptions';
+import {
+  type GetAudioFeaturesForTracksResponse,
+  type GetTracksResponse,
 } from '../types/SpotifyResponses';
 
 export class TracksApi {
-  private http: Http;
+  private readonly http: Http;
 
   constructor(http: Http) {
     this.http = http;
@@ -21,8 +25,8 @@ export class TracksApi {
    *
    * @param trackId The Spotify ID for the track.
    */
-  getAudioAnalysisForTrack(trackId: string): Promise<AudioAnalysis> {
-    return this.http.get<AudioAnalysis>(`/audio-analysis/${trackId}`);
+  async getAudioAnalysisForTrack(trackId: string): Promise<AudioAnalysis> {
+    return await this.http.get<AudioAnalysis>(`/audio-analysis/${trackId}`);
   }
 
   /**
@@ -33,8 +37,8 @@ export class TracksApi {
    *
    * @param trackId The Spotify ID for the track.
    */
-  getAudioFeaturesForTrack(trackId: string): Promise<AudioFeatures> {
-    return this.http.get<AudioFeatures>(`/audio-features/${trackId}`);
+  async getAudioFeaturesForTrack(trackId: string): Promise<AudioFeatures> {
+    return await this.http.get<AudioFeatures>(`/audio-features/${trackId}`);
   }
 
   /**
@@ -67,8 +71,8 @@ export class TracksApi {
    * @param trackId The Spotify ID for the track.
    * @param options Optional request information.
    */
-  getTrack(trackId: string, options?: MarketOptions): Promise<Track> {
-    return this.http.get<Track>(
+  async getTrack(trackId: string, options?: MarketOptions): Promise<Track> {
+    return await this.http.get<Track>(
       `/tracks/${trackId}`,
       options && { params: options },
     );

@@ -1,5 +1,7 @@
 import axios from 'axios';
+
 import { BASE_API_URL } from '../constants';
+
 import { paramsSerializer, spotifyAxios } from './spotifyAxios';
 import { type Mock } from 'vitest';
 
@@ -25,7 +27,7 @@ describe('spotifyAxios', () => {
       },
       baseURL: BASE_API_URL,
       headers: {
-        Authorization: 'Bearer token',
+        'Authorization': 'Bearer token',
         'Content-Type': 'application/json',
       },
       paramsSerializer,
@@ -44,7 +46,7 @@ describe('spotifyAxios', () => {
       data: 'bar',
       baseURL: BASE_API_URL,
       headers: {
-        Authorization: 'Bearer token',
+        'Authorization': 'Bearer token',
         'Content-Type': 'image/jpeg',
       },
       paramsSerializer,

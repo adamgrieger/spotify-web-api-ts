@@ -1,4 +1,4 @@
-import { GetArtistTopTracksResponse } from '../../types/SpotifyResponses';
+import { type GetArtistTopTracksResponse } from '../../types/SpotifyResponses';
 
 export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
   tracks: [
@@ -25,20 +25,17 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b2733f31769b727102837cb32a63',
+            url: 'https://i.scdn.co/image/ab67616d0000b2733f31769b727102837cb32a63',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e023f31769b727102837cb32a63',
+            url: 'https://i.scdn.co/image/ab67616d00001e023f31769b727102837cb32a63',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d000048513f31769b727102837cb32a63',
+            url: 'https://i.scdn.co/image/ab67616d000048513f31769b727102837cb32a63',
             width: 64,
           },
         ],
@@ -105,20 +102,17 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b273210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d0000b273210e19d835bb0af6620256cf',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e02210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d00001e02210e19d835bb0af6620256cf',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d00004851210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d00004851210e19d835bb0af6620256cf',
             width: 64,
           },
         ],
@@ -185,20 +179,17 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b273210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d0000b273210e19d835bb0af6620256cf',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e02210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d00001e02210e19d835bb0af6620256cf',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d00004851210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d00004851210e19d835bb0af6620256cf',
             width: 64,
           },
         ],
@@ -265,20 +256,17 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b2733f31769b727102837cb32a63',
+            url: 'https://i.scdn.co/image/ab67616d0000b2733f31769b727102837cb32a63',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e023f31769b727102837cb32a63',
+            url: 'https://i.scdn.co/image/ab67616d00001e023f31769b727102837cb32a63',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d000048513f31769b727102837cb32a63',
+            url: 'https://i.scdn.co/image/ab67616d000048513f31769b727102837cb32a63',
             width: 64,
           },
         ],
@@ -345,20 +333,17 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b2733f31769b727102837cb32a63',
+            url: 'https://i.scdn.co/image/ab67616d0000b2733f31769b727102837cb32a63',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e023f31769b727102837cb32a63',
+            url: 'https://i.scdn.co/image/ab67616d00001e023f31769b727102837cb32a63',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d000048513f31769b727102837cb32a63',
+            url: 'https://i.scdn.co/image/ab67616d000048513f31769b727102837cb32a63',
             width: 64,
           },
         ],
@@ -425,20 +410,17 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b273210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d0000b273210e19d835bb0af6620256cf',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e02210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d00001e02210e19d835bb0af6620256cf',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d00004851210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d00004851210e19d835bb0af6620256cf',
             width: 64,
           },
         ],
@@ -505,20 +487,17 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b273210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d0000b273210e19d835bb0af6620256cf',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e02210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d00001e02210e19d835bb0af6620256cf',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d00004851210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d00004851210e19d835bb0af6620256cf',
             width: 64,
           },
         ],
@@ -585,20 +564,17 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b2730c0bb65462ee3d704aec1fce',
+            url: 'https://i.scdn.co/image/ab67616d0000b2730c0bb65462ee3d704aec1fce',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e020c0bb65462ee3d704aec1fce',
+            url: 'https://i.scdn.co/image/ab67616d00001e020c0bb65462ee3d704aec1fce',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d000048510c0bb65462ee3d704aec1fce',
+            url: 'https://i.scdn.co/image/ab67616d000048510c0bb65462ee3d704aec1fce',
             width: 64,
           },
         ],
@@ -665,20 +641,17 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b273210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d0000b273210e19d835bb0af6620256cf',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e02210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d00001e02210e19d835bb0af6620256cf',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d00004851210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d00004851210e19d835bb0af6620256cf',
             width: 64,
           },
         ],
@@ -745,20 +718,17 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b273210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d0000b273210e19d835bb0af6620256cf',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e02210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d00001e02210e19d835bb0af6620256cf',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d00004851210e19d835bb0af6620256cf',
+            url: 'https://i.scdn.co/image/ab67616d00004851210e19d835bb0af6620256cf',
             width: 64,
           },
         ],

@@ -1,4 +1,4 @@
-import { CurrentlyPlaying } from '../types/SpotifyObjects';
+import { type CurrentlyPlaying } from '../types/SpotifyObjects';
 
 export const currentlyPlayingFixture: CurrentlyPlaying = {
   timestamp: 1587438536283,
@@ -115,20 +115,17 @@ export const currentlyPlayingFixture: CurrentlyPlaying = {
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/ab67616d0000b273841292c1316c4bf85447bcd9',
+          url: 'https://i.scdn.co/image/ab67616d0000b273841292c1316c4bf85447bcd9',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/ab67616d00001e02841292c1316c4bf85447bcd9',
+          url: 'https://i.scdn.co/image/ab67616d00001e02841292c1316c4bf85447bcd9',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/ab67616d00004851841292c1316c4bf85447bcd9',
+          url: 'https://i.scdn.co/image/ab67616d00004851841292c1316c4bf85447bcd9',
           width: 64,
         },
       ],

@@ -6,6 +6,7 @@ import {
   getRecentlyPlayedTracksFixture,
 } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { PlayerApi } from './PlayerApi';
 
 vi.mock('../helpers/Http');

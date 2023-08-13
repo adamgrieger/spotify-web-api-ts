@@ -7,6 +7,7 @@ import {
   trackFixture,
 } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { TracksApi } from './TracksApi';
 
 vi.mock('../helpers/Http');

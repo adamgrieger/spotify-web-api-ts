@@ -15,6 +15,8 @@
     "assets"
   ],
   "scripts": {
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
 		"test:dom": "vitest run --environment jsdom",
     "test:node": "vitest run --environment node",
 		"test": "yarn test:dom && yarn test:node",
@@ -26,8 +28,11 @@
     "qs": "^6.9.4"
   },
   "devDependencies": {
+    "@inferrinizzard/eslint-config": "inferrinizzard/eslint-config",
     "@types/qs": "^6.9.4",
+    "eslint": "^8.47.0",
     "jsdom": "^22.1.0",
+    "prettier": "^2.7.1",
     "typedoc": "^0.18.0",
     "typescript": "^5.1.6",
     "vite": "^4.4.9",

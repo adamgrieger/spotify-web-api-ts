@@ -1,6 +1,7 @@
 import { type MockedClass } from 'vitest';
 import { episodeFixture, getEpisodesFixture } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { EpisodesApi } from './EpisodesApi';
 
 vi.mock('../helpers/Http');

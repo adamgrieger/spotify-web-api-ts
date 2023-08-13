@@ -1,6 +1,7 @@
 import { type MockedClass } from 'vitest';
 import { getFollowedArtistsFixture } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { FollowApi } from './FollowApi';
 
 vi.mock('../helpers/Http');

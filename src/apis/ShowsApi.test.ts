@@ -5,6 +5,7 @@ import {
   showFixture,
 } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { ShowsApi } from './ShowsApi';
 
 vi.mock('../helpers/Http');

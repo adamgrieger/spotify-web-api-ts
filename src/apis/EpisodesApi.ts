@@ -1,10 +1,10 @@
-import { Http } from '../helpers/Http';
-import { Episode } from '../types/SpotifyObjects';
-import { MarketOptions } from '../types/SpotifyOptions';
-import { GetEpisodesResponse } from '../types/SpotifyResponses';
+import { type Http } from '../helpers/Http';
+import { type Episode } from '../types/SpotifyObjects';
+import { type MarketOptions } from '../types/SpotifyOptions';
+import { type GetEpisodesResponse } from '../types/SpotifyResponses';
 
 export class EpisodesApi {
-  private http: Http;
+  private readonly http: Http;
 
   constructor(http: Http) {
     this.http = http;
@@ -28,8 +28,11 @@ export class EpisodesApi {
    *
    * @param options Optional request information.
    */
-  getEpisode(episodeId: string, options?: MarketOptions): Promise<Episode> {
-    return this.http.get<Episode>(
+  async getEpisode(
+    episodeId: string,
+    options?: MarketOptions,
+  ): Promise<Episode> {
+    return await this.http.get<Episode>(
       `/episodes/${episodeId}`,
       options && { params: options },
     );

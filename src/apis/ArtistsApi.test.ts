@@ -2,11 +2,12 @@ import { type MockedClass } from 'vitest';
 import {
   artistFixture,
   getArtistAlbumsFixture,
-  getArtistsFixture,
   getArtistTopTracksFixture,
+  getArtistsFixture,
   getRelatedArtistsFixture,
 } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { ArtistsApi } from './ArtistsApi';
 
 vi.mock('../helpers/Http');

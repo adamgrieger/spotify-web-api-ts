@@ -8,6 +8,7 @@ import {
   spotifyImageFixture,
 } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { PlaylistsApi } from './PlaylistsApi';
 
 vi.mock('../helpers/Http');

@@ -1,6 +1,7 @@
 import { type MockedClass } from 'vitest';
 import { getMyTopArtistsFixture, getMyTopTracksFixture } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { PersonalizationApi } from './PersonalizationApi';
 
 vi.mock('../helpers/Http');

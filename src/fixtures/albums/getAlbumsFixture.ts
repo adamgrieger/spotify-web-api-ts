@@ -1,4 +1,4 @@
-import { GetAlbumsResponse } from '../../types/SpotifyResponses';
+import { type GetAlbumsResponse } from '../../types/SpotifyResponses';
 
 export const getAlbumsFixture: GetAlbumsResponse = {
   albums: [
@@ -110,20 +110,17 @@ export const getAlbumsFixture: GetAlbumsResponse = {
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/ab67616d0000b273a1370ed5825b52eff3d2492d',
+          url: 'https://i.scdn.co/image/ab67616d0000b273a1370ed5825b52eff3d2492d',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/ab67616d00001e02a1370ed5825b52eff3d2492d',
+          url: 'https://i.scdn.co/image/ab67616d00001e02a1370ed5825b52eff3d2492d',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/ab67616d00004851a1370ed5825b52eff3d2492d',
+          url: 'https://i.scdn.co/image/ab67616d00004851a1370ed5825b52eff3d2492d',
           width: 64,
         },
       ],
@@ -134,8 +131,7 @@ export const getAlbumsFixture: GetAlbumsResponse = {
       release_date_precision: 'day',
       total_tracks: 4,
       tracks: {
-        href:
-          'https://api.spotify.com/v1/albums/4OnDcyeOdyBfEEqtsHrr6i/tracks?offset=0&limit=50',
+        href: 'https://api.spotify.com/v1/albums/4OnDcyeOdyBfEEqtsHrr6i/tracks?offset=0&limit=50',
         items: [
           {
             artists: [
@@ -144,8 +140,7 @@ export const getAlbumsFixture: GetAlbumsResponse = {
                   spotify:
                     'https://open.spotify.com/artist/2MPSxDniHj2BKV7GSSOFMA',
                 },
-                href:
-                  'https://api.spotify.com/v1/artists/2MPSxDniHj2BKV7GSSOFMA',
+                href: 'https://api.spotify.com/v1/artists/2MPSxDniHj2BKV7GSSOFMA',
                 id: '2MPSxDniHj2BKV7GSSOFMA',
                 name: 'Sepalcure',
                 type: 'artist',
@@ -256,8 +251,7 @@ export const getAlbumsFixture: GetAlbumsResponse = {
                   spotify:
                     'https://open.spotify.com/artist/2MPSxDniHj2BKV7GSSOFMA',
                 },
-                href:
-                  'https://api.spotify.com/v1/artists/2MPSxDniHj2BKV7GSSOFMA',
+                href: 'https://api.spotify.com/v1/artists/2MPSxDniHj2BKV7GSSOFMA',
                 id: '2MPSxDniHj2BKV7GSSOFMA',
                 name: 'Sepalcure',
                 type: 'artist',
@@ -368,8 +362,7 @@ export const getAlbumsFixture: GetAlbumsResponse = {
                   spotify:
                     'https://open.spotify.com/artist/2MPSxDniHj2BKV7GSSOFMA',
                 },
-                href:
-                  'https://api.spotify.com/v1/artists/2MPSxDniHj2BKV7GSSOFMA',
+                href: 'https://api.spotify.com/v1/artists/2MPSxDniHj2BKV7GSSOFMA',
                 id: '2MPSxDniHj2BKV7GSSOFMA',
                 name: 'Sepalcure',
                 type: 'artist',
@@ -480,8 +473,7 @@ export const getAlbumsFixture: GetAlbumsResponse = {
                   spotify:
                     'https://open.spotify.com/artist/2MPSxDniHj2BKV7GSSOFMA',
                 },
-                href:
-                  'https://api.spotify.com/v1/artists/2MPSxDniHj2BKV7GSSOFMA',
+                href: 'https://api.spotify.com/v1/artists/2MPSxDniHj2BKV7GSSOFMA',
                 id: '2MPSxDniHj2BKV7GSSOFMA',
                 name: 'Sepalcure',
                 type: 'artist',
@@ -712,20 +704,17 @@ export const getAlbumsFixture: GetAlbumsResponse = {
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/ab67616d0000b27329f469ca19f2db2c2802bc53',
+          url: 'https://i.scdn.co/image/ab67616d0000b27329f469ca19f2db2c2802bc53',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/ab67616d00001e0229f469ca19f2db2c2802bc53',
+          url: 'https://i.scdn.co/image/ab67616d00001e0229f469ca19f2db2c2802bc53',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/ab67616d0000485129f469ca19f2db2c2802bc53',
+          url: 'https://i.scdn.co/image/ab67616d0000485129f469ca19f2db2c2802bc53',
           width: 64,
         },
       ],
@@ -736,8 +725,7 @@ export const getAlbumsFixture: GetAlbumsResponse = {
       release_date_precision: 'day',
       total_tracks: 3,
       tracks: {
-        href:
-          'https://api.spotify.com/v1/albums/0FO3N0KhhvXY7SORYneGbw/tracks?offset=0&limit=50',
+        href: 'https://api.spotify.com/v1/albums/0FO3N0KhhvXY7SORYneGbw/tracks?offset=0&limit=50',
         items: [
           {
             artists: [
@@ -746,8 +734,7 @@ export const getAlbumsFixture: GetAlbumsResponse = {
                   spotify:
                     'https://open.spotify.com/artist/25TUFIkK2VpEjl6GnzrcEp',
                 },
-                href:
-                  'https://api.spotify.com/v1/artists/25TUFIkK2VpEjl6GnzrcEp',
+                href: 'https://api.spotify.com/v1/artists/25TUFIkK2VpEjl6GnzrcEp',
                 id: '25TUFIkK2VpEjl6GnzrcEp',
                 name: 'Dauwd',
                 type: 'artist',
@@ -858,8 +845,7 @@ export const getAlbumsFixture: GetAlbumsResponse = {
                   spotify:
                     'https://open.spotify.com/artist/25TUFIkK2VpEjl6GnzrcEp',
                 },
-                href:
-                  'https://api.spotify.com/v1/artists/25TUFIkK2VpEjl6GnzrcEp',
+                href: 'https://api.spotify.com/v1/artists/25TUFIkK2VpEjl6GnzrcEp',
                 id: '25TUFIkK2VpEjl6GnzrcEp',
                 name: 'Dauwd',
                 type: 'artist',
@@ -970,8 +956,7 @@ export const getAlbumsFixture: GetAlbumsResponse = {
                   spotify:
                     'https://open.spotify.com/artist/25TUFIkK2VpEjl6GnzrcEp',
                 },
-                href:
-                  'https://api.spotify.com/v1/artists/25TUFIkK2VpEjl6GnzrcEp',
+                href: 'https://api.spotify.com/v1/artists/25TUFIkK2VpEjl6GnzrcEp',
                 id: '25TUFIkK2VpEjl6GnzrcEp',
                 name: 'Dauwd',
                 type: 'artist',

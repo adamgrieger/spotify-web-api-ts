@@ -1,6 +1,7 @@
 import { type MockedClass } from 'vitest';
 import { privateUserFixture, publicUserFixture } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { UsersApi } from './UsersApi';
 
 vi.mock('../helpers/Http');

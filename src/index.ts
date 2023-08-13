@@ -1,5 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
+
 import { AlbumsApi } from './apis/AlbumsApi';
 import { ArtistsApi } from './apis/ArtistsApi';
 import { BrowseApi } from './apis/BrowseApi';
@@ -15,43 +16,55 @@ import { TracksApi } from './apis/TracksApi';
 import { UsersApi } from './apis/UsersApi';
 import { TOKEN_URL } from './constants';
 import { encodeToBase64 } from './helpers/encodeToBase64';
-import {
-  getAuthorizationUrl,
-  GetAuthorizationUrlOptions,
-} from './helpers/getAuthorizationUrl';
+import { getAuthorizationUrl } from './helpers/getAuthorizationUrl';
 import { Http } from './helpers/Http';
 import {
-  GetRefreshableUserTokensResponse,
-  GetRefreshedAccessTokenResponse,
-  GetTemporaryAppTokensResponse,
+  type GetRefreshableUserTokensResponse,
+  type GetRefreshedAccessTokenResponse,
+  type GetTemporaryAppTokensResponse,
 } from './types/SpotifyAuthorization';
+import { type GetAuthorizationUrlOptions } from './helpers/getAuthorizationUrl';
 
-type SpotifyWebApiOptions = {
+interface SpotifyWebApiOptions {
   accessToken?: string;
   clientId?: string;
   clientSecret?: string;
   redirectUri?: string;
-};
+}
 
 export class SpotifyWebApi {
-  private clientId: string;
-  private clientSecret: string;
-  private redirectUri: string;
+  private readonly clientId: string;
 
-  private http: Http;
+  private readonly clientSecret: string;
+
+  private readonly redirectUri: string;
+
+  private readonly http: Http;
 
   public albums: AlbumsApi;
+
   public artists: ArtistsApi;
+
   public browse: BrowseApi;
+
   public episodes: EpisodesApi;
+
   public follow: FollowApi;
+
   public library: LibraryApi;
+
   public personalization: PersonalizationApi;
+
   public player: PlayerApi;
+
   public playlists: PlaylistsApi;
+
   public search: SearchApi;
+
   public shows: ShowsApi;
+
   public tracks: TracksApi;
+
   public users: UsersApi;
 
   constructor(options?: SpotifyWebApiOptions) {
@@ -157,7 +170,7 @@ export class SpotifyWebApi {
       }),
       {
         headers: {
-          Authorization: `Basic ${encodeToBase64(
+          'Authorization': `Basic ${encodeToBase64(
             `${this.clientId}:${this.clientSecret}`,
           )}`,
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -185,7 +198,7 @@ export class SpotifyWebApi {
       }),
       {
         headers: {
-          Authorization: `Basic ${encodeToBase64(
+          'Authorization': `Basic ${encodeToBase64(
             `${this.clientId}:${this.clientSecret}`,
           )}`,
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -215,7 +228,7 @@ export class SpotifyWebApi {
       }),
       {
         headers: {
-          Authorization: `Basic ${encodeToBase64(
+          'Authorization': `Basic ${encodeToBase64(
             `${this.clientId}:${this.clientSecret}`,
           )}`,
           'Content-Type': 'application/x-www-form-urlencoded',

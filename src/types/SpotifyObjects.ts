@@ -6,12 +6,12 @@ export type Action =
   | 'skipping_next'
   | 'skipping_prev'
   | 'toggling_repeat_context'
-  | 'toggling_shuffle'
   | 'toggling_repeat_track'
+  | 'toggling_shuffle'
   | 'transferring_playback';
 
-export type Album = {
-  album_type: 'album' | 'single' | 'compilation';
+export interface Album {
+  album_type: 'album' | 'compilation' | 'single';
   artists: SimplifiedArtist[];
   available_markets: string[];
   copyrights: Copyright[];
@@ -25,15 +25,15 @@ export type Album = {
   name: string;
   popularity: number;
   release_date: string;
-  release_date_precision: 'year' | 'month' | 'day';
+  release_date_precision: 'day' | 'month' | 'year';
   restrictions?: Restrictions;
   total_tracks: number;
   tracks: Paging<SimplifiedTrack>;
   type: 'album';
   uri: string;
-};
+}
 
-export type Artist = {
+export interface Artist {
   external_urls: ExternalURL;
   followers: Followers;
   genres: string[];
@@ -44,9 +44,9 @@ export type Artist = {
   popularity: number;
   type: 'artist';
   uri: string;
-};
+}
 
-export type AudioAnalysis = {
+export interface AudioAnalysis {
   bars: TimeInterval[];
   beats: TimeInterval[];
   meta?: unknown;
@@ -54,86 +54,86 @@ export type AudioAnalysis = {
   segments: Segment[];
   tatums: TimeInterval[];
   track?: unknown;
-};
+}
 
-export type AudioFeatures = {
-  duration_ms: number;
-  key: number;
-  mode: number;
-  time_signature: number;
+export interface AudioFeatures {
   acousticness: number;
+  analysis_url: string;
   danceability: number;
+  duration_ms: number;
   energy: number;
+  id: string;
   instrumentalness: number;
+  key: number;
   liveness: number;
   loudness: number;
+  mode: number;
   speechiness: number;
-  valence: number;
   tempo: number;
-  id: string;
-  uri: string;
+  time_signature: number;
   track_href: string;
-  analysis_url: string;
   type: 'audio_features';
-};
+  valence: number;
+  uri: string;
+}
 
-export type Category = {
+export interface Category {
   href: string;
   icons: SpotifyImage[];
   id: string;
   name: string;
-};
+}
 
-export type Context = {
-  uri: string;
-  href: string | null;
+export interface Context {
   external_urls: ExternalURL | null;
+  href: string | null;
   type: 'album' | 'artist' | 'playlist';
-};
+  uri: string;
+}
 
-export type Copyright = {
+export interface Copyright {
   text: string;
   type: 'C' | 'P';
-};
+}
 
-export type CurrentlyPlaying = {
+export interface CurrentlyPlaying {
+  actions: Disallows;
   context: Context | null;
-  timestamp: number;
-  progress_ms: number | null;
+  currently_playing_type: 'ad' | 'episode' | 'track' | 'unknown';
   is_playing: boolean;
   item: Episode | Track | null;
-  currently_playing_type: 'track' | 'episode' | 'ad' | 'unknown';
-  actions: Disallows;
-};
-
-export type CurrentlyPlayingContext = {
-  device: Device;
-  repeat_state: 'off' | 'track' | 'context';
-  shuffle_state: boolean;
-  context: Context | null;
-  timestamp: number;
   progress_ms: number | null;
+  timestamp: number;
+}
+
+export interface CurrentlyPlayingContext {
+  actions: Disallows;
+  context: Context | null;
+  currently_playing_type: 'ad' | 'episode' | 'track' | 'unknown';
+  device: Device;
   is_playing: boolean;
   item: Track | null;
-  currently_playing_type: 'track' | 'episode' | 'ad' | 'unknown';
-  actions: Disallows;
-};
+  progress_ms: number | null;
+  repeat_state: 'context' | 'off' | 'track';
+  shuffle_state: boolean;
+  timestamp: number;
+}
 
-export type Cursor = {
+export interface Cursor {
   after: string;
   before?: string;
-};
+}
 
-export type CursorBasedPaging<T> = {
+export interface CursorBasedPaging<T> {
+  cursors: Cursor;
   href: string;
   items: T[];
   limit: number;
   next: string | null;
-  cursors: Cursor;
   total?: number;
-};
+}
 
-export type Device = {
+export interface Device {
   id: string | null;
   is_active: boolean;
   is_private_session: boolean;
@@ -141,28 +141,28 @@ export type Device = {
   name: string;
   type: DeviceType;
   volume_percent: number | null;
-};
+}
 
 export type DeviceType =
+  | 'AudioDongle'
+  | 'Automobile'
+  | 'AVR'
+  | 'CastAudio'
+  | 'CastVideo'
   | 'Computer'
-  | 'Tablet'
+  | 'GameConsole'
   | 'Smartphone'
   | 'Speaker'
-  | 'TV'
-  | 'AVR'
   | 'STB'
-  | 'AudioDongle'
-  | 'GameConsole'
-  | 'CastVideo'
-  | 'CastAudio'
-  | 'Automobile'
+  | 'Tablet'
+  | 'TV'
   | 'Unknown';
 
-export type Disallows = {
+export interface Disallows {
   disallows: Partial<Record<Action, boolean>>;
-};
+}
 
-export type Episode = {
+export interface Episode {
   audio_preview_url: string | null;
   description: string;
   duration_ms: number;
@@ -177,38 +177,38 @@ export type Episode = {
   languages: string[];
   name: string;
   release_date: string;
-  release_date_precision: 'year' | 'month' | 'day';
+  release_date_precision: 'day' | 'month' | 'year';
   resume_point?: ResumePoint;
   show: SimplifiedShow;
   type: 'episode';
   uri: string;
-};
+}
 
-export type ExplicitContent = {
+export interface ExplicitContent {
   filter_enabled: boolean;
   filter_locked: boolean;
-};
+}
 
-export type ExternalID = {
+export interface ExternalID {
   [key: string]: string;
-};
+}
 
-export type ExternalURL = {
+export interface ExternalURL {
   [key: string]: string;
-};
+}
 
-export type Followers = {
+export interface Followers {
   href: string | null;
   total: number;
-};
+}
 
-export type GetRecommendationsSeeds = {
+export interface GetRecommendationsSeeds {
   seed_artists?: string[];
   seed_genres?: string[];
   seed_tracks?: string[];
-};
+}
 
-export type Paging<T> = {
+export interface Paging<T> {
   href: string;
   items: T[];
   limit: number;
@@ -216,15 +216,15 @@ export type Paging<T> = {
   offset: number;
   previous: string | null;
   total: number;
-};
+}
 
-export type PlayHistory = {
-  track: Track;
-  played_at: string;
+export interface PlayHistory {
   context: Context | null;
-};
+  played_at: string;
+  track: Track;
+}
 
-export type Playlist = {
+export interface Playlist {
   collaborative: boolean;
   description: string | null;
   external_urls: ExternalURL;
@@ -240,25 +240,25 @@ export type Playlist = {
   tracks: Paging<PlaylistItem>;
   type: 'playlist';
   uri: string;
-};
+}
 
-export type PlaylistDetails = {
-  name?: string;
-  public?: boolean;
+export interface PlaylistDetails {
   collaborative?: boolean;
   description?: string;
-};
+  name?: string;
+  public?: boolean;
+}
 
-export type PlaylistItem = {
+export interface PlaylistItem {
   added_at: string | null;
   added_by: PublicUser | null;
   is_local: boolean;
   primary_color?: string | null;
-  track: Track | Episode;
+  track: Episode | Track;
   video_thumbnail?: VideoThumbnail;
-};
+}
 
-export type PrivateUser = {
+export interface PrivateUser {
   birthdate?: string;
   country?: string;
   display_name: string | null;
@@ -272,9 +272,9 @@ export type PrivateUser = {
   product?: string;
   type: 'user';
   uri: string;
-};
+}
 
-export type PublicUser = {
+export interface PublicUser {
   display_name?: string | null;
   external_urls: ExternalURL;
   followers?: Followers;
@@ -283,91 +283,91 @@ export type PublicUser = {
   images?: SpotifyImage[];
   type: 'user';
   uri: string;
-};
+}
 
-export type RecommendationSeed = {
+export interface RecommendationSeed {
   afterFilteringSize: number;
   afterRelinkingSize: number;
   href: string | null;
   id: string;
   initialPoolSize: number;
-  type: 'artist' | 'ARTIST' | 'track' | 'TRACK' | 'genre' | 'GENRE';
-};
+  type: 'ARTIST' | 'artist' | 'GENRE' | 'genre' | 'TRACK' | 'track';
+}
 
-export type RegularError = {
+export interface RegularError {
   error: {
-    status: number;
     message: string;
+    status: number;
   };
-};
+}
 
-export type RepeatState = 'track' | 'context' | 'off';
+export type RepeatState = 'context' | 'off' | 'track';
 
-export type ResumePoint = {
+export interface ResumePoint {
   fully_played: boolean;
   resume_position_ms: number;
-};
+}
 
-export type Restrictions = {
+export interface Restrictions {
   reason: string;
-};
+}
 
-export type SavedAlbum = {
+export interface SavedAlbum {
   added_at: string;
   album: Album;
-};
+}
 
-export type SavedShow = {
+export interface SavedShow {
   added_at: string;
   show: SimplifiedShow;
-};
+}
 
-export type SavedTrack = {
+export interface SavedTrack {
   added_at: string;
   track: Track;
-};
+}
 
 export type SearchType =
   | 'album'
   | 'artist'
+  | 'episode'
   | 'playlist'
-  | 'track'
   | 'show'
-  | 'episode';
+  | 'track';
 
-export type Section = {
-  start: number;
-  duration: number;
+export interface Section {
   confidence: number;
-  loudness: number;
-  tempo: number;
-  tempo_confidence: number;
+  duration: number;
   key: number;
   key_confidence: number;
+  loudness: number;
   mode: number;
   mode_confidence: number;
+  start: number;
+  tempo: number;
+  tempo_confidence: number;
   time_signature: number;
   time_signature_confidence: number;
-};
+}
 
-export type Segment = {
-  start: number;
-  duration: number;
+export interface Segment {
   confidence: number;
-  loudness_start: number;
+  duration: number;
+  loudness_end: number;
   loudness_max: number;
   loudness_max_time: number;
-  loudness_end: number;
+  loudness_start: number;
   pitches: number[];
+  start: number;
   timbre: number[];
-};
+}
 
-export type Show = {
+export interface Show {
   available_markets: string[];
   copyrights: Copyright[];
   description: string;
-  explicit: boolean;
   episodes: Paging<SimplifiedEpisode>;
+  explicit: boolean;
   external_urls: ExternalURL;
   href: string;
   id: string;
@@ -379,17 +379,17 @@ export type Show = {
   publisher: string;
   type: 'show';
   uri: string;
-};
+}
 
-export type SimplifiedAlbum = {
-  album_group?: 'album' | 'single' | 'compilation' | 'appears_on';
+export interface SimplifiedAlbum {
+  album_group?: 'album' | 'appears_on' | 'compilation' | 'single';
   album_type:
-    | 'album'
     | 'ALBUM'
-    | 'single'
-    | 'SINGLE'
+    | 'album'
+    | 'COMPILATION'
     | 'compilation'
-    | 'COMPILATION';
+    | 'SINGLE'
+    | 'single';
   artists: SimplifiedArtist[];
   available_markets?: string[];
   external_urls: ExternalURL;
@@ -398,23 +398,23 @@ export type SimplifiedAlbum = {
   images: SpotifyImage[];
   name: string;
   release_date: string;
-  release_date_precision: 'year' | 'month' | 'day';
+  release_date_precision: 'day' | 'month' | 'year';
   restrictions?: Restrictions;
   total_tracks: number;
   type: 'album';
   uri: string;
-};
+}
 
-export type SimplifiedArtist = {
+export interface SimplifiedArtist {
   external_urls: ExternalURL;
   href: string;
   id: string;
   name: string;
   type: 'artist';
   uri: string;
-};
+}
 
-export type SimplifiedEpisode = {
+export interface SimplifiedEpisode {
   audio_preview_url: string | null;
   description: string;
   duration_ms: number;
@@ -429,13 +429,13 @@ export type SimplifiedEpisode = {
   languages: string[];
   name: string;
   release_date: string;
-  release_date_precision: 'year' | 'month' | 'day';
+  release_date_precision: 'day' | 'month' | 'year';
   resume_point?: ResumePoint;
   type: 'episode';
   uri: string;
-};
+}
 
-export type SimplifiedPlaylist = {
+export interface SimplifiedPlaylist {
   collaborative: boolean;
   description: string | null;
   external_urls: ExternalURL;
@@ -450,9 +450,9 @@ export type SimplifiedPlaylist = {
   tracks: Tracks;
   type: 'playlist';
   uri: string;
-};
+}
 
-export type SimplifiedShow = {
+export interface SimplifiedShow {
   available_markets: string[];
   copyrights: Copyright[];
   description: string;
@@ -468,9 +468,9 @@ export type SimplifiedShow = {
   publisher: string;
   type: 'show';
   uri: string;
-};
+}
 
-export type SimplifiedTrack = {
+export interface SimplifiedTrack {
   artists: SimplifiedArtist[];
   available_markets: string[];
   disc_number: number;
@@ -479,30 +479,30 @@ export type SimplifiedTrack = {
   external_urls: ExternalURL;
   href: string;
   id: string;
+  is_local: boolean;
   is_playable?: boolean;
   linked_from?: TrackLink;
-  restrictions?: Restrictions;
   name: string;
   preview_url: string;
+  restrictions?: Restrictions;
   track_number: number;
   type: 'track';
   uri: string;
-  is_local: boolean;
-};
+}
 
-export type SpotifyImage = {
+export interface SpotifyImage {
   height: number | null;
   url: string;
   width: number | null;
-};
+}
 
-export type TimeInterval = {
-  start: number;
-  duration: number;
+export interface TimeInterval {
   confidence: number;
-};
+  duration: number;
+  start: number;
+}
 
-export type Track = {
+export interface Track {
   album: SimplifiedAlbum;
   artists: SimplifiedArtist[];
   available_markets?: string[];
@@ -514,32 +514,32 @@ export type Track = {
   external_urls: ExternalURL;
   href: string;
   id: string;
+  is_local: boolean;
   is_playable?: boolean;
   linked_from?: TrackLink;
-  restrictions?: Restrictions;
   name: string;
   popularity: number;
   preview_url: string | null;
+  restrictions?: Restrictions;
   track?: boolean;
   track_number: number;
   type: 'track';
   uri: string;
-  is_local: boolean;
-};
+}
 
-export type TrackLink = {
+export interface TrackLink {
   external_urls: ExternalURL;
   href: string;
   id: string;
   type: 'track';
   uri: string;
-};
+}
 
-export type Tracks = {
+export interface Tracks {
   href: string;
   total: number;
-};
+}
 
-export type VideoThumbnail = {
+export interface VideoThumbnail {
   url: string | null;
-};
+}

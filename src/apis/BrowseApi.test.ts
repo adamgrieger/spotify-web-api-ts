@@ -9,6 +9,7 @@ import {
   getRecommendationsFixture,
 } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { BrowseApi } from './BrowseApi';
 
 vi.mock('../helpers/Http');

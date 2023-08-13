@@ -1,4 +1,4 @@
-import { GetRecommendationsResponse } from '../../types/SpotifyResponses';
+import { type GetRecommendationsResponse } from '../../types/SpotifyResponses';
 
 export const getRecommendationsFixture: GetRecommendationsResponse = {
   tracks: [
@@ -116,20 +116,17 @@ export const getRecommendationsFixture: GetRecommendationsResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b273c790025ad67295b3ecc13aa0',
+            url: 'https://i.scdn.co/image/ab67616d0000b273c790025ad67295b3ecc13aa0',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e02c790025ad67295b3ecc13aa0',
+            url: 'https://i.scdn.co/image/ab67616d00001e02c790025ad67295b3ecc13aa0',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d00004851c790025ad67295b3ecc13aa0',
+            url: 'https://i.scdn.co/image/ab67616d00004851c790025ad67295b3ecc13aa0',
             width: 64,
           },
         ],
@@ -357,20 +354,17 @@ export const getRecommendationsFixture: GetRecommendationsResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b2730c65cfa2a4a782e7d002b1af',
+            url: 'https://i.scdn.co/image/ab67616d0000b2730c65cfa2a4a782e7d002b1af',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e020c65cfa2a4a782e7d002b1af',
+            url: 'https://i.scdn.co/image/ab67616d00001e020c65cfa2a4a782e7d002b1af',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d000048510c65cfa2a4a782e7d002b1af',
+            url: 'https://i.scdn.co/image/ab67616d000048510c65cfa2a4a782e7d002b1af',
             width: 64,
           },
         ],

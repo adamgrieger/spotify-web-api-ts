@@ -10,6 +10,7 @@ import {
 } from '../fixtures';
 import { Http } from '../helpers/Http';
 import { searchHelper } from '../helpers/searchHelper';
+
 import { SearchApi } from './SearchApi';
 
 vi.mock('../helpers/searchHelper');

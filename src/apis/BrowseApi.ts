@@ -1,30 +1,30 @@
-import { Http } from '../helpers/Http';
+import { type Http } from '../helpers/Http';
 import {
-  Category,
-  GetRecommendationsSeeds,
-  Paging,
-  SimplifiedAlbum,
-  SimplifiedPlaylist,
+  type Category,
+  type GetRecommendationsSeeds,
+  type Paging,
+  type SimplifiedAlbum,
+  type SimplifiedPlaylist,
 } from '../types/SpotifyObjects';
 import {
-  GetCategoriesOptions,
-  GetCategoryOptions,
-  GetCategoryPlaylistsOptions,
-  GetFeaturedPlaylistsOptions,
-  GetNewReleasesOptions,
-  GetRecommendationsOptions,
+  type GetCategoriesOptions,
+  type GetCategoryOptions,
+  type GetCategoryPlaylistsOptions,
+  type GetFeaturedPlaylistsOptions,
+  type GetNewReleasesOptions,
+  type GetRecommendationsOptions,
 } from '../types/SpotifyOptions';
 import {
-  GetAvailableGenreSeedsResponse,
-  GetCategoriesResponse,
-  GetCategoryPlaylistsResponse,
-  GetFeaturedPlaylistsResponse,
-  GetNewReleasesResponse,
-  GetRecommendationsResponse,
+  type GetAvailableGenreSeedsResponse,
+  type GetCategoriesResponse,
+  type GetCategoryPlaylistsResponse,
+  type GetFeaturedPlaylistsResponse,
+  type GetNewReleasesResponse,
+  type GetRecommendationsResponse,
 } from '../types/SpotifyResponses';
 
 export class BrowseApi {
-  private http: Http;
+  private readonly http: Http;
 
   constructor(http: Http) {
     this.http = http;
@@ -96,11 +96,11 @@ export class BrowseApi {
    * @param categoryId The Spotify category ID for the category.
    * @param options Optional request information.
    */
-  getCategory(
+  async getCategory(
     categoryId: string,
     options?: GetCategoryOptions,
   ): Promise<Category> {
-    return this.http.get<Category>(
+    return await this.http.get<Category>(
       `/browse/categories/${categoryId}`,
       options && { params: options },
     );
@@ -151,10 +151,10 @@ export class BrowseApi {
    *
    * @param options Optional request information.
    */
-  getFeaturedPlaylists(
+  async getFeaturedPlaylists(
     options?: GetFeaturedPlaylistsOptions,
   ): Promise<GetFeaturedPlaylistsResponse> {
-    return this.http.get<GetFeaturedPlaylistsResponse>(
+    return await this.http.get<GetFeaturedPlaylistsResponse>(
       '/browse/featured-playlists',
       options && { params: options },
     );
@@ -215,11 +215,11 @@ export class BrowseApi {
    * @param seeds Artists, genres, and/or tracks to use as seeds for recommendations.
    * @param options Optional request information.
    */
-  getRecommendations(
+  async getRecommendations(
     seeds: GetRecommendationsSeeds,
     options?: GetRecommendationsOptions,
   ): Promise<GetRecommendationsResponse> {
-    return this.http.get<GetRecommendationsResponse>('/recommendations', {
+    return await this.http.get<GetRecommendationsResponse>('/recommendations', {
       params: {
         ...seeds,
         ...options,
