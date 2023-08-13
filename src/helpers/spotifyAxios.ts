@@ -1,5 +1,7 @@
-import axios, { AxiosError, AxiosRequestConfig, Method } from 'axios';
+import axios from 'axios';
 import qs from 'qs';
+import { type AxiosError, type AxiosRequestConfig, type Method } from 'axios';
+
 import { BASE_API_URL } from '../constants';
 
 export type SpotifyAxiosConfig = AxiosRequestConfig & { contentType?: string };
@@ -16,7 +18,7 @@ export async function spotifyAxios<T>(
       ...axiosConfig,
       baseURL: BASE_API_URL,
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        'Authorization': `Bearer ${accessToken}`,
         'Content-Type': contentType ?? 'application/json',
       },
       paramsSerializer,

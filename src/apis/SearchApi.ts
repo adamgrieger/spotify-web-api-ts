@@ -1,28 +1,28 @@
-import { Http } from '../helpers/Http';
 import { searchHelper } from '../helpers/searchHelper';
 import {
-  Artist,
-  Paging,
-  SearchType,
-  SimplifiedAlbum,
-  SimplifiedEpisode,
-  SimplifiedPlaylist,
-  SimplifiedShow,
-  Track,
+  type Artist,
+  type Paging,
+  type SearchType,
+  type SimplifiedAlbum,
+  type SimplifiedEpisode,
+  type SimplifiedPlaylist,
+  type SimplifiedShow,
+  type Track,
 } from '../types/SpotifyObjects';
-import { SearchOptions } from '../types/SpotifyOptions';
+import { type SearchOptions } from '../types/SpotifyOptions';
 import {
-  SearchAlbumsResponse,
-  SearchArtistsResponse,
-  SearchEpisodesResponse,
-  SearchPlaylistsResponse,
-  SearchResponse,
-  SearchShowsResponse,
-  SearchTracksResponse,
+  type SearchAlbumsResponse,
+  type SearchArtistsResponse,
+  type SearchEpisodesResponse,
+  type SearchPlaylistsResponse,
+  type SearchResponse,
+  type SearchShowsResponse,
+  type SearchTracksResponse,
 } from '../types/SpotifyResponses';
+import { type Http } from '../helpers/Http';
 
 export class SearchApi {
-  private http: Http;
+  private readonly http: Http;
 
   constructor(http: Http) {
     this.http = http;
@@ -38,12 +38,12 @@ export class SearchApi {
    * @param type The item types to search across.
    * @param options Optional request information.
    */
-  search(
+  async search(
     query: string,
     type: SearchType[],
     options?: SearchOptions,
   ): Promise<SearchResponse> {
-    return searchHelper<SearchResponse>(this.http, query, type, options);
+    return await searchHelper<SearchResponse>(this.http, query, type, options);
   }
 
   /**

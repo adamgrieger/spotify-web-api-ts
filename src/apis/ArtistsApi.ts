@@ -1,15 +1,15 @@
-import { Http } from '../helpers/Http';
-import { Artist, Track } from '../types/SpotifyObjects';
-import { GetArtistAlbumsOptions } from '../types/SpotifyOptions';
+import { type Http } from '../helpers/Http';
+import { type Artist, type Track } from '../types/SpotifyObjects';
+import { type GetArtistAlbumsOptions } from '../types/SpotifyOptions';
 import {
-  GetArtistAlbumsResponse,
-  GetArtistsResponse,
-  GetArtistTopTracksResponse,
-  GetRelatedArtistsResponse,
+  type GetArtistAlbumsResponse,
+  type GetArtistTopTracksResponse,
+  type GetArtistsResponse,
+  type GetRelatedArtistsResponse,
 } from '../types/SpotifyResponses';
 
 export class ArtistsApi {
-  private http: Http;
+  private readonly http: Http;
 
   constructor(http: Http) {
     this.http = http;
@@ -32,8 +32,8 @@ export class ArtistsApi {
    *
    * @param artistId The Spotify ID for the artist.
    */
-  getArtist(artistId: string): Promise<Artist> {
-    return this.http.get<Artist>(`/artists/${artistId}`);
+  async getArtist(artistId: string): Promise<Artist> {
+    return await this.http.get<Artist>(`/artists/${artistId}`);
   }
 
   /**
@@ -56,11 +56,11 @@ export class ArtistsApi {
    * @param artistId The Spotify ID for the artist.
    * @param options Optional request information.
    */
-  getArtistAlbums(
+  async getArtistAlbums(
     artistId: string,
     options?: GetArtistAlbumsOptions,
   ): Promise<GetArtistAlbumsResponse> {
-    return this.http.get<GetArtistAlbumsResponse>(
+    return await this.http.get<GetArtistAlbumsResponse>(
       `/artists/${artistId}/albums`,
       options && { params: options },
     );

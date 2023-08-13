@@ -1,10 +1,12 @@
 import axios from 'axios';
+
 import { BASE_API_URL } from '../constants';
+
 import { paramsSerializer, spotifyAxios } from './spotifyAxios';
 
 jest.mock('axios');
 
-const axiosMock = (axios as unknown) as jest.Mock;
+const axiosMock = axios as unknown as jest.Mock;
 
 describe('spotifyAxios', () => {
   beforeEach(() => {
@@ -24,7 +26,7 @@ describe('spotifyAxios', () => {
       },
       baseURL: BASE_API_URL,
       headers: {
-        Authorization: 'Bearer token',
+        'Authorization': 'Bearer token',
         'Content-Type': 'application/json',
       },
       paramsSerializer,
@@ -43,7 +45,7 @@ describe('spotifyAxios', () => {
       data: 'bar',
       baseURL: BASE_API_URL,
       headers: {
-        Authorization: 'Bearer token',
+        'Authorization': 'Bearer token',
         'Content-Type': 'image/jpeg',
       },
       paramsSerializer,

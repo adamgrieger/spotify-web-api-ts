@@ -1,9 +1,10 @@
 import {
   albumFixture,
-  getAlbumsFixture,
   getAlbumTracksFixture,
+  getAlbumsFixture,
 } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { AlbumsApi } from './AlbumsApi';
 
 jest.mock('../helpers/Http');

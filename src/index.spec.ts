@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { SpotifyWebApi } from '.';
+
 import { TOKEN_URL } from './constants';
 import { encodeToBase64 } from './helpers/encodeToBase64';
 import { getAuthorizationUrl } from './helpers/getAuthorizationUrl';
+
+import { SpotifyWebApi } from '.';
 
 jest.mock('axios');
 jest.mock('./helpers/getAuthorizationUrl');
@@ -125,7 +127,7 @@ describe('SpotifyWebApi', () => {
         'code=qux&grant_type=authorization_code&redirect_uri=baz',
         {
           headers: {
-            Authorization: `Basic ${encodeToBase64('foo:bar')}`,
+            'Authorization': `Basic ${encodeToBase64('foo:bar')}`,
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         },
@@ -148,7 +150,7 @@ describe('SpotifyWebApi', () => {
         'grant_type=refresh_token&refresh_token=baz',
         {
           headers: {
-            Authorization: `Basic ${encodeToBase64('foo:bar')}`,
+            'Authorization': `Basic ${encodeToBase64('foo:bar')}`,
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         },
@@ -171,7 +173,7 @@ describe('SpotifyWebApi', () => {
         'grant_type=client_credentials',
         {
           headers: {
-            Authorization: `Basic ${encodeToBase64('foo:bar')}`,
+            'Authorization': `Basic ${encodeToBase64('foo:bar')}`,
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         },

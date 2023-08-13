@@ -1,4 +1,4 @@
-import { GetRecentlyPlayedTracksResponse } from '../../types/SpotifyResponses';
+import { type GetRecentlyPlayedTracksResponse } from '../../types/SpotifyResponses';
 
 export const getRecentlyPlayedTracksFixture: GetRecentlyPlayedTracksResponse = {
   items: [
@@ -105,20 +105,17 @@ export const getRecentlyPlayedTracksFixture: GetRecentlyPlayedTracksResponse = {
           images: [
             {
               height: 640,
-              url:
-                'https://i.scdn.co/image/ab67616d0000b27366a89b08608325d5a34f31d2',
+              url: 'https://i.scdn.co/image/ab67616d0000b27366a89b08608325d5a34f31d2',
               width: 640,
             },
             {
               height: 300,
-              url:
-                'https://i.scdn.co/image/ab67616d00001e0266a89b08608325d5a34f31d2',
+              url: 'https://i.scdn.co/image/ab67616d00001e0266a89b08608325d5a34f31d2',
               width: 300,
             },
             {
               height: 64,
-              url:
-                'https://i.scdn.co/image/ab67616d0000485166a89b08608325d5a34f31d2',
+              url: 'https://i.scdn.co/image/ab67616d0000485166a89b08608325d5a34f31d2',
               width: 64,
             },
           ],
@@ -345,20 +342,17 @@ export const getRecentlyPlayedTracksFixture: GetRecentlyPlayedTracksResponse = {
           images: [
             {
               height: 640,
-              url:
-                'https://i.scdn.co/image/ab67616d0000b27366a89b08608325d5a34f31d2',
+              url: 'https://i.scdn.co/image/ab67616d0000b27366a89b08608325d5a34f31d2',
               width: 640,
             },
             {
               height: 300,
-              url:
-                'https://i.scdn.co/image/ab67616d00001e0266a89b08608325d5a34f31d2',
+              url: 'https://i.scdn.co/image/ab67616d00001e0266a89b08608325d5a34f31d2',
               width: 300,
             },
             {
               height: 64,
-              url:
-                'https://i.scdn.co/image/ab67616d0000485166a89b08608325d5a34f31d2',
+              url: 'https://i.scdn.co/image/ab67616d0000485166a89b08608325d5a34f31d2',
               width: 64,
             },
           ],
@@ -483,8 +477,7 @@ export const getRecentlyPlayedTracksFixture: GetRecentlyPlayedTracksResponse = {
       context: null,
     },
   ],
-  next:
-    'https://api.spotify.com/v1/me/player/recently-played?before=1587609840115&limit=2',
+  next: 'https://api.spotify.com/v1/me/player/recently-played?before=1587609840115&limit=2',
   cursors: {
     after: '1587610021613',
     before: '1587609840115',

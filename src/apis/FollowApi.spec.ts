@@ -1,5 +1,6 @@
 import { getFollowedArtistsFixture } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { FollowApi } from './FollowApi';
 
 jest.mock('../helpers/Http');

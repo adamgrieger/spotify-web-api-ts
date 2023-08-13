@@ -1,5 +1,6 @@
 import { getMyTopArtistsFixture, getMyTopTracksFixture } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { PersonalizationApi } from './PersonalizationApi';
 
 jest.mock('../helpers/Http');

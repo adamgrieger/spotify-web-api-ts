@@ -1,4 +1,4 @@
-import { GetSavedTracksResponse } from '../../types/SpotifyResponses';
+import { type GetSavedTracksResponse } from '../../types/SpotifyResponses';
 
 export const getSavedTracksFixture: GetSavedTracksResponse = {
   href: 'https://api.spotify.com/v1/me/tracks?offset=0&limit=2',
@@ -110,20 +110,17 @@ export const getSavedTracksFixture: GetSavedTracksResponse = {
           images: [
             {
               height: 640,
-              url:
-                'https://i.scdn.co/image/ab67616d0000b273956d578ebac807dfe89f03f7',
+              url: 'https://i.scdn.co/image/ab67616d0000b273956d578ebac807dfe89f03f7',
               width: 640,
             },
             {
               height: 300,
-              url:
-                'https://i.scdn.co/image/ab67616d00001e02956d578ebac807dfe89f03f7',
+              url: 'https://i.scdn.co/image/ab67616d00001e02956d578ebac807dfe89f03f7',
               width: 300,
             },
             {
               height: 64,
-              url:
-                'https://i.scdn.co/image/ab67616d00004851956d578ebac807dfe89f03f7',
+              url: 'https://i.scdn.co/image/ab67616d00004851956d578ebac807dfe89f03f7',
               width: 64,
             },
           ],
@@ -354,20 +351,17 @@ export const getSavedTracksFixture: GetSavedTracksResponse = {
           images: [
             {
               height: 640,
-              url:
-                'https://i.scdn.co/image/ab67616d0000b2730f2a198651d9c2e4efad9d18',
+              url: 'https://i.scdn.co/image/ab67616d0000b2730f2a198651d9c2e4efad9d18',
               width: 640,
             },
             {
               height: 300,
-              url:
-                'https://i.scdn.co/image/ab67616d00001e020f2a198651d9c2e4efad9d18',
+              url: 'https://i.scdn.co/image/ab67616d00001e020f2a198651d9c2e4efad9d18',
               width: 300,
             },
             {
               height: 64,
-              url:
-                'https://i.scdn.co/image/ab67616d000048510f2a198651d9c2e4efad9d18',
+              url: 'https://i.scdn.co/image/ab67616d000048510f2a198651d9c2e4efad9d18',
               width: 64,
             },
           ],

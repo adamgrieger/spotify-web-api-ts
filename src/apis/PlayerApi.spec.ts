@@ -5,6 +5,7 @@ import {
   getRecentlyPlayedTracksFixture,
 } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { PlayerApi } from './PlayerApi';
 
 jest.mock('../helpers/Http');

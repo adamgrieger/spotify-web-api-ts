@@ -1,5 +1,6 @@
 import { privateUserFixture, publicUserFixture } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { UsersApi } from './UsersApi';
 
 jest.mock('../helpers/Http');

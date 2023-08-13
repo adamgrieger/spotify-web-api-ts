@@ -1,4 +1,4 @@
-import { GetMyTopArtistsResponse } from '../../types/SpotifyResponses';
+import { type GetMyTopArtistsResponse } from '../../types/SpotifyResponses';
 
 export const getMyTopArtistsFixture: GetMyTopArtistsResponse = {
   items: [
@@ -24,20 +24,17 @@ export const getMyTopArtistsFixture: GetMyTopArtistsResponse = {
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/f96458025a0640bf1d3c8f764a42ec21d4db1eae',
+          url: 'https://i.scdn.co/image/f96458025a0640bf1d3c8f764a42ec21d4db1eae',
           width: 640,
         },
         {
           height: 320,
-          url:
-            'https://i.scdn.co/image/4547d5656309079fdfc73bef86a3c327cd59a3ea',
+          url: 'https://i.scdn.co/image/4547d5656309079fdfc73bef86a3c327cd59a3ea',
           width: 320,
         },
         {
           height: 160,
-          url:
-            'https://i.scdn.co/image/e512f91d540d864906d36a850ecb9ad5d562d262',
+          url: 'https://i.scdn.co/image/e512f91d540d864906d36a850ecb9ad5d562d262',
           width: 160,
         },
       ],
@@ -67,20 +64,17 @@ export const getMyTopArtistsFixture: GetMyTopArtistsResponse = {
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/5ae35abbcca16ff670722c6f8f176b2314e6526d',
+          url: 'https://i.scdn.co/image/5ae35abbcca16ff670722c6f8f176b2314e6526d',
           width: 640,
         },
         {
           height: 320,
-          url:
-            'https://i.scdn.co/image/fc8e55caa8a46d223a3e0c6d46afb9b02d1a4384',
+          url: 'https://i.scdn.co/image/fc8e55caa8a46d223a3e0c6d46afb9b02d1a4384',
           width: 320,
         },
         {
           height: 160,
-          url:
-            'https://i.scdn.co/image/b80db1c7becac12f9c63bb29d3990225dd29a934',
+          url: 'https://i.scdn.co/image/b80db1c7becac12f9c63bb29d3990225dd29a934',
           width: 160,
         },
       ],

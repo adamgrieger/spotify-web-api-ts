@@ -9,6 +9,7 @@ import {
 } from '../fixtures';
 import { Http } from '../helpers/Http';
 import { searchHelper } from '../helpers/searchHelper';
+
 import { SearchApi } from './SearchApi';
 
 jest.mock('../helpers/searchHelper');

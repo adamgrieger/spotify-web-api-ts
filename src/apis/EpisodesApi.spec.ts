@@ -1,5 +1,6 @@
 import { episodeFixture, getEpisodesFixture } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { EpisodesApi } from './EpisodesApi';
 
 jest.mock('../helpers/Http');

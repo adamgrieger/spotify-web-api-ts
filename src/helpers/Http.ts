@@ -1,4 +1,5 @@
-import { spotifyAxios, SpotifyAxiosConfig } from './spotifyAxios';
+import { spotifyAxios } from './spotifyAxios';
+import { type SpotifyAxiosConfig } from './spotifyAxios';
 
 export class Http {
   private accessToken: string;
@@ -15,19 +16,19 @@ export class Http {
     this.accessToken = accessToken;
   }
 
-  get<T>(url: string, config?: SpotifyAxiosConfig) {
-    return spotifyAxios<T>(url, 'GET', this.accessToken, config);
+  async get<T>(url: string, config?: SpotifyAxiosConfig) {
+    return await spotifyAxios<T>(url, 'GET', this.accessToken, config);
   }
 
-  post<T>(url: string, config?: SpotifyAxiosConfig) {
-    return spotifyAxios<T>(url, 'POST', this.accessToken, config);
+  async post<T>(url: string, config?: SpotifyAxiosConfig) {
+    return await spotifyAxios<T>(url, 'POST', this.accessToken, config);
   }
 
-  put<T>(url: string, config?: SpotifyAxiosConfig) {
-    return spotifyAxios<T>(url, 'PUT', this.accessToken, config);
+  async put<T>(url: string, config?: SpotifyAxiosConfig) {
+    return await spotifyAxios<T>(url, 'PUT', this.accessToken, config);
   }
 
-  delete<T>(url: string, config?: SpotifyAxiosConfig) {
-    return spotifyAxios<T>(url, 'DELETE', this.accessToken, config);
+  async delete<T>(url: string, config?: SpotifyAxiosConfig) {
+    return await spotifyAxios<T>(url, 'DELETE', this.accessToken, config);
   }
 }

@@ -1,4 +1,4 @@
-import { SnapshotIdResponse } from '../types/SpotifyResponses';
+import { type SnapshotIdResponse } from '../types/SpotifyResponses';
 
 export const snapshotIdFixture: SnapshotIdResponse = {
   snapshot_id:

@@ -1,4 +1,4 @@
-import { GetShowsResponse } from '../../types/SpotifyResponses';
+import { type GetShowsResponse } from '../../types/SpotifyResponses';
 
 export const getShowsFixture: GetShowsResponse = {
   shows: [
@@ -94,20 +94,17 @@ export const getShowsFixture: GetShowsResponse = {
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/69610f7b5a459d74d1bd94d8b0189e37a6373162',
+          url: 'https://i.scdn.co/image/69610f7b5a459d74d1bd94d8b0189e37a6373162',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/a32d33f7763c9c5e40f0730b85b7158c67f413f5',
+          url: 'https://i.scdn.co/image/a32d33f7763c9c5e40f0730b85b7158c67f413f5',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/0cd1ffe3e99ef04620c00a10be88a1676f14c2c7',
+          url: 'https://i.scdn.co/image/0cd1ffe3e99ef04620c00a10be88a1676f14c2c7',
           width: 64,
         },
       ],
@@ -211,20 +208,17 @@ export const getShowsFixture: GetShowsResponse = {
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/f98b2557f4c992405e70ebe70540c24592043540',
+          url: 'https://i.scdn.co/image/f98b2557f4c992405e70ebe70540c24592043540',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/8650ae0b7542c57d0b4f7e96016b65776515e3cd',
+          url: 'https://i.scdn.co/image/8650ae0b7542c57d0b4f7e96016b65776515e3cd',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/f3376e395e743adc694fd0c79769fe13a78df29c',
+          url: 'https://i.scdn.co/image/f3376e395e743adc694fd0c79769fe13a78df29c',
           width: 64,
         },
       ],

@@ -1,8 +1,7 @@
-import { GetAlbumTracksResponse } from '../../types/SpotifyResponses';
+import { type GetAlbumTracksResponse } from '../../types/SpotifyResponses';
 
 export const getAlbumTracksFixture: GetAlbumTracksResponse = {
-  href:
-    'https://api.spotify.com/v1/albums/76254F4WYdKOm0pVAVvp0x/tracks?offset=0&limit=20',
+  href: 'https://api.spotify.com/v1/albums/76254F4WYdKOm0pVAVvp0x/tracks?offset=0&limit=20',
   items: [
     {
       artists: [

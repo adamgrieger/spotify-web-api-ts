@@ -1,4 +1,4 @@
-import { GetTracksResponse } from '../../types/SpotifyResponses';
+import { type GetTracksResponse } from '../../types/SpotifyResponses';
 
 export const getTracksFixture: GetTracksResponse = {
   tracks: [
@@ -105,20 +105,17 @@ export const getTracksFixture: GetTracksResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b273a26581cf15fff67319407061',
+            url: 'https://i.scdn.co/image/ab67616d0000b273a26581cf15fff67319407061',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e02a26581cf15fff67319407061',
+            url: 'https://i.scdn.co/image/ab67616d00001e02a26581cf15fff67319407061',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d00004851a26581cf15fff67319407061',
+            url: 'https://i.scdn.co/image/ab67616d00004851a26581cf15fff67319407061',
             width: 64,
           },
         ],

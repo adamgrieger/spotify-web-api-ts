@@ -1,11 +1,12 @@
 import {
   artistFixture,
   getArtistAlbumsFixture,
-  getArtistsFixture,
   getArtistTopTracksFixture,
+  getArtistsFixture,
   getRelatedArtistsFixture,
 } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { ArtistsApi } from './ArtistsApi';
 
 jest.mock('../helpers/Http');

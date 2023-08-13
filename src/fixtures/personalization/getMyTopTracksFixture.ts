@@ -1,4 +1,4 @@
-import { GetMyTopTracksResponse } from '../../types/SpotifyResponses';
+import { type GetMyTopTracksResponse } from '../../types/SpotifyResponses';
 
 export const getMyTopTracksFixture: GetMyTopTracksResponse = {
   items: [
@@ -105,20 +105,17 @@ export const getMyTopTracksFixture: GetMyTopTracksResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b2730f2a198651d9c2e4efad9d18',
+            url: 'https://i.scdn.co/image/ab67616d0000b2730f2a198651d9c2e4efad9d18',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e020f2a198651d9c2e4efad9d18',
+            url: 'https://i.scdn.co/image/ab67616d00001e020f2a198651d9c2e4efad9d18',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d000048510f2a198651d9c2e4efad9d18',
+            url: 'https://i.scdn.co/image/ab67616d000048510f2a198651d9c2e4efad9d18',
             width: 64,
           },
         ],

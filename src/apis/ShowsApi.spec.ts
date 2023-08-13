@@ -4,6 +4,7 @@ import {
   showFixture,
 } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { ShowsApi } from './ShowsApi';
 
 jest.mock('../helpers/Http');

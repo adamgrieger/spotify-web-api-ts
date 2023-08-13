@@ -6,6 +6,7 @@ import {
   trackFixture,
 } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { TracksApi } from './TracksApi';
 
 jest.mock('../helpers/Http');

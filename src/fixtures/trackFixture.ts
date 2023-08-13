@@ -1,4 +1,4 @@
-import { Track } from '../types/SpotifyObjects';
+import { type Track } from '../types/SpotifyObjects';
 
 export const trackFixture: Track = {
   album: {

@@ -1,8 +1,7 @@
-import { GetPlaylistItemsResponse } from '../../types/SpotifyResponses';
+import { type GetPlaylistItemsResponse } from '../../types/SpotifyResponses';
 
 export const getPlaylistItemsFixture: GetPlaylistItemsResponse = {
-  href:
-    'https://api.spotify.com/v1/playlists/6SAtV2bMjUbQTV37X51F3u/tracks?offset=0&limit=1',
+  href: 'https://api.spotify.com/v1/playlists/6SAtV2bMjUbQTV37X51F3u/tracks?offset=0&limit=1',
   items: [
     {
       added_at: '2019-07-10T01:12:07Z',
@@ -42,20 +41,17 @@ export const getPlaylistItemsFixture: GetPlaylistItemsResponse = {
           images: [
             {
               height: 640,
-              url:
-                'https://i.scdn.co/image/ab67616d0000b2730fa94d62fd6cea145ef9bbb5',
+              url: 'https://i.scdn.co/image/ab67616d0000b2730fa94d62fd6cea145ef9bbb5',
               width: 640,
             },
             {
               height: 300,
-              url:
-                'https://i.scdn.co/image/ab67616d00001e020fa94d62fd6cea145ef9bbb5',
+              url: 'https://i.scdn.co/image/ab67616d00001e020fa94d62fd6cea145ef9bbb5',
               width: 300,
             },
             {
               height: 64,
-              url:
-                'https://i.scdn.co/image/ab67616d000048510fa94d62fd6cea145ef9bbb5',
+              url: 'https://i.scdn.co/image/ab67616d000048510fa94d62fd6cea145ef9bbb5',
               width: 64,
             },
           ],
@@ -106,8 +102,7 @@ export const getPlaylistItemsFixture: GetPlaylistItemsResponse = {
     },
   ],
   limit: 1,
-  next:
-    'https://api.spotify.com/v1/playlists/6SAtV2bMjUbQTV37X51F3u/tracks?offset=1&limit=1',
+  next: 'https://api.spotify.com/v1/playlists/6SAtV2bMjUbQTV37X51F3u/tracks?offset=1&limit=1',
   offset: 0,
   previous: null,
   total: 51,
