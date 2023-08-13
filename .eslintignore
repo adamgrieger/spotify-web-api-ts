@@ -3,3 +3,5 @@ package.json
 
 tsconfig.json
 tsconfig.*.json
+
+vite.config.ts

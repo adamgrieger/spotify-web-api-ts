@@ -15,6 +15,7 @@
     "assets"
   ],
   "scripts": {
+		"build": "vite build",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
 		"test:dom": "vitest run --environment jsdom",
