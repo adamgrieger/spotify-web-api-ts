@@ -1,4 +1,19 @@
 {
-  // "extends": "@spotify/web-scripts/config/tsconfig.json",
+  "compilerOptions": {
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"noEmit": true,
+		"skipLibCheck": true,
+		"target": "ESNext",
+		"module": "ESNext",
+		"strict": true,
+		"resolveJsonModule": true,
+		"moduleResolution": "bundler",
+		"esModuleInterop": true,
+		"incremental": true,
+		"tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
+		"allowSyntheticDefaultImports": true,
+		// "types": ["vite/client", "vitest/globals"]
+	},
   "include": ["src"]
 }
