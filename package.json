@@ -15,6 +15,8 @@
     "assets"
   ],
   "scripts": {
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "types": "tsc --project tsconfig.json",
     "generate-docs": "typedoc --out docs src/index.ts"
   },
@@ -26,7 +28,7 @@
     "@inferrinizzard/eslint-config": "inferrinizzard/eslint-config",
     "@types/qs": "^6.9.4",
     "eslint": "^8.47.0",
-    "prettier": "^3.0.1",
+    "prettier": "^2.7.1",
     "typedoc": "^0.18.0",
     "typescript": "^5.1.6"
   }
