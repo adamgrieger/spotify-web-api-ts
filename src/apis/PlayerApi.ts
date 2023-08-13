@@ -119,6 +119,7 @@ export class PlayerApi {
    * @param options Optional request information.
    */
   public async play(options?: PlayOptions): Promise<void> {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { device_id, ...bodyParams } = options ?? {};
 
     await this.http.put(
