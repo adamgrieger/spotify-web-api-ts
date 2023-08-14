@@ -1,11 +1,15 @@
+import { type MockedClass } from 'vitest';
+
 import { privateUserFixture, publicUserFixture } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { UsersApi } from './UsersApi';
 
-jest.mock('../helpers/Http');
+vi.mock('../helpers/Http');
 
-const HttpMock = Http as jest.MockedClass<typeof Http>;
+const HttpMock = Http as MockedClass<typeof Http>;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function setup() {
   const httpMock = new HttpMock('token');
   const users = new UsersApi(httpMock);
@@ -13,11 +17,11 @@ function setup() {
   return { httpMock, users };
 }
 
-beforeEach(() => {
-  jest.resetAllMocks();
-});
-
 describe(UsersApi.name, () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   describe('getMe', () => {
     beforeEach(() => {
       HttpMock.prototype.get.mockResolvedValue(privateUserFixture);
@@ -29,7 +33,7 @@ describe(UsersApi.name, () => {
       const response = await users.getMe();
 
       expect(response).toEqual(privateUserFixture);
-      expect(httpMock.get).toBeCalledWith('/me');
+      expect(httpMock.get).toHaveBeenCalledWith('/me');
     });
   });
 
@@ -44,7 +48,7 @@ describe(UsersApi.name, () => {
       const response = await users.getUser('foo');
 
       expect(response).toEqual(publicUserFixture);
-      expect(httpMock.get).toBeCalledWith('/users/foo');
+      expect(httpMock.get).toHaveBeenCalledWith('/users/foo');
     });
   });
 });

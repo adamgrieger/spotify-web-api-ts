@@ -1,5 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
+
 import { AlbumsApi } from './apis/AlbumsApi';
 import { ArtistsApi } from './apis/ArtistsApi';
 import { BrowseApi } from './apis/BrowseApi';
@@ -16,45 +17,59 @@ import { UsersApi } from './apis/UsersApi';
 import { TOKEN_URL } from './constants';
 import { encodeToBase64 } from './helpers/encodeToBase64';
 import {
+  type GetAuthorizationUrlOptions,
   getAuthorizationUrl,
-  GetAuthorizationUrlOptions,
 } from './helpers/getAuthorizationUrl';
 import { Http } from './helpers/Http';
 import {
-  GetRefreshableUserTokensResponse,
-  GetRefreshedAccessTokenResponse,
-  GetTemporaryAppTokensResponse,
+  type GetRefreshableUserTokensResponse,
+  type GetRefreshedAccessTokenResponse,
+  type GetTemporaryAppTokensResponse,
 } from './types/SpotifyAuthorization';
 
-type SpotifyWebApiOptions = {
+export interface SpotifyWebApiOptions {
   accessToken?: string;
   clientId?: string;
   clientSecret?: string;
   redirectUri?: string;
-};
+}
 
 export class SpotifyWebApi {
-  private clientId: string;
-  private clientSecret: string;
-  private redirectUri: string;
+  private readonly clientId: string;
 
-  private http: Http;
+  private readonly clientSecret: string;
+
+  private readonly redirectUri: string;
+
+  private readonly http: Http;
 
   public albums: AlbumsApi;
+
   public artists: ArtistsApi;
+
   public browse: BrowseApi;
+
   public episodes: EpisodesApi;
+
   public follow: FollowApi;
+
   public library: LibraryApi;
+
   public personalization: PersonalizationApi;
+
   public player: PlayerApi;
+
   public playlists: PlaylistsApi;
+
   public search: SearchApi;
+
   public shows: ShowsApi;
+
   public tracks: TracksApi;
+
   public users: UsersApi;
 
-  constructor(options?: SpotifyWebApiOptions) {
+  public constructor(options?: SpotifyWebApiOptions) {
     this.clientId = options?.clientId ?? '';
     this.clientSecret = options?.clientSecret ?? '';
     this.redirectUri = options?.redirectUri ?? '';
@@ -76,23 +91,23 @@ export class SpotifyWebApi {
     this.users = new UsersApi(this.http);
   }
 
-  getAccessToken() {
+  public getAccessToken(): string {
     return this.http.getAccessToken();
   }
 
-  setAccessToken(accessToken: string) {
+  public setAccessToken(accessToken: string): void {
     this.http.setAccessToken(accessToken);
   }
 
-  getClientId() {
+  public getClientId(): string {
     return this.clientId;
   }
 
-  getClientSecret() {
+  public getClientSecret(): string {
     return this.clientSecret;
   }
 
-  getRedirectUri() {
+  public getRedirectUri(): string {
     return this.redirectUri;
   }
 
@@ -105,7 +120,9 @@ export class SpotifyWebApi {
    *
    * @param options Optional URL parameters.
    */
-  getRefreshableAuthorizationUrl(options?: GetAuthorizationUrlOptions): string {
+  public getRefreshableAuthorizationUrl(
+    options?: GetAuthorizationUrlOptions,
+  ): string {
     return getAuthorizationUrl(
       this.clientId,
       this.redirectUri,
@@ -120,7 +137,9 @@ export class SpotifyWebApi {
    *
    * @param options Optional URL parameters.
    */
-  getTemporaryAuthorizationUrl(options?: GetAuthorizationUrlOptions): string {
+  public getTemporaryAuthorizationUrl(
+    options?: GetAuthorizationUrlOptions,
+  ): string {
     return getAuthorizationUrl(
       this.clientId,
       this.redirectUri,
@@ -145,7 +164,7 @@ export class SpotifyWebApi {
    * @param code The authorization code returned from the initial request to
    *             the authorization endpoint.
    */
-  async getRefreshableUserTokens(
+  public async getRefreshableUserTokens(
     code: string,
   ): Promise<GetRefreshableUserTokensResponse> {
     const response = await axios.post<GetRefreshableUserTokensResponse>(
@@ -157,7 +176,7 @@ export class SpotifyWebApi {
       }),
       {
         headers: {
-          Authorization: `Basic ${encodeToBase64(
+          'Authorization': `Basic ${encodeToBase64(
             `${this.clientId}:${this.clientSecret}`,
           )}`,
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -174,7 +193,7 @@ export class SpotifyWebApi {
    * @param refreshToken The refresh token returned from the authorization code
    *                     exchange.
    */
-  async getRefreshedAccessToken(
+  public async getRefreshedAccessToken(
     refreshToken: string,
   ): Promise<GetRefreshedAccessTokenResponse> {
     const response = await axios.post<GetRefreshedAccessTokenResponse>(
@@ -185,7 +204,7 @@ export class SpotifyWebApi {
       }),
       {
         headers: {
-          Authorization: `Basic ${encodeToBase64(
+          'Authorization': `Basic ${encodeToBase64(
             `${this.clientId}:${this.clientSecret}`,
           )}`,
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -207,7 +226,7 @@ export class SpotifyWebApi {
    * advantage here in comparison with requests to the Web API made without an
    * access token, is that a higher rate limit is applied.
    */
-  async getTemporaryAppTokens(): Promise<GetTemporaryAppTokensResponse> {
+  public async getTemporaryAppTokens(): Promise<GetTemporaryAppTokensResponse> {
     const response = await axios.post<GetTemporaryAppTokensResponse>(
       TOKEN_URL,
       qs.stringify({
@@ -215,7 +234,7 @@ export class SpotifyWebApi {
       }),
       {
         headers: {
-          Authorization: `Basic ${encodeToBase64(
+          'Authorization': `Basic ${encodeToBase64(
             `${this.clientId}:${this.clientSecret}`,
           )}`,
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -225,3 +244,7 @@ export class SpotifyWebApi {
     return response.data;
   }
 }
+
+export type * from './types';
+export type * from './helpers/index.types';
+export type * from './apis/index.types';

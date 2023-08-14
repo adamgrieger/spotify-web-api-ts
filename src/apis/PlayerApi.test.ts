@@ -1,3 +1,5 @@
+import { type MockedClass } from 'vitest';
+
 import {
   currentlyPlayingContextFixture,
   currentlyPlayingFixture,
@@ -5,12 +7,14 @@ import {
   getRecentlyPlayedTracksFixture,
 } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { PlayerApi } from './PlayerApi';
 
-jest.mock('../helpers/Http');
+vi.mock('../helpers/Http');
 
-const HttpMock = Http as jest.MockedClass<typeof Http>;
+const HttpMock = Http as MockedClass<typeof Http>;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function setup() {
   const httpMock = new HttpMock('token');
   const player = new PlayerApi(httpMock);
@@ -18,18 +22,18 @@ function setup() {
   return { httpMock, player };
 }
 
-beforeEach(() => {
-  jest.resetAllMocks();
-});
-
 describe('PlayerApi', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   describe('addToQueue', () => {
     it("should add an item to the user's playback queue (without options)", async () => {
       const { httpMock, player } = setup();
 
       await player.addToQueue('foo');
 
-      expect(httpMock.post).toBeCalledWith('/me/player/queue', {
+      expect(httpMock.post).toHaveBeenCalledWith('/me/player/queue', {
         params: {
           uri: 'foo',
         },
@@ -41,7 +45,7 @@ describe('PlayerApi', () => {
 
       await player.addToQueue('foo', { device_id: 'bar' });
 
-      expect(httpMock.post).toBeCalledWith('/me/player/queue', {
+      expect(httpMock.post).toHaveBeenCalledWith('/me/player/queue', {
         params: {
           uri: 'foo',
           device_id: 'bar',
@@ -61,7 +65,7 @@ describe('PlayerApi', () => {
       const response = await player.getCurrentlyPlayingTrack();
 
       expect(response).toEqual(currentlyPlayingFixture);
-      expect(httpMock.get).toBeCalledWith(
+      expect(httpMock.get).toHaveBeenCalledWith(
         '/me/player/currently-playing',
         undefined,
       );
@@ -73,11 +77,14 @@ describe('PlayerApi', () => {
       const response = await player.getCurrentlyPlayingTrack({ market: 'foo' });
 
       expect(response).toEqual(currentlyPlayingFixture);
-      expect(httpMock.get).toBeCalledWith('/me/player/currently-playing', {
-        params: {
-          market: 'foo',
+      expect(httpMock.get).toHaveBeenCalledWith(
+        '/me/player/currently-playing',
+        {
+          params: {
+            market: 'foo',
+          },
         },
-      });
+      );
     });
   });
 
@@ -92,7 +99,7 @@ describe('PlayerApi', () => {
       const response = await player.getMyDevices();
 
       expect(response).toEqual([deviceFixture]);
-      expect(httpMock.get).toBeCalledWith('/me/player/devices');
+      expect(httpMock.get).toHaveBeenCalledWith('/me/player/devices');
     });
   });
 
@@ -107,7 +114,7 @@ describe('PlayerApi', () => {
       const response = await player.getPlaybackInfo();
 
       expect(response).toEqual(currentlyPlayingContextFixture);
-      expect(httpMock.get).toBeCalledWith('/me/player', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith('/me/player', undefined);
     });
 
     it("should get information about the user's current playback state (with options)", async () => {
@@ -116,7 +123,7 @@ describe('PlayerApi', () => {
       const response = await player.getPlaybackInfo({ market: 'foo' });
 
       expect(response).toEqual(currentlyPlayingContextFixture);
-      expect(httpMock.get).toBeCalledWith('/me/player', {
+      expect(httpMock.get).toHaveBeenCalledWith('/me/player', {
         params: {
           market: 'foo',
         },
@@ -135,7 +142,7 @@ describe('PlayerApi', () => {
       const response = await player.getRecentlyPlayedTracks();
 
       expect(response).toEqual(getRecentlyPlayedTracksFixture);
-      expect(httpMock.get).toBeCalledWith(
+      expect(httpMock.get).toHaveBeenCalledWith(
         '/me/player/recently-played',
         undefined,
       );
@@ -147,7 +154,7 @@ describe('PlayerApi', () => {
       const response = await player.getRecentlyPlayedTracks({ limit: 2 });
 
       expect(response).toEqual(getRecentlyPlayedTracksFixture);
-      expect(httpMock.get).toBeCalledWith('/me/player/recently-played', {
+      expect(httpMock.get).toHaveBeenCalledWith('/me/player/recently-played', {
         params: {
           limit: 2,
         },
@@ -161,7 +168,7 @@ describe('PlayerApi', () => {
 
       await player.pause();
 
-      expect(httpMock.put).toBeCalledWith('/me/player/pause', undefined);
+      expect(httpMock.put).toHaveBeenCalledWith('/me/player/pause', undefined);
     });
 
     it("should pause a user's playback (with options)", async () => {
@@ -169,7 +176,7 @@ describe('PlayerApi', () => {
 
       await player.pause({ device_id: 'foo' });
 
-      expect(httpMock.put).toBeCalledWith('/me/player/pause', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/player/pause', {
         params: {
           device_id: 'foo',
         },
@@ -183,7 +190,7 @@ describe('PlayerApi', () => {
 
       await player.play();
 
-      expect(httpMock.put).toBeCalledWith('/me/player/play', undefined);
+      expect(httpMock.put).toHaveBeenCalledWith('/me/player/play', undefined);
     });
 
     it("should start or resume a user's playback (with only query params)", async () => {
@@ -191,7 +198,7 @@ describe('PlayerApi', () => {
 
       await player.play({ device_id: 'foo' });
 
-      expect(httpMock.put).toBeCalledWith('/me/player/play', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/player/play', {
         params: {
           device_id: 'foo',
         },
@@ -203,7 +210,7 @@ describe('PlayerApi', () => {
 
       await player.play({ context_uri: 'foo' });
 
-      expect(httpMock.put).toBeCalledWith('/me/player/play', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/player/play', {
         data: {
           context_uri: 'foo',
         },
@@ -215,7 +222,7 @@ describe('PlayerApi', () => {
 
       await player.play({ device_id: 'foo', context_uri: 'bar' });
 
-      expect(httpMock.put).toBeCalledWith('/me/player/play', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/player/play', {
         params: {
           device_id: 'foo',
         },
@@ -232,7 +239,7 @@ describe('PlayerApi', () => {
 
       await player.seek(100);
 
-      expect(httpMock.put).toBeCalledWith('/me/player/seek', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/player/seek', {
         params: {
           position_ms: 100,
         },
@@ -244,7 +251,7 @@ describe('PlayerApi', () => {
 
       await player.seek(100, { device_id: 'foo' });
 
-      expect(httpMock.put).toBeCalledWith('/me/player/seek', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/player/seek', {
         params: {
           position_ms: 100,
           device_id: 'foo',
@@ -259,7 +266,7 @@ describe('PlayerApi', () => {
 
       await player.setRepeat('track');
 
-      expect(httpMock.put).toBeCalledWith('/me/player/repeat', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/player/repeat', {
         params: {
           state: 'track',
         },
@@ -271,7 +278,7 @@ describe('PlayerApi', () => {
 
       await player.setRepeat('track', { device_id: 'foo' });
 
-      expect(httpMock.put).toBeCalledWith('/me/player/repeat', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/player/repeat', {
         params: {
           state: 'track',
           device_id: 'foo',
@@ -286,7 +293,7 @@ describe('PlayerApi', () => {
 
       await player.setShuffle(true);
 
-      expect(httpMock.put).toBeCalledWith('/me/player/shuffle', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/player/shuffle', {
         params: {
           state: true,
         },
@@ -298,7 +305,7 @@ describe('PlayerApi', () => {
 
       await player.setShuffle(true, { device_id: 'foo' });
 
-      expect(httpMock.put).toBeCalledWith('/me/player/shuffle', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/player/shuffle', {
         params: {
           state: true,
           device_id: 'foo',
@@ -313,7 +320,7 @@ describe('PlayerApi', () => {
 
       await player.setVolume(50);
 
-      expect(httpMock.put).toBeCalledWith('/me/player/volume', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/player/volume', {
         params: {
           volume_percent: 50,
         },
@@ -325,7 +332,7 @@ describe('PlayerApi', () => {
 
       await player.setVolume(50, { device_id: 'foo' });
 
-      expect(httpMock.put).toBeCalledWith('/me/player/volume', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/player/volume', {
         params: {
           volume_percent: 50,
           device_id: 'foo',
@@ -340,7 +347,7 @@ describe('PlayerApi', () => {
 
       await player.skipToNext();
 
-      expect(httpMock.post).toBeCalledWith('/me/player/next', undefined);
+      expect(httpMock.post).toHaveBeenCalledWith('/me/player/next', undefined);
     });
 
     it('should skip to the next track (with options)', async () => {
@@ -348,7 +355,7 @@ describe('PlayerApi', () => {
 
       await player.skipToNext({ device_id: 'foo' });
 
-      expect(httpMock.post).toBeCalledWith('/me/player/next', {
+      expect(httpMock.post).toHaveBeenCalledWith('/me/player/next', {
         params: {
           device_id: 'foo',
         },
@@ -362,7 +369,10 @@ describe('PlayerApi', () => {
 
       await player.skipToPrevious();
 
-      expect(httpMock.post).toBeCalledWith('/me/player/previous', undefined);
+      expect(httpMock.post).toHaveBeenCalledWith(
+        '/me/player/previous',
+        undefined,
+      );
     });
 
     it('should skip to the previous track (with options)', async () => {
@@ -370,7 +380,7 @@ describe('PlayerApi', () => {
 
       await player.skipToPrevious({ device_id: 'foo' });
 
-      expect(httpMock.post).toBeCalledWith('/me/player/previous', {
+      expect(httpMock.post).toHaveBeenCalledWith('/me/player/previous', {
         params: {
           device_id: 'foo',
         },
@@ -384,7 +394,7 @@ describe('PlayerApi', () => {
 
       await player.transferPlayback('foo');
 
-      expect(httpMock.put).toBeCalledWith('/me/player', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/player', {
         data: {
           device_ids: ['foo'],
         },
@@ -396,7 +406,7 @@ describe('PlayerApi', () => {
 
       await player.transferPlayback('foo', { play: true });
 
-      expect(httpMock.put).toBeCalledWith('/me/player', {
+      expect(httpMock.put).toHaveBeenCalledWith('/me/player', {
         data: {
           device_ids: ['foo'],
           play: true,

@@ -1,15 +1,19 @@
+import { type MockedClass } from 'vitest';
+
 import {
   albumFixture,
-  getAlbumsFixture,
   getAlbumTracksFixture,
+  getAlbumsFixture,
 } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { AlbumsApi } from './AlbumsApi';
 
-jest.mock('../helpers/Http');
+vi.mock('../helpers/Http');
 
-const HttpMock = Http as jest.MockedClass<typeof Http>;
+const HttpMock = Http as MockedClass<typeof Http>;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function setup() {
   const httpMock = new HttpMock('token');
   const albums = new AlbumsApi(httpMock);
@@ -17,11 +21,11 @@ function setup() {
   return { httpMock, albums };
 }
 
-beforeEach(() => {
-  jest.resetAllMocks();
-});
-
 describe('AlbumsApi', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   describe('getAlbum', () => {
     beforeEach(() => {
       HttpMock.prototype.get.mockResolvedValue(albumFixture);
@@ -33,7 +37,7 @@ describe('AlbumsApi', () => {
       const response = await albums.getAlbum('foo');
 
       expect(response).toEqual(albumFixture);
-      expect(httpMock.get).toBeCalledWith('/albums/foo', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith('/albums/foo', undefined);
     });
 
     it('should get an album (with options)', async () => {
@@ -42,7 +46,7 @@ describe('AlbumsApi', () => {
       const response = await albums.getAlbum('foo', { market: 'bar' });
 
       expect(response).toEqual(albumFixture);
-      expect(httpMock.get).toBeCalledWith('/albums/foo', {
+      expect(httpMock.get).toHaveBeenCalledWith('/albums/foo', {
         params: {
           market: 'bar',
         },
@@ -61,7 +65,7 @@ describe('AlbumsApi', () => {
       const response = await albums.getAlbums(['foo', 'bar']);
 
       expect(response).toEqual(getAlbumsFixture.albums);
-      expect(httpMock.get).toBeCalledWith('/albums', {
+      expect(httpMock.get).toHaveBeenCalledWith('/albums', {
         params: {
           ids: ['foo', 'bar'],
         },
@@ -76,7 +80,7 @@ describe('AlbumsApi', () => {
       });
 
       expect(response).toEqual(getAlbumsFixture.albums);
-      expect(httpMock.get).toBeCalledWith('/albums', {
+      expect(httpMock.get).toHaveBeenCalledWith('/albums', {
         params: {
           ids: ['foo', 'bar'],
           market: 'baz',
@@ -96,7 +100,10 @@ describe('AlbumsApi', () => {
       const response = await albums.getAlbumTracks('foo');
 
       expect(response).toEqual(getAlbumTracksFixture);
-      expect(httpMock.get).toBeCalledWith('/albums/foo/tracks', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith(
+        '/albums/foo/tracks',
+        undefined,
+      );
     });
 
     it("should get an album's tracks (with options)", async () => {
@@ -105,7 +112,7 @@ describe('AlbumsApi', () => {
       const response = await albums.getAlbumTracks('foo', { market: 'bar' });
 
       expect(response).toEqual(getAlbumTracksFixture);
-      expect(httpMock.get).toBeCalledWith('/albums/foo/tracks', {
+      expect(httpMock.get).toHaveBeenCalledWith('/albums/foo/tracks', {
         params: {
           market: 'bar',
         },

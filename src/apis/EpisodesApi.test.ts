@@ -1,11 +1,15 @@
+import { type MockedClass } from 'vitest';
+
 import { episodeFixture, getEpisodesFixture } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { EpisodesApi } from './EpisodesApi';
 
-jest.mock('../helpers/Http');
+vi.mock('../helpers/Http');
 
-const HttpMock = Http as jest.MockedClass<typeof Http>;
+const HttpMock = Http as MockedClass<typeof Http>;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function setup() {
   const httpMock = new HttpMock('token');
   const episodes = new EpisodesApi(httpMock);
@@ -13,11 +17,11 @@ function setup() {
   return { httpMock, episodes };
 }
 
-beforeEach(() => {
-  jest.resetAllMocks();
-});
-
 describe('EpisodesApi', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   describe('getEpisode', () => {
     beforeEach(() => {
       HttpMock.prototype.get.mockResolvedValue(episodeFixture);
@@ -29,7 +33,7 @@ describe('EpisodesApi', () => {
       const response = await episodes.getEpisode('foo');
 
       expect(response).toEqual(episodeFixture);
-      expect(httpMock.get).toBeCalledWith('/episodes/foo', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith('/episodes/foo', undefined);
     });
 
     it('should get an episode (with options)', async () => {
@@ -38,7 +42,7 @@ describe('EpisodesApi', () => {
       const response = await episodes.getEpisode('foo', { market: 'bar' });
 
       expect(response).toEqual(episodeFixture);
-      expect(httpMock.get).toBeCalledWith('/episodes/foo', {
+      expect(httpMock.get).toHaveBeenCalledWith('/episodes/foo', {
         params: {
           market: 'bar',
         },
@@ -57,7 +61,7 @@ describe('EpisodesApi', () => {
       const response = await episodes.getEpisodes(['foo', 'bar']);
 
       expect(response).toEqual(getEpisodesFixture.episodes);
-      expect(httpMock.get).toBeCalledWith('/episodes', {
+      expect(httpMock.get).toHaveBeenCalledWith('/episodes', {
         params: {
           ids: ['foo', 'bar'],
         },
@@ -72,7 +76,7 @@ describe('EpisodesApi', () => {
       });
 
       expect(response).toEqual(getEpisodesFixture.episodes);
-      expect(httpMock.get).toBeCalledWith('/episodes', {
+      expect(httpMock.get).toHaveBeenCalledWith('/episodes', {
         params: {
           ids: ['foo', 'bar'],
           market: 'baz',

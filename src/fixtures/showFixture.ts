@@ -1,4 +1,4 @@
-import { Show } from '../types/SpotifyObjects';
+import { type Show } from '../types/SpotifyObjects';
 
 export const showFixture: Show = {
   available_markets: [
@@ -84,8 +84,7 @@ export const showFixture: Show = {
   description:
     "If you've ever wanted to know about champagne, satanism, the Stonewall Uprising, chaos theory, LSD, El Nino, true crime and Rosa Parks, then look no further. Josh and Chuck have you covered.",
   episodes: {
-    href:
-      'https://api.spotify.com/v1/shows/0ofXAdFIQQRsCYj9754UFx/episodes?offset=0&limit=50',
+    href: 'https://api.spotify.com/v1/shows/0ofXAdFIQQRsCYj9754UFx/episodes?offset=0&limit=50',
     items: [
       {
         audio_preview_url:
@@ -102,20 +101,17 @@ export const showFixture: Show = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/883c24ddeb1e8f393226a7b5be5b0084ad0b0205',
+            url: 'https://i.scdn.co/image/883c24ddeb1e8f393226a7b5be5b0084ad0b0205',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/c1d7aae424cc88eb7a2105e6eab3db957027b023',
+            url: 'https://i.scdn.co/image/c1d7aae424cc88eb7a2105e6eab3db957027b023',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/e640ac2a8b8432e2bab4b1e94cf4c96dec65dac1',
+            url: 'https://i.scdn.co/image/e640ac2a8b8432e2bab4b1e94cf4c96dec65dac1',
             width: 64,
           },
         ],
@@ -135,8 +131,7 @@ export const showFixture: Show = {
       },
     ],
     limit: 1,
-    next:
-      'https://api.spotify.com/v1/shows/0ofXAdFIQQRsCYj9754UFx/episodes?offset=1&limit=1',
+    next: 'https://api.spotify.com/v1/shows/0ofXAdFIQQRsCYj9754UFx/episodes?offset=1&limit=1',
     offset: 0,
     previous: null,
     total: 1490,

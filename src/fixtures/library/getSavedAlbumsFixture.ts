@@ -1,4 +1,4 @@
-import { GetSavedAlbumsResponse } from '../../types/SpotifyResponses';
+import { type GetSavedAlbumsResponse } from '../../types/SpotifyResponses';
 
 export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
   href: 'https://api.spotify.com/v1/me/albums?offset=0&limit=1',
@@ -101,13 +101,11 @@ export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
         ],
         copyrights: [
           {
-            text:
-              '© 1972 Island Records, a division of Universal Music Operations Limited',
+            text: '© 1972 Island Records, a division of Universal Music Operations Limited',
             type: 'C',
           },
           {
-            text:
-              '℗ 1972 Island Records, a division of Universal Music Operations Limited',
+            text: '℗ 1972 Island Records, a division of Universal Music Operations Limited',
             type: 'P',
           },
         ],
@@ -123,20 +121,17 @@ export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b2730f2a198651d9c2e4efad9d18',
+            url: 'https://i.scdn.co/image/ab67616d0000b2730f2a198651d9c2e4efad9d18',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e020f2a198651d9c2e4efad9d18',
+            url: 'https://i.scdn.co/image/ab67616d00001e020f2a198651d9c2e4efad9d18',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d000048510f2a198651d9c2e4efad9d18',
+            url: 'https://i.scdn.co/image/ab67616d000048510f2a198651d9c2e4efad9d18',
             width: 64,
           },
         ],
@@ -147,8 +142,7 @@ export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
         release_date_precision: 'day',
         total_tracks: 11,
         tracks: {
-          href:
-            'https://api.spotify.com/v1/albums/7KyvfoQhqlNLPNb98yY0pf/tracks?offset=0&limit=50',
+          href: 'https://api.spotify.com/v1/albums/7KyvfoQhqlNLPNb98yY0pf/tracks?offset=0&limit=50',
           items: [
             {
               artists: [
@@ -157,8 +151,7 @@ export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
                     spotify:
                       'https://open.spotify.com/artist/5c3GLXai8YOMid29ZEuR9y',
                   },
-                  href:
-                    'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
+                  href: 'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
                   id: '5c3GLXai8YOMid29ZEuR9y',
                   name: 'Nick Drake',
                   type: 'artist',
@@ -269,8 +262,7 @@ export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
                     spotify:
                       'https://open.spotify.com/artist/5c3GLXai8YOMid29ZEuR9y',
                   },
-                  href:
-                    'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
+                  href: 'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
                   id: '5c3GLXai8YOMid29ZEuR9y',
                   name: 'Nick Drake',
                   type: 'artist',
@@ -381,8 +373,7 @@ export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
                     spotify:
                       'https://open.spotify.com/artist/5c3GLXai8YOMid29ZEuR9y',
                   },
-                  href:
-                    'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
+                  href: 'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
                   id: '5c3GLXai8YOMid29ZEuR9y',
                   name: 'Nick Drake',
                   type: 'artist',
@@ -493,8 +484,7 @@ export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
                     spotify:
                       'https://open.spotify.com/artist/5c3GLXai8YOMid29ZEuR9y',
                   },
-                  href:
-                    'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
+                  href: 'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
                   id: '5c3GLXai8YOMid29ZEuR9y',
                   name: 'Nick Drake',
                   type: 'artist',
@@ -605,8 +595,7 @@ export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
                     spotify:
                       'https://open.spotify.com/artist/5c3GLXai8YOMid29ZEuR9y',
                   },
-                  href:
-                    'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
+                  href: 'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
                   id: '5c3GLXai8YOMid29ZEuR9y',
                   name: 'Nick Drake',
                   type: 'artist',
@@ -717,8 +706,7 @@ export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
                     spotify:
                       'https://open.spotify.com/artist/5c3GLXai8YOMid29ZEuR9y',
                   },
-                  href:
-                    'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
+                  href: 'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
                   id: '5c3GLXai8YOMid29ZEuR9y',
                   name: 'Nick Drake',
                   type: 'artist',
@@ -829,8 +817,7 @@ export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
                     spotify:
                       'https://open.spotify.com/artist/5c3GLXai8YOMid29ZEuR9y',
                   },
-                  href:
-                    'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
+                  href: 'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
                   id: '5c3GLXai8YOMid29ZEuR9y',
                   name: 'Nick Drake',
                   type: 'artist',
@@ -941,8 +928,7 @@ export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
                     spotify:
                       'https://open.spotify.com/artist/5c3GLXai8YOMid29ZEuR9y',
                   },
-                  href:
-                    'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
+                  href: 'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
                   id: '5c3GLXai8YOMid29ZEuR9y',
                   name: 'Nick Drake',
                   type: 'artist',
@@ -1053,8 +1039,7 @@ export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
                     spotify:
                       'https://open.spotify.com/artist/5c3GLXai8YOMid29ZEuR9y',
                   },
-                  href:
-                    'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
+                  href: 'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
                   id: '5c3GLXai8YOMid29ZEuR9y',
                   name: 'Nick Drake',
                   type: 'artist',
@@ -1165,8 +1150,7 @@ export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
                     spotify:
                       'https://open.spotify.com/artist/5c3GLXai8YOMid29ZEuR9y',
                   },
-                  href:
-                    'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
+                  href: 'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
                   id: '5c3GLXai8YOMid29ZEuR9y',
                   name: 'Nick Drake',
                   type: 'artist',
@@ -1277,8 +1261,7 @@ export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
                     spotify:
                       'https://open.spotify.com/artist/5c3GLXai8YOMid29ZEuR9y',
                   },
-                  href:
-                    'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
+                  href: 'https://api.spotify.com/v1/artists/5c3GLXai8YOMid29ZEuR9y',
                   id: '5c3GLXai8YOMid29ZEuR9y',
                   name: 'Nick Drake',
                   type: 'artist',

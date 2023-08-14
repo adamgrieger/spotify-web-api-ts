@@ -1,14 +1,17 @@
 import axios from 'axios';
+import { type Mock } from 'vitest';
+
 import { BASE_API_URL } from '../constants';
+
 import { paramsSerializer, spotifyAxios } from './spotifyAxios';
 
-jest.mock('axios');
+vi.mock('axios');
 
-const axiosMock = (axios as unknown) as jest.Mock;
+const axiosMock = axios as unknown as Mock;
 
 describe('spotifyAxios', () => {
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("should successfully call Spotify's Web API with the default content type", async () => {
@@ -18,13 +21,13 @@ describe('spotifyAxios', () => {
         bar: 'baz',
       },
     });
-    expect(axiosMock).toBeCalledWith({
+    expect(axiosMock).toHaveBeenCalledWith({
       params: {
         bar: 'baz',
       },
       baseURL: BASE_API_URL,
       headers: {
-        Authorization: 'Bearer token',
+        'Authorization': 'Bearer token',
         'Content-Type': 'application/json',
       },
       paramsSerializer,
@@ -39,11 +42,11 @@ describe('spotifyAxios', () => {
       contentType: 'image/jpeg',
       data: 'bar',
     });
-    expect(axiosMock).toBeCalledWith({
+    expect(axiosMock).toHaveBeenCalledWith({
       data: 'bar',
       baseURL: BASE_API_URL,
       headers: {
-        Authorization: 'Bearer token',
+        'Authorization': 'Bearer token',
         'Content-Type': 'image/jpeg',
       },
       paramsSerializer,

@@ -1,17 +1,21 @@
+import { type MockedClass } from 'vitest';
+
 import {
   artistFixture,
   getArtistAlbumsFixture,
-  getArtistsFixture,
   getArtistTopTracksFixture,
+  getArtistsFixture,
   getRelatedArtistsFixture,
 } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { ArtistsApi } from './ArtistsApi';
 
-jest.mock('../helpers/Http');
+vi.mock('../helpers/Http');
 
-const HttpMock = Http as jest.MockedClass<typeof Http>;
+const HttpMock = Http as MockedClass<typeof Http>;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function setup() {
   const httpMock = new HttpMock('token');
   const artists = new ArtistsApi(httpMock);
@@ -19,11 +23,11 @@ function setup() {
   return { httpMock, artists };
 }
 
-beforeEach(() => {
-  jest.resetAllMocks();
-});
-
 describe('ArtistsApi', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   describe('getArtist', () => {
     beforeEach(() => {
       HttpMock.prototype.get.mockResolvedValue(artistFixture);
@@ -35,7 +39,7 @@ describe('ArtistsApi', () => {
       const response = await artists.getArtist('foo');
 
       expect(response).toEqual(artistFixture);
-      expect(httpMock.get).toBeCalledWith('/artists/foo');
+      expect(httpMock.get).toHaveBeenCalledWith('/artists/foo');
     });
   });
 
@@ -50,7 +54,10 @@ describe('ArtistsApi', () => {
       const response = await artists.getArtistAlbums('foo');
 
       expect(response).toEqual(getArtistAlbumsFixture);
-      expect(httpMock.get).toBeCalledWith('/artists/foo/albums', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith(
+        '/artists/foo/albums',
+        undefined,
+      );
     });
 
     it("should get an artist's albums (with options)", async () => {
@@ -59,7 +66,7 @@ describe('ArtistsApi', () => {
       const response = await artists.getArtistAlbums('foo', { country: 'bar' });
 
       expect(response).toEqual(getArtistAlbumsFixture);
-      expect(httpMock.get).toBeCalledWith('/artists/foo/albums', {
+      expect(httpMock.get).toHaveBeenCalledWith('/artists/foo/albums', {
         params: {
           country: 'bar',
         },
@@ -78,7 +85,7 @@ describe('ArtistsApi', () => {
       const response = await artists.getArtists(['foo', 'bar']);
 
       expect(response).toEqual(getArtistsFixture.artists);
-      expect(httpMock.get).toBeCalledWith('/artists', {
+      expect(httpMock.get).toHaveBeenCalledWith('/artists', {
         params: {
           ids: ['foo', 'bar'],
         },
@@ -97,7 +104,7 @@ describe('ArtistsApi', () => {
       const response = await artists.getArtistTopTracks('foo', 'bar');
 
       expect(response).toEqual(getArtistTopTracksFixture.tracks);
-      expect(httpMock.get).toBeCalledWith('/artists/foo/top-tracks', {
+      expect(httpMock.get).toHaveBeenCalledWith('/artists/foo/top-tracks', {
         params: {
           country: 'bar',
         },
@@ -116,7 +123,7 @@ describe('ArtistsApi', () => {
       const response = await artists.getRelatedArtists('foo');
 
       expect(response).toEqual(getRelatedArtistsFixture.artists);
-      expect(httpMock.get).toBeCalledWith('/artists/foo/related-artists');
+      expect(httpMock.get).toHaveBeenCalledWith('/artists/foo/related-artists');
     });
   });
 });

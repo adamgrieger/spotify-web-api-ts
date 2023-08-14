@@ -1,21 +1,23 @@
+import { type MockedClass } from 'vitest';
+
 import { Http } from './Http';
 import { searchHelper } from './searchHelper';
 
-jest.mock('./Http');
+vi.mock('./Http');
 
-const HttpMock = Http as jest.MockedClass<typeof Http>;
-
-beforeEach(() => {
-  jest.resetAllMocks();
-});
+const HttpMock = Http as MockedClass<typeof Http>;
 
 describe('searchHelper', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   it('should search for an item (without options)', async () => {
     const httpMock = new HttpMock('token');
 
     await searchHelper(httpMock, 'foo', ['album', 'artist']);
 
-    expect(httpMock.get).toBeCalledWith('/search', {
+    expect(httpMock.get).toHaveBeenCalledWith('/search', {
       params: {
         q: 'foo',
         type: ['album', 'artist'],
@@ -28,7 +30,7 @@ describe('searchHelper', () => {
 
     await searchHelper(httpMock, 'foo', ['album', 'artist'], { limit: 2 });
 
-    expect(httpMock.get).toBeCalledWith('/search', {
+    expect(httpMock.get).toHaveBeenCalledWith('/search', {
       params: {
         q: 'foo',
         type: ['album', 'artist'],

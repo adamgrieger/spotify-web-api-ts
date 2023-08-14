@@ -1,9 +1,8 @@
-import { SearchPlaylistsResponse } from '../../types/SpotifyResponses';
+import { type SearchPlaylistsResponse } from '../../types/SpotifyResponses';
 
 export const searchPlaylistsFixture: SearchPlaylistsResponse = {
   playlists: {
-    href:
-      'https://api.spotify.com/v1/search?query=garage&type=playlist&offset=0&limit=1',
+    href: 'https://api.spotify.com/v1/search?query=garage&type=playlist&offset=0&limit=1',
     items: [
       {
         collaborative: false,
@@ -16,8 +15,7 @@ export const searchPlaylistsFixture: SearchPlaylistsResponse = {
         images: [
           {
             height: null,
-            url:
-              'https://i.scdn.co/image/ab67706c0000da84b367e7b6daf27909411ee160',
+            url: 'https://i.scdn.co/image/ab67706c0000da84b367e7b6daf27909411ee160',
             width: null,
           },
         ],
@@ -37,8 +35,7 @@ export const searchPlaylistsFixture: SearchPlaylistsResponse = {
         snapshot_id:
           'MjcsYmU5YjE2MDllODcxYzI4ODA5M2ZmNGY0ZDY1MzFhODVkYWViMTEwZg==',
         tracks: {
-          href:
-            'https://api.spotify.com/v1/playlists/7fdQkum2nvXwcaCKnBZ7rR/tracks',
+          href: 'https://api.spotify.com/v1/playlists/7fdQkum2nvXwcaCKnBZ7rR/tracks',
           total: 19,
         },
         type: 'playlist',
@@ -46,8 +43,7 @@ export const searchPlaylistsFixture: SearchPlaylistsResponse = {
       },
     ],
     limit: 1,
-    next:
-      'https://api.spotify.com/v1/search?query=garage&type=playlist&offset=1&limit=1',
+    next: 'https://api.spotify.com/v1/search?query=garage&type=playlist&offset=1&limit=1',
     offset: 0,
     previous: null,
     total: 39136,

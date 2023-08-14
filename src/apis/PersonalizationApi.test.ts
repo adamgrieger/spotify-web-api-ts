@@ -1,11 +1,15 @@
+import { type MockedClass } from 'vitest';
+
 import { getMyTopArtistsFixture, getMyTopTracksFixture } from '../fixtures';
 import { Http } from '../helpers/Http';
+
 import { PersonalizationApi } from './PersonalizationApi';
 
-jest.mock('../helpers/Http');
+vi.mock('../helpers/Http');
 
-const HttpMock = Http as jest.MockedClass<typeof Http>;
+const HttpMock = Http as MockedClass<typeof Http>;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function setup() {
   const httpMock = new HttpMock('token');
   const personalization = new PersonalizationApi(httpMock);
@@ -13,11 +17,11 @@ function setup() {
   return { httpMock, personalization };
 }
 
-beforeEach(() => {
-  jest.resetAllMocks();
-});
-
 describe('PersonalizationApi', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   describe('getMyTopArtists', () => {
     beforeEach(() => {
       HttpMock.prototype.get.mockResolvedValue(getMyTopArtistsFixture);
@@ -29,7 +33,7 @@ describe('PersonalizationApi', () => {
       const response = await personalization.getMyTopArtists();
 
       expect(response).toEqual(getMyTopArtistsFixture);
-      expect(httpMock.get).toBeCalledWith('/me/top/artists', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith('/me/top/artists', undefined);
     });
 
     it("should get the current user's top artists (with options)", async () => {
@@ -38,7 +42,7 @@ describe('PersonalizationApi', () => {
       const response = await personalization.getMyTopArtists({ limit: 2 });
 
       expect(response).toEqual(getMyTopArtistsFixture);
-      expect(httpMock.get).toBeCalledWith('/me/top/artists', {
+      expect(httpMock.get).toHaveBeenCalledWith('/me/top/artists', {
         params: {
           limit: 2,
         },
@@ -57,7 +61,7 @@ describe('PersonalizationApi', () => {
       const response = await personalization.getMyTopTracks();
 
       expect(response).toEqual(getMyTopTracksFixture);
-      expect(httpMock.get).toBeCalledWith('/me/top/tracks', undefined);
+      expect(httpMock.get).toHaveBeenCalledWith('/me/top/tracks', undefined);
     });
 
     it("should get the current user's top tracks (with options)", async () => {
@@ -66,7 +70,7 @@ describe('PersonalizationApi', () => {
       const response = await personalization.getMyTopTracks({ limit: 2 });
 
       expect(response).toEqual(getMyTopTracksFixture);
-      expect(httpMock.get).toBeCalledWith('/me/top/tracks', {
+      expect(httpMock.get).toHaveBeenCalledWith('/me/top/tracks', {
         params: {
           limit: 2,
         },

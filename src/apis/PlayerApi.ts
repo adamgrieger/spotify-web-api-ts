@@ -1,24 +1,24 @@
-import { Http } from '../helpers/Http';
+import { type Http } from '../helpers/Http';
 import {
-  CurrentlyPlaying,
-  CurrentlyPlayingContext,
-  Device,
-  RepeatState,
+  type CurrentlyPlaying,
+  type CurrentlyPlayingContext,
+  type Device,
+  type RepeatState,
 } from '../types/SpotifyObjects';
 import {
-  DeviceIdOptions,
-  GetCurrentlyPlayingTrackOptions,
-  GetPlaybackInfoOptions,
-  GetRecentlyPlayedTracksOptions,
-  PlayOptions,
-  TransferPlaybackOptions,
+  type DeviceIdOptions,
+  type GetCurrentlyPlayingTrackOptions,
+  type GetPlaybackInfoOptions,
+  type GetRecentlyPlayedTracksOptions,
+  type PlayOptions,
+  type TransferPlaybackOptions,
 } from '../types/SpotifyOptions';
-import { GetRecentlyPlayedTracksResponse } from '../types/SpotifyResponses';
+import { type GetRecentlyPlayedTracksResponse } from '../types/SpotifyResponses';
 
 export class PlayerApi {
-  private http: Http;
+  private readonly http: Http;
 
-  constructor(http: Http) {
+  public constructor(http: Http) {
     this.http = http;
   }
 
@@ -30,8 +30,11 @@ export class PlayerApi {
    * @param uri The uri of the track or episode to add to the queue.
    * @param options Optional request information.
    */
-  addToQueue(uri: string, options?: DeviceIdOptions): Promise<void> {
-    return this.http.post<void>('/me/player/queue', {
+  public async addToQueue(
+    uri: string,
+    options?: DeviceIdOptions,
+  ): Promise<void> {
+    await this.http.post('/me/player/queue', {
       params: {
         ...options,
         uri,
@@ -46,10 +49,10 @@ export class PlayerApi {
    *
    * @param options Optional request information.
    */
-  getCurrentlyPlayingTrack(
+  public async getCurrentlyPlayingTrack(
     options?: GetCurrentlyPlayingTrackOptions,
   ): Promise<CurrentlyPlaying | string> {
-    return this.http.get<CurrentlyPlaying>(
+    return await this.http.get<CurrentlyPlaying>(
       '/me/player/currently-playing',
       options && { params: options },
     );
@@ -60,8 +63,8 @@ export class PlayerApi {
    *
    * Get information about a user's available devices.
    */
-  getMyDevices(): Promise<Device[]> {
-    return this.http.get<Device[]>('/me/player/devices');
+  public async getMyDevices(): Promise<Device[]> {
+    return await this.http.get<Device[]>('/me/player/devices');
   }
 
   /**
@@ -72,10 +75,10 @@ export class PlayerApi {
    *
    * @param options Optional request information.
    */
-  getPlaybackInfo(
+  public async getPlaybackInfo(
     options?: GetPlaybackInfoOptions,
   ): Promise<CurrentlyPlayingContext> {
-    return this.http.get<CurrentlyPlayingContext>(
+    return await this.http.get<CurrentlyPlayingContext>(
       '/me/player',
       options && { params: options },
     );
@@ -88,10 +91,10 @@ export class PlayerApi {
    *
    * @param options Optional request information.
    */
-  getRecentlyPlayedTracks(
+  public async getRecentlyPlayedTracks(
     options?: GetRecentlyPlayedTracksOptions,
   ): Promise<GetRecentlyPlayedTracksResponse> {
-    return this.http.get<GetRecentlyPlayedTracksResponse>(
+    return await this.http.get<GetRecentlyPlayedTracksResponse>(
       '/me/player/recently-played',
       options && { params: options },
     );
@@ -104,11 +107,8 @@ export class PlayerApi {
    *
    * @param options Optional request information.
    */
-  pause(options?: DeviceIdOptions): Promise<void> {
-    return this.http.put<void>(
-      '/me/player/pause',
-      options && { params: options },
-    );
+  public async pause(options?: DeviceIdOptions): Promise<void> {
+    await this.http.put('/me/player/pause', options && { params: options });
   }
 
   /**
@@ -118,10 +118,11 @@ export class PlayerApi {
    *
    * @param options Optional request information.
    */
-  play(options?: PlayOptions): Promise<void> {
+  public async play(options?: PlayOptions): Promise<void> {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { device_id, ...bodyParams } = options ?? {};
 
-    return this.http.put<void>(
+    await this.http.put(
       '/me/player/play',
       options && {
         ...(device_id && { params: { device_id } }),
@@ -138,8 +139,11 @@ export class PlayerApi {
    * @param positionMs The position in milliseconds to seek to.
    * @param options Optional request information.
    */
-  seek(positionMs: number, options?: DeviceIdOptions): Promise<void> {
-    return this.http.put<void>('/me/player/seek', {
+  public async seek(
+    positionMs: number,
+    options?: DeviceIdOptions,
+  ): Promise<void> {
+    await this.http.put('/me/player/seek', {
       params: {
         ...options,
         position_ms: positionMs,
@@ -155,8 +159,11 @@ export class PlayerApi {
    * @param state The desired repeat mode.
    * @param options Optional request information.
    */
-  setRepeat(state: RepeatState, options?: DeviceIdOptions): Promise<void> {
-    return this.http.put<void>('/me/player/repeat', {
+  public async setRepeat(
+    state: RepeatState,
+    options?: DeviceIdOptions,
+  ): Promise<void> {
+    await this.http.put('/me/player/repeat', {
       params: {
         ...options,
         state,
@@ -172,8 +179,11 @@ export class PlayerApi {
    * @param state The desired shuffle state.
    * @param options Optional request information.
    */
-  setShuffle(state: boolean, options?: DeviceIdOptions): Promise<void> {
-    return this.http.put<void>('/me/player/shuffle', {
+  public async setShuffle(
+    state: boolean,
+    options?: DeviceIdOptions,
+  ): Promise<void> {
+    await this.http.put('/me/player/shuffle', {
       params: {
         ...options,
         state,
@@ -189,8 +199,11 @@ export class PlayerApi {
    * @param volumePercent The volume to set.
    * @param options Optional request information.
    */
-  setVolume(volumePercent: number, options?: DeviceIdOptions): Promise<void> {
-    return this.http.put<void>('/me/player/volume', {
+  public async setVolume(
+    volumePercent: number,
+    options?: DeviceIdOptions,
+  ): Promise<void> {
+    await this.http.put('/me/player/volume', {
       params: {
         ...options,
         volume_percent: volumePercent,
@@ -205,11 +218,8 @@ export class PlayerApi {
    *
    * @param options Optional request information.
    */
-  skipToNext(options?: DeviceIdOptions): Promise<void> {
-    return this.http.post<void>(
-      '/me/player/next',
-      options && { params: options },
-    );
+  public async skipToNext(options?: DeviceIdOptions): Promise<void> {
+    await this.http.post('/me/player/next', options && { params: options });
   }
 
   /**
@@ -219,11 +229,8 @@ export class PlayerApi {
    *
    * @param options Optional request information.
    */
-  skipToPrevious(options?: DeviceIdOptions): Promise<void> {
-    return this.http.post<void>(
-      '/me/player/previous',
-      options && { params: options },
-    );
+  public async skipToPrevious(options?: DeviceIdOptions): Promise<void> {
+    await this.http.post('/me/player/previous', options && { params: options });
   }
 
   /**
@@ -234,11 +241,11 @@ export class PlayerApi {
    * @param deviceId The ID of the device on which playback should be started/transferred.
    * @param options Optional request information.
    */
-  transferPlayback(
+  public async transferPlayback(
     deviceId: string,
     options?: TransferPlaybackOptions,
   ): Promise<void> {
-    return this.http.put<void>('/me/player', {
+    await this.http.put('/me/player', {
       data: {
         ...options,
         device_ids: [deviceId],

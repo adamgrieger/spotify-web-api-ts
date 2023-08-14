@@ -1,4 +1,4 @@
-import { GetSavedShowsResponse } from '../../types/SpotifyResponses';
+import { type GetSavedShowsResponse } from '../../types/SpotifyResponses';
 
 export const getSavedShowsFixture: GetSavedShowsResponse = {
   href: 'https://api.spotify.com/v1/me/shows?offset=0&limit=2',
@@ -66,20 +66,17 @@ export const getSavedShowsFixture: GetSavedShowsResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/7f2ffb09d7f47fcb31420c3299bfb4675c13877f',
+            url: 'https://i.scdn.co/image/7f2ffb09d7f47fcb31420c3299bfb4675c13877f',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/cd96ee6735f2a79f2ea39f8522375ef867923e59',
+            url: 'https://i.scdn.co/image/cd96ee6735f2a79f2ea39f8522375ef867923e59',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/1f2031fee48e1d27e8d1fea217de23554e22b74d',
+            url: 'https://i.scdn.co/image/1f2031fee48e1d27e8d1fea217de23554e22b74d',
             width: 64,
           },
         ],
@@ -186,20 +183,17 @@ export const getSavedShowsFixture: GetSavedShowsResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/29126c05d08eac150b0e9a4cc61f13885c555ff1',
+            url: 'https://i.scdn.co/image/29126c05d08eac150b0e9a4cc61f13885c555ff1',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/1ec0eba6e85fb1bc30221fe10092488111533a15',
+            url: 'https://i.scdn.co/image/1ec0eba6e85fb1bc30221fe10092488111533a15',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/8870c75630935db5290d2162245b611f0fb40b14',
+            url: 'https://i.scdn.co/image/8870c75630935db5290d2162245b611f0fb40b14',
             width: 64,
           },
         ],

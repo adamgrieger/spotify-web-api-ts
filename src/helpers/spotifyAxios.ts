@@ -1,5 +1,10 @@
-import axios, { AxiosError, AxiosRequestConfig, Method } from 'axios';
+import axios, {
+  type AxiosError,
+  type AxiosRequestConfig,
+  type Method,
+} from 'axios';
 import qs from 'qs';
+
 import { BASE_API_URL } from '../constants';
 
 export type SpotifyAxiosConfig = AxiosRequestConfig & { contentType?: string };
@@ -9,14 +14,14 @@ export async function spotifyAxios<T>(
   method: Method,
   accessToken: string,
   config?: SpotifyAxiosConfig,
-) {
+): Promise<T> {
   try {
     const { contentType, ...axiosConfig } = config ?? {};
     const response = await axios({
       ...axiosConfig,
       baseURL: BASE_API_URL,
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        'Authorization': `Bearer ${accessToken}`,
         'Content-Type': contentType ?? 'application/json',
       },
       paramsSerializer,
@@ -31,6 +36,6 @@ export async function spotifyAxios<T>(
   }
 }
 
-export function paramsSerializer(params: any) {
+export function paramsSerializer(params: unknown): string {
   return qs.stringify(params, { arrayFormat: 'comma' });
 }

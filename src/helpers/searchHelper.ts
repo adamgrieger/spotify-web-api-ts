@@ -1,14 +1,15 @@
-import { SearchType } from '../types/SpotifyObjects';
-import { SearchOptions } from '../types/SpotifyOptions';
-import { Http } from './Http';
+import { type SearchType } from '../types/SpotifyObjects';
+import { type SearchOptions } from '../types/SpotifyOptions';
 
-export function searchHelper<T>(
+import { type Http } from './Http';
+
+export async function searchHelper<T>(
   http: Http,
   query: string,
   type: SearchType[],
   options?: SearchOptions,
-) {
-  return http.get<T>('/search', {
+): Promise<T> {
+  return await http.get<T>('/search', {
     params: {
       ...options,
       q: query,

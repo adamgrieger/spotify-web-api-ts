@@ -1,32 +1,32 @@
 import {
-  Album,
-  Artist,
-  AudioFeatures,
-  Category,
-  CursorBasedPaging,
-  Episode,
-  Paging,
-  PlayHistory,
-  PlaylistItem,
-  RecommendationSeed,
-  SavedAlbum,
-  SavedShow,
-  SavedTrack,
-  SimplifiedAlbum,
-  SimplifiedEpisode,
-  SimplifiedPlaylist,
-  SimplifiedShow,
-  SimplifiedTrack,
-  Track,
+  type Album,
+  type Artist,
+  type AudioFeatures,
+  type Category,
+  type CursorBasedPaging,
+  type Episode,
+  type Paging,
+  type PlayHistory,
+  type PlaylistItem,
+  type RecommendationSeed,
+  type SavedAlbum,
+  type SavedShow,
+  type SavedTrack,
+  type SimplifiedAlbum,
+  type SimplifiedEpisode,
+  type SimplifiedPlaylist,
+  type SimplifiedShow,
+  type SimplifiedTrack,
+  type Track,
 } from './SpotifyObjects';
 
 // +--------+
 // | Albums |
 // +--------+
 
-export type GetAlbumsResponse = {
+export interface GetAlbumsResponse {
   albums: Array<Album | null>;
-};
+}
 
 export type GetAlbumTracksResponse = Paging<SimplifiedTrack>;
 
@@ -36,63 +36,63 @@ export type GetAlbumTracksResponse = Paging<SimplifiedTrack>;
 
 export type GetArtistAlbumsResponse = Paging<SimplifiedAlbum>;
 
-export type GetArtistsResponse = {
+export interface GetArtistsResponse {
   artists: Artist[];
-};
+}
 
-export type GetArtistTopTracksResponse = {
+export interface GetArtistTopTracksResponse {
   tracks: Track[];
-};
+}
 
-export type GetRelatedArtistsResponse = {
+export interface GetRelatedArtistsResponse {
   artists: Artist[];
-};
+}
 
 // +--------+
 // | Browse |
 // +--------+
 
-export type GetAvailableGenreSeedsResponse = {
+export interface GetAvailableGenreSeedsResponse {
   genres: string[];
-};
+}
 
-export type GetCategoriesResponse = {
+export interface GetCategoriesResponse {
   categories: Paging<Category>;
-};
+}
 
-export type GetCategoryPlaylistsResponse = {
+export interface GetCategoryPlaylistsResponse {
   playlists: Paging<SimplifiedPlaylist>;
-};
+}
 
-export type GetFeaturedPlaylistsResponse = {
+export interface GetFeaturedPlaylistsResponse {
   message: string;
   playlists: Paging<SimplifiedPlaylist>;
-};
+}
 
-export type GetNewReleasesResponse = {
+export interface GetNewReleasesResponse {
   albums: Paging<SimplifiedAlbum>;
-};
+}
 
-export type GetRecommendationsResponse = {
+export interface GetRecommendationsResponse {
   seeds: RecommendationSeed[];
   tracks: Track[];
-};
+}
 
 // +----------+
 // | Episodes |
 // +----------+
 
-export type GetEpisodesResponse = {
+export interface GetEpisodesResponse {
   episodes: Array<Episode | null>;
-};
+}
 
 // +--------+
 // | Follow |
 // +--------+
 
-export type GetFollowedArtistsResponse = {
+export interface GetFollowedArtistsResponse {
   artists: CursorBasedPaging<Artist>;
-};
+}
 
 // +---------+
 // | Library |
@@ -128,9 +128,9 @@ export type GetPlaylistItemsResponse = Paging<PlaylistItem>;
 
 export type GetUserPlaylistsResponse = Paging<SimplifiedPlaylist>;
 
-export type SnapshotIdResponse = {
+export interface SnapshotIdResponse {
   snapshot_id: string;
-};
+}
 
 // +--------+
 // | Search |
@@ -145,37 +145,37 @@ export type SearchResponse = Partial<
     SearchTracksResponse
 >;
 
-export type SearchAlbumsResponse = {
+export interface SearchAlbumsResponse {
   albums: Paging<SimplifiedAlbum>;
-};
+}
 
-export type SearchArtistsResponse = {
+export interface SearchArtistsResponse {
   artists: Paging<Artist>;
-};
+}
 
-export type SearchEpisodesResponse = {
+export interface SearchEpisodesResponse {
   episodes: Paging<SimplifiedEpisode>;
-};
+}
 
-export type SearchPlaylistsResponse = {
+export interface SearchPlaylistsResponse {
   playlists: Paging<SimplifiedPlaylist>;
-};
+}
 
-export type SearchShowsResponse = {
+export interface SearchShowsResponse {
   shows: Paging<SimplifiedShow>;
-};
+}
 
-export type SearchTracksResponse = {
+export interface SearchTracksResponse {
   tracks: Paging<Track>;
-};
+}
 
 // +-------+
 // | Shows |
 // +-------+
 
-export type GetShowsResponse = {
+export interface GetShowsResponse {
   shows: Array<SimplifiedShow | null>;
-};
+}
 
 export type GetShowEpisodesResponse = Paging<SimplifiedEpisode>;
 
@@ -183,10 +183,10 @@ export type GetShowEpisodesResponse = Paging<SimplifiedEpisode>;
 // | Tracks |
 // +--------+
 
-export type GetAudioFeaturesForTracksResponse = {
+export interface GetAudioFeaturesForTracksResponse {
   audio_features: Array<AudioFeatures | null>;
-};
+}
 
-export type GetTracksResponse = {
+export interface GetTracksResponse {
   tracks: Array<Track | null>;
-};
+}

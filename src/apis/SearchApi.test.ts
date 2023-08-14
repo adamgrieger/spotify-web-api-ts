@@ -1,3 +1,5 @@
+import { type MockedFunction } from 'vitest';
+
 import {
   searchAlbumsFixture,
   searchArtistsFixture,
@@ -9,14 +11,14 @@ import {
 } from '../fixtures';
 import { Http } from '../helpers/Http';
 import { searchHelper } from '../helpers/searchHelper';
+
 import { SearchApi } from './SearchApi';
 
-jest.mock('../helpers/searchHelper');
+vi.mock('../helpers/searchHelper');
 
-const searchHelperMock = searchHelper as jest.MockedFunction<
-  typeof searchHelper
->;
+const searchHelperMock = searchHelper as MockedFunction<typeof searchHelper>;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function setup() {
   const http = new Http('token');
   const search = new SearchApi(http);
@@ -24,11 +26,11 @@ function setup() {
   return { http, search };
 }
 
-beforeEach(() => {
-  jest.resetAllMocks();
-});
-
 describe('SearchApi', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   describe('search', () => {
     beforeEach(() => {
       searchHelperMock.mockResolvedValue(searchFixture);
@@ -40,7 +42,7 @@ describe('SearchApi', () => {
       const response = await search.search('foo', ['album', 'artist']);
 
       expect(response).toEqual(searchFixture);
-      expect(searchHelperMock).toBeCalledWith(
+      expect(searchHelperMock).toHaveBeenCalledWith(
         http,
         'foo',
         ['album', 'artist'],
@@ -56,7 +58,7 @@ describe('SearchApi', () => {
       });
 
       expect(response).toEqual(searchFixture);
-      expect(searchHelperMock).toBeCalledWith(
+      expect(searchHelperMock).toHaveBeenCalledWith(
         http,
         'foo',
         ['album', 'artist'],
@@ -76,7 +78,7 @@ describe('SearchApi', () => {
       const response = await search.searchAlbums('foo');
 
       expect(response).toEqual(searchAlbumsFixture.albums);
-      expect(searchHelperMock).toBeCalledWith(
+      expect(searchHelperMock).toHaveBeenCalledWith(
         http,
         'foo',
         ['album'],
@@ -90,7 +92,7 @@ describe('SearchApi', () => {
       const response = await search.searchAlbums('foo', { limit: 2 });
 
       expect(response).toEqual(searchAlbumsFixture.albums);
-      expect(searchHelperMock).toBeCalledWith(http, 'foo', ['album'], {
+      expect(searchHelperMock).toHaveBeenCalledWith(http, 'foo', ['album'], {
         limit: 2,
       });
     });
@@ -107,7 +109,7 @@ describe('SearchApi', () => {
       const response = await search.searchArtists('foo');
 
       expect(response).toEqual(searchArtistsFixture.artists);
-      expect(searchHelperMock).toBeCalledWith(
+      expect(searchHelperMock).toHaveBeenCalledWith(
         http,
         'foo',
         ['artist'],
@@ -121,7 +123,7 @@ describe('SearchApi', () => {
       const response = await search.searchArtists('foo', { limit: 2 });
 
       expect(response).toEqual(searchArtistsFixture.artists);
-      expect(searchHelperMock).toBeCalledWith(http, 'foo', ['artist'], {
+      expect(searchHelperMock).toHaveBeenCalledWith(http, 'foo', ['artist'], {
         limit: 2,
       });
     });
@@ -138,7 +140,7 @@ describe('SearchApi', () => {
       const response = await search.searchEpisodes('foo');
 
       expect(response).toEqual(searchEpisodesFixture.episodes);
-      expect(searchHelperMock).toBeCalledWith(
+      expect(searchHelperMock).toHaveBeenCalledWith(
         http,
         'foo',
         ['episode'],
@@ -152,7 +154,7 @@ describe('SearchApi', () => {
       const response = await search.searchEpisodes('foo', { limit: 2 });
 
       expect(response).toEqual(searchEpisodesFixture.episodes);
-      expect(searchHelperMock).toBeCalledWith(http, 'foo', ['episode'], {
+      expect(searchHelperMock).toHaveBeenCalledWith(http, 'foo', ['episode'], {
         limit: 2,
       });
     });
@@ -169,7 +171,7 @@ describe('SearchApi', () => {
       const response = await search.searchPlaylists('foo');
 
       expect(response).toEqual(searchPlaylistsFixture.playlists);
-      expect(searchHelperMock).toBeCalledWith(
+      expect(searchHelperMock).toHaveBeenCalledWith(
         http,
         'foo',
         ['playlist'],
@@ -183,7 +185,7 @@ describe('SearchApi', () => {
       const response = await search.searchPlaylists('foo', { limit: 2 });
 
       expect(response).toEqual(searchPlaylistsFixture.playlists);
-      expect(searchHelperMock).toBeCalledWith(http, 'foo', ['playlist'], {
+      expect(searchHelperMock).toHaveBeenCalledWith(http, 'foo', ['playlist'], {
         limit: 2,
       });
     });
@@ -200,7 +202,12 @@ describe('SearchApi', () => {
       const response = await search.searchShows('foo');
 
       expect(response).toEqual(searchShowsFixture.shows);
-      expect(searchHelperMock).toBeCalledWith(http, 'foo', ['show'], undefined);
+      expect(searchHelperMock).toHaveBeenCalledWith(
+        http,
+        'foo',
+        ['show'],
+        undefined,
+      );
     });
 
     it('should search for a show (with options)', async () => {
@@ -209,7 +216,7 @@ describe('SearchApi', () => {
       const response = await search.searchShows('foo', { limit: 2 });
 
       expect(response).toEqual(searchShowsFixture.shows);
-      expect(searchHelperMock).toBeCalledWith(http, 'foo', ['show'], {
+      expect(searchHelperMock).toHaveBeenCalledWith(http, 'foo', ['show'], {
         limit: 2,
       });
     });
@@ -226,7 +233,7 @@ describe('SearchApi', () => {
       const response = await search.searchTracks('foo');
 
       expect(response).toEqual(searchTracksFixture.tracks);
-      expect(searchHelperMock).toBeCalledWith(
+      expect(searchHelperMock).toHaveBeenCalledWith(
         http,
         'foo',
         ['track'],
@@ -240,7 +247,7 @@ describe('SearchApi', () => {
       const response = await search.searchTracks('foo', { limit: 2 });
 
       expect(response).toEqual(searchTracksFixture.tracks);
-      expect(searchHelperMock).toBeCalledWith(http, 'foo', ['track'], {
+      expect(searchHelperMock).toHaveBeenCalledWith(http, 'foo', ['track'], {
         limit: 2,
       });
     });

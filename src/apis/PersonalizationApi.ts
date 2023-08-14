@@ -1,14 +1,14 @@
-import { Http } from '../helpers/Http';
-import { PersonalizationOptions } from '../types/SpotifyOptions';
+import { type Http } from '../helpers/Http';
+import { type PersonalizationOptions } from '../types/SpotifyOptions';
 import {
-  GetMyTopArtistsResponse,
-  GetMyTopTracksResponse,
+  type GetMyTopArtistsResponse,
+  type GetMyTopTracksResponse,
 } from '../types/SpotifyResponses';
 
 export class PersonalizationApi {
-  private http: Http;
+  private readonly http: Http;
 
-  constructor(http: Http) {
+  public constructor(http: Http) {
     this.http = http;
   }
 
@@ -19,10 +19,10 @@ export class PersonalizationApi {
    *
    * @param options Optional request information.
    */
-  getMyTopArtists(
+  public async getMyTopArtists(
     options?: PersonalizationOptions,
   ): Promise<GetMyTopArtistsResponse> {
-    return this.http.get<GetMyTopArtistsResponse>(
+    return await this.http.get<GetMyTopArtistsResponse>(
       '/me/top/artists',
       options && { params: options },
     );
@@ -35,10 +35,10 @@ export class PersonalizationApi {
    *
    * @param options Optional request information.
    */
-  getMyTopTracks(
+  public async getMyTopTracks(
     options?: PersonalizationOptions,
   ): Promise<GetMyTopTracksResponse> {
-    return this.http.get<GetMyTopTracksResponse>(
+    return await this.http.get<GetMyTopTracksResponse>(
       '/me/top/tracks',
       options && { params: options },
     );
