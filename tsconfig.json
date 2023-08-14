@@ -1,19 +1,19 @@
 {
   "compilerOptions": {
-		"outDir": "./dist",
-		"rootDir": "./",
-		"noEmit": true,
-		"skipLibCheck": true,
-		"target": "ESNext",
-		"module": "ESNext",
-		"strict": true,
-		"resolveJsonModule": true,
-		"moduleResolution": "bundler",
-		"esModuleInterop": true,
-		"incremental": true,
-		"tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
-		"allowSyntheticDefaultImports": true,
-		"types": ["vite/client", "vitest/globals"]
-	},
+    "outDir": "./dist",
+    "rootDir": "./",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "strict": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "incremental": true,
+    "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
+    "allowSyntheticDefaultImports": true,
+    "types": ["vite/client", "vitest/globals"]
+  },
   "include": ["src", "vite.config.ts"]
 }
