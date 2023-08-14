@@ -13,7 +13,7 @@ import type { TimeIntervalObject } from './TimeIntervalObject';
 import type { TimeSignature } from './TimeSignature';
 
 export type AudioAnalysisObject = {
-    meta?: {
+  meta?: {
 /**
  * The version of the Analyzer used to analyze this track.
  */
@@ -43,7 +43,7 @@ analysis_time?: number;
  */
 input_process?: string;
 };
-    track?: {
+  track?: {
 /**
  * The exact number of audio samples analyzed from this track. See also `analysis_sample_rate`.
  */
@@ -134,24 +134,24 @@ rhythmstring?: string;
  */
 rhythm_version?: number;
 };
-    /**
-     * The time intervals of the bars throughout the track. A bar (or measure) is a segment of time defined as a given number of beats.
-     */
-    bars?: Array<TimeIntervalObject>;
-    /**
-     * The time intervals of beats throughout the track. A beat is the basic time unit of a piece of music; for example, each tick of a metronome. Beats are typically multiples of tatums.
-     */
-    beats?: Array<TimeIntervalObject>;
-    /**
-     * Sections are defined by large variations in rhythm or timbre, e.g. chorus, verse, bridge, guitar solo, etc. Each section contains its own descriptions of tempo, key, mode, time_signature, and loudness.
-     */
-    sections?: Array<SectionObject>;
-    /**
-     * Each segment contains a roughly conisistent sound throughout its duration.
-     */
-    segments?: Array<SegmentObject>;
-    /**
-     * A tatum represents the lowest regular pulse train that a listener intuitively infers from the timing of perceived musical events (segments).
-     */
-    tatums?: Array<TimeIntervalObject>;
+  /**
+   * The time intervals of the bars throughout the track. A bar (or measure) is a segment of time defined as a given number of beats.
+   */
+  bars?: Array<TimeIntervalObject>;
+  /**
+   * The time intervals of beats throughout the track. A beat is the basic time unit of a piece of music; for example, each tick of a metronome. Beats are typically multiples of tatums.
+   */
+  beats?: Array<TimeIntervalObject>;
+  /**
+   * Sections are defined by large variations in rhythm or timbre, e.g. chorus, verse, bridge, guitar solo, etc. Each section contains its own descriptions of tempo, key, mode, time_signature, and loudness.
+   */
+  sections?: Array<SectionObject>;
+  /**
+   * Each segment contains a roughly conisistent sound throughout its duration.
+   */
+  segments?: Array<SegmentObject>;
+  /**
+   * A tatum represents the lowest regular pulse train that a listener intuitively infers from the timing of perceived musical events (segments).
+   */
+  tatums?: Array<TimeIntervalObject>;
 };

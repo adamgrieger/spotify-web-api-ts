@@ -4,9 +4,9 @@
 /* eslint-disable */
 
 export type AuthorObject = {
-    /**
-     * The name of the author.
+  /**
+   * The name of the author.
  * 
-     */
-    name?: string;
+   */
+  name?: string;
 };

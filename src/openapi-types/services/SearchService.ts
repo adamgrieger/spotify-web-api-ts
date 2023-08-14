@@ -16,23 +16,23 @@ import { request as __request } from '../core/request';
 
 export class SearchService {
 
-    /**
-     * Search for Item
+  /**
+   * Search for Item
  * 
-     * Get Spotify catalog information about albums, artists, playlists, tracks, shows, episodes or audiobooks
+   * Get Spotify catalog information about albums, artists, playlists, tracks, shows, episodes or audiobooks
  * that match a keyword string.<br />
  * **Note: Audiobooks are only available for the US, UK, Ireland, New Zealand and Australia markets.**
  * 
-     * @param q 
-     * @param type 
-     * @param market 
-     * @param limit 
-     * @param offset 
-     * @param includeExternal 
-     * @returns any Search response
-     * @throws ApiError
-     */
-    public static search(
+   * @param q 
+   * @param type 
+   * @param market 
+   * @param limit 
+   * @param offset 
+   * @param includeExternal 
+   * @returns any Search response
+   * @throws ApiError
+   */
+  public static search(
 q: string,
 type: Array<'album' | 'artist' | 'playlist' | 'track' | 'show' | 'episode' | 'audiobook'>,
 market?: string,
@@ -48,28 +48,28 @@ shows?: PagingSimplifiedShowObject;
 episodes?: PagingSimplifiedEpisodeObject;
 audiobooks?: PagingSimplifiedAudiobookObject;
 }> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/search',
-            query: {
-                'q': q,
-                'type': type,
-                'market': market,
-                'limit': limit,
-                'offset': offset,
-                'include_external': includeExternal,
-            },
-            errors: {
-                401: `Bad or expired token. This can happen if the user revoked a token or
+    return __request(OpenAPI, {
+      method: 'GET',
+      url: '/search',
+      query: {
+        'q': q,
+        'type': type,
+        'market': market,
+        'limit': limit,
+        'offset': offset,
+        'include_external': includeExternal,
+      },
+      errors: {
+        401: `Bad or expired token. This can happen if the user revoked a token or
 the access token has expired. You should re-authenticate the user.
 `,
-                403: `Bad OAuth request (wrong consumer key, bad nonce, expired
+        403: `Bad OAuth request (wrong consumer key, bad nonce, expired
 timestamp...). Unfortunately, re-authenticating the user won't help here.
 `,
-                429: `The app has exceeded its rate limits.
+        429: `The app has exceeded its rate limits.
 `,
-            },
-        });
-    }
+      },
+    });
+  }
 
 }

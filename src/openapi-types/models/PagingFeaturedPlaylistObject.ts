@@ -6,6 +6,6 @@
 import type { PagingPlaylistObject } from './PagingPlaylistObject';
 
 export type PagingFeaturedPlaylistObject = {
-    message?: string;
-    playlists?: PagingPlaylistObject;
+  message?: string;
+  playlists?: PagingPlaylistObject;
 };

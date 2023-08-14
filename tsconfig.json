@@ -3,7 +3,7 @@
     "outDir": "./dist",
     "rootDir": "./",
     "noEmit": true,
-		"lib": ["dom"],
+    "lib": ["dom"],
     "skipLibCheck": true,
     "target": "ESNext",
     "module": "ESNext",

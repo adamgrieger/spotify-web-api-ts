@@ -21,16 +21,16 @@ artists: Array<SimplifiedArtistObject>;
 
 export namespace SimplifiedAlbumObject {
 
-    /**
-     * The field is present when getting an artist's albums. Compare to album_type this field represents relationship between the artist and the album.
+  /**
+   * The field is present when getting an artist's albums. Compare to album_type this field represents relationship between the artist and the album.
  * 
-     */
-    export enum album_group {
-        ALBUM = 'album',
-        SINGLE = 'single',
-        COMPILATION = 'compilation',
-        APPEARS_ON = 'appears_on',
-    }
+   */
+  export enum album_group {
+    ALBUM = 'album',
+    SINGLE = 'single',
+    COMPILATION = 'compilation',
+    APPEARS_ON = 'appears_on',
+  }
 
 
 }

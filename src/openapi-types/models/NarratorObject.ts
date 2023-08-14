@@ -4,9 +4,9 @@
 /* eslint-disable */
 
 export type NarratorObject = {
-    /**
-     * The name of the Narrator.
+  /**
+   * The name of the Narrator.
  * 
-     */
-    name?: string;
+   */
+  name?: string;
 };

@@ -4,19 +4,19 @@
 /* eslint-disable */
 
 export type ImageObject = {
-    /**
-     * The source URL of the image.
+  /**
+   * The source URL of the image.
  * 
-     */
-    url: string;
-    /**
-     * The image height in pixels.
+   */
+  url: string;
+  /**
+   * The image height in pixels.
  * 
-     */
-    height: number | null;
-    /**
-     * The image width in pixels.
+   */
+  height: number | null;
+  /**
+   * The image width in pixels.
  * 
-     */
-    width: number | null;
+   */
+  width: number | null;
 };
