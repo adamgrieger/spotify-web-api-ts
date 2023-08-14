@@ -2,13 +2,13 @@
   "name": "spotify-web-api",
   "version": "1.0.0",
   "description": "An isomorphic TypeScript wrapper for Spotify's Web API",
-	"repository": "https://github.com/inferrinizzard/spotify-web-api.git",
-	"author": "inferrinizzard",
-	"license": "MIT",
-	"type": "module",
+  "repository": "https://github.com/inferrinizzard/spotify-web-api.git",
+  "author": "inferrinizzard",
+  "license": "MIT",
+  "type": "module",
   "main": "dist/spotify-web-api.umd.js",
   "module": "dist/spotify-web-api.cjs",
-	"exports": {
+  "exports": {
     ".": {
       "import": "./dist/spotify-web-api.cjs",
       "require": "./dist/spotify-web-api.umd.js"
@@ -19,12 +19,12 @@
     "assets"
   ],
   "scripts": {
-		"build": "vite build",
+    "build": "vite build",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
-		"test:dom": "vitest run --environment jsdom",
+    "test:dom": "vitest run --environment jsdom",
     "test:node": "vitest run --environment node",
-		"test": "yarn test:dom && yarn test:node",
+    "test": "yarn test:dom && yarn test:node",
     "types": "tsc --project tsconfig.json",
     "generate-docs": "typedoc --out docs src/index.ts"
   },
@@ -41,6 +41,7 @@
     "typedoc": "^0.18.0",
     "typescript": "^5.1.6",
     "vite": "^4.4.9",
+    "vite-plugin-dts": "^3.5.2",
     "vitest": "^0.34.1"
   }
 }
