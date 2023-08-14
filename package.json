@@ -5,6 +5,7 @@
   "repository": "https://github.com/inferrinizzard/spotify-web-api.git",
   "author": "inferrinizzard",
   "license": "MIT",
+  "engines": { "node": "^16.0.0 || >=18.0.0" },
   "type": "module",
   "main": "dist/spotify-web-api.umd.js",
   "module": "dist/spotify-web-api.cjs",
