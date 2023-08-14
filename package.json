@@ -29,7 +29,8 @@
     "types": "tsc --project tsconfig.json",
     "generate-docs": "typedoc --out docs src/index.ts",
 
-		"pre-commit": "lint-staged"
+		"pre-commit": "lint-staged",
+		"pre-push": "yarn test"
   },
 	"lint-staged": {
     "*": "eslint --fix",
