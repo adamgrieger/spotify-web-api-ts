@@ -34,7 +34,7 @@
   },
 	"lint-staged": {
     "src/**/*": "eslint --fix",
-		"*.ts": "yarn types"
+    "*.ts": "bash -c yarn types"
   },
   "dependencies": {
     "axios": "^0.21.1",
