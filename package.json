@@ -2,16 +2,20 @@
   "name": "spotify-web-api",
   "version": "1.0.0",
   "description": "An isomorphic TypeScript wrapper for Spotify's Web API",
-  "main": "cjs/index.js",
-  "module": "esm/index.js",
-  "types": "types",
-  "repository": "https://github.com/inferrinizzard/spotify-web-api.git",
-  "author": "inferrinizzard",
-  "license": "MIT",
+	"repository": "https://github.com/inferrinizzard/spotify-web-api.git",
+	"author": "inferrinizzard",
+	"license": "MIT",
+	"type": "module",
+  "main": "dist/spotify-web-api.umd.js",
+  "module": "dist/spotify-web-api.cjs",
+	"exports": {
+    ".": {
+      "import": "./dist/spotify-web-api.cjs",
+      "require": "./dist/spotify-web-api.umd.js"
+    }
+  },
   "files": [
-    "cjs",
-    "esm",
-    "types",
+    "dist",
     "assets"
   ],
   "scripts": {
