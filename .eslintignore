@@ -1,7 +1,7 @@
 package.json
-.eslintrc.js
+.eslintrc.*
 
 tsconfig.json
 tsconfig.*.json
 
-vite.config.ts
+dist/
