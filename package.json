@@ -27,10 +27,11 @@
     "test:node": "vitest run --environment node",
     "test": "yarn test:dom && yarn test:node",
     "types": "tsc --project tsconfig.json",
+    
     "generate-docs": "typedoc --out docs src/index.ts",
 
 		"pre-commit": "lint-staged",
-		"pre-push": "yarn test"
+		"pre-push": "yarn lint:fix && yarn test"
   },
 	"lint-staged": {
     "src/**/*": "eslint --fix",
