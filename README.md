@@ -40,12 +40,17 @@ npm install spotify-web-api
 ## Basic Example
 
 ```typescript
-import { SpotifyWebApi } from 'spotify-web-api';
+import { SpotifyWebApi } from "spotify-web-api";
 
-const spotify = new SpotifyWebApi({ accessToken: '<YOUR_ACCESS_TOKEN_HERE>' });
+const spotify = new SpotifyWebApi({ accessToken: "<YOUR_ACCESS_TOKEN_HERE>" });
 
-const { artists } = await spotify.albums.getAlbum('1uzfGk9vxMXfaZ2avqwxod');
+const { artists } = await spotify.albums.getAlbum("1uzfGk9vxMXfaZ2avqwxod");
 
-console.log(artists.map(artist => artist.name));
+console.log(artists.map((artist) => artist.name));
 // Array [ "Against All Logic" ]
 ```
+
+### Contributors
+
+- @inferrinizzard
+- @adamgrieger
