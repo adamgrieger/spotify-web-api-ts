@@ -15,11 +15,11 @@ const getAuthorizationUrlMock = getAuthorizationUrl as MockedFunction<
   typeof getAuthorizationUrl
 >;
 
-beforeEach(() => {
-  vi.resetAllMocks();
-});
-
 describe('SpotifyWebApi', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   it('should construct a SpotifyWebApi instance (without options)', () => {
     const spotify = new SpotifyWebApi();
 
@@ -59,7 +59,7 @@ describe('SpotifyWebApi', () => {
 
       spotify.getRefreshableAuthorizationUrl();
 
-      expect(getAuthorizationUrlMock).toBeCalledWith(
+      expect(getAuthorizationUrlMock).toHaveBeenCalledWith(
         'foo',
         'bar',
         'code',
@@ -75,9 +75,14 @@ describe('SpotifyWebApi', () => {
 
       spotify.getRefreshableAuthorizationUrl({ state: 'baz' });
 
-      expect(getAuthorizationUrlMock).toBeCalledWith('foo', 'bar', 'code', {
-        state: 'baz',
-      });
+      expect(getAuthorizationUrlMock).toHaveBeenCalledWith(
+        'foo',
+        'bar',
+        'code',
+        {
+          state: 'baz',
+        },
+      );
     });
   });
 
@@ -90,7 +95,7 @@ describe('SpotifyWebApi', () => {
 
       spotify.getTemporaryAuthorizationUrl();
 
-      expect(getAuthorizationUrlMock).toBeCalledWith(
+      expect(getAuthorizationUrlMock).toHaveBeenCalledWith(
         'foo',
         'bar',
         'token',
@@ -106,9 +111,14 @@ describe('SpotifyWebApi', () => {
 
       spotify.getTemporaryAuthorizationUrl({ state: 'baz' });
 
-      expect(getAuthorizationUrlMock).toBeCalledWith('foo', 'bar', 'token', {
-        state: 'baz',
-      });
+      expect(getAuthorizationUrlMock).toHaveBeenCalledWith(
+        'foo',
+        'bar',
+        'token',
+        {
+          state: 'baz',
+        },
+      );
     });
   });
 
@@ -123,7 +133,7 @@ describe('SpotifyWebApi', () => {
 
       await spotify.getRefreshableUserTokens('qux');
 
-      expect(axiosMock.post).toBeCalledWith(
+      expect(axiosMock.post).toHaveBeenCalledWith(
         TOKEN_URL,
         'code=qux&grant_type=authorization_code&redirect_uri=baz',
         {
@@ -146,7 +156,7 @@ describe('SpotifyWebApi', () => {
 
       await spotify.getRefreshedAccessToken('baz');
 
-      expect(axiosMock.post).toBeCalledWith(
+      expect(axiosMock.post).toHaveBeenCalledWith(
         TOKEN_URL,
         'grant_type=refresh_token&refresh_token=baz',
         {
@@ -169,7 +179,7 @@ describe('SpotifyWebApi', () => {
 
       await spotify.getTemporaryAppTokens();
 
-      expect(axiosMock.post).toBeCalledWith(
+      expect(axiosMock.post).toHaveBeenCalledWith(
         TOKEN_URL,
         'grant_type=client_credentials',
         {
