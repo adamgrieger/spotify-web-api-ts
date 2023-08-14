@@ -27,7 +27,13 @@
     "test:node": "vitest run --environment node",
     "test": "yarn test:dom && yarn test:node",
     "types": "tsc --project tsconfig.json",
-    "generate-docs": "typedoc --out docs src/index.ts"
+    "generate-docs": "typedoc --out docs src/index.ts",
+
+		"pre-commit": "lint-staged"
+  },
+	"lint-staged": {
+    "*": "eslint --fix",
+		"*.ts": "yarn types"
   },
   "dependencies": {
     "axios": "^0.21.1",
