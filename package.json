@@ -8,6 +8,7 @@
   "type": "module",
   "main": "dist/spotify-web-api.umd.js",
   "module": "dist/spotify-web-api.cjs",
+	"types": "dist/spotify-web-api.d.ts",
   "exports": {
     ".": {
       "import": "./dist/spotify-web-api.cjs",

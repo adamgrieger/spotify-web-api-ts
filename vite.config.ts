@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import { defineConfig } from "vitest/config";
+import dts from 'vite-plugin-dts';
 
 export default defineConfig({
 	cacheDir: './node_modules/.vite',
@@ -11,6 +12,11 @@ export default defineConfig({
       fileName: 'spotify-web-api',
     },
   },
+	plugins: [dts({
+		tsconfigPath: 'tsconfig.build.json',
+		rollupTypes: true,
+		insertTypesEntry: true,
+	})],
 
 	test: {
 		globals: true,
