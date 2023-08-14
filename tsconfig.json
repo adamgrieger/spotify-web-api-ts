@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
 		"outDir": "./dist",
-		"rootDir": "./src",
+		"rootDir": "./",
 		"noEmit": true,
 		"skipLibCheck": true,
 		"target": "ESNext",
@@ -15,5 +15,5 @@
 		"allowSyntheticDefaultImports": true,
 		"types": ["vite/client", "vitest/globals"]
 	},
-  "include": ["src"]
+  "include": ["src", "vite.config.ts"]
 }
