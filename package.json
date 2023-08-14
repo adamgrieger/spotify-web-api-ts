@@ -30,10 +30,10 @@
     
     "generate-docs": "typedoc --out docs src/index.ts",
 
-		"pre-commit": "lint-staged",
-		"pre-push": "yarn lint:fix && yarn test"
+    "pre-commit": "lint-staged",
+    "pre-push": "yarn lint:fix && yarn test"
   },
-	"lint-staged": {
+  "lint-staged": {
     "src/**/*": "eslint --fix",
     "*.ts": "bash -c yarn types"
   },
@@ -55,8 +55,8 @@
     "vite-plugin-dts": "^3.5.2",
     "vitest": "^0.34.1"
   },
-	"contributors": [
-		"inferrinizzard",
-		"adamgrieger"
-	]
+  "contributors": [
+    "inferrinizzard",
+    "adamgrieger"
+  ]
 }
