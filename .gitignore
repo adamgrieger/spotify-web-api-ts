@@ -20,19 +20,9 @@ build/Release
 
 # Dependency directories
 node_modules/
-jspm_packages/
 
 # Optional npm cache directory
 .npm
-
-# Optional eslint cache
-.eslintcache
-
-# Optional REPL history
-.node_repl_history
-
-# Output of 'npm pack'
-*.tgz
 
 # Yarn Integrity file
 .yarn-integrity
@@ -41,8 +31,6 @@ jspm_packages/
 .env
 
 # Build output
-cjs
-esm
 dist
 
 # Generated documentation
