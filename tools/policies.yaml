@@ -1,0 +1,40 @@
+StandalonePreview:
+  title: Spotify Audio preview clips can not be a standalone service
+  description: Audio Preview Clips may not be offered as a standalone service or product.
+  url: '/policy/#ii-respect-content-and-creators:~:text=You must not offer metadata,as a standalone service or product.'
+ContentAlteration:
+  title: Keep audio content in its original form
+  description: The Spotify Platform can not be used to develop applications that alter Spotify Content.
+  url: '/policy/#iii-some-prohibited-applications:~:text=Do not permit any device or system to segue,.'
+Synchronization:
+  title: Do not synchronize Spotify content
+  description: You may not synchronize any sound recordings with any visual media, including any advertising, film, television program, slideshow, video, or similar content
+  url: '/policy/#iii-some-prohibited-applications:~:text=Do not synchronize any sound recordings with any visual media,.'
+Downloading:
+  title: Spotify content may not be downloaded
+  description: You may not facilitate downloads of Spotify content or enable “stream ripping”
+  url: '/terms/#section-iv-restrictions:~:text=facilitating,make permanent copies of Spotify Content.'
+VisualAlteration:
+  title: Keep visual content in its original form
+  description: Spotify visual content must be kept in its original form, e.g. you can not crop album artwork, overlay images on album artwork, place a brand/logo on album artwork
+  url: /documentation/design#using-our-content
+CommercialStreaming:
+  title: Streaming applications may not be commercial
+  description: The Spotify Platform can not be used to develop commercial streaming integrations.
+  url: '/policy/#iv-streaming-and-commercial-use:~:text=Commercial use restrictions,Streaming SDA itself.'
+Attribution:
+  title: Ensure content attribution
+  description: Please keep in mind that metadata, cover art and artist images must be accompanied by a link back to the applicable artist, album, track, or playlist on the Spotify Service. You must also attribute content from Spotify with the logo.
+  url: '/policy/#ii-respect-content-and-creators:~:text=If you display any Spotify Content,on the Spotify Service.'
+Broadcasting:
+  title: Spotify content may not be broadcasted
+  description: The Spotify Platform can not be used for non-interactive broadcasting.
+  url: '/policy/#iii-some-prohibited-applications:~:text=Do not create any product or service which includes any non,several simultaneous listeners.'
+MultipleIntegrations:
+  title: Spotify data may not be transferred
+  description: Please keep in mind that you can not enable transfers of data to another service, except for the purpose of enabling a user to transfer their personal data or the metadata of the user's playlists to another service.
+  url: '/policy/#iii-some-prohibited-applications:~:text=Do not build an SDA that enables the transfer of data,.'
+MachineLearning:
+  title: Spotify content may not be used to train machine learning or AI model
+  description: Please note that you can not use the Spotify Platform or any Spotify Content to train a machine learning or AI model or otherwise ingesting Spotify Content into a machine learning or AI model.
+  url: '/terms#section-iv-restrictions:~:text=Misuse%20of%20the,or%20AI%20model%3B'
