@@ -27,7 +27,7 @@ import {
   type GetTemporaryAppTokensResponse,
 } from './types/SpotifyAuthorization';
 
-interface SpotifyWebApiOptions {
+export interface SpotifyWebApiOptions {
   accessToken?: string;
   clientId?: string;
   clientSecret?: string;
@@ -244,3 +244,7 @@ export class SpotifyWebApi {
     return response.data;
   }
 }
+
+export type * from './types';
+export type * from './helpers/index.types';
+export type * from './apis/index.types';
