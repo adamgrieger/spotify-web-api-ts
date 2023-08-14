@@ -27,14 +27,15 @@
     "test:node": "vitest run --environment node",
     "test": "yarn test:dom && yarn test:node",
     "types": "tsc --project tsconfig.json",
+    
     "generate-docs": "typedoc --out docs src/index.ts",
 
-		"pre-commit": "lint-staged",
-		"pre-push": "yarn test"
+    "pre-commit": "lint-staged",
+    "pre-push": "yarn lint:fix && yarn test"
   },
-	"lint-staged": {
+  "lint-staged": {
     "src/**/*": "eslint --fix",
-		"*.ts": "yarn types"
+    "*.ts": "bash -c yarn types"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -54,8 +55,8 @@
     "vite-plugin-dts": "^3.5.2",
     "vitest": "^0.34.1"
   },
-	"contributors": [
-		"inferrinizzard",
-		"adamgrieger"
-	]
+  "contributors": [
+    "inferrinizzard",
+    "adamgrieger"
+  ]
 }
