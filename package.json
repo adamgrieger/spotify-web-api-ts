@@ -8,7 +8,7 @@
   "type": "module",
   "main": "dist/spotify-web-api.umd.js",
   "module": "dist/spotify-web-api.cjs",
-	"types": "dist/spotify-web-api.d.ts",
+  "types": "dist/spotify-web-api.d.ts",
   "exports": {
     ".": {
       "import": "./dist/spotify-web-api.cjs",
@@ -37,6 +37,7 @@
     "@inferrinizzard/eslint-config": "^0.1.3",
     "@types/qs": "^6.9.4",
     "eslint": "^8.47.0",
+    "husky": "^8.0.3",
     "jsdom": "^22.1.0",
     "prettier": "^2.7.1",
     "typedoc": "^0.18.0",
