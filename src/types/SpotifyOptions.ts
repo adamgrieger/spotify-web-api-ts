@@ -25,9 +25,9 @@ export interface GetAlbumTracksOptions {
 // +---------+
 
 export interface GetArtistAlbumsOptions {
-  country?: string;
   include_groups?: Array<'album' | 'appears_on' | 'compilation' | 'single'>;
   limit?: number;
+  market?: string;
   offset?: number;
 }
 

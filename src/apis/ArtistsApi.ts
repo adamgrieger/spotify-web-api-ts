@@ -1,20 +1,12 @@
-import { type Http } from '../helpers/Http';
-import { type Artist, type Track } from '../types/SpotifyObjects';
-import { type GetArtistAlbumsOptions } from '../types/SpotifyOptions';
 import {
-  type GetArtistAlbumsResponse,
-  type GetArtistTopTracksResponse,
-  type GetArtistsResponse,
-  type GetRelatedArtistsResponse,
-} from '../types/SpotifyResponses';
+  type ArtistObject,
+  ArtistsService,
+  type PagingSimplifiedAlbumObject,
+  type TrackObject,
+} from '../openapi';
+import { type GetArtistAlbumsOptions } from '../types/SpotifyOptions';
 
 export class ArtistsApi {
-  private readonly http: Http;
-
-  public constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * ### Get an Artist
    *
@@ -32,8 +24,8 @@ export class ArtistsApi {
    *
    * @param artistId The Spotify ID for the artist.
    */
-  public async getArtist(artistId: string): Promise<Artist> {
-    return await this.http.get<Artist>(`/artists/${artistId}`);
+  public async getArtist(artistId: string): Promise<ArtistObject> {
+    return await ArtistsService.getAnArtist(artistId);
   }
 
   /**
@@ -59,10 +51,13 @@ export class ArtistsApi {
   public async getArtistAlbums(
     artistId: string,
     options?: GetArtistAlbumsOptions,
-  ): Promise<GetArtistAlbumsResponse> {
-    return await this.http.get<GetArtistAlbumsResponse>(
-      `/artists/${artistId}/albums`,
-      options && { params: options },
+  ): Promise<PagingSimplifiedAlbumObject> {
+    return await ArtistsService.getAnArtistsAlbums(
+      artistId,
+      options?.include_groups?.join(','),
+      options?.market,
+      options?.limit,
+      options?.offset,
     );
   }
 
@@ -87,13 +82,10 @@ export class ArtistsApi {
    *
    * @param artistIds The Spotify IDs for the artists.
    */
-  public async getArtists(artistIds: string[]): Promise<Artist[]> {
-    const response = await this.http.get<GetArtistsResponse>('/artists', {
-      params: {
-        ids: artistIds,
-      },
-    });
-    return response.artists;
+  public async getArtists(
+    artistIds: string[],
+  ): Promise<{ artists: ArtistObject[] }> {
+    return await ArtistsService.getMultipleArtists(artistIds.join(','));
   }
 
   /**
@@ -119,16 +111,8 @@ export class ArtistsApi {
   public async getArtistTopTracks(
     artistId: string,
     country: string,
-  ): Promise<Track[]> {
-    const response = await this.http.get<GetArtistTopTracksResponse>(
-      `/artists/${artistId}/top-tracks`,
-      {
-        params: {
-          country,
-        },
-      },
-    );
-    return response.tracks;
+  ): Promise<{ tracks: TrackObject[] }> {
+    return await ArtistsService.getAnArtistsTopTracks(artistId, country);
   }
 
   /**
@@ -151,10 +135,9 @@ export class ArtistsApi {
    *
    * @param artistId The Spotify ID for the artist.
    */
-  public async getRelatedArtists(artistId: string): Promise<Artist[]> {
-    const response = await this.http.get<GetRelatedArtistsResponse>(
-      `/artists/${artistId}/related-artists`,
-    );
-    return response.artists;
+  public async getRelatedArtists(
+    artistId: string,
+  ): Promise<{ artists: ArtistObject[] }> {
+    return await ArtistsService.getAnArtistsRelatedArtists(artistId);
   }
 }
