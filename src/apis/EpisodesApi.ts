@@ -1,15 +1,7 @@
-import { type Http } from '../helpers/Http';
-import { type Episode } from '../types/SpotifyObjects';
+import { type EpisodeObject, EpisodesService } from '../openapi';
 import { type MarketOptions } from '../types/SpotifyOptions';
-import { type GetEpisodesResponse } from '../types/SpotifyResponses';
 
 export class EpisodesApi {
-  private readonly http: Http;
-
-  public constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * ### Get an Episode
    *
@@ -31,11 +23,8 @@ export class EpisodesApi {
   public async getEpisode(
     episodeId: string,
     options?: MarketOptions,
-  ): Promise<Episode> {
-    return await this.http.get<Episode>(
-      `/episodes/${episodeId}`,
-      options && { params: options },
-    );
+  ): Promise<EpisodeObject> {
+    return await EpisodesService.getAnEpisode(episodeId, options?.market);
   }
 
   /**
@@ -63,13 +52,10 @@ export class EpisodesApi {
   public async getEpisodes(
     episodeIds: string[],
     options?: MarketOptions,
-  ): Promise<Array<Episode | null>> {
-    const response = await this.http.get<GetEpisodesResponse>('/episodes', {
-      params: {
-        ...options,
-        ids: episodeIds,
-      },
-    });
-    return response.episodes;
+  ): Promise<{ episodes: EpisodeObject[] }> {
+    return await EpisodesService.getMultipleEpisodes(
+      episodeIds.join(','),
+      options?.market,
+    );
   }
 }
