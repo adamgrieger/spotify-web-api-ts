@@ -88,7 +88,7 @@ export class SpotifyWebApi {
     this.search = new SearchApi(this.http);
     this.shows = new ShowsApi();
     this.tracks = new TracksApi();
-    this.users = new UsersApi(this.http);
+    this.users = new UsersApi();
   }
 
   public getAccessToken(): string {
