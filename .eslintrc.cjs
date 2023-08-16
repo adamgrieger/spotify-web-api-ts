@@ -4,4 +4,12 @@ module.exports = {
   rules: {
     "@typescript-eslint/unbound-method": "off",
   },
+  overrides: [
+    {
+      files: "src/openapi/**/*",
+      rules: {
+        "@typescript-eslint/ban-tslint-comment": "off",
+      },
+    },
+  ],
 };

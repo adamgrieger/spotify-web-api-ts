@@ -1,4 +1,4 @@
-import axios, { type AxiosInstance } from 'axios';
+import { getSpotifyAxios } from '../../main/spotifyAxios';
 
 import { type CancelablePromise } from './CancelablePromise';
 import { type ApiRequestOptions } from './ApiRequestOptions';
@@ -27,7 +27,8 @@ export {
 export const request = <T>(
   config: OpenAPIConfig,
   options: ApiRequestOptions,
-  axiosClient: AxiosInstance = axios,
 ): CancelablePromise<T> => {
-  return rawRequest(config, options, axiosClient);
+  const spotifyAxios = getSpotifyAxios().axiosInstance;
+
+  return rawRequest(config, options, spotifyAxios);
 };
