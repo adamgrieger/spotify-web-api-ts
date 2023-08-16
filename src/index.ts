@@ -81,7 +81,7 @@ export class SpotifyWebApi {
     this.browse = new BrowseApi();
     this.episodes = new EpisodesApi();
     this.follow = new FollowApi();
-    this.library = new LibraryApi(this.http);
+    this.library = new LibraryApi();
     this.personalization = new PersonalizationApi(this.http);
     this.player = new PlayerApi(this.http);
     this.playlists = new PlaylistsApi(this.http);
