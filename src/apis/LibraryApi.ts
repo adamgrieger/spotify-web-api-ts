@@ -1,11 +1,13 @@
 import {
   LibraryService,
   type PagingSavedAlbumObject,
+  type PagingSavedEpisodeObject,
   type PagingSavedShowObject,
   type PagingSavedTrackObject,
 } from '../openapi';
 import {
   type GetSavedAlbumsOptions,
+  type GetSavedEpisodesOptions,
   type GetSavedShowsOptions,
   type GetSavedTracksOptions,
   type RemoveSavedShowsOptions,
@@ -21,6 +23,17 @@ export class LibraryApi {
    */
   public async areAlbumsSaved(albumIds: string[]): Promise<boolean[]> {
     return await LibraryService.checkUsersSavedAlbums(albumIds.join(','));
+  }
+
+  /**
+   * Check User's Saved Episodes
+   *
+   * Check if one or more episodes are saved in the current user's library.
+   *
+   * @param episodeIds The Spotify IDs of the episodes.
+   */
+  public async areEpisodesSaved(episodeIds: string[]): Promise<boolean[]> {
+    return await LibraryService.checkUsersSavedEpisodes(episodeIds.join(','));
   }
 
   /**
@@ -59,6 +72,23 @@ export class LibraryApi {
       options?.limit,
       options?.offset,
       options?.market,
+    );
+  }
+
+  /**
+   * Get the Current User's Saved Episodes
+   *
+   * Get a list of episodes saved in the current user's library.
+   *
+   * @param options Optional request information.
+   */
+  public async getSavedEpisodes(
+    options?: GetSavedEpisodesOptions,
+  ): Promise<PagingSavedEpisodeObject> {
+    return await LibraryService.getUsersSavedEpisodes(
+      options?.market,
+      options?.limit,
+      options?.offset,
     );
   }
 
@@ -108,6 +138,18 @@ export class LibraryApi {
   }
 
   /**
+   * Check User's Saved Episodes
+   *
+   * Check if an episode is saved in the current user's library.
+   *
+   * @param episodeId The Spotify ID of the episode.
+   */
+  public async isEpisodeSaved(episodeId: string): Promise<boolean> {
+    const response = await this.areEpisodesSaved([episodeId]);
+    return response[0];
+  }
+
+  /**
    * Check User's Saved Shows
    *
    * Check if a show is saved in the current user's library.
@@ -151,6 +193,28 @@ export class LibraryApi {
    */
   public async removeSavedAlbums(albumIds: string[]): Promise<void> {
     return await LibraryService.removeAlbumsUser(albumIds.join(','));
+  }
+
+  /**
+   * Remove Episode for the Current User
+   *
+   * Remove an episode from the current user's library.
+   *
+   * @param episodeId The Spotify ID of the episode.
+   */
+  public async removeSavedEpisode(episodeId: string): Promise<void> {
+    await this.removeSavedEpisodes([episodeId]);
+  }
+
+  /**
+   * Remove Episodes for the Current User
+   *
+   * Remove one or more episodes from the current user's library.
+   *
+   * @param episodeIds The Spotify IDs of the episodes.
+   */
+  public async removeSavedEpisodes(episodeIds: string[]): Promise<void> {
+    return await LibraryService.removeEpisodesUser(episodeIds.join(','));
   }
 
   /**
@@ -228,6 +292,28 @@ export class LibraryApi {
    */
   public async saveAlbums(albumIds: string[]): Promise<void> {
     return await LibraryService.saveAlbumsUser(albumIds.join(','));
+  }
+
+  /**
+   * Save Episode for Current User
+   *
+   * Save an episode to the current user's library.
+   *
+   * @param episodeId The Spotify ID of the episode.
+   */
+  public async saveEpisode(episodeId: string): Promise<void> {
+    await this.saveEpisodes([episodeId]);
+  }
+
+  /**
+   * Save Episodes for Current User
+   *
+   * Save one or more episodes to the current user's library.
+   *
+   * @param episodeIds The Spotify IDs of the episodes.
+   */
+  public async saveEpisodes(episodeIds: string[]): Promise<void> {
+    return await LibraryService.saveEpisodesUser(episodeIds.join(','));
   }
 
   /**

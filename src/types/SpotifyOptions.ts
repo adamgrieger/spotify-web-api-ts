@@ -137,6 +137,12 @@ export interface GetSavedAlbumsOptions {
   offset?: number;
 }
 
+export interface GetSavedEpisodesOptions {
+  limit?: number;
+  market?: string;
+  offset?: number;
+}
+
 export interface GetSavedShowsOptions {
   limit?: number;
   offset?: number;
