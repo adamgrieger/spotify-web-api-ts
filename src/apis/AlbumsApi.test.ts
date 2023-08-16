@@ -1,122 +1,98 @@
-import { type MockedClass } from 'vitest';
+import { type SpyInstance } from 'vitest';
 
 import {
   albumFixture,
   getAlbumTracksFixture,
   getAlbumsFixture,
 } from '../fixtures';
-import { Http } from '../helpers/Http';
+import { AlbumsService } from '../openapi/services/AlbumsService';
 
 import { AlbumsApi } from './AlbumsApi';
 
-vi.mock('../helpers/Http');
-
-const HttpMock = Http as MockedClass<typeof Http>;
-
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function setup() {
-  const httpMock = new HttpMock('token');
-  const albums = new AlbumsApi();
-
-  return { httpMock, albums };
-}
+const albums = new AlbumsApi();
 
 describe('AlbumsApi', () => {
-  beforeEach(() => {
+  afterEach(() => {
     vi.resetAllMocks();
   });
 
   describe('getAlbum', () => {
+    let getAnAlbumSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(albumFixture);
+      getAnAlbumSpy = vi
+        .spyOn(AlbumsService, 'getAnAlbum')
+        .mockResolvedValue(albumFixture);
     });
 
-    it.todo('should get an album (without options)', async () => {
-      const { httpMock, albums } = setup();
-
+    it('should get an album (without options)', async () => {
       const response = await albums.getAlbum('foo');
 
       expect(response).toEqual(albumFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/albums/foo', undefined);
+      expect(getAnAlbumSpy).toHaveBeenCalledWith('foo', undefined);
     });
 
-    it.todo('should get an album (with options)', async () => {
-      const { httpMock, albums } = setup();
-
+    it('should get an album (with options)', async () => {
       const response = await albums.getAlbum('foo', { market: 'bar' });
 
       expect(response).toEqual(albumFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/albums/foo', {
-        params: {
-          market: 'bar',
-        },
-      });
+      expect(getAnAlbumSpy).toHaveBeenCalledWith('foo', 'bar');
     });
   });
 
   describe('getAlbums', () => {
+    let getAlbumsSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getAlbumsFixture);
+      getAlbumsSpy = vi
+        .spyOn(AlbumsService, 'getMultipleAlbums')
+        .mockResolvedValue(getAlbumsFixture);
     });
 
-    it.todo('should get several albums (without options)', async () => {
-      const { httpMock, albums } = setup();
-
+    it('should get several albums (without options)', async () => {
       const response = await albums.getAlbums(['foo', 'bar']);
 
       expect(response).toEqual(getAlbumsFixture.albums);
-      expect(httpMock.get).toHaveBeenCalledWith('/albums', {
-        params: {
-          ids: ['foo', 'bar'],
-        },
-      });
+      expect(getAlbumsSpy).toHaveBeenCalledWith('foo,bar', undefined);
     });
 
-    it.todo('should get several albums (with options)', async () => {
-      const { httpMock, albums } = setup();
-
+    it('should get several albums (with options)', async () => {
       const response = await albums.getAlbums(['foo', 'bar'], {
         market: 'baz',
       });
 
       expect(response).toEqual(getAlbumsFixture.albums);
-      expect(httpMock.get).toHaveBeenCalledWith('/albums', {
-        params: {
-          ids: ['foo', 'bar'],
-          market: 'baz',
-        },
-      });
+      expect(getAlbumsSpy).toHaveBeenCalledWith('foo,bar', 'baz');
     });
   });
 
   describe('getAlbumTracks', () => {
+    let getAlbumTracksSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getAlbumTracksFixture);
+      getAlbumTracksSpy = vi
+        .spyOn(AlbumsService, 'getAnAlbumsTracks')
+        .mockResolvedValue(getAlbumTracksFixture);
     });
 
-    it.todo("should get an album's tracks (without options)", async () => {
-      const { httpMock, albums } = setup();
-
+    it("should get an album's tracks (without options)", async () => {
       const response = await albums.getAlbumTracks('foo');
 
       expect(response).toEqual(getAlbumTracksFixture);
-      expect(httpMock.get).toHaveBeenCalledWith(
-        '/albums/foo/tracks',
+      expect(getAlbumTracksSpy).toHaveBeenCalledWith(
+        'foo',
+        undefined,
+        undefined,
         undefined,
       );
     });
 
-    it.todo("should get an album's tracks (with options)", async () => {
-      const { httpMock, albums } = setup();
-
-      const response = await albums.getAlbumTracks('foo', { market: 'bar' });
+    it("should get an album's tracks (with options)", async () => {
+      const response = await albums.getAlbumTracks('foo', {
+        market: 'bar',
+        limit: 1,
+        offset: 2,
+      });
 
       expect(response).toEqual(getAlbumTracksFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/albums/foo/tracks', {
-        params: {
-          market: 'bar',
-        },
-      });
+      expect(getAlbumTracksSpy).toHaveBeenCalledWith('foo', 'bar', 1, 2);
     });
   });
 });
