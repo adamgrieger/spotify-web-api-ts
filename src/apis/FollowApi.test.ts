@@ -12,7 +12,7 @@ const HttpMock = Http as MockedClass<typeof Http>;
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function setup() {
   const httpMock = new HttpMock('token');
-  const follow = new FollowApi(httpMock);
+  const follow = new FollowApi();
 
   return { httpMock, follow };
 }
