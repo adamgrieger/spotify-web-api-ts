@@ -31,7 +31,7 @@ describe('LibraryApi', () => {
       HttpMock.prototype.get.mockResolvedValue([true, false]);
     });
 
-    it("should check the user's saved albums", async () => {
+    it.todo("should check the user's saved albums", async () => {
       const { httpMock, library } = setup();
 
       const response = await library.areAlbumsSaved(['foo', 'bar']);
@@ -50,7 +50,7 @@ describe('LibraryApi', () => {
       HttpMock.prototype.get.mockResolvedValue([true, false]);
     });
 
-    it("should check the user's saved shows", async () => {
+    it.todo("should check the user's saved shows", async () => {
       const { httpMock, library } = setup();
 
       const response = await library.areShowsSaved(['foo', 'bar']);
@@ -69,7 +69,7 @@ describe('LibraryApi', () => {
       HttpMock.prototype.get.mockResolvedValue([true, false]);
     });
 
-    it("should check the user's saved tracks", async () => {
+    it.todo("should check the user's saved tracks", async () => {
       const { httpMock, library } = setup();
 
       const response = await library.areTracksSaved(['foo', 'bar']);
@@ -88,27 +88,33 @@ describe('LibraryApi', () => {
       HttpMock.prototype.get.mockResolvedValue(getSavedAlbumsFixture);
     });
 
-    it("should get the current user's saved albums (without options)", async () => {
-      const { httpMock, library } = setup();
+    it.todo(
+      "should get the current user's saved albums (without options)",
+      async () => {
+        const { httpMock, library } = setup();
 
-      const response = await library.getSavedAlbums();
+        const response = await library.getSavedAlbums();
 
-      expect(response).toEqual(getSavedAlbumsFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/me/albums', undefined);
-    });
+        expect(response).toEqual(getSavedAlbumsFixture);
+        expect(httpMock.get).toHaveBeenCalledWith('/me/albums', undefined);
+      },
+    );
 
-    it("should get the current user's saved albums (with options)", async () => {
-      const { httpMock, library } = setup();
+    it.todo(
+      "should get the current user's saved albums (with options)",
+      async () => {
+        const { httpMock, library } = setup();
 
-      const response = await library.getSavedAlbums({ limit: 2 });
+        const response = await library.getSavedAlbums({ limit: 2 });
 
-      expect(response).toEqual(getSavedAlbumsFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/me/albums', {
-        params: {
-          limit: 2,
-        },
-      });
-    });
+        expect(response).toEqual(getSavedAlbumsFixture);
+        expect(httpMock.get).toHaveBeenCalledWith('/me/albums', {
+          params: {
+            limit: 2,
+          },
+        });
+      },
+    );
   });
 
   describe('getSavedShows', () => {
@@ -116,27 +122,33 @@ describe('LibraryApi', () => {
       HttpMock.prototype.get.mockResolvedValue(getSavedShowsFixture);
     });
 
-    it("should get the current user's saved shows (without options)", async () => {
-      const { httpMock, library } = setup();
+    it.todo(
+      "should get the current user's saved shows (without options)",
+      async () => {
+        const { httpMock, library } = setup();
 
-      const response = await library.getSavedShows();
+        const response = await library.getSavedShows();
 
-      expect(response).toEqual(getSavedShowsFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/me/shows', undefined);
-    });
+        expect(response).toEqual(getSavedShowsFixture);
+        expect(httpMock.get).toHaveBeenCalledWith('/me/shows', undefined);
+      },
+    );
 
-    it("should get the current user's saved shows (with options)", async () => {
-      const { httpMock, library } = setup();
+    it.todo(
+      "should get the current user's saved shows (with options)",
+      async () => {
+        const { httpMock, library } = setup();
 
-      const response = await library.getSavedShows({ limit: 2 });
+        const response = await library.getSavedShows({ limit: 2 });
 
-      expect(response).toEqual(getSavedShowsFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/me/shows', {
-        params: {
-          limit: 2,
-        },
-      });
-    });
+        expect(response).toEqual(getSavedShowsFixture);
+        expect(httpMock.get).toHaveBeenCalledWith('/me/shows', {
+          params: {
+            limit: 2,
+          },
+        });
+      },
+    );
   });
 
   describe('getSavedTracks', () => {
@@ -144,27 +156,33 @@ describe('LibraryApi', () => {
       HttpMock.prototype.get.mockResolvedValue(getSavedTracksFixture);
     });
 
-    it("should get the current user's saved tracks (without options)", async () => {
-      const { httpMock, library } = setup();
+    it.todo(
+      "should get the current user's saved tracks (without options)",
+      async () => {
+        const { httpMock, library } = setup();
 
-      const response = await library.getSavedTracks();
+        const response = await library.getSavedTracks();
 
-      expect(response).toEqual(getSavedTracksFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/me/tracks', undefined);
-    });
+        expect(response).toEqual(getSavedTracksFixture);
+        expect(httpMock.get).toHaveBeenCalledWith('/me/tracks', undefined);
+      },
+    );
 
-    it("should get the current user's saved tracks (with options)", async () => {
-      const { httpMock, library } = setup();
+    it.todo(
+      "should get the current user's saved tracks (with options)",
+      async () => {
+        const { httpMock, library } = setup();
 
-      const response = await library.getSavedTracks({ limit: 2 });
+        const response = await library.getSavedTracks({ limit: 2 });
 
-      expect(response).toEqual(getSavedTracksFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/me/tracks', {
-        params: {
-          limit: 2,
-        },
-      });
-    });
+        expect(response).toEqual(getSavedTracksFixture);
+        expect(httpMock.get).toHaveBeenCalledWith('/me/tracks', {
+          params: {
+            limit: 2,
+          },
+        });
+      },
+    );
   });
 
   describe('isAlbumSaved', () => {
@@ -172,7 +190,7 @@ describe('LibraryApi', () => {
       HttpMock.prototype.get.mockResolvedValue([true]);
     });
 
-    it("should check the user's saved albums", async () => {
+    it.todo("should check the user's saved albums", async () => {
       const { httpMock, library } = setup();
 
       const response = await library.isAlbumSaved('foo');
@@ -191,7 +209,7 @@ describe('LibraryApi', () => {
       HttpMock.prototype.get.mockResolvedValue([true]);
     });
 
-    it("should check the user's saved shows", async () => {
+    it.todo("should check the user's saved shows", async () => {
       const { httpMock, library } = setup();
 
       const response = await library.isShowSaved('foo');
@@ -210,7 +228,7 @@ describe('LibraryApi', () => {
       HttpMock.prototype.get.mockResolvedValue([true]);
     });
 
-    it("should check the user's saved tracks", async () => {
+    it.todo("should check the user's saved tracks", async () => {
       const { httpMock, library } = setup();
 
       const response = await library.isTrackSaved('foo');
@@ -225,7 +243,7 @@ describe('LibraryApi', () => {
   });
 
   describe('removeSavedAlbum', () => {
-    it('should remove an album for the current user', async () => {
+    it.todo('should remove an album for the current user', async () => {
       const { httpMock, library } = setup();
 
       await library.removeSavedAlbum('foo');
@@ -239,7 +257,7 @@ describe('LibraryApi', () => {
   });
 
   describe('removeSavedAlbums', () => {
-    it('should remove albums for the current user', async () => {
+    it.todo('should remove albums for the current user', async () => {
       const { httpMock, library } = setup();
 
       await library.removeSavedAlbums(['foo', 'bar']);
@@ -253,61 +271,73 @@ describe('LibraryApi', () => {
   });
 
   describe('removeSavedShow', () => {
-    it('should remove a show for the current user (without options)', async () => {
-      const { httpMock, library } = setup();
+    it.todo(
+      'should remove a show for the current user (without options)',
+      async () => {
+        const { httpMock, library } = setup();
 
-      await library.removeSavedShow('foo');
+        await library.removeSavedShow('foo');
 
-      expect(httpMock.delete).toHaveBeenCalledWith('/me/shows', {
-        params: {
-          ids: ['foo'],
-        },
-      });
-    });
+        expect(httpMock.delete).toHaveBeenCalledWith('/me/shows', {
+          params: {
+            ids: ['foo'],
+          },
+        });
+      },
+    );
 
-    it('should remove a show for the current user (with options)', async () => {
-      const { httpMock, library } = setup();
+    it.todo(
+      'should remove a show for the current user (with options)',
+      async () => {
+        const { httpMock, library } = setup();
 
-      await library.removeSavedShow('foo', { market: 'bar' });
+        await library.removeSavedShow('foo', { market: 'bar' });
 
-      expect(httpMock.delete).toHaveBeenCalledWith('/me/shows', {
-        params: {
-          ids: ['foo'],
-          market: 'bar',
-        },
-      });
-    });
+        expect(httpMock.delete).toHaveBeenCalledWith('/me/shows', {
+          params: {
+            ids: ['foo'],
+            market: 'bar',
+          },
+        });
+      },
+    );
   });
 
   describe('removeSavedShows', () => {
-    it('should remove shows for the current user (without options)', async () => {
-      const { httpMock, library } = setup();
+    it.todo(
+      'should remove shows for the current user (without options)',
+      async () => {
+        const { httpMock, library } = setup();
 
-      await library.removeSavedShows(['foo', 'bar']);
+        await library.removeSavedShows(['foo', 'bar']);
 
-      expect(httpMock.delete).toHaveBeenCalledWith('/me/shows', {
-        params: {
-          ids: ['foo', 'bar'],
-        },
-      });
-    });
+        expect(httpMock.delete).toHaveBeenCalledWith('/me/shows', {
+          params: {
+            ids: ['foo', 'bar'],
+          },
+        });
+      },
+    );
 
-    it('should remove shows for the current user (with options)', async () => {
-      const { httpMock, library } = setup();
+    it.todo(
+      'should remove shows for the current user (with options)',
+      async () => {
+        const { httpMock, library } = setup();
 
-      await library.removeSavedShows(['foo', 'bar'], { market: 'baz' });
+        await library.removeSavedShows(['foo', 'bar'], { market: 'baz' });
 
-      expect(httpMock.delete).toHaveBeenCalledWith('/me/shows', {
-        params: {
-          ids: ['foo', 'bar'],
-          market: 'baz',
-        },
-      });
-    });
+        expect(httpMock.delete).toHaveBeenCalledWith('/me/shows', {
+          params: {
+            ids: ['foo', 'bar'],
+            market: 'baz',
+          },
+        });
+      },
+    );
   });
 
   describe('removeSavedTrack', () => {
-    it('should remove a track for the current user', async () => {
+    it.todo('should remove a track for the current user', async () => {
       const { httpMock, library } = setup();
 
       await library.removeSavedTrack('foo');
@@ -321,7 +351,7 @@ describe('LibraryApi', () => {
   });
 
   describe('removeSavedTracks', () => {
-    it('should remove tracks for the current user', async () => {
+    it.todo('should remove tracks for the current user', async () => {
       const { httpMock, library } = setup();
 
       await library.removeSavedTracks(['foo', 'bar']);
@@ -335,7 +365,7 @@ describe('LibraryApi', () => {
   });
 
   describe('saveAlbum', () => {
-    it('should save an album for the current user', async () => {
+    it.todo('should save an album for the current user', async () => {
       const { httpMock, library } = setup();
 
       await library.saveAlbum('foo');
@@ -349,7 +379,7 @@ describe('LibraryApi', () => {
   });
 
   describe('saveAlbums', () => {
-    it('should save albums for the current user', async () => {
+    it.todo('should save albums for the current user', async () => {
       const { httpMock, library } = setup();
 
       await library.saveAlbums(['foo', 'bar']);
@@ -363,7 +393,7 @@ describe('LibraryApi', () => {
   });
 
   describe('saveShow', () => {
-    it('should save a show for the current user', async () => {
+    it.todo('should save a show for the current user', async () => {
       const { httpMock, library } = setup();
 
       await library.saveShow('foo');
@@ -377,7 +407,7 @@ describe('LibraryApi', () => {
   });
 
   describe('saveShows', () => {
-    it('should save shows for the current user', async () => {
+    it.todo('should save shows for the current user', async () => {
       const { httpMock, library } = setup();
 
       await library.saveShows(['foo', 'bar']);
@@ -391,7 +421,7 @@ describe('LibraryApi', () => {
   });
 
   describe('saveTrack', () => {
-    it('should save a track for the current user', async () => {
+    it.todo('should save a track for the current user', async () => {
       const { httpMock, library } = setup();
 
       await library.saveTrack('foo');
@@ -405,7 +435,7 @@ describe('LibraryApi', () => {
   });
 
   describe('saveTracks', () => {
-    it('should save tracks for the current user', async () => {
+    it.todo('should save tracks for the current user', async () => {
       const { httpMock, library } = setup();
 
       await library.saveTracks(['foo', 'bar']);

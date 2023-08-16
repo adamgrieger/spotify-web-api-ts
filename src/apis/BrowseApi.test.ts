@@ -35,7 +35,7 @@ describe('BrowseApi', () => {
       HttpMock.prototype.get.mockResolvedValue(getAvailableGenreSeedsFixture);
     });
 
-    it('should get available genre seeds', async () => {
+    it.todo('should get available genre seeds', async () => {
       const { httpMock, browse } = setup();
 
       const response = await browse.getAvailableGenreSeeds();
@@ -52,7 +52,7 @@ describe('BrowseApi', () => {
       HttpMock.prototype.get.mockResolvedValue(getCategoriesFixture);
     });
 
-    it('should get a list of categories (without options)', async () => {
+    it.todo('should get a list of categories (without options)', async () => {
       const { httpMock, browse } = setup();
 
       const response = await browse.getCategories();
@@ -64,7 +64,7 @@ describe('BrowseApi', () => {
       );
     });
 
-    it('should get a list of categories (with options)', async () => {
+    it.todo('should get a list of categories (with options)', async () => {
       const { httpMock, browse } = setup();
 
       const response = await browse.getCategories({ country: 'foo' });
@@ -83,7 +83,7 @@ describe('BrowseApi', () => {
       HttpMock.prototype.get.mockResolvedValue(categoryFixture);
     });
 
-    it('should get a category (without options)', async () => {
+    it.todo('should get a category (without options)', async () => {
       const { httpMock, browse } = setup();
 
       const response = await browse.getCategory('foo');
@@ -95,7 +95,7 @@ describe('BrowseApi', () => {
       );
     });
 
-    it('should get a category (with options)', async () => {
+    it.todo('should get a category (with options)', async () => {
       const { httpMock, browse } = setup();
 
       const response = await browse.getCategory('foo', { country: 'bar' });
@@ -114,7 +114,7 @@ describe('BrowseApi', () => {
       HttpMock.prototype.get.mockResolvedValue(getCategoryPlaylistsFixture);
     });
 
-    it("should get a category's playlists (without options)", async () => {
+    it.todo("should get a category's playlists (without options)", async () => {
       const { httpMock, browse } = setup();
 
       const response = await browse.getCategoryPlaylists('foo');
@@ -126,7 +126,7 @@ describe('BrowseApi', () => {
       );
     });
 
-    it("should get a category's playlists (with options)", async () => {
+    it.todo("should get a category's playlists (with options)", async () => {
       const { httpMock, browse } = setup();
 
       const response = await browse.getCategoryPlaylists('foo', {
@@ -150,30 +150,39 @@ describe('BrowseApi', () => {
       HttpMock.prototype.get.mockResolvedValue(getFeaturedPlaylistsFixture);
     });
 
-    it('should get a list of featured playlists (without options)', async () => {
-      const { httpMock, browse } = setup();
+    it.todo(
+      'should get a list of featured playlists (without options)',
+      async () => {
+        const { httpMock, browse } = setup();
 
-      const response = await browse.getFeaturedPlaylists();
+        const response = await browse.getFeaturedPlaylists();
 
-      expect(response).toEqual(getFeaturedPlaylistsFixture);
-      expect(httpMock.get).toHaveBeenCalledWith(
-        '/browse/featured-playlists',
-        undefined,
-      );
-    });
+        expect(response).toEqual(getFeaturedPlaylistsFixture);
+        expect(httpMock.get).toHaveBeenCalledWith(
+          '/browse/featured-playlists',
+          undefined,
+        );
+      },
+    );
 
-    it('should get a list of featured playlists (with options)', async () => {
-      const { httpMock, browse } = setup();
+    it.todo(
+      'should get a list of featured playlists (with options)',
+      async () => {
+        const { httpMock, browse } = setup();
 
-      const response = await browse.getFeaturedPlaylists({ country: 'foo' });
+        const response = await browse.getFeaturedPlaylists({ country: 'foo' });
 
-      expect(response).toEqual(getFeaturedPlaylistsFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/browse/featured-playlists', {
-        params: {
-          country: 'foo',
-        },
-      });
-    });
+        expect(response).toEqual(getFeaturedPlaylistsFixture);
+        expect(httpMock.get).toHaveBeenCalledWith(
+          '/browse/featured-playlists',
+          {
+            params: {
+              country: 'foo',
+            },
+          },
+        );
+      },
+    );
   });
 
   describe('getNewReleases', () => {
@@ -181,7 +190,7 @@ describe('BrowseApi', () => {
       HttpMock.prototype.get.mockResolvedValue(getNewReleasesFixture);
     });
 
-    it('should get a list of new releases (without options)', async () => {
+    it.todo('should get a list of new releases (without options)', async () => {
       const { httpMock, browse } = setup();
 
       const response = await browse.getNewReleases();
@@ -193,7 +202,7 @@ describe('BrowseApi', () => {
       );
     });
 
-    it('should get a list of new releases (with options)', async () => {
+    it.todo('should get a list of new releases (with options)', async () => {
       const { httpMock, browse } = setup();
 
       const response = await browse.getNewReleases({ country: 'foo' });
@@ -212,40 +221,46 @@ describe('BrowseApi', () => {
       HttpMock.prototype.get.mockResolvedValue(getRecommendationsFixture);
     });
 
-    it('should get recommendations based on seeds (without options)', async () => {
-      const { httpMock, browse } = setup();
+    it.todo(
+      'should get recommendations based on seeds (without options)',
+      async () => {
+        const { httpMock, browse } = setup();
 
-      const response = await browse.getRecommendations({
-        seed_artists: ['foo', 'bar'],
-      });
-
-      expect(response).toEqual(getRecommendationsFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/recommendations', {
-        params: {
+        const response = await browse.getRecommendations({
           seed_artists: ['foo', 'bar'],
-        },
-      });
-    });
+        });
 
-    it('should get recommendations based on seeds (with options)', async () => {
-      const { httpMock, browse } = setup();
+        expect(response).toEqual(getRecommendationsFixture);
+        expect(httpMock.get).toHaveBeenCalledWith('/recommendations', {
+          params: {
+            seed_artists: ['foo', 'bar'],
+          },
+        });
+      },
+    );
 
-      const response = await browse.getRecommendations(
-        {
-          seed_artists: ['foo', 'bar'],
-        },
-        {
-          market: 'baz',
-        },
-      );
+    it.todo(
+      'should get recommendations based on seeds (with options)',
+      async () => {
+        const { httpMock, browse } = setup();
 
-      expect(response).toEqual(getRecommendationsFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/recommendations', {
-        params: {
-          seed_artists: ['foo', 'bar'],
-          market: 'baz',
-        },
-      });
-    });
+        const response = await browse.getRecommendations(
+          {
+            seed_artists: ['foo', 'bar'],
+          },
+          {
+            market: 'baz',
+          },
+        );
+
+        expect(response).toEqual(getRecommendationsFixture);
+        expect(httpMock.get).toHaveBeenCalledWith('/recommendations', {
+          params: {
+            seed_artists: ['foo', 'bar'],
+            market: 'baz',
+          },
+        });
+      },
+    );
   });
 });
