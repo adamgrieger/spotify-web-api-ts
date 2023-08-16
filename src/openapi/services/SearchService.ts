@@ -1,5 +1,6 @@
 /* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
+/* tslint:disable */
 /* eslint-disable */
 import type { PagingArtistObject } from '../models/PagingArtistObject';
 import type { PagingPlaylistObject } from '../models/PagingPlaylistObject';
