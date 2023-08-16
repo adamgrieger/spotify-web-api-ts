@@ -32,7 +32,7 @@
     "types": "tsc --project tsconfig.json",
     
     "generate-docs": "typedoc --out docs src/index.ts",
-    "generate-types": "openapi  --input ./tools/schema/main/openapi-schema.yaml --output ./src/openapi-types --client axios --indent 2",
+    "generate-types": "openapi  --input ./tools/schema/main/openapi-schema.yaml --output ./src/openapi --client axios --indent 2",
     
     "pre-commit": "lint-staged",
     "pre-push": "yarn lint:fix && yarn test"
