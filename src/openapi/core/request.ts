@@ -1,8 +1,10 @@
 /* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
 /* eslint-disable */
+
+import { getSpotifyAxios } from '../../helpers/spotifyAxios';
 import axios from 'axios';
-import type { AxiosError, AxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios';
+import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import FormData from 'form-data';
 
 import { ApiError } from './ApiError';
@@ -201,7 +203,6 @@ export const sendRequest = async <T>(
   formData: FormData | undefined,
   headers: Record<string, string>,
   onCancel: OnCancel,
-  axiosClient: AxiosInstance
 ): Promise<AxiosResponse<T>> => {
   const source = axios.CancelToken.source();
 
@@ -211,13 +212,13 @@ export const sendRequest = async <T>(
     data: body ?? formData,
     method: options.method,
     withCredentials: config.WITH_CREDENTIALS,
-    cancelToken: source.token,
+    cancelToken: source?.token,
   };
 
   onCancel(() => source.cancel('The user aborted a request.'));
 
   try {
-    return await axiosClient.request(requestConfig);
+    return await getSpotifyAxios().axiosInstance.request(requestConfig);
   } catch (error) {
     const axiosError = error as AxiosError<T>;
     if (axiosError.response) {
@@ -286,7 +287,7 @@ export const catchErrorCodes = (options: ApiRequestOptions, result: ApiResult): 
  * @returns CancelablePromise<T>
  * @throws ApiError
  */
-export const request = <T>(config: OpenAPIConfig, options: ApiRequestOptions, axiosClient: AxiosInstance = axios): CancelablePromise<T> => {
+export const request = <T>(config: OpenAPIConfig, options: ApiRequestOptions): CancelablePromise<T> => {
   return new CancelablePromise(async (resolve, reject, onCancel) => {
     try {
       const url = getUrl(config, options);
@@ -295,7 +296,7 @@ export const request = <T>(config: OpenAPIConfig, options: ApiRequestOptions, ax
       const headers = await getHeaders(config, options, formData);
 
       if (!onCancel.isCancelled) {
-        const response = await sendRequest<T>(config, options, url, body, formData, headers, onCancel, axiosClient);
+        const response = await sendRequest<T>(config, options, url, body, formData, headers, onCancel);
         const responseBody = getResponseBody(response);
         const responseHeader = getResponseHeader(response, options.responseHeader);
 

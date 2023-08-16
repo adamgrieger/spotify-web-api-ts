@@ -28,6 +28,9 @@ import {
   type GetTemporaryAppTokensResponse,
 } from './types/SpotifyAuthorization';
 import { MarketsApi } from './apis/MarketsApi';
+import { type SpotifyAxios, getSpotifyAxios } from './helpers/spotifyAxios';
+
+export let spotifyAxios: SpotifyAxios;
 
 export interface SpotifyWebApiOptions {
   accessToken?: string;
@@ -44,6 +47,8 @@ export class SpotifyWebApi {
   private readonly redirectUri: string;
 
   private readonly http: Http;
+
+  private readonly spotifyAxios: SpotifyAxios;
 
   public albums: AlbumsApi;
 
@@ -81,6 +86,7 @@ export class SpotifyWebApi {
     this.redirectUri = options?.redirectUri ?? '';
 
     this.http = new Http(options?.accessToken ?? '');
+    this.spotifyAxios = getSpotifyAxios();
 
     this.albums = new AlbumsApi();
     this.artists = new ArtistsApi();
@@ -252,6 +258,8 @@ export class SpotifyWebApi {
     return response.data;
   }
 }
+
+export default SpotifyWebApi;
 
 export type * from './types';
 export type * from './helpers/index.types';
