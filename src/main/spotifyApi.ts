@@ -27,16 +27,20 @@ import {
   type GetTemporaryAppTokensResponse,
 } from '../types/SpotifyAuthorization';
 import { MarketsApi } from '../apis/MarketsApi';
+import { assertClientConfigs } from '../helpers/validateClientConfigs';
 
 import { type SpotifyAxios, getSpotifyAxios } from './spotifyAxios';
 
 export let spotifyAxios: SpotifyAxios;
 
 export interface SpotifyWebApiOptions {
-  accessToken?: string;
   clientId?: string;
   clientSecret?: string;
   redirectUri?: string;
+}
+
+export interface SpotifyWebApiCredentials {
+  accessToken?: string;
 }
 
 export class SpotifyWebApi {
@@ -80,12 +84,15 @@ export class SpotifyWebApi {
 
   public users: UsersApi;
 
-  public constructor(options?: SpotifyWebApiOptions) {
+  public constructor(
+    options?: SpotifyWebApiOptions,
+    credentials?: SpotifyWebApiCredentials,
+  ) {
     this.clientId = options?.clientId ?? '';
     this.clientSecret = options?.clientSecret ?? '';
     this.redirectUri = options?.redirectUri ?? '';
 
-    this.http = new Http(options?.accessToken ?? '');
+    this.http = new Http(credentials?.accessToken ?? '');
     this.spotifyAxios = getSpotifyAxios();
 
     this.albums = new AlbumsApi();
@@ -181,6 +188,12 @@ export class SpotifyWebApi {
   public async getRefreshableUserTokens(
     code: string,
   ): Promise<GetRefreshableUserTokensResponse> {
+    assertClientConfigs({
+      clientId: this.clientId,
+      clientSecret: this.clientSecret,
+      redirectUri: this.redirectUri,
+    });
+
     const response =
       await this.spotifyAxios.axiosInstance.post<GetRefreshableUserTokensResponse>(
         TOKEN_URL,
@@ -211,6 +224,11 @@ export class SpotifyWebApi {
   public async getRefreshedAccessToken(
     refreshToken: string,
   ): Promise<GetRefreshedAccessTokenResponse> {
+    assertClientConfigs({
+      clientId: this.clientId,
+      clientSecret: this.clientSecret,
+    });
+
     const response =
       await this.spotifyAxios.axiosInstance.post<GetRefreshedAccessTokenResponse>(
         TOKEN_URL,
@@ -243,6 +261,11 @@ export class SpotifyWebApi {
    * access token, is that a higher rate limit is applied.
    */
   public async getTemporaryAppTokens(): Promise<GetTemporaryAppTokensResponse> {
+    assertClientConfigs({
+      clientId: this.clientId,
+      clientSecret: this.clientSecret,
+    });
+
     const response =
       await this.spotifyAxios.axiosInstance.post<GetTemporaryAppTokensResponse>(
         TOKEN_URL,
