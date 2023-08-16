@@ -6,4 +6,4 @@ tsconfig.*.json
 
 dist/
 
-src/openapi-types/
+src/openapi/
