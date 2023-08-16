@@ -30,10 +30,8 @@
     "test:node": "vitest run --environment node",
     "test": "yarn test:dom && yarn test:node",
     "types": "tsc --project tsconfig.json",
-    
     "generate-docs": "typedoc --out docs src/index.ts",
     "generate-types": "openapi  --input ./tools/schema/main/openapi-schema.yaml --output ./src/openapi --client axios --indent 2",
-    
     "pre-commit": "lint-staged",
     "pre-push": "yarn lint:fix && yarn test"
   },
@@ -42,7 +40,7 @@
     "*.ts": "bash -c yarn types"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^1.4.0",
     "qs": "^6.9.4"
   },
   "devDependencies": {
