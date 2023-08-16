@@ -1,6 +1,6 @@
-import { type CurrentlyPlaying } from '../types/SpotifyObjects';
+import { type CurrentlyPlayingObject } from '../openapi';
 
-export const currentlyPlayingFixture: CurrentlyPlaying = {
+export const currentlyPlayingFixture = {
   timestamp: 1587438536283,
   context: {
     external_urls: {
@@ -256,4 +256,4 @@ export const currentlyPlayingFixture: CurrentlyPlaying = {
     },
   },
   is_playing: true,
-};
+} as CurrentlyPlayingObject;

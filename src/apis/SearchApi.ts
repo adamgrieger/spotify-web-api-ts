@@ -8,10 +8,10 @@ import {
   type PagingTrackObject,
   SearchService,
 } from '../openapi';
-import { type SearchType } from '../types/SpotifyObjects';
 import { type SearchOptions } from '../types/SpotifyOptions';
 
 export type SearchResponse = Awaited<ReturnType<typeof SearchService.search>>;
+export type SearchType = Parameters<typeof SearchService.search>[1][number];
 
 export class SearchApi {
   /**

@@ -1,6 +1,6 @@
-import { type PrivateUser } from '../types/SpotifyObjects';
+import { type PrivateUserObject } from '../openapi';
 
-export const privateUserFixture: PrivateUser = {
+export const privateUserFixture = {
   birthdate: '',
   country: 'US',
   display_name: 'griegs',
@@ -28,4 +28,4 @@ export const privateUserFixture: PrivateUser = {
   product: 'premium',
   type: 'user',
   uri: 'spotify:user:griegs',
-};
+} as PrivateUserObject;

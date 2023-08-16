@@ -1,6 +1,6 @@
-import { type Show } from '../types/SpotifyObjects';
+import { type ShowObject } from '../openapi';
 
-export const showFixture: Show = {
+export const showFixture = {
   available_markets: [
     'AD',
     'AE',
@@ -97,6 +97,8 @@ export const showFixture: Show = {
           spotify: 'https://open.spotify.com/episode/2u0RVbP3tRtZTOQoY3twlB',
         },
         href: 'https://api.spotify.com/v1/episodes/2u0RVbP3tRtZTOQoY3twlB',
+        html_description:
+          '<p>Business in the front, you know the rest. Listen in as we discuss the lifestyle choice that is the mullet.  Learn more about your ad-choices at https://news.iheart.com/podcast-advertisers</p>',
         id: '2u0RVbP3tRtZTOQoY3twlB',
         images: [
           {
@@ -141,6 +143,8 @@ export const showFixture: Show = {
     spotify: 'https://open.spotify.com/show/0ofXAdFIQQRsCYj9754UFx',
   },
   href: 'https://api.spotify.com/v1/shows/0ofXAdFIQQRsCYj9754UFx',
+  html_description:
+    "<p>If you've ever wanted to know about champagne, satanism, the Stonewall Uprising, chaos theory, LSD, El Nino, true crime and Rosa Parks, then look no further. Josh and Chuck have you covered.</p>",
   id: '0ofXAdFIQQRsCYj9754UFx',
   images: [
     {
@@ -164,6 +168,7 @@ export const showFixture: Show = {
   media_type: 'audio',
   name: 'Stuff You Should Know',
   publisher: 'iHeartRadio',
+  total_episodes: 1,
   type: 'show',
   uri: 'spotify:show:0ofXAdFIQQRsCYj9754UFx',
-};
+} as ShowObject;

@@ -1,6 +1,6 @@
-import { type PublicUser } from '../types/SpotifyObjects';
+import { type PublicUserObject } from '../openapi';
 
-export const publicUserFixture: PublicUser = {
+export const publicUserFixture = {
   display_name: 'griegs',
   external_urls: {
     spotify: 'https://open.spotify.com/user/griegs',
@@ -20,4 +20,4 @@ export const publicUserFixture: PublicUser = {
   ],
   type: 'user',
   uri: 'spotify:user:griegs',
-};
+} as PublicUserObject;
