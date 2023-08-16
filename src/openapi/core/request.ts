@@ -28,7 +28,10 @@ export const request = <T>(
   config: OpenAPIConfig,
   options: ApiRequestOptions,
 ): CancelablePromise<T> => {
-  const spotifyAxios = getSpotifyAxios().axiosInstance;
+  const spotifyAxios = getSpotifyAxios();
+  let apiConfig = { ...config, ...spotifyAxios.apiConfig };
+  apiConfig.WITH_CREDENTIALS =
+    !!apiConfig.TOKEN || (!!apiConfig.USERNAME && !!apiConfig.PASSWORD);
 
-  return rawRequest(config, options, spotifyAxios);
+  return rawRequest(apiConfig, options, spotifyAxios.axiosInstance);
 };

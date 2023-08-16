@@ -1,9 +1,13 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios';
 
+import { type OpenAPIConfig } from '../openapi/core/OpenAPI';
+
 let spotifyAxios: SpotifyAxios;
 
 export class SpotifyAxios {
   public axiosInstance: AxiosInstance;
+
+  public apiConfig: Partial<OpenAPIConfig> = {};
 
   public constructor(config?: AxiosRequestConfig) {
     this.axiosInstance = axios.create(config);
@@ -17,6 +21,10 @@ export class SpotifyAxios {
     this.axiosInstance.interceptors.response.use((res) => {
       return res;
     });
+  }
+
+  public setApiConfig(config: Partial<OpenAPIConfig>): void {
+    this.apiConfig = config;
   }
 }
 

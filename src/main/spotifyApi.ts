@@ -45,8 +45,6 @@ export class SpotifyWebApi {
 
   private readonly redirectUri: string;
 
-  private accessToken: string;
-
   private readonly spotifyAxios: SpotifyAxios;
 
   public albums: AlbumsApi;
@@ -85,7 +83,7 @@ export class SpotifyWebApi {
     this.redirectUri = options?.redirectUri ?? '';
 
     this.spotifyAxios = getSpotifyAxios();
-    this.accessToken = options?.accessToken ?? '';
+    this.setAccessToken(options?.accessToken ?? '');
 
     this.albums = new AlbumsApi();
     this.artists = new ArtistsApi();
@@ -105,11 +103,11 @@ export class SpotifyWebApi {
   }
 
   public getAccessToken(): string {
-    return this.accessToken;
+    return this.spotifyAxios.apiConfig.TOKEN as string;
   }
 
   public setAccessToken(accessToken: string): void {
-    this.accessToken = accessToken;
+    this.spotifyAxios.apiConfig.TOKEN = accessToken;
   }
 
   public getClientId(): string {
