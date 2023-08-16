@@ -16,12 +16,12 @@ import { ShowsApi } from '../apis/ShowsApi';
 import { TracksApi } from '../apis/TracksApi';
 import { UsersApi } from '../apis/UsersApi';
 import { TOKEN_URL } from '../constants';
-import { encodeToBase64 } from '../helpers/encodeToBase64';
 import {
   type GetAuthorizationUrlOptions,
   getAuthorizationUrl,
 } from '../helpers/getAuthorizationUrl';
 import { assertClientConfigs } from '../helpers/validateClientConfigs';
+import { base64 } from '../openapi/core/request';
 import {
   type GetRefreshableUserTokensResponse,
   type GetRefreshedAccessTokenResponse,
@@ -203,7 +203,7 @@ export class SpotifyWebApi {
         }),
         {
           headers: {
-            'Authorization': `Basic ${encodeToBase64(
+            'Authorization': `Basic ${base64(
               `${this.clientId}:${this.clientSecret}`,
             )}`,
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -237,7 +237,7 @@ export class SpotifyWebApi {
         }),
         {
           headers: {
-            'Authorization': `Basic ${encodeToBase64(
+            'Authorization': `Basic ${base64(
               `${this.clientId}:${this.clientSecret}`,
             )}`,
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -273,7 +273,7 @@ export class SpotifyWebApi {
         }),
         {
           headers: {
-            'Authorization': `Basic ${encodeToBase64(
+            'Authorization': `Basic ${base64(
               `${this.clientId}:${this.clientSecret}`,
             )}`,
             'Content-Type': 'application/x-www-form-urlencoded',
