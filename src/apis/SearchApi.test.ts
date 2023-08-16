@@ -21,7 +21,7 @@ const searchHelperMock = searchHelper as MockedFunction<typeof searchHelper>;
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function setup() {
   const http = new Http('token');
-  const search = new SearchApi(http);
+  const search = new SearchApi();
 
   return { http, search };
 }

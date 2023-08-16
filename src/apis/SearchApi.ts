@@ -1,33 +1,18 @@
-import { searchHelper } from '../helpers/searchHelper';
 import {
-  type Artist,
-  type Paging,
-  type SearchType,
-  type SimplifiedAlbum,
-  type SimplifiedEpisode,
-  type SimplifiedPlaylist,
-  type SimplifiedShow,
-  type Track,
-} from '../types/SpotifyObjects';
+  type PagingArtistObject,
+  type PagingPlaylistObject,
+  type PagingSimplifiedAlbumObject,
+  type PagingSimplifiedAudiobookObject,
+  type PagingSimplifiedEpisodeObject,
+  type PagingSimplifiedShowObject,
+  type PagingTrackObject,
+  SearchService,
+} from '../openapi';
+import { type SearchType } from '../types/SpotifyObjects';
 import { type SearchOptions } from '../types/SpotifyOptions';
-import {
-  type SearchAlbumsResponse,
-  type SearchArtistsResponse,
-  type SearchEpisodesResponse,
-  type SearchPlaylistsResponse,
-  type SearchResponse,
-  type SearchShowsResponse,
-  type SearchTracksResponse,
-} from '../types/SpotifyResponses';
-import { type Http } from '../helpers/Http';
+import { type SearchResponse } from '../types/SpotifyResponses';
 
 export class SearchApi {
-  private readonly http: Http;
-
-  public constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * Search for an Item
    *
@@ -35,15 +20,23 @@ export class SearchApi {
    * shows, or episodes that match a keyword string.
    *
    * @param query Search query keywords, optional field filters, and operators.
-   * @param type The item types to search across.
+   * @param searchTypes The item types to search across.
    * @param options Optional request information.
    */
-  public async search(
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  public async search<SearchTypes extends SearchType[]>(
     query: string,
-    type: SearchType[],
+    searchTypes: SearchTypes,
     options?: SearchOptions,
-  ): Promise<SearchResponse> {
-    return await searchHelper<SearchResponse>(this.http, query, type, options);
+  ) {
+    return (await SearchService.search(
+      query,
+      searchTypes,
+      options?.market,
+      options?.limit,
+      options?.offset,
+      options?.include_external,
+    )) as Pick<SearchResponse, `${SearchTypes[number]}s`>;
   }
 
   /**
@@ -57,14 +50,8 @@ export class SearchApi {
   public async searchAlbums(
     query: string,
     options?: SearchOptions,
-  ): Promise<Paging<SimplifiedAlbum>> {
-    const response = await searchHelper<SearchAlbumsResponse>(
-      this.http,
-      query,
-      ['album'],
-      options,
-    );
-    return response.albums;
+  ): Promise<{ albums?: PagingSimplifiedAlbumObject }> {
+    return await this.search(query, ['album'], options);
   }
 
   /**
@@ -78,14 +65,23 @@ export class SearchApi {
   public async searchArtists(
     query: string,
     options?: SearchOptions,
-  ): Promise<Paging<Artist>> {
-    const response = await searchHelper<SearchArtistsResponse>(
-      this.http,
-      query,
-      ['artist'],
-      options,
-    );
-    return response.artists;
+  ): Promise<{ artists?: PagingArtistObject }> {
+    return await this.search(query, ['artist'], options);
+  }
+
+  /**
+   * Search for an Audiobook
+   *
+   * Get Spotify Catalog information about audiobooks that match a keyword string.
+   *
+   * @param query Search query keywords, optional field filters, and operators.
+   * @param options Optional request information.
+   */
+  public async searchAudiobooks(
+    query: string,
+    options?: SearchOptions,
+  ): Promise<{ audiobooks?: PagingSimplifiedAudiobookObject }> {
+    return await this.search(query, ['audiobook'], options);
   }
 
   /**
@@ -99,14 +95,8 @@ export class SearchApi {
   public async searchEpisodes(
     query: string,
     options?: SearchOptions,
-  ): Promise<Paging<SimplifiedEpisode>> {
-    const response = await searchHelper<SearchEpisodesResponse>(
-      this.http,
-      query,
-      ['episode'],
-      options,
-    );
-    return response.episodes;
+  ): Promise<{ episodes?: PagingSimplifiedEpisodeObject }> {
+    return await this.search(query, ['episode'], options);
   }
 
   /**
@@ -120,14 +110,8 @@ export class SearchApi {
   public async searchPlaylists(
     query: string,
     options?: SearchOptions,
-  ): Promise<Paging<SimplifiedPlaylist>> {
-    const response = await searchHelper<SearchPlaylistsResponse>(
-      this.http,
-      query,
-      ['playlist'],
-      options,
-    );
-    return response.playlists;
+  ): Promise<{ playlists?: PagingPlaylistObject }> {
+    return await this.search(query, ['playlist'], options);
   }
 
   /**
@@ -141,14 +125,8 @@ export class SearchApi {
   public async searchShows(
     query: string,
     options?: SearchOptions,
-  ): Promise<Paging<SimplifiedShow>> {
-    const response = await searchHelper<SearchShowsResponse>(
-      this.http,
-      query,
-      ['show'],
-      options,
-    );
-    return response.shows;
+  ): Promise<{ shows?: PagingSimplifiedShowObject }> {
+    return await this.search(query, ['show'], options);
   }
 
   /**
@@ -162,13 +140,7 @@ export class SearchApi {
   public async searchTracks(
     query: string,
     options?: SearchOptions,
-  ): Promise<Paging<Track>> {
-    const response = await searchHelper<SearchTracksResponse>(
-      this.http,
-      query,
-      ['track'],
-      options,
-    );
-    return response.tracks;
+  ): Promise<{ tracks?: PagingTrackObject }> {
+    return await this.search(query, ['track'], options);
   }
 }
