@@ -17,36 +17,21 @@ export interface PagingOptions {
 
 export type PagingMarketOptions = MarketOptions & PagingOptions;
 
-// +--------+
-// | Albums |
-// +--------+
-
-export interface GetAlbumTracksOptions {
-  limit?: number;
-  market?: string;
-  offset?: number;
-}
-
 // +---------+
 // | Artists |
 // +---------+
 
-export interface GetArtistAlbumsOptions {
+export interface GetArtistAlbumsOptions extends PagingMarketOptions {
   include_groups?: Array<'album' | 'appears_on' | 'compilation' | 'single'>;
-  limit?: number;
-  market?: string;
-  offset?: number;
 }
 
 // +--------+
 // | Browse |
 // +--------+
 
-export interface GetCategoriesOptions {
+export interface GetCategoriesOptions extends PagingOptions {
   country?: string;
-  limit?: number;
   locale?: string;
-  offset?: number;
 }
 
 export interface GetCategoryOptions {
@@ -54,29 +39,22 @@ export interface GetCategoryOptions {
   locale?: string;
 }
 
-export interface GetCategoryPlaylistsOptions {
+export interface GetCategoryPlaylistsOptions extends PagingOptions {
   country?: string;
-  limit?: number;
-  offset?: number;
 }
 
-export interface GetFeaturedPlaylistsOptions {
+export interface GetFeaturedPlaylistsOptions extends PagingOptions {
   country?: string;
-  limit?: number;
   locale?: string;
-  offset?: number;
   timestamp?: string;
 }
 
-export interface GetNewReleasesOptions {
+export interface GetNewReleasesOptions extends PagingOptions {
   country?: string;
-  limit?: number;
-  offset?: number;
 }
 
-export interface GetRecommendationsOptions {
+export interface GetRecommendationsOptions extends MarketOptions {
   limit?: number;
-  market?: string;
   max_acousticness?: number;
   max_danceability?: number;
   max_duration_ms?: number;
@@ -134,49 +112,11 @@ export interface GetFollowedArtistsOptions {
   limit?: number;
 }
 
-// +---------+
-// | Library |
-// +---------+
-
-export interface GetSavedAlbumsOptions {
-  limit?: number;
-  market?: string;
-  offset?: number;
-}
-
-export interface GetSavedAudiobooksOptions {
-  limit?: number;
-  offset?: number;
-}
-
-export interface GetSavedEpisodesOptions {
-  limit?: number;
-  market?: string;
-  offset?: number;
-}
-
-export interface GetSavedShowsOptions {
-  limit?: number;
-  offset?: number;
-}
-
-export interface GetSavedTracksOptions {
-  limit?: number;
-  market?: string;
-  offset?: number;
-}
-
-export interface RemoveSavedShowsOptions {
-  market?: string;
-}
-
 // +-----------------+
 // | Personalization |
 // +-----------------+
 
-export interface PersonalizationOptions {
-  limit?: number;
-  offset?: number;
+export interface PersonalizationOptions extends PagingOptions {
   time_range?: 'long_term' | 'medium_term' | 'short_term';
 }
 
@@ -184,14 +124,12 @@ export interface PersonalizationOptions {
 // | Player |
 // +--------+
 
-export interface GetCurrentlyPlayingTrackOptions {
+export interface GetCurrentlyPlayingTrackOptions extends MarketOptions {
   additional_types?: Array<'episode'>;
-  market?: string;
 }
 
-export interface GetPlaybackInfoOptions {
+export interface GetPlaybackInfoOptions extends MarketOptions {
   additional_types?: Array<'episode'>;
-  market?: string;
 }
 
 export interface GetRecentlyPlayedTracksOptions {
@@ -200,9 +138,8 @@ export interface GetRecentlyPlayedTracksOptions {
   limit?: number;
 }
 
-export interface PlayOptions {
+export interface PlayOptions extends DeviceIdOptions {
   context_uri?: string;
-  device_id?: string;
   offset?: { position: number } | { uri: string };
   uris?: string[];
 }
@@ -225,28 +162,14 @@ export interface CreatePlaylistOptions {
   public?: boolean;
 }
 
-export interface GetMyPlaylistsOptions {
-  limit?: number;
-  offset?: number;
-}
-
-export interface GetPlaylistOptions {
+export interface GetPlaylistOptions extends MarketOptions {
   additional_types?: Array<'episode'>;
   fields?: string;
-  market?: string;
 }
 
-export interface GetPlaylistItemsOptions {
+export interface GetPlaylistItemsOptions extends PagingMarketOptions {
   additional_types?: Array<'episode'>;
   fields?: string;
-  limit?: number;
-  market?: string;
-  offset?: number;
-}
-
-export interface GetUserPlaylistsOptions {
-  limit?: number;
-  offset?: number;
 }
 
 export interface RemovePlaylistItemsByPositionOptions {
@@ -262,19 +185,6 @@ export interface ReorderPlaylistItemsOptions {
 // | Search |
 // +--------+
 
-export interface SearchOptions {
+export interface SearchOptions extends PagingMarketOptions {
   include_external?: 'audio';
-  limit?: number;
-  market?: string;
-  offset?: number;
-}
-
-// +-------+
-// | Shows |
-// +-------+
-
-export interface GetShowEpisodesOptions {
-  limit?: number;
-  market?: string;
-  offset?: number;
 }

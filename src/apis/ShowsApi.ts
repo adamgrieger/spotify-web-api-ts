@@ -5,8 +5,8 @@ import {
   type SimplifiedShowObject,
 } from '../openapi';
 import {
-  type GetShowEpisodesOptions,
   type MarketOptions,
+  type PagingMarketOptions,
 } from '../types/SpotifyOptions';
 
 export class ShowsApi {
@@ -36,7 +36,7 @@ export class ShowsApi {
    */
   public async getShowEpisodes(
     showId: string,
-    options?: GetShowEpisodesOptions,
+    options?: PagingMarketOptions,
   ): Promise<PagingSimplifiedEpisodeObject> {
     return await ShowsService.getAShowsEpisodes(
       showId,

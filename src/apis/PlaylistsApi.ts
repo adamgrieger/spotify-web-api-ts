@@ -9,10 +9,9 @@ import { type PlaylistDetails } from '../types/SpotifyObjects';
 import {
   type AddItemsToPlaylistOptions,
   type CreatePlaylistOptions,
-  type GetMyPlaylistsOptions,
   type GetPlaylistItemsOptions,
   type GetPlaylistOptions,
-  type GetUserPlaylistsOptions,
+  type PagingOptions,
   type ReorderPlaylistItemsOptions,
 } from '../types/SpotifyOptions';
 
@@ -100,7 +99,7 @@ export class PlaylistsApi {
    * @param options Optional request information.
    */
   public async getMyPlaylists(
-    options?: GetMyPlaylistsOptions,
+    options?: PagingOptions,
   ): Promise<PagingPlaylistObject> {
     return await PlaylistsService.getAListOfCurrentUsersPlaylists(
       options?.limit,
@@ -172,7 +171,7 @@ export class PlaylistsApi {
    */
   public async getUserPlaylists(
     userId: string,
-    options?: GetUserPlaylistsOptions,
+    options?: PagingOptions,
   ): Promise<PagingPlaylistObject> {
     return await PlaylistsService.getListUsersPlaylists(
       userId,

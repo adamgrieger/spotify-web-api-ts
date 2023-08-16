@@ -7,12 +7,9 @@ import {
   type PagingSimplifiedAudiobookObject,
 } from '../openapi';
 import {
-  type GetSavedAlbumsOptions,
-  type GetSavedAudiobooksOptions,
-  type GetSavedEpisodesOptions,
-  type GetSavedShowsOptions,
-  type GetSavedTracksOptions,
-  type RemoveSavedShowsOptions,
+  type MarketOptions,
+  type PagingMarketOptions,
+  type PagingOptions,
 } from '../types/SpotifyOptions';
 
 export class LibraryApi {
@@ -81,7 +78,7 @@ export class LibraryApi {
    * @param options Optional request information.
    */
   public async getSavedAlbums(
-    options?: GetSavedAlbumsOptions,
+    options?: PagingMarketOptions,
   ): Promise<PagingSavedAlbumObject> {
     return await LibraryService.getUsersSavedAlbums(
       options?.limit,
@@ -98,7 +95,7 @@ export class LibraryApi {
    * @param options Optional request information.
    */
   public async getSavedAudiobooks(
-    options?: GetSavedAudiobooksOptions,
+    options?: PagingOptions,
   ): Promise<PagingSimplifiedAudiobookObject> {
     return await LibraryService.getUsersSavedAudiobooks(
       options?.limit,
@@ -114,7 +111,7 @@ export class LibraryApi {
    * @param options Optional request information.
    */
   public async getSavedEpisodes(
-    options?: GetSavedEpisodesOptions,
+    options?: PagingMarketOptions,
   ): Promise<PagingSavedEpisodeObject> {
     return await LibraryService.getUsersSavedEpisodes(
       options?.market,
@@ -131,7 +128,7 @@ export class LibraryApi {
    * @param options Optional request information.
    */
   public async getSavedShows(
-    options?: GetSavedShowsOptions,
+    options?: PagingOptions,
   ): Promise<PagingSavedShowObject> {
     return await LibraryService.getUsersSavedShows(
       options?.limit,
@@ -147,7 +144,7 @@ export class LibraryApi {
    * @param options Optional request information.
    */
   public async getSavedTracks(
-    options?: GetSavedTracksOptions,
+    options?: PagingMarketOptions,
   ): Promise<PagingSavedTrackObject> {
     return await LibraryService.getUsersSavedTracks(
       options?.market,
@@ -292,7 +289,7 @@ export class LibraryApi {
    */
   public async removeSavedShow(
     showId: string,
-    options?: RemoveSavedShowsOptions,
+    options?: MarketOptions,
   ): Promise<void> {
     await this.removeSavedShows([showId], options);
   }
@@ -307,7 +304,7 @@ export class LibraryApi {
    */
   public async removeSavedShows(
     showIds: string[],
-    options?: RemoveSavedShowsOptions,
+    options?: MarketOptions,
   ): Promise<void> {
     await LibraryService.removeShowsUser(showIds.join(','), options?.market);
   }
