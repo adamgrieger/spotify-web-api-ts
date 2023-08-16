@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* eslint-disable */
 
-import { getSpotifyAxios } from '../../helpers/spotifyAxios';
+import { getSpotifyAxios } from '../../main/spotifyAxios';
 import axios from 'axios';
 import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import FormData from 'form-data';

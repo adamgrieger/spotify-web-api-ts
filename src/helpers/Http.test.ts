@@ -1,7 +1,8 @@
 import { type Mock } from 'vitest';
 
+import { spotifyAxios } from '../main/spotifyAxios';
+
 import { Http } from './Http';
-import { spotifyAxios } from './spotifyAxios';
 
 vi.mock('./spotifyAxios');
 

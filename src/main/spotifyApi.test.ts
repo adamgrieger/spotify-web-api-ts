@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { type Mocked, type MockedFunction } from 'vitest';
 
-import { TOKEN_URL } from './constants';
-import { encodeToBase64 } from './helpers/encodeToBase64';
-import { getAuthorizationUrl } from './helpers/getAuthorizationUrl';
+import { TOKEN_URL } from '../constants';
+import { encodeToBase64 } from '../helpers/encodeToBase64';
+import { getAuthorizationUrl } from '../helpers/getAuthorizationUrl';
 
-import { SpotifyWebApi } from '.';
+import { SpotifyWebApi } from './spotifyApi';
 
 vi.mock('axios');
 vi.mock('./helpers/getAuthorizationUrl');
