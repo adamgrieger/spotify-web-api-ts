@@ -17,7 +17,7 @@ export class EpisodesApi {
    * console.log(episode.name);
    * // "S1E6 - Institutionalized by Kendrick Lamar"
    * ```
-   *
+   * @param episodeId The Spotify ID for the episode.
    * @param options Optional request information.
    */
   public async getEpisode(

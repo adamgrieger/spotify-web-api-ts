@@ -10,6 +10,13 @@ export interface MarketOptions {
   market?: string;
 }
 
+export interface PagingOptions {
+  limit?: number;
+  offset?: number;
+}
+
+export type PagingMarketOptions = MarketOptions & PagingOptions;
+
 // +--------+
 // | Albums |
 // +--------+

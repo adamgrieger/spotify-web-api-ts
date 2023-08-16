@@ -3,6 +3,7 @@ import qs from 'qs';
 
 import { AlbumsApi } from './apis/AlbumsApi';
 import { ArtistsApi } from './apis/ArtistsApi';
+import { AudiobooksApi } from './apis/AudiobooksApi';
 import { BrowseApi } from './apis/BrowseApi';
 import { EpisodesApi } from './apis/EpisodesApi';
 import { FollowApi } from './apis/FollowApi';
@@ -47,6 +48,8 @@ export class SpotifyWebApi {
 
   public artists: ArtistsApi;
 
+  public audiobooks: AudiobooksApi;
+
   public browse: BrowseApi;
 
   public episodes: EpisodesApi;
@@ -78,6 +81,7 @@ export class SpotifyWebApi {
 
     this.albums = new AlbumsApi();
     this.artists = new ArtistsApi();
+    this.audiobooks = new AudiobooksApi();
     this.browse = new BrowseApi();
     this.episodes = new EpisodesApi();
     this.follow = new FollowApi();
