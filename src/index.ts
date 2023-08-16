@@ -27,6 +27,7 @@ import {
   type GetRefreshedAccessTokenResponse,
   type GetTemporaryAppTokensResponse,
 } from './types/SpotifyAuthorization';
+import { MarketsApi } from './apis/MarketsApi';
 
 export interface SpotifyWebApiOptions {
   accessToken?: string;
@@ -58,6 +59,8 @@ export class SpotifyWebApi {
 
   public library: LibraryApi;
 
+  public markets: MarketsApi;
+
   public personalization: PersonalizationApi;
 
   public player: PlayerApi;
@@ -86,6 +89,7 @@ export class SpotifyWebApi {
     this.episodes = new EpisodesApi();
     this.follow = new FollowApi();
     this.library = new LibraryApi();
+    this.markets = new MarketsApi();
     this.personalization = new PersonalizationApi();
     this.player = new PlayerApi();
     this.playlists = new PlaylistsApi();

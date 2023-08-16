@@ -4,6 +4,7 @@ import {
   type CursorPagingPlayHistoryObject,
   type DeviceObject,
   PlayerService,
+  type QueueObject,
 } from '../openapi';
 import { type RepeatState } from '../types/SpotifyObjects';
 import {
@@ -29,6 +30,16 @@ export class PlayerApi {
     options?: DeviceIdOptions,
   ): Promise<void> {
     await PlayerService.addToQueue(uri, options?.device_id);
+  }
+
+  /**
+   * Get the User's Queue
+   *
+   * Get the list of objects that make up the user's queue.
+   *
+   */
+  public async getQueue(): Promise<QueueObject> {
+    return await PlayerService.getQueue();
   }
 
   /**
