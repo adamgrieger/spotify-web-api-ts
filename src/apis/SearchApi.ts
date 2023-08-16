@@ -10,7 +10,8 @@ import {
 } from '../openapi';
 import { type SearchType } from '../types/SpotifyObjects';
 import { type SearchOptions } from '../types/SpotifyOptions';
-import { type SearchResponse } from '../types/SpotifyResponses';
+
+export type SearchResponse = Awaited<ReturnType<typeof SearchService.search>>;
 
 export class SearchApi {
   /**
