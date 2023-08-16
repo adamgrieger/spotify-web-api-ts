@@ -1,5 +1,6 @@
 /* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
+/* tslint:disable */
 /* eslint-disable */
 import type { ChapterObject } from '../models/ChapterObject';
 import type { PagingSimplifiedChapterObject } from '../models/PagingSimplifiedChapterObject';

@@ -1,5 +1,6 @@
 /* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
+/* tslint:disable */
 /* eslint-disable */
 import type { AlbumObject } from '../models/AlbumObject';
 import type { PagingSavedAlbumObject } from '../models/PagingSavedAlbumObject';
