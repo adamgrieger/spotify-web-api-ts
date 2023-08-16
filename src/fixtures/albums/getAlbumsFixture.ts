@@ -1,6 +1,6 @@
-import { type GetAlbumsResponse } from '../../types/SpotifyResponses';
+import { type AlbumObject } from '../../openapi';
 
-export const getAlbumsFixture: GetAlbumsResponse = {
+export const getAlbumsFixture: { albums: AlbumObject[] } = {
   albums: [
     {
       album_type: 'single',
@@ -586,7 +586,7 @@ export const getAlbumsFixture: GetAlbumsResponse = {
       },
       type: 'album',
       uri: 'spotify:album:4OnDcyeOdyBfEEqtsHrr6i',
-    },
+    } as AlbumObject,
     {
       album_type: 'single',
       artists: [
@@ -1069,6 +1069,6 @@ export const getAlbumsFixture: GetAlbumsResponse = {
       },
       type: 'album',
       uri: 'spotify:album:0FO3N0KhhvXY7SORYneGbw',
-    },
+    } as AlbumObject,
   ],
 };

@@ -1,6 +1,6 @@
-import { type GetArtistsResponse } from '../../types/SpotifyResponses';
+import { type ArtistObject } from '../../openapi';
 
-export const getArtistsFixture: GetArtistsResponse = {
+export const getArtistsFixture: { artists: ArtistObject[] } = {
   artists: [
     {
       external_urls: {
@@ -34,7 +34,7 @@ export const getArtistsFixture: GetArtistsResponse = {
       popularity: 16,
       type: 'artist',
       uri: 'spotify:artist:2leze82lbuNUn3K4c7nS1B',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/77bG3jpmWXOxpmZcVjPayy',
@@ -72,6 +72,6 @@ export const getArtistsFixture: GetArtistsResponse = {
       popularity: 12,
       type: 'artist',
       uri: 'spotify:artist:77bG3jpmWXOxpmZcVjPayy',
-    },
+    } as ArtistObject,
   ],
 };

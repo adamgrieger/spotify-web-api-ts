@@ -1,6 +1,9 @@
-import { type GetSavedAlbumsResponse } from '../../types/SpotifyResponses';
+import {
+  type PagingSavedAlbumObject,
+  type SavedAlbumObject,
+} from '../../openapi';
 
-export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
+export const getSavedAlbumsFixture: PagingSavedAlbumObject = {
   href: 'https://api.spotify.com/v1/me/albums?offset=0&limit=1',
   items: [
     {
@@ -1375,7 +1378,7 @@ export const getSavedAlbumsFixture: GetSavedAlbumsResponse = {
         type: 'album',
         uri: 'spotify:album:7KyvfoQhqlNLPNb98yY0pf',
       },
-    },
+    } as SavedAlbumObject,
   ],
   limit: 1,
   next: 'https://api.spotify.com/v1/me/albums?offset=1&limit=1',

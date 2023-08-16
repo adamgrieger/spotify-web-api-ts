@@ -1,6 +1,7 @@
-import { type SearchShowsResponse } from '../../types/SpotifyResponses';
+import { type SearchResponse } from '../../apis/index.types';
+import { type SimplifiedShowObject } from '../../openapi';
 
-export const searchShowsFixture: SearchShowsResponse = {
+export const searchShowsFixture: SearchResponse = {
   shows: {
     href: 'https://api.spotify.com/v1/search?query=brother&type=show&offset=0&limit=1',
     items: [
@@ -92,6 +93,8 @@ export const searchShowsFixture: SearchShowsResponse = {
           spotify: 'https://open.spotify.com/show/308BQUUnIkoH2UAXJCAt0g',
         },
         href: 'https://api.spotify.com/v1/shows/308BQUUnIkoH2UAXJCAt0g',
+        html_description:
+          "<p>Free advice from three of the world's most qualified, most related experts: Justin, Travis and Griffin McElroy. For one-half to three-quarters of an hour every Monday, we tell people how to live their lives, because we're obviously doing such a great job of it so far.</p>",
         id: '308BQUUnIkoH2UAXJCAt0g',
         images: [
           {
@@ -115,9 +118,10 @@ export const searchShowsFixture: SearchShowsResponse = {
         media_type: 'audio',
         name: 'My Brother, My Brother And Me',
         publisher: 'The McElroys',
+        total_episodes: 0,
         type: 'show',
         uri: 'spotify:show:308BQUUnIkoH2UAXJCAt0g',
-      },
+      } as SimplifiedShowObject,
     ],
     limit: 1,
     next: 'https://api.spotify.com/v1/search?query=brother&type=show&offset=1&limit=1',

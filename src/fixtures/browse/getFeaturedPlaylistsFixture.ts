@@ -1,6 +1,9 @@
-import { type GetFeaturedPlaylistsResponse } from '../../types/SpotifyResponses';
+import {
+  type PagingFeaturedPlaylistObject,
+  type SimplifiedPlaylistObject,
+} from '../../openapi';
 
-export const getFeaturedPlaylistsFixture: GetFeaturedPlaylistsResponse = {
+export const getFeaturedPlaylistsFixture: PagingFeaturedPlaylistObject = {
   message: "Editor's picks",
   playlists: {
     href: 'https://api.spotify.com/v1/browse/featured-playlists?timestamp=2020-04-19T03%3A06%3A33&offset=0&limit=2',
@@ -33,7 +36,7 @@ export const getFeaturedPlaylistsFixture: GetFeaturedPlaylistsResponse = {
           uri: 'spotify:user:spotify',
         },
         primary_color: null,
-        public: null,
+        public: true,
         snapshot_id:
           'MTU4NzI2NTU2MCwwMDAwMDAwMGQ0MWQ4Y2Q5OGYwMGIyMDRlOTgwMDk5OGVjZjg0Mjdl',
         tracks: {
@@ -42,7 +45,7 @@ export const getFeaturedPlaylistsFixture: GetFeaturedPlaylistsResponse = {
         },
         type: 'playlist',
         uri: 'spotify:playlist:37i9dQZF1DWSRc3WJklgBs',
-      },
+      } as SimplifiedPlaylistObject,
       {
         collaborative: false,
         description:
@@ -71,7 +74,7 @@ export const getFeaturedPlaylistsFixture: GetFeaturedPlaylistsResponse = {
           uri: 'spotify:user:spotify',
         },
         primary_color: null,
-        public: null,
+        public: true,
         snapshot_id:
           'MTU4NzI2NTU3OSwwMDAwMDAwMGQ0MWQ4Y2Q5OGYwMGIyMDRlOTgwMDk5OGVjZjg0Mjdl',
         tracks: {
@@ -80,7 +83,7 @@ export const getFeaturedPlaylistsFixture: GetFeaturedPlaylistsResponse = {
         },
         type: 'playlist',
         uri: 'spotify:playlist:37i9dQZF1DX843Qf4lrFtZ',
-      },
+      } as SimplifiedPlaylistObject,
     ],
     limit: 2,
     next: 'https://api.spotify.com/v1/browse/featured-playlists?timestamp=2020-04-19T03%3A06%3A33&offset=2&limit=2',

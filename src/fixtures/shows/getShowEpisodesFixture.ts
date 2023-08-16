@@ -1,6 +1,9 @@
-import { type GetShowEpisodesResponse } from '../../types/SpotifyResponses';
+import {
+  type EpisodeObject,
+  type PagingSimplifiedEpisodeObject,
+} from '../../openapi';
 
-export const getShowEpisodesFixture: GetShowEpisodesResponse = {
+export const getShowEpisodesFixture: PagingSimplifiedEpisodeObject = {
   href: 'https://api.spotify.com/v1/shows/0ofXAdFIQQRsCYj9754UFx/episodes?offset=0&limit=1',
   items: [
     {
@@ -45,7 +48,7 @@ export const getShowEpisodesFixture: GetShowEpisodesResponse = {
       },
       type: 'episode',
       uri: 'spotify:episode:2u0RVbP3tRtZTOQoY3twlB',
-    },
+    } as EpisodeObject,
   ],
   limit: 1,
   next: 'https://api.spotify.com/v1/shows/0ofXAdFIQQRsCYj9754UFx/episodes?offset=1&limit=1',

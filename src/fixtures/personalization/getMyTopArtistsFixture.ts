@@ -1,6 +1,6 @@
-import { type GetMyTopArtistsResponse } from '../../types/SpotifyResponses';
+import { type ArtistObject, type PagingArtistObject } from '../../openapi';
 
-export const getMyTopArtistsFixture: GetMyTopArtistsResponse = {
+export const getMyTopArtistsFixture: PagingArtistObject = {
   items: [
     {
       external_urls: {
@@ -42,7 +42,7 @@ export const getMyTopArtistsFixture: GetMyTopArtistsResponse = {
       popularity: 69,
       type: 'artist',
       uri: 'spotify:artist:7Eu1txygG6nJttLHbZdQOh',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/2L2unNFaPbDxjg3NqzpqhJ',
@@ -82,7 +82,7 @@ export const getMyTopArtistsFixture: GetMyTopArtistsResponse = {
       popularity: 47,
       type: 'artist',
       uri: 'spotify:artist:2L2unNFaPbDxjg3NqzpqhJ',
-    },
+    } as ArtistObject,
   ],
   total: 50,
   limit: 2,

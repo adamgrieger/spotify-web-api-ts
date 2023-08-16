@@ -1,6 +1,11 @@
-import { type GetFollowedArtistsResponse } from '../../types/SpotifyResponses';
+import {
+  type ArtistObject,
+  type CursorPagingSimplifiedArtistObject,
+} from '../../openapi';
 
-export const getFollowedArtistsFixture: GetFollowedArtistsResponse = {
+export const getFollowedArtistsFixture: {
+  artists: CursorPagingSimplifiedArtistObject;
+} = {
   artists: {
     items: [
       {
@@ -35,7 +40,7 @@ export const getFollowedArtistsFixture: GetFollowedArtistsResponse = {
         popularity: 38,
         type: 'artist',
         uri: 'spotify:artist:029y4wr8YYFoqPBahe8Ddz',
-      },
+      } as ArtistObject,
       {
         external_urls: {
           spotify: 'https://open.spotify.com/artist/2L2unNFaPbDxjg3NqzpqhJ',
@@ -75,7 +80,7 @@ export const getFollowedArtistsFixture: GetFollowedArtistsResponse = {
         popularity: 47,
         type: 'artist',
         uri: 'spotify:artist:2L2unNFaPbDxjg3NqzpqhJ',
-      },
+      } as ArtistObject,
     ],
     next: 'https://api.spotify.com/v1/me/following?type=artist&after=2L2unNFaPbDxjg3NqzpqhJ&limit=2',
     total: 9,

@@ -1,10 +1,10 @@
-import { type GetRecommendationsResponse } from '../../types/SpotifyResponses';
+import { type RecommendationsObject, type TrackObject } from '../../openapi';
 
-export const getRecommendationsFixture: GetRecommendationsResponse = {
+export const getRecommendationsFixture: RecommendationsObject = {
   tracks: [
     {
       album: {
-        album_type: 'ALBUM',
+        album_type: 'album',
         artists: [
           {
             external_urls: {
@@ -249,10 +249,10 @@ export const getRecommendationsFixture: GetRecommendationsResponse = {
       track_number: 7,
       type: 'track',
       uri: 'spotify:track:3THLm08Nd6uyLpFVpm0ChG',
-    },
+    } as TrackObject,
     {
       album: {
-        album_type: 'ALBUM',
+        album_type: 'album',
         artists: [
           {
             external_urls: {
@@ -487,7 +487,7 @@ export const getRecommendationsFixture: GetRecommendationsResponse = {
       track_number: 3,
       type: 'track',
       uri: 'spotify:track:20Y5XZkFEJ7hEFPQq611vZ',
-    },
+    } as TrackObject,
   ],
   seeds: [
     {

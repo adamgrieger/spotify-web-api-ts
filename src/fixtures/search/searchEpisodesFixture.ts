@@ -1,6 +1,7 @@
-import { type SearchEpisodesResponse } from '../../types/SpotifyResponses';
+import { type SearchResponse } from '../../apis/index.types';
+import { type SimplifiedEpisodeObject } from '../../openapi';
 
-export const searchEpisodesFixture: SearchEpisodesResponse = {
+export const searchEpisodesFixture: SearchResponse = {
   episodes: {
     href: 'https://api.spotify.com/v1/search?query=institutionalized&type=episode&offset=0&limit=1',
     items: [
@@ -42,7 +43,7 @@ export const searchEpisodesFixture: SearchEpisodesResponse = {
         release_date_precision: 'day',
         type: 'episode',
         uri: 'spotify:episode:5VhaAEtTrKQ1NSneHsXK6C',
-      },
+      } as SimplifiedEpisodeObject,
     ],
     limit: 1,
     next: 'https://api.spotify.com/v1/search?query=institutionalized&type=episode&offset=1&limit=1',

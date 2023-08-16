@@ -1,6 +1,9 @@
-import { type GetMyPlaylistsResponse } from '../../types/SpotifyResponses';
+import {
+  type PagingPlaylistObject,
+  type SimplifiedPlaylistObject,
+} from '../../openapi';
 
-export const getMyPlaylistsFixture: GetMyPlaylistsResponse = {
+export const getMyPlaylistsFixture: PagingPlaylistObject = {
   href: 'https://api.spotify.com/v1/users/griegs/playlists?offset=0&limit=1',
   items: [
     {
@@ -50,7 +53,7 @@ export const getMyPlaylistsFixture: GetMyPlaylistsResponse = {
       },
       type: 'playlist',
       uri: 'spotify:playlist:6SAtV2bMjUbQTV37X51F3u',
-    },
+    } as SimplifiedPlaylistObject,
   ],
   limit: 1,
   next: 'https://api.spotify.com/v1/users/griegs/playlists?offset=1&limit=1',

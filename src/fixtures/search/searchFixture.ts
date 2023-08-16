@@ -1,4 +1,5 @@
-import { type SearchResponse } from '../../types/SpotifyResponses';
+import { type SearchResponse } from '../../apis/index.types';
+import { type ArtistObject, type SimplifiedAlbumObject } from '../../openapi';
 
 export const searchFixture: SearchResponse = {
   albums: {
@@ -127,7 +128,7 @@ export const searchFixture: SearchResponse = {
         total_tracks: 15,
         type: 'album',
         uri: 'spotify:album:6yWMN087PgSimbcVmHLEwG',
-      },
+      } as SimplifiedAlbumObject,
     ],
     limit: 1,
     next: 'https://api.spotify.com/v1/search?query=tool&type=album&offset=1&limit=1',
@@ -180,7 +181,7 @@ export const searchFixture: SearchResponse = {
         popularity: 75,
         type: 'artist',
         uri: 'spotify:artist:2yEwvVSSSUkcLeSTNyHKh8',
-      },
+      } as ArtistObject,
     ],
     limit: 1,
     next: 'https://api.spotify.com/v1/search?query=tool&type=artist&offset=1&limit=1',

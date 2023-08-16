@@ -1,6 +1,9 @@
-import { type GetSavedShowsResponse } from '../../types/SpotifyResponses';
+import {
+  type PagingSavedShowObject,
+  type SavedShowObject,
+} from '../../openapi';
 
-export const getSavedShowsFixture: GetSavedShowsResponse = {
+export const getSavedShowsFixture: PagingSavedShowObject = {
   href: 'https://api.spotify.com/v1/me/shows?offset=0&limit=2',
   items: [
     {
@@ -62,6 +65,8 @@ export const getSavedShowsFixture: GetSavedShowsResponse = {
           spotify: 'https://open.spotify.com/show/2b025hq3gJ17tQdxS3aV43',
         },
         href: 'https://api.spotify.com/v1/shows/2b025hq3gJ17tQdxS3aV43',
+        html_description:
+          "<p>Learn more about the albums you love with Dissect, serialized music podcast from Spotify Studios. Dissect dives deep into albums like Kendrick Lamar's To Pimp a Butterfly (Season 1), Kanye West's My Beautiful Dark Twisted Fantasy (Season 2), Frank Ocean's Blonde (Season 3), and Tyler the Creator's Flower Boy (Season 4), forensically dissecting one song per episode.</p>",
         id: '2b025hq3gJ17tQdxS3aV43',
         images: [
           {
@@ -85,10 +90,11 @@ export const getSavedShowsFixture: GetSavedShowsResponse = {
         media_type: 'audio',
         name: 'Dissect',
         publisher: 'Spotify Studios',
+        total_episodes: 0,
         type: 'show',
         uri: 'spotify:show:2b025hq3gJ17tQdxS3aV43',
       },
-    },
+    } as SavedShowObject,
     {
       added_at: '2020-04-06T16:55:17Z',
       show: {
@@ -179,6 +185,8 @@ export const getSavedShowsFixture: GetSavedShowsResponse = {
           spotify: 'https://open.spotify.com/show/7qV2tMPbnZu18p2h0w6vvR',
         },
         href: 'https://api.spotify.com/v1/shows/7qV2tMPbnZu18p2h0w6vvR',
+        html_description:
+          '<p>Nyheter på lätt svenska för dig som är ny i Sverige. Ansvarig utgivare: Klas Wolf-Watz</p>',
         id: '7qV2tMPbnZu18p2h0w6vvR',
         images: [
           {
@@ -202,10 +210,11 @@ export const getSavedShowsFixture: GetSavedShowsResponse = {
         media_type: 'audio',
         name: 'Radio Sweden på lätt svenska',
         publisher: 'Sveriges Radio',
+        total_episodes: 0,
         type: 'show',
         uri: 'spotify:show:7qV2tMPbnZu18p2h0w6vvR',
       },
-    },
+    } as SavedShowObject,
   ],
   limit: 2,
   next: null,

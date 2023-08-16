@@ -1,6 +1,7 @@
-import { type SearchTracksResponse } from '../../types/SpotifyResponses';
+import { type SearchResponse } from '../../apis/index.types';
+import { type TrackObject } from '../../openapi';
 
-export const searchTracksFixture: SearchTracksResponse = {
+export const searchTracksFixture: SearchResponse = {
   tracks: {
     href: 'https://api.spotify.com/v1/search?query=vroom&type=track&offset=0&limit=1',
     items: [
@@ -238,7 +239,7 @@ export const searchTracksFixture: SearchTracksResponse = {
         track_number: 1,
         type: 'track',
         uri: 'spotify:track:5hyq3LBlCfjRQAFkdQwe8o',
-      },
+      } as TrackObject,
     ],
     limit: 1,
     next: 'https://api.spotify.com/v1/search?query=vroom&type=track&offset=1&limit=1',

@@ -1,6 +1,9 @@
-import { type GetCategoriesResponse } from '../../types/SpotifyResponses';
+import { type CategoryObject, type PagingObject } from '../../openapi';
 
-export const getCategoriesFixture: GetCategoriesResponse = {
+// TODO: DNE
+export const getCategoriesFixture: {
+  categories: PagingObject & { items?: CategoryObject[] };
+} = {
   categories: {
     href: 'https://api.spotify.com/v1/browse/categories?offset=0&limit=20',
     items: [

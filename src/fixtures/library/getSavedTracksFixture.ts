@@ -1,6 +1,9 @@
-import { type GetSavedTracksResponse } from '../../types/SpotifyResponses';
+import {
+  type PagingSavedTrackObject,
+  type SavedTrackObject,
+} from '../../openapi';
 
-export const getSavedTracksFixture: GetSavedTracksResponse = {
+export const getSavedTracksFixture: PagingSavedTrackObject = {
   href: 'https://api.spotify.com/v1/me/tracks?offset=0&limit=2',
   items: [
     {
@@ -244,7 +247,7 @@ export const getSavedTracksFixture: GetSavedTracksResponse = {
         type: 'track',
         uri: 'spotify:track:75T1xBaarYAqYdNtFZxUaZ',
       },
-    },
+    } as SavedTrackObject,
     {
       added_at: '2020-04-18T22:17:47Z',
       track: {
@@ -484,7 +487,7 @@ export const getSavedTracksFixture: GetSavedTracksResponse = {
         type: 'track',
         uri: 'spotify:track:7a9CcfKkg5E9JlU0nflL8K',
       },
-    },
+    } as SavedTrackObject,
   ],
   limit: 2,
   next: 'https://api.spotify.com/v1/me/tracks?offset=2&limit=2',
