@@ -137,6 +137,11 @@ export interface GetSavedAlbumsOptions {
   offset?: number;
 }
 
+export interface GetSavedAudiobooksOptions {
+  limit?: number;
+  offset?: number;
+}
+
 export interface GetSavedEpisodesOptions {
   limit?: number;
   market?: string;
