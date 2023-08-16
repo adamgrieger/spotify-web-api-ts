@@ -1,5 +1,6 @@
 /* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
+/* tslint:disable */
 /* eslint-disable */
 import type { PagingSavedShowObject } from '../models/PagingSavedShowObject';
 import type { PagingSimplifiedEpisodeObject } from '../models/PagingSimplifiedEpisodeObject';

@@ -1,5 +1,6 @@
 /* generated using openapi-typescript-codegen -- do no edit */
 /* istanbul ignore file */
+/* tslint:disable */
 /* eslint-disable */
 import type { ArtistObject } from '../models/ArtistObject';
 import type { CursorPagingSimplifiedArtistObject } from '../models/CursorPagingSimplifiedArtistObject';
