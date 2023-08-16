@@ -1,17 +1,7 @@
-import { type Http } from '../helpers/Http';
+import { UsersService } from '../openapi';
 import { type PersonalizationOptions } from '../types/SpotifyOptions';
-import {
-  type GetMyTopArtistsResponse,
-  type GetMyTopTracksResponse,
-} from '../types/SpotifyResponses';
 
 export class PersonalizationApi {
-  private readonly http: Http;
-
-  public constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * Get the Current User's Top Artists
    *
@@ -21,10 +11,14 @@ export class PersonalizationApi {
    */
   public async getMyTopArtists(
     options?: PersonalizationOptions,
-  ): Promise<GetMyTopArtistsResponse> {
-    return await this.http.get<GetMyTopArtistsResponse>(
-      '/me/top/artists',
-      options && { params: options },
+  ): Promise<
+    Awaited<ReturnType<typeof UsersService.getUsersTopArtistsAndTracks>>
+  > {
+    return await UsersService.getUsersTopArtistsAndTracks(
+      'artists',
+      options?.time_range,
+      options?.limit,
+      options?.offset,
     );
   }
 
@@ -37,10 +31,14 @@ export class PersonalizationApi {
    */
   public async getMyTopTracks(
     options?: PersonalizationOptions,
-  ): Promise<GetMyTopTracksResponse> {
-    return await this.http.get<GetMyTopTracksResponse>(
-      '/me/top/tracks',
-      options && { params: options },
+  ): Promise<
+    Awaited<ReturnType<typeof UsersService.getUsersTopArtistsAndTracks>>
+  > {
+    return await UsersService.getUsersTopArtistsAndTracks(
+      'tracks',
+      options?.time_range,
+      options?.limit,
+      options?.offset,
     );
   }
 }
