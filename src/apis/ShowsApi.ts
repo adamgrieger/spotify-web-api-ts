@@ -58,10 +58,10 @@ export class ShowsApi {
   public async getShows(
     showIds: string[],
     options?: MarketOptions,
-  ): Promise<{ shows: SimplifiedShowObject[] }> {
+  ): Promise<SimplifiedShowObject[]> {
     return await ShowsService.getMultipleShows(
       showIds.join(','),
       options?.market,
-    );
+    ).then(({ shows }) => shows);
   }
 }

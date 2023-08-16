@@ -52,10 +52,10 @@ export class EpisodesApi {
   public async getEpisodes(
     episodeIds: string[],
     options?: MarketOptions,
-  ): Promise<{ episodes: EpisodeObject[] }> {
+  ): Promise<EpisodeObject[]> {
     return await EpisodesService.getMultipleEpisodes(
       episodeIds.join(','),
       options?.market,
-    );
+    ).then(({ episodes }) => episodes);
   }
 }

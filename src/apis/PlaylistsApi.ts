@@ -31,7 +31,7 @@ export class PlaylistsApi {
     playlistId: string,
     uri: string,
     options?: AddItemsToPlaylistOptions,
-  ): Promise<{ snapshot_id?: string }> {
+  ): Promise<string | undefined> {
     return await this.addItemsToPlaylist(playlistId, [uri], options);
   }
 
@@ -48,12 +48,12 @@ export class PlaylistsApi {
     playlistId: string,
     uris: string[],
     options?: AddItemsToPlaylistOptions,
-  ): Promise<{ snapshot_id?: string }> {
+  ): Promise<string | undefined> {
     return await PlaylistsService.addTracksToPlaylist(
       playlistId,
       options?.position,
       uris.join(','),
-    );
+    ).then(({ snapshot_id }) => snapshot_id);
   }
 
   /**
@@ -194,7 +194,7 @@ export class PlaylistsApi {
     playlistId: string,
     uri: string,
     snapshotId?: string,
-  ): Promise<{ snapshot_id?: string }> {
+  ): Promise<string | undefined> {
     return await this.removePlaylistItems(playlistId, [uri], snapshotId);
   }
 
@@ -210,11 +210,11 @@ export class PlaylistsApi {
     playlistId: string,
     uris: string[],
     snapshotId?: string,
-  ): Promise<{ snapshot_id?: string }> {
+  ): Promise<string | undefined> {
     return await PlaylistsService.removeTracksPlaylist(playlistId, {
       tracks: uris.map((uri) => ({ uri })),
       snapshot_id: snapshotId,
-    });
+    }).then(({ snapshot_id }) => snapshot_id);
   }
 
   /**
@@ -283,7 +283,7 @@ export class PlaylistsApi {
     rangeStart: number,
     insertBefore: number,
     options?: ReorderPlaylistItemsOptions,
-  ): Promise<{ snapshot_id?: string }> {
+  ): Promise<string | undefined> {
     return await PlaylistsService.reorderOrReplacePlaylistsTracks(
       playlistId,
       undefined,
@@ -293,7 +293,7 @@ export class PlaylistsApi {
         range_length: options?.range_length,
         snapshot_id: options?.snapshot_id,
       },
-    );
+    ).then(({ snapshot_id }) => snapshot_id);
   }
 
   /**
@@ -307,11 +307,11 @@ export class PlaylistsApi {
   public async replacePlaylistItems(
     playlistId: string,
     uris: string[],
-  ): Promise<{ snapshot_id?: string }> {
+  ): Promise<string | undefined> {
     return await PlaylistsService.reorderOrReplacePlaylistsTracks(
       playlistId,
       uris?.join(','),
-    );
+    ).then(({ snapshot_id }) => snapshot_id);
   }
 
   /**

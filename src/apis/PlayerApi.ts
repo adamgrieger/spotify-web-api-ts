@@ -63,8 +63,10 @@ export class PlayerApi {
    *
    * Get information about a user's available devices.
    */
-  public async getMyDevices(): Promise<{ devices: DeviceObject[] }> {
-    return await PlayerService.getAUsersAvailableDevices();
+  public async getMyDevices(): Promise<DeviceObject[]> {
+    return await PlayerService.getAUsersAvailableDevices().then(
+      ({ devices }) => devices,
+    );
   }
 
   /**

@@ -155,12 +155,12 @@ export class FollowApi {
    */
   public async getFollowedArtists(
     options?: GetFollowedArtistsOptions,
-  ): Promise<{ artists: CursorPagingSimplifiedArtistObject }> {
+  ): Promise<CursorPagingSimplifiedArtistObject> {
     return await UsersService.getFollowed(
       'artist',
       options?.after,
       options?.limit,
-    );
+    ).then(({ artists }) => artists);
   }
 
   /**

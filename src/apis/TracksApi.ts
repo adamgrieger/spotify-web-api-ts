@@ -44,8 +44,10 @@ export class TracksApi {
    */
   public async getAudioFeaturesForTracks(
     trackIds: string[],
-  ): Promise<{ audio_features: AudioFeaturesObject[] }> {
-    return await TracksService.getSeveralAudioFeatures(trackIds.join(','));
+  ): Promise<AudioFeaturesObject[]> {
+    return await TracksService.getSeveralAudioFeatures(trackIds.join(',')).then(
+      ({ audio_features }) => audio_features,
+    );
   }
 
   /**
@@ -76,7 +78,9 @@ export class TracksApi {
   public async getTracks(
     trackIds: string[],
     options?: MarketOptions,
-  ): Promise<{ tracks: TrackObject[] }> {
-    return await TracksService.getSeveralTracks(trackIds.join(','));
+  ): Promise<TrackObject[]> {
+    return await TracksService.getSeveralTracks(trackIds.join(',')).then(
+      ({ tracks }) => tracks,
+    );
   }
 }

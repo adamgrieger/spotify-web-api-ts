@@ -50,8 +50,10 @@ export class SearchApi {
   public async searchAlbums(
     query: string,
     options?: SearchOptions,
-  ): Promise<{ albums?: PagingSimplifiedAlbumObject }> {
-    return await this.search(query, ['album'], options);
+  ): Promise<PagingSimplifiedAlbumObject | undefined> {
+    return await this.search(query, ['album'], options).then(
+      ({ albums }) => albums,
+    );
   }
 
   /**
@@ -65,8 +67,10 @@ export class SearchApi {
   public async searchArtists(
     query: string,
     options?: SearchOptions,
-  ): Promise<{ artists?: PagingArtistObject }> {
-    return await this.search(query, ['artist'], options);
+  ): Promise<PagingArtistObject | undefined> {
+    return await this.search(query, ['artist'], options).then(
+      ({ artists }) => artists,
+    );
   }
 
   /**
@@ -80,8 +84,10 @@ export class SearchApi {
   public async searchAudiobooks(
     query: string,
     options?: SearchOptions,
-  ): Promise<{ audiobooks?: PagingSimplifiedAudiobookObject }> {
-    return await this.search(query, ['audiobook'], options);
+  ): Promise<PagingSimplifiedAudiobookObject | undefined> {
+    return await this.search(query, ['audiobook'], options).then(
+      ({ audiobooks }) => audiobooks,
+    );
   }
 
   /**
@@ -95,8 +101,10 @@ export class SearchApi {
   public async searchEpisodes(
     query: string,
     options?: SearchOptions,
-  ): Promise<{ episodes?: PagingSimplifiedEpisodeObject }> {
-    return await this.search(query, ['episode'], options);
+  ): Promise<PagingSimplifiedEpisodeObject | undefined> {
+    return await this.search(query, ['episode'], options).then(
+      ({ episodes }) => episodes,
+    );
   }
 
   /**
@@ -110,8 +118,10 @@ export class SearchApi {
   public async searchPlaylists(
     query: string,
     options?: SearchOptions,
-  ): Promise<{ playlists?: PagingPlaylistObject }> {
-    return await this.search(query, ['playlist'], options);
+  ): Promise<PagingPlaylistObject | undefined> {
+    return await this.search(query, ['playlist'], options).then(
+      ({ playlists }) => playlists,
+    );
   }
 
   /**
@@ -125,8 +135,10 @@ export class SearchApi {
   public async searchShows(
     query: string,
     options?: SearchOptions,
-  ): Promise<{ shows?: PagingSimplifiedShowObject }> {
-    return await this.search(query, ['show'], options);
+  ): Promise<PagingSimplifiedShowObject | undefined> {
+    return await this.search(query, ['show'], options).then(
+      ({ shows }) => shows,
+    );
   }
 
   /**
@@ -140,7 +152,9 @@ export class SearchApi {
   public async searchTracks(
     query: string,
     options?: SearchOptions,
-  ): Promise<{ tracks?: PagingTrackObject }> {
-    return await this.search(query, ['track'], options);
+  ): Promise<PagingTrackObject | undefined> {
+    return await this.search(query, ['track'], options).then(
+      ({ tracks }) => tracks,
+    );
   }
 }

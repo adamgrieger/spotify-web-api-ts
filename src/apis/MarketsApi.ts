@@ -6,7 +6,9 @@ export class MarketsApi {
    *
    * Get the list of markets where Spotify is available.
    */
-  public async getMarkets(): Promise<{ markets?: string[] }> {
-    return await MarketsService.getAvailableMarkets();
+  public async getMarkets(): Promise<string[]> {
+    return await MarketsService.getAvailableMarkets().then(
+      ({ markets }) => markets ?? [],
+    );
   }
 }

@@ -35,8 +35,10 @@ export class BrowseApi {
    * // Array [ "acoustic", "afrobeat", ... ]
    * ```
    */
-  public async getAvailableGenreSeeds(): Promise<{ genres: string[] }> {
-    return await GenresService.getRecommendationGenres();
+  public async getAvailableGenreSeeds(): Promise<string[]> {
+    return await GenresService.getRecommendationGenres().then(
+      ({ genres }) => genres,
+    );
   }
 
   /**
@@ -58,13 +60,13 @@ export class BrowseApi {
    */
   public async getCategories(
     options?: GetCategoriesOptions,
-  ): Promise<{ categories: PagingObject }> {
+  ): Promise<PagingObject> {
     return await CategoriesService.getCategories(
       options?.country,
       options?.locale,
       options?.limit,
       options?.offset,
-    );
+    ).then(({ categories }) => categories);
   }
 
   /**
@@ -173,12 +175,12 @@ export class BrowseApi {
    */
   public async getNewReleases(
     options?: GetNewReleasesOptions,
-  ): Promise<{ albums: PagingSimplifiedAlbumObject }> {
+  ): Promise<PagingSimplifiedAlbumObject> {
     return await AlbumsService.getNewReleases(
       options?.country,
       options?.limit,
       options?.offset,
-    );
+    ).then(({ albums }) => albums);
   }
 
   /**

@@ -82,10 +82,10 @@ export class ArtistsApi {
    *
    * @param artistIds The Spotify IDs for the artists.
    */
-  public async getArtists(
-    artistIds: string[],
-  ): Promise<{ artists: ArtistObject[] }> {
-    return await ArtistsService.getMultipleArtists(artistIds.join(','));
+  public async getArtists(artistIds: string[]): Promise<ArtistObject[]> {
+    return await ArtistsService.getMultipleArtists(artistIds.join(',')).then(
+      ({ artists }) => artists,
+    );
   }
 
   /**
@@ -111,8 +111,10 @@ export class ArtistsApi {
   public async getArtistTopTracks(
     artistId: string,
     country: string,
-  ): Promise<{ tracks: TrackObject[] }> {
-    return await ArtistsService.getAnArtistsTopTracks(artistId, country);
+  ): Promise<TrackObject[]> {
+    return await ArtistsService.getAnArtistsTopTracks(artistId, country).then(
+      ({ tracks }) => tracks,
+    );
   }
 
   /**
@@ -135,9 +137,9 @@ export class ArtistsApi {
    *
    * @param artistId The Spotify ID for the artist.
    */
-  public async getRelatedArtists(
-    artistId: string,
-  ): Promise<{ artists: ArtistObject[] }> {
-    return await ArtistsService.getAnArtistsRelatedArtists(artistId);
+  public async getRelatedArtists(artistId: string): Promise<ArtistObject[]> {
+    return await ArtistsService.getAnArtistsRelatedArtists(artistId).then(
+      ({ artists }) => artists,
+    );
   }
 }

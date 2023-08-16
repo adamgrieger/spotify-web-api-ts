@@ -46,11 +46,11 @@ export class AudiobooksApi {
   public async getAudiobooks(
     audiobookIds: string[],
     options?: MarketOptions,
-  ): Promise<{ audiobooks: AudiobookObject[] }> {
+  ): Promise<AudiobookObject[]> {
     return await AudiobooksService.getMultipleAudiobooks(
       audiobookIds.join(','),
       options?.market,
-    );
+    ).then(({ audiobooks }) => audiobooks);
   }
 
   /**
@@ -102,10 +102,10 @@ export class AudiobooksApi {
   public async getChapters(
     chapterIds: string[],
     options: MarketOptions,
-  ): Promise<{ chapters: ChapterObject[] }> {
+  ): Promise<ChapterObject[]> {
     return await ChaptersService.getSeveralChapters(
       chapterIds.join(','),
       options?.market,
-    );
+    ).then(({ chapters }) => chapters);
   }
 }

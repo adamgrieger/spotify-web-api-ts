@@ -57,11 +57,11 @@ export class AlbumsApi {
   public async getAlbums(
     albumIds: string[],
     options?: MarketOptions,
-  ): Promise<{ albums: AlbumObject[] }> {
+  ): Promise<AlbumObject[]> {
     return await AlbumsService.getMultipleAlbums(
       albumIds.join(','),
       options?.market,
-    );
+    ).then(({ albums }) => albums);
   }
 
   /**
