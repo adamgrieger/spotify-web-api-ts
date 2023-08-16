@@ -1,23 +1,21 @@
-import { type Http } from '../helpers/Http';
+import {
+  LibraryService,
+  type PagingSavedAlbumObject,
+  type PagingSavedEpisodeObject,
+  type PagingSavedShowObject,
+  type PagingSavedTrackObject,
+  type PagingSimplifiedAudiobookObject,
+} from '../openapi';
 import {
   type GetSavedAlbumsOptions,
+  type GetSavedAudiobooksOptions,
+  type GetSavedEpisodesOptions,
   type GetSavedShowsOptions,
   type GetSavedTracksOptions,
   type RemoveSavedShowsOptions,
 } from '../types/SpotifyOptions';
-import {
-  type GetSavedAlbumsResponse,
-  type GetSavedShowsResponse,
-  type GetSavedTracksResponse,
-} from '../types/SpotifyResponses';
 
 export class LibraryApi {
-  private readonly http: Http;
-
-  public constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * Check User's Saved Albums
    *
@@ -26,11 +24,31 @@ export class LibraryApi {
    * @param albumIds The Spotify IDs of the albums.
    */
   public async areAlbumsSaved(albumIds: string[]): Promise<boolean[]> {
-    return await this.http.get<boolean[]>('/me/albums/contains', {
-      params: {
-        ids: albumIds,
-      },
-    });
+    return await LibraryService.checkUsersSavedAlbums(albumIds.join(','));
+  }
+
+  /**
+   * Check User's Saved Audiobooks
+   *
+   * Check if one or more audiobooks are saved in the current user's library.
+   *
+   * @param audiobookIds The Spotify IDs of the audiobooks.
+   */
+  public async areAudiobooksSaved(audiobookIds: string[]): Promise<boolean[]> {
+    return await LibraryService.checkUsersSavedAudiobooks(
+      audiobookIds.join(','),
+    );
+  }
+
+  /**
+   * Check User's Saved Episodes
+   *
+   * Check if one or more episodes are saved in the current user's library.
+   *
+   * @param episodeIds The Spotify IDs of the episodes.
+   */
+  public async areEpisodesSaved(episodeIds: string[]): Promise<boolean[]> {
+    return await LibraryService.checkUsersSavedEpisodes(episodeIds.join(','));
   }
 
   /**
@@ -41,11 +59,7 @@ export class LibraryApi {
    * @param showIds The Spotify IDs of the shows.
    */
   public async areShowsSaved(showIds: string[]): Promise<boolean[]> {
-    return await this.http.get<boolean[]>('/me/shows/contains', {
-      params: {
-        ids: showIds,
-      },
-    });
+    return await LibraryService.checkUsersSavedShows(showIds.join(','));
   }
 
   /**
@@ -56,11 +70,7 @@ export class LibraryApi {
    * @param trackIds The Spotify IDs of the tracks.
    */
   public async areTracksSaved(trackIds: string[]): Promise<boolean[]> {
-    return await this.http.get<boolean[]>('/me/tracks/contains', {
-      params: {
-        ids: trackIds,
-      },
-    });
+    return await LibraryService.checkUsersSavedTracks(trackIds.join(','));
   }
 
   /**
@@ -72,10 +82,44 @@ export class LibraryApi {
    */
   public async getSavedAlbums(
     options?: GetSavedAlbumsOptions,
-  ): Promise<GetSavedAlbumsResponse> {
-    return await this.http.get<GetSavedAlbumsResponse>(
-      '/me/albums',
-      options && { params: options },
+  ): Promise<PagingSavedAlbumObject> {
+    return await LibraryService.getUsersSavedAlbums(
+      options?.limit,
+      options?.offset,
+      options?.market,
+    );
+  }
+
+  /**
+   * Get the Current User's Saved Audiobooks
+   *
+   * Get a list of audiobooks saved in the current user's library.
+   *
+   * @param options Optional request information.
+   */
+  public async getSavedAudiobooks(
+    options?: GetSavedAudiobooksOptions,
+  ): Promise<PagingSimplifiedAudiobookObject> {
+    return await LibraryService.getUsersSavedAudiobooks(
+      options?.limit,
+      options?.offset,
+    );
+  }
+
+  /**
+   * Get the Current User's Saved Episodes
+   *
+   * Get a list of episodes saved in the current user's library.
+   *
+   * @param options Optional request information.
+   */
+  public async getSavedEpisodes(
+    options?: GetSavedEpisodesOptions,
+  ): Promise<PagingSavedEpisodeObject> {
+    return await LibraryService.getUsersSavedEpisodes(
+      options?.market,
+      options?.limit,
+      options?.offset,
     );
   }
 
@@ -88,10 +132,10 @@ export class LibraryApi {
    */
   public async getSavedShows(
     options?: GetSavedShowsOptions,
-  ): Promise<GetSavedShowsResponse> {
-    return await this.http.get<GetSavedShowsResponse>(
-      '/me/shows',
-      options && { params: options },
+  ): Promise<PagingSavedShowObject> {
+    return await LibraryService.getUsersSavedShows(
+      options?.limit,
+      options?.offset,
     );
   }
 
@@ -104,10 +148,11 @@ export class LibraryApi {
    */
   public async getSavedTracks(
     options?: GetSavedTracksOptions,
-  ): Promise<GetSavedTracksResponse> {
-    return await this.http.get<GetSavedTracksResponse>(
-      '/me/tracks',
-      options && { params: options },
+  ): Promise<PagingSavedTrackObject> {
+    return await LibraryService.getUsersSavedTracks(
+      options?.market,
+      options?.limit,
+      options?.offset,
     );
   }
 
@@ -120,6 +165,30 @@ export class LibraryApi {
    */
   public async isAlbumSaved(albumId: string): Promise<boolean> {
     const response = await this.areAlbumsSaved([albumId]);
+    return response[0];
+  }
+
+  /**
+   * Check User's Saved Audiobooks
+   *
+   * Check if an audiobook is saved in the current user's library.
+   *
+   * @param audiobookId The Spotify ID of the audiobook.
+   */
+  public async isAudiobookSaved(audiobookId: string): Promise<boolean> {
+    const response = await this.areAudiobooksSaved([audiobookId]);
+    return response[0];
+  }
+
+  /**
+   * Check User's Saved Episodes
+   *
+   * Check if an episode is saved in the current user's library.
+   *
+   * @param episodeId The Spotify ID of the episode.
+   */
+  public async isEpisodeSaved(episodeId: string): Promise<boolean> {
+    const response = await this.areEpisodesSaved([episodeId]);
     return response[0];
   }
 
@@ -166,11 +235,51 @@ export class LibraryApi {
    * @param albumIds The Spotify IDs of the albums.
    */
   public async removeSavedAlbums(albumIds: string[]): Promise<void> {
-    await this.http.delete('/me/albums', {
-      data: {
-        ids: albumIds,
-      },
-    });
+    await LibraryService.removeAlbumsUser(albumIds.join(','));
+  }
+
+  /**
+   * Remove Audiobook for the Current User
+   *
+   * Remove an audiobook from the current user's library.
+   *
+   * @param audiobookId The Spotify ID of the audiobook.
+   */
+  public async removeSavedAudiobook(audiobookId: string): Promise<void> {
+    await this.removeSavedAudiobooks([audiobookId]);
+  }
+
+  /**
+   * Remove Audiobooks for the Current User
+   *
+   * Remove one or more audiobooks from the current user's library.
+   *
+   * @param audiobookIds The Spotify IDs of the audiobooks.
+   */
+  public async removeSavedAudiobooks(audiobookIds: string[]): Promise<void> {
+    await LibraryService.removeAudiobooksUser(audiobookIds.join(','));
+  }
+
+  /**
+   * Remove Episode for the Current User
+   *
+   * Remove an episode from the current user's library.
+   *
+   * @param episodeId The Spotify ID of the episode.
+   */
+  public async removeSavedEpisode(episodeId: string): Promise<void> {
+    await this.removeSavedEpisodes([episodeId]);
+  }
+
+  /**
+   * Remove Episodes for the Current User
+   *
+   * Remove one or more episodes from the current user's library.
+   *
+   * @param episodeIds The Spotify IDs of the episodes.
+   */
+  public async removeSavedEpisodes(episodeIds: string[]): Promise<void> {
+    await LibraryService.removeEpisodesUser(episodeIds.join(','));
   }
 
   /**
@@ -200,12 +309,7 @@ export class LibraryApi {
     showIds: string[],
     options?: RemoveSavedShowsOptions,
   ): Promise<void> {
-    await this.http.delete('/me/shows', {
-      params: {
-        ...options,
-        ids: showIds,
-      },
-    });
+    await LibraryService.removeShowsUser(showIds.join(','), options?.market);
   }
 
   /**
@@ -227,11 +331,7 @@ export class LibraryApi {
    * @param trackIds The Spotify IDs of the tracks.
    */
   public async removeSavedTracks(trackIds: string[]): Promise<void> {
-    await this.http.delete('/me/tracks', {
-      data: {
-        ids: trackIds,
-      },
-    });
+    await LibraryService.removeTracksUser(trackIds.join(','));
   }
 
   /**
@@ -253,11 +353,51 @@ export class LibraryApi {
    * @param albumIds The Spotify IDs of the albums.
    */
   public async saveAlbums(albumIds: string[]): Promise<void> {
-    await this.http.put('/me/albums', {
-      data: {
-        ids: albumIds,
-      },
-    });
+    await LibraryService.saveAlbumsUser(albumIds.join(','));
+  }
+
+  /**
+   * Save Audiobook for the Current User
+   *
+   * Save an audiobook to the current user's library.
+   *
+   * @param audiobookId The Spotify ID of the audiobook.
+   */
+  public async saveAudiobook(audiobookId: string): Promise<void> {
+    await this.saveAudiobooks([audiobookId]);
+  }
+
+  /**
+   * Save Audiobooks for the Current User
+   *
+   * Save one or more audiobooks to the current user's library.
+   *
+   * @param audiobookIds The Spotify IDs of the audiobooks.
+   */
+  public async saveAudiobooks(audiobookIds: string[]): Promise<void> {
+    await LibraryService.saveAudiobooksUser(audiobookIds.join(','));
+  }
+
+  /**
+   * Save Episode for Current User
+   *
+   * Save an episode to the current user's library.
+   *
+   * @param episodeId The Spotify ID of the episode.
+   */
+  public async saveEpisode(episodeId: string): Promise<void> {
+    await this.saveEpisodes([episodeId]);
+  }
+
+  /**
+   * Save Episodes for Current User
+   *
+   * Save one or more episodes to the current user's library.
+   *
+   * @param episodeIds The Spotify IDs of the episodes.
+   */
+  public async saveEpisodes(episodeIds: string[]): Promise<void> {
+    await LibraryService.saveEpisodesUser(episodeIds.join(','));
   }
 
   /**
@@ -279,11 +419,7 @@ export class LibraryApi {
    * @param showIds The Spotify IDs of the shows.
    */
   public async saveShows(showIds: string[]): Promise<void> {
-    await this.http.put('/me/shows', {
-      params: {
-        ids: showIds,
-      },
-    });
+    await LibraryService.saveShowsUser(showIds.join(','));
   }
 
   /**
@@ -305,10 +441,6 @@ export class LibraryApi {
    * @param trackIds The Spotify IDs of the tracks.
    */
   public async saveTracks(trackIds: string[]): Promise<void> {
-    await this.http.put('/me/tracks', {
-      data: {
-        ids: trackIds,
-      },
-    });
+    await LibraryService.saveTracksUser(trackIds.join(','));
   }
 }

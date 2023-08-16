@@ -10,6 +10,13 @@ export interface MarketOptions {
   market?: string;
 }
 
+export interface PagingOptions {
+  limit?: number;
+  offset?: number;
+}
+
+export type PagingMarketOptions = MarketOptions & PagingOptions;
+
 // +--------+
 // | Albums |
 // +--------+
@@ -25,9 +32,9 @@ export interface GetAlbumTracksOptions {
 // +---------+
 
 export interface GetArtistAlbumsOptions {
-  country?: string;
   include_groups?: Array<'album' | 'appears_on' | 'compilation' | 'single'>;
   limit?: number;
+  market?: string;
   offset?: number;
 }
 
@@ -132,6 +139,17 @@ export interface GetFollowedArtistsOptions {
 // +---------+
 
 export interface GetSavedAlbumsOptions {
+  limit?: number;
+  market?: string;
+  offset?: number;
+}
+
+export interface GetSavedAudiobooksOptions {
+  limit?: number;
+  offset?: number;
+}
+
+export interface GetSavedEpisodesOptions {
   limit?: number;
   market?: string;
   offset?: number;

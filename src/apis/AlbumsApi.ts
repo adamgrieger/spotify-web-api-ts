@@ -1,21 +1,14 @@
-import { type Http } from '../helpers/Http';
-import { type Album } from '../types/SpotifyObjects';
+import {
+  type AlbumObject,
+  AlbumsService,
+  type PagingSimplifiedTrackObject,
+} from '../openapi';
 import {
   type GetAlbumTracksOptions,
   type MarketOptions,
 } from '../types/SpotifyOptions';
-import {
-  type GetAlbumTracksResponse,
-  type GetAlbumsResponse,
-} from '../types/SpotifyResponses';
 
 export class AlbumsApi {
-  private readonly http: Http;
-
-  public constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * ### Get an Album
    *
@@ -36,11 +29,8 @@ export class AlbumsApi {
   public async getAlbum(
     albumId: string,
     options?: MarketOptions,
-  ): Promise<Album> {
-    return await this.http.get<Album>(
-      `/albums/${albumId}`,
-      options && { params: options },
-    );
+  ): Promise<AlbumObject> {
+    return await AlbumsService.getAnAlbum(albumId, options?.market);
   }
 
   /**
@@ -67,14 +57,11 @@ export class AlbumsApi {
   public async getAlbums(
     albumIds: string[],
     options?: MarketOptions,
-  ): Promise<Array<Album | null>> {
-    const response = await this.http.get<GetAlbumsResponse>('/albums', {
-      params: {
-        ...options,
-        ids: albumIds,
-      },
-    });
-    return response.albums;
+  ): Promise<AlbumObject[]> {
+    return await AlbumsService.getMultipleAlbums(
+      albumIds.join(','),
+      options?.market,
+    ).then(({ albums }) => albums);
   }
 
   /**
@@ -97,10 +84,12 @@ export class AlbumsApi {
   public async getAlbumTracks(
     albumId: string,
     options?: GetAlbumTracksOptions,
-  ): Promise<GetAlbumTracksResponse> {
-    return await this.http.get<GetAlbumTracksResponse>(
-      `/albums/${albumId}/tracks`,
-      options && { params: options },
+  ): Promise<PagingSimplifiedTrackObject> {
+    return await AlbumsService.getAnAlbumsTracks(
+      albumId,
+      options?.market,
+      options?.limit,
+      options?.offset,
     );
   }
 }

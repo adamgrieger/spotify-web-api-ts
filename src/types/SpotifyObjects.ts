@@ -330,6 +330,7 @@ export interface SavedTrack {
 export type SearchType =
   | 'album'
   | 'artist'
+  | 'audiobook'
   | 'episode'
   | 'playlist'
   | 'show'

@@ -1,4 +1,14 @@
 import {
+  type PagingArtistObject,
+  type PagingPlaylistObject,
+  type PagingSimplifiedAlbumObject,
+  type PagingSimplifiedAudiobookObject,
+  type PagingSimplifiedEpisodeObject,
+  type PagingSimplifiedShowObject,
+  type PagingTrackObject,
+} from '../openapi';
+
+import {
   type Album,
   type Artist,
   type AudioFeatures,
@@ -139,6 +149,7 @@ export interface SnapshotIdResponse {
 export type SearchResponse = Partial<
   SearchAlbumsResponse &
     SearchArtistsResponse &
+    SearchAudiobooksResponse &
     SearchEpisodesResponse &
     SearchPlaylistsResponse &
     SearchShowsResponse &
@@ -146,27 +157,31 @@ export type SearchResponse = Partial<
 >;
 
 export interface SearchAlbumsResponse {
-  albums: Paging<SimplifiedAlbum>;
+  albums: PagingSimplifiedAlbumObject;
 }
 
 export interface SearchArtistsResponse {
-  artists: Paging<Artist>;
+  artists: PagingArtistObject;
+}
+
+export interface SearchAudiobooksResponse {
+  audiobooks: PagingSimplifiedAudiobookObject;
 }
 
 export interface SearchEpisodesResponse {
-  episodes: Paging<SimplifiedEpisode>;
+  episodes: PagingSimplifiedEpisodeObject;
 }
 
 export interface SearchPlaylistsResponse {
-  playlists: Paging<SimplifiedPlaylist>;
+  playlists: PagingPlaylistObject;
 }
 
 export interface SearchShowsResponse {
-  shows: Paging<SimplifiedShow>;
+  shows: PagingSimplifiedShowObject;
 }
 
 export interface SearchTracksResponse {
-  tracks: Paging<Track>;
+  tracks: PagingTrackObject;
 }
 
 // +-------+

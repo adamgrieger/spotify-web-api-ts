@@ -1,21 +1,18 @@
-import { type Http } from '../helpers/Http';
-import { type PrivateUser, type PublicUser } from '../types/SpotifyObjects';
+import {
+  type PrivateUserObject,
+  type PublicUserObject,
+  UsersService,
+} from '../openapi';
 
 export class UsersApi {
-  private readonly http: Http;
-
-  public constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * Get Current User's Profile
    *
    * Get detailed profile information about the current user (including the
    * current user's username).
    */
-  public async getMe(): Promise<PrivateUser> {
-    return await this.http.get<PrivateUser>('/me');
+  public async getMe(): Promise<PrivateUserObject> {
+    return await UsersService.getCurrentUsersProfile();
   }
 
   /**
@@ -25,7 +22,7 @@ export class UsersApi {
    *
    * @param userId The user's Spotify user ID.
    */
-  public async getUser(userId: string): Promise<PublicUser> {
-    return await this.http.get<PublicUser>(`/users/${userId}`);
+  public async getUser(userId: string): Promise<PublicUserObject> {
+    return await UsersService.getUsersProfile(userId);
   }
 }

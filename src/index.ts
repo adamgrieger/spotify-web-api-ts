@@ -3,6 +3,7 @@ import qs from 'qs';
 
 import { AlbumsApi } from './apis/AlbumsApi';
 import { ArtistsApi } from './apis/ArtistsApi';
+import { AudiobooksApi } from './apis/AudiobooksApi';
 import { BrowseApi } from './apis/BrowseApi';
 import { EpisodesApi } from './apis/EpisodesApi';
 import { FollowApi } from './apis/FollowApi';
@@ -26,6 +27,7 @@ import {
   type GetRefreshedAccessTokenResponse,
   type GetTemporaryAppTokensResponse,
 } from './types/SpotifyAuthorization';
+import { MarketsApi } from './apis/MarketsApi';
 
 export interface SpotifyWebApiOptions {
   accessToken?: string;
@@ -47,6 +49,8 @@ export class SpotifyWebApi {
 
   public artists: ArtistsApi;
 
+  public audiobooks: AudiobooksApi;
+
   public browse: BrowseApi;
 
   public episodes: EpisodesApi;
@@ -54,6 +58,8 @@ export class SpotifyWebApi {
   public follow: FollowApi;
 
   public library: LibraryApi;
+
+  public markets: MarketsApi;
 
   public personalization: PersonalizationApi;
 
@@ -76,19 +82,21 @@ export class SpotifyWebApi {
 
     this.http = new Http(options?.accessToken ?? '');
 
-    this.albums = new AlbumsApi(this.http);
-    this.artists = new ArtistsApi(this.http);
-    this.browse = new BrowseApi(this.http);
-    this.episodes = new EpisodesApi(this.http);
-    this.follow = new FollowApi(this.http);
-    this.library = new LibraryApi(this.http);
-    this.personalization = new PersonalizationApi(this.http);
-    this.player = new PlayerApi(this.http);
-    this.playlists = new PlaylistsApi(this.http);
-    this.search = new SearchApi(this.http);
-    this.shows = new ShowsApi(this.http);
-    this.tracks = new TracksApi(this.http);
-    this.users = new UsersApi(this.http);
+    this.albums = new AlbumsApi();
+    this.artists = new ArtistsApi();
+    this.audiobooks = new AudiobooksApi();
+    this.browse = new BrowseApi();
+    this.episodes = new EpisodesApi();
+    this.follow = new FollowApi();
+    this.library = new LibraryApi();
+    this.markets = new MarketsApi();
+    this.personalization = new PersonalizationApi();
+    this.player = new PlayerApi();
+    this.playlists = new PlaylistsApi();
+    this.search = new SearchApi();
+    this.shows = new ShowsApi();
+    this.tracks = new TracksApi();
+    this.users = new UsersApi();
   }
 
   public getAccessToken(): string {

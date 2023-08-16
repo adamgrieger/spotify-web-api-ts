@@ -1,21 +1,15 @@
-import { type Http } from '../helpers/Http';
-import { type Show, type SimplifiedShow } from '../types/SpotifyObjects';
+import {
+  type PagingSimplifiedEpisodeObject,
+  type ShowObject,
+  ShowsService,
+  type SimplifiedShowObject,
+} from '../openapi';
 import {
   type GetShowEpisodesOptions,
   type MarketOptions,
 } from '../types/SpotifyOptions';
-import {
-  type GetShowEpisodesResponse,
-  type GetShowsResponse,
-} from '../types/SpotifyResponses';
 
 export class ShowsApi {
-  private readonly http: Http;
-
-  public constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * Get a Show
    *
@@ -25,11 +19,11 @@ export class ShowsApi {
    * @param showId The Spotify ID for the show.
    * @param options Optional request information.
    */
-  public async getShow(showId: string, options?: MarketOptions): Promise<Show> {
-    return await this.http.get<Show>(
-      `/shows/${showId}`,
-      options && { params: options },
-    );
+  public async getShow(
+    showId: string,
+    options?: MarketOptions,
+  ): Promise<ShowObject> {
+    return await ShowsService.getAShow(showId, options?.market);
   }
 
   /**
@@ -43,10 +37,12 @@ export class ShowsApi {
   public async getShowEpisodes(
     showId: string,
     options?: GetShowEpisodesOptions,
-  ): Promise<GetShowEpisodesResponse> {
-    return await this.http.get<GetShowEpisodesResponse>(
-      `/shows/${showId}/episodes`,
-      options && { params: options },
+  ): Promise<PagingSimplifiedEpisodeObject> {
+    return await ShowsService.getAShowsEpisodes(
+      showId,
+      options?.market,
+      options?.limit,
+      options?.offset,
     );
   }
 
@@ -62,13 +58,10 @@ export class ShowsApi {
   public async getShows(
     showIds: string[],
     options?: MarketOptions,
-  ): Promise<Array<SimplifiedShow | null>> {
-    const response = await this.http.get<GetShowsResponse>('/shows', {
-      params: {
-        ...options,
-        ids: showIds,
-      },
-    });
-    return response.shows;
+  ): Promise<SimplifiedShowObject[]> {
+    return await ShowsService.getMultipleShows(
+      showIds.join(','),
+      options?.market,
+    ).then(({ shows }) => shows);
   }
 }

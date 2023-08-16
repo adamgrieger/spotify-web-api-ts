@@ -1,10 +1,12 @@
-import { type Http } from '../helpers/Http';
 import {
-  type CurrentlyPlaying,
-  type CurrentlyPlayingContext,
-  type Device,
-  type RepeatState,
-} from '../types/SpotifyObjects';
+  type CurrentlyPlayingContextObject,
+  type CurrentlyPlayingObject,
+  type CursorPagingPlayHistoryObject,
+  type DeviceObject,
+  PlayerService,
+  type QueueObject,
+} from '../openapi';
+import { type RepeatState } from '../types/SpotifyObjects';
 import {
   type DeviceIdOptions,
   type GetCurrentlyPlayingTrackOptions,
@@ -13,15 +15,8 @@ import {
   type PlayOptions,
   type TransferPlaybackOptions,
 } from '../types/SpotifyOptions';
-import { type GetRecentlyPlayedTracksResponse } from '../types/SpotifyResponses';
 
 export class PlayerApi {
-  private readonly http: Http;
-
-  public constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * Add an Item to the User's Playback Queue
    *
@@ -34,12 +29,17 @@ export class PlayerApi {
     uri: string,
     options?: DeviceIdOptions,
   ): Promise<void> {
-    await this.http.post('/me/player/queue', {
-      params: {
-        ...options,
-        uri,
-      },
-    });
+    await PlayerService.addToQueue(uri, options?.device_id);
+  }
+
+  /**
+   * Get the User's Queue
+   *
+   * Get the list of objects that make up the user's queue.
+   *
+   */
+  public async getQueue(): Promise<QueueObject> {
+    return await PlayerService.getQueue();
   }
 
   /**
@@ -51,10 +51,10 @@ export class PlayerApi {
    */
   public async getCurrentlyPlayingTrack(
     options?: GetCurrentlyPlayingTrackOptions,
-  ): Promise<CurrentlyPlaying | string> {
-    return await this.http.get<CurrentlyPlaying>(
-      '/me/player/currently-playing',
-      options && { params: options },
+  ): Promise<CurrentlyPlayingContextObject> {
+    return await PlayerService.getTheUsersCurrentlyPlayingTrack(
+      options?.market,
+      options?.additional_types?.join(','),
     );
   }
 
@@ -63,8 +63,10 @@ export class PlayerApi {
    *
    * Get information about a user's available devices.
    */
-  public async getMyDevices(): Promise<Device[]> {
-    return await this.http.get<Device[]>('/me/player/devices');
+  public async getMyDevices(): Promise<DeviceObject[]> {
+    return await PlayerService.getAUsersAvailableDevices().then(
+      ({ devices }) => devices,
+    );
   }
 
   /**
@@ -77,10 +79,10 @@ export class PlayerApi {
    */
   public async getPlaybackInfo(
     options?: GetPlaybackInfoOptions,
-  ): Promise<CurrentlyPlayingContext> {
-    return await this.http.get<CurrentlyPlayingContext>(
-      '/me/player',
-      options && { params: options },
+  ): Promise<CurrentlyPlayingObject> {
+    return await PlayerService.getInformationAboutTheUsersCurrentPlayback(
+      options?.market,
+      options?.additional_types?.join(','),
     );
   }
 
@@ -93,10 +95,11 @@ export class PlayerApi {
    */
   public async getRecentlyPlayedTracks(
     options?: GetRecentlyPlayedTracksOptions,
-  ): Promise<GetRecentlyPlayedTracksResponse> {
-    return await this.http.get<GetRecentlyPlayedTracksResponse>(
-      '/me/player/recently-played',
-      options && { params: options },
+  ): Promise<CursorPagingPlayHistoryObject> {
+    return await PlayerService.getRecentlyPlayed(
+      options?.limit,
+      options?.after,
+      options?.before,
     );
   }
 
@@ -108,7 +111,7 @@ export class PlayerApi {
    * @param options Optional request information.
    */
   public async pause(options?: DeviceIdOptions): Promise<void> {
-    await this.http.put('/me/player/pause', options && { params: options });
+    await PlayerService.pauseAUsersPlayback(options?.device_id);
   }
 
   /**
@@ -118,17 +121,10 @@ export class PlayerApi {
    *
    * @param options Optional request information.
    */
-  public async play(options?: PlayOptions): Promise<void> {
+  public async play(options: PlayOptions = {}): Promise<void> {
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    const { device_id, ...bodyParams } = options ?? {};
-
-    await this.http.put(
-      '/me/player/play',
-      options && {
-        ...(device_id && { params: { device_id } }),
-        ...(Object.keys(bodyParams).length && { data: bodyParams }),
-      },
-    );
+    const { device_id, ...requestOptions } = options;
+    await PlayerService.startAUsersPlayback(device_id, requestOptions);
   }
 
   /**
@@ -143,12 +139,10 @@ export class PlayerApi {
     positionMs: number,
     options?: DeviceIdOptions,
   ): Promise<void> {
-    await this.http.put('/me/player/seek', {
-      params: {
-        ...options,
-        position_ms: positionMs,
-      },
-    });
+    await PlayerService.seekToPositionInCurrentlyPlayingTrack(
+      positionMs,
+      options?.device_id,
+    );
   }
 
   /**
@@ -163,12 +157,7 @@ export class PlayerApi {
     state: RepeatState,
     options?: DeviceIdOptions,
   ): Promise<void> {
-    await this.http.put('/me/player/repeat', {
-      params: {
-        ...options,
-        state,
-      },
-    });
+    await PlayerService.setRepeatModeOnUsersPlayback(state, options?.device_id);
   }
 
   /**
@@ -183,12 +172,10 @@ export class PlayerApi {
     state: boolean,
     options?: DeviceIdOptions,
   ): Promise<void> {
-    await this.http.put('/me/player/shuffle', {
-      params: {
-        ...options,
-        state,
-      },
-    });
+    await PlayerService.toggleShuffleForUsersPlayback(
+      state,
+      options?.device_id,
+    );
   }
 
   /**
@@ -203,12 +190,10 @@ export class PlayerApi {
     volumePercent: number,
     options?: DeviceIdOptions,
   ): Promise<void> {
-    await this.http.put('/me/player/volume', {
-      params: {
-        ...options,
-        volume_percent: volumePercent,
-      },
-    });
+    await PlayerService.setVolumeForUsersPlayback(
+      volumePercent,
+      options?.device_id,
+    );
   }
 
   /**
@@ -219,7 +204,7 @@ export class PlayerApi {
    * @param options Optional request information.
    */
   public async skipToNext(options?: DeviceIdOptions): Promise<void> {
-    await this.http.post('/me/player/next', options && { params: options });
+    await PlayerService.skipUsersPlaybackToNextTrack(options?.device_id);
   }
 
   /**
@@ -230,7 +215,7 @@ export class PlayerApi {
    * @param options Optional request information.
    */
   public async skipToPrevious(options?: DeviceIdOptions): Promise<void> {
-    await this.http.post('/me/player/previous', options && { params: options });
+    await PlayerService.skipUsersPlaybackToPreviousTrack(options?.device_id);
   }
 
   /**
@@ -245,11 +230,9 @@ export class PlayerApi {
     deviceId: string,
     options?: TransferPlaybackOptions,
   ): Promise<void> {
-    await this.http.put('/me/player', {
-      data: {
-        ...options,
-        device_ids: [deviceId],
-      },
+    await PlayerService.transferAUsersPlayback({
+      device_ids: [deviceId],
+      play: options?.play,
     });
   }
 }

@@ -1,18 +1,13 @@
-import { type Http } from '../helpers/Http';
-import { type Artist, type CursorBasedPaging } from '../types/SpotifyObjects';
+import {
+  type CursorPagingSimplifiedArtistObject,
+  UsersService,
+} from '../openapi';
 import {
   type FollowPlaylistOptions,
   type GetFollowedArtistsOptions,
 } from '../types/SpotifyOptions';
-import { type GetFollowedArtistsResponse } from '../types/SpotifyResponses';
 
 export class FollowApi {
-  private readonly http: Http;
-
-  public constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * ### Check if Users Follow a Playlist
    *
@@ -38,13 +33,9 @@ export class FollowApi {
     playlistId: string,
     userIds: string[],
   ): Promise<boolean[]> {
-    return await this.http.get<boolean[]>(
-      `/playlists/${playlistId}/followers/contains`,
-      {
-        params: {
-          ids: userIds,
-        },
-      },
+    return await UsersService.checkIfUserFollowsPlaylist(
+      playlistId,
+      userIds.join(','),
     );
   }
 
@@ -84,14 +75,7 @@ export class FollowApi {
    * @param artistIds The Spotify IDs of the artists.
    */
   public async followArtists(artistIds: string[]): Promise<void> {
-    await this.http.put('/me/following', {
-      params: {
-        type: 'artist',
-      },
-      data: {
-        ids: artistIds,
-      },
-    });
+    await UsersService.followArtistsUsers('artist', artistIds.join(','));
   }
 
   /**
@@ -114,10 +98,7 @@ export class FollowApi {
     playlistId: string,
     options?: FollowPlaylistOptions,
   ): Promise<void> {
-    await this.http.put(
-      `/playlists/${playlistId}/followers`,
-      options && { data: options },
-    );
+    await UsersService.followPlaylist(playlistId, options);
   }
 
   /**
@@ -153,14 +134,7 @@ export class FollowApi {
    * @param userIds The Spotify IDs of the users.
    */
   public async followUsers(userIds: string[]): Promise<void> {
-    await this.http.put('/me/following', {
-      params: {
-        type: 'user',
-      },
-      data: {
-        ids: userIds,
-      },
-    });
+    await UsersService.followArtistsUsers('user', userIds.join(','));
   }
 
   /**
@@ -181,17 +155,12 @@ export class FollowApi {
    */
   public async getFollowedArtists(
     options?: GetFollowedArtistsOptions,
-  ): Promise<CursorBasedPaging<Artist>> {
-    const response = await this.http.get<GetFollowedArtistsResponse>(
-      '/me/following',
-      {
-        params: {
-          ...options,
-          type: 'artist',
-        },
-      },
-    );
-    return response.artists;
+  ): Promise<CursorPagingSimplifiedArtistObject> {
+    return await UsersService.getFollowed(
+      'artist',
+      options?.after,
+      options?.limit,
+    ).then(({ artists }) => artists);
   }
 
   /**
@@ -237,12 +206,10 @@ export class FollowApi {
    * @param artistIds The Spotify IDs for the artists.
    */
   public async isFollowingArtists(artistIds: string[]): Promise<boolean[]> {
-    return await this.http.get<boolean[]>('/me/following/contains', {
-      params: {
-        ids: artistIds,
-        type: 'artist',
-      },
-    });
+    return await UsersService.checkCurrentUserFollows(
+      'artist',
+      artistIds.join(','),
+    );
   }
 
   /**
@@ -315,12 +282,10 @@ export class FollowApi {
    * @param userIds The Spotify IDs for the users.
    */
   public async isFollowingUsers(userIds: string[]): Promise<boolean[]> {
-    return await this.http.get<boolean[]>('/me/following/contains', {
-      params: {
-        ids: userIds,
-        type: 'user',
-      },
-    });
+    return await UsersService.checkCurrentUserFollows(
+      'user',
+      userIds.join(','),
+    );
   }
 
   /**
@@ -351,14 +316,7 @@ export class FollowApi {
    * @param artistIds The Spotify IDs of the artists.
    */
   public async unfollowArtists(artistIds: string[]): Promise<void> {
-    await this.http.delete('/me/following', {
-      params: {
-        type: 'artist',
-      },
-      data: {
-        ids: artistIds,
-      },
-    });
+    await UsersService.unfollowArtistsUsers('artist', artistIds.join(','));
   }
 
   /**
@@ -378,7 +336,7 @@ export class FollowApi {
    * @param playlistId The Spotify ID of the playlist.
    */
   public async unfollowPlaylist(playlistId: string): Promise<void> {
-    await this.http.delete(`/playlists/${playlistId}/followers`);
+    await UsersService.unfollowPlaylist(playlistId);
   }
 
   /**
@@ -414,13 +372,6 @@ export class FollowApi {
    * @param userIds The Spotify IDs of the users.
    */
   public async unfollowUsers(userIds: string[]): Promise<void> {
-    await this.http.delete('/me/following', {
-      params: {
-        type: 'user',
-      },
-      data: {
-        ids: userIds,
-      },
-    });
+    await UsersService.unfollowArtistsUsers('user', userIds.join(','));
   }
 }
