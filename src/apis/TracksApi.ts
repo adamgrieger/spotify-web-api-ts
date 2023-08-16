@@ -1,22 +1,12 @@
-import { type Http } from '../helpers/Http';
 import {
-  type AudioAnalysis,
-  type AudioFeatures,
-  type Track,
-} from '../types/SpotifyObjects';
+  type AudioAnalysisObject,
+  type AudioFeaturesObject,
+  type TrackObject,
+  TracksService,
+} from '../openapi';
 import { type MarketOptions } from '../types/SpotifyOptions';
-import {
-  type GetAudioFeaturesForTracksResponse,
-  type GetTracksResponse,
-} from '../types/SpotifyResponses';
 
 export class TracksApi {
-  private readonly http: Http;
-
-  public constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * Get Audio Analysis for a Track
    *
@@ -27,8 +17,8 @@ export class TracksApi {
    */
   public async getAudioAnalysisForTrack(
     trackId: string,
-  ): Promise<AudioAnalysis> {
-    return await this.http.get<AudioAnalysis>(`/audio-analysis/${trackId}`);
+  ): Promise<AudioAnalysisObject> {
+    return await TracksService.getAudioAnalysis(trackId);
   }
 
   /**
@@ -41,8 +31,8 @@ export class TracksApi {
    */
   public async getAudioFeaturesForTrack(
     trackId: string,
-  ): Promise<AudioFeatures> {
-    return await this.http.get<AudioFeatures>(`/audio-features/${trackId}`);
+  ): Promise<AudioFeaturesObject> {
+    return await TracksService.getAudioFeatures(trackId);
   }
 
   /**
@@ -54,16 +44,8 @@ export class TracksApi {
    */
   public async getAudioFeaturesForTracks(
     trackIds: string[],
-  ): Promise<Array<AudioFeatures | null>> {
-    const response = await this.http.get<GetAudioFeaturesForTracksResponse>(
-      '/audio-features',
-      {
-        params: {
-          ids: trackIds,
-        },
-      },
-    );
-    return response.audio_features;
+  ): Promise<{ audio_features: AudioFeaturesObject[] }> {
+    return await TracksService.getSeveralAudioFeatures(trackIds.join(','));
   }
 
   /**
@@ -78,11 +60,8 @@ export class TracksApi {
   public async getTrack(
     trackId: string,
     options?: MarketOptions,
-  ): Promise<Track> {
-    return await this.http.get<Track>(
-      `/tracks/${trackId}`,
-      options && { params: options },
-    );
+  ): Promise<TrackObject> {
+    return await TracksService.getTrack(trackId, options?.market);
   }
 
   /**
@@ -97,13 +76,7 @@ export class TracksApi {
   public async getTracks(
     trackIds: string[],
     options?: MarketOptions,
-  ): Promise<Array<Track | null>> {
-    const response = await this.http.get<GetTracksResponse>('/tracks', {
-      params: {
-        ...options,
-        ids: trackIds,
-      },
-    });
-    return response.tracks;
+  ): Promise<{ tracks: TrackObject[] }> {
+    return await TracksService.getSeveralTracks(trackIds.join(','));
   }
 }
