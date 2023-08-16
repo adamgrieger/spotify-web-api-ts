@@ -13,7 +13,6 @@ import {
   type GetPlaylistItemsOptions,
   type GetPlaylistOptions,
   type GetUserPlaylistsOptions,
-  type RemovePlaylistItemsByPositionOptions,
   type ReorderPlaylistItemsOptions,
 } from '../types/SpotifyOptions';
 
@@ -215,57 +214,6 @@ export class PlaylistsApi {
       tracks: uris.map((uri) => ({ uri })),
       snapshot_id: snapshotId,
     }).then(({ snapshot_id }) => snapshot_id);
-  }
-
-  /**
-   * Remove Item from a Playlist by Position
-   *
-   * Remove an item from a user's playlist by position.
-   *
-   * @param playlistId The Spotify ID for the playlist.
-   * @param uri The Spotify track or episode URI to remove.
-   * @param positions The positions of the item to remove.
-   * @param options Optional request information.
-   */
-  public async removePlaylistItemByPosition(
-    playlistId: string,
-    uri: string,
-    positions: number[],
-    options?: RemovePlaylistItemsByPositionOptions,
-  ): Promise<string> {
-    return await this.removePlaylistItemsByPosition(
-      playlistId,
-      [{ uri, positions }],
-      options,
-    );
-  }
-
-  /**
-   * Remove Items from a Playlist by Position
-   *
-   * Remove one or more items from a user's playlist by position.
-   *
-   * @param playlistId The Spotify ID for the playlist.
-   * @param items The Spotify track or episode URIs and positions to remove.
-   * @param options Optional request information.
-   */
-  public async removePlaylistItemsByPosition(
-    playlistId: string,
-    items: Array<{ positions: number[]; uri: string }>,
-    options?: RemovePlaylistItemsByPositionOptions,
-  ): Promise<string> {
-    // TODO: spike
-    // const response = await this.http.delete<SnapshotIdResponse>(
-    //   `/playlists/${playlistId}/tracks`,
-    //   {
-    //     data: {
-    //       ...options,
-    //       tracks: items,
-    //     },
-    //   },
-    // );
-    // return response.snapshot_id;
-    return await Promise.resolve('');
   }
 
   /**
