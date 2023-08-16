@@ -235,7 +235,7 @@ export class LibraryApi {
    * @param albumIds The Spotify IDs of the albums.
    */
   public async removeSavedAlbums(albumIds: string[]): Promise<void> {
-    return await LibraryService.removeAlbumsUser(albumIds.join(','));
+    await LibraryService.removeAlbumsUser(albumIds.join(','));
   }
 
   /**
@@ -257,7 +257,7 @@ export class LibraryApi {
    * @param audiobookIds The Spotify IDs of the audiobooks.
    */
   public async removeSavedAudiobooks(audiobookIds: string[]): Promise<void> {
-    return await LibraryService.removeAudiobooksUser(audiobookIds.join(','));
+    await LibraryService.removeAudiobooksUser(audiobookIds.join(','));
   }
 
   /**
@@ -279,7 +279,7 @@ export class LibraryApi {
    * @param episodeIds The Spotify IDs of the episodes.
    */
   public async removeSavedEpisodes(episodeIds: string[]): Promise<void> {
-    return await LibraryService.removeEpisodesUser(episodeIds.join(','));
+    await LibraryService.removeEpisodesUser(episodeIds.join(','));
   }
 
   /**
@@ -309,10 +309,7 @@ export class LibraryApi {
     showIds: string[],
     options?: RemoveSavedShowsOptions,
   ): Promise<void> {
-    return await LibraryService.removeShowsUser(
-      showIds.join(','),
-      options?.market,
-    );
+    await LibraryService.removeShowsUser(showIds.join(','), options?.market);
   }
 
   /**
@@ -334,7 +331,7 @@ export class LibraryApi {
    * @param trackIds The Spotify IDs of the tracks.
    */
   public async removeSavedTracks(trackIds: string[]): Promise<void> {
-    return await LibraryService.removeTracksUser(trackIds.join(','));
+    await LibraryService.removeTracksUser(trackIds.join(','));
   }
 
   /**
@@ -356,7 +353,7 @@ export class LibraryApi {
    * @param albumIds The Spotify IDs of the albums.
    */
   public async saveAlbums(albumIds: string[]): Promise<void> {
-    return await LibraryService.saveAlbumsUser(albumIds.join(','));
+    await LibraryService.saveAlbumsUser(albumIds.join(','));
   }
 
   /**
@@ -378,7 +375,7 @@ export class LibraryApi {
    * @param audiobookIds The Spotify IDs of the audiobooks.
    */
   public async saveAudiobooks(audiobookIds: string[]): Promise<void> {
-    return await LibraryService.saveAudiobooksUser(audiobookIds.join(','));
+    await LibraryService.saveAudiobooksUser(audiobookIds.join(','));
   }
 
   /**
@@ -400,7 +397,7 @@ export class LibraryApi {
    * @param episodeIds The Spotify IDs of the episodes.
    */
   public async saveEpisodes(episodeIds: string[]): Promise<void> {
-    return await LibraryService.saveEpisodesUser(episodeIds.join(','));
+    await LibraryService.saveEpisodesUser(episodeIds.join(','));
   }
 
   /**
@@ -422,7 +419,7 @@ export class LibraryApi {
    * @param showIds The Spotify IDs of the shows.
    */
   public async saveShows(showIds: string[]): Promise<void> {
-    return await LibraryService.saveShowsUser(showIds.join(','));
+    await LibraryService.saveShowsUser(showIds.join(','));
   }
 
   /**
@@ -444,6 +441,6 @@ export class LibraryApi {
    * @param trackIds The Spotify IDs of the tracks.
    */
   public async saveTracks(trackIds: string[]): Promise<void> {
-    return await LibraryService.saveTracksUser(trackIds.join(','));
+    await LibraryService.saveTracksUser(trackIds.join(','));
   }
 }

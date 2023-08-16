@@ -98,7 +98,7 @@ export class FollowApi {
     playlistId: string,
     options?: FollowPlaylistOptions,
   ): Promise<void> {
-    return await UsersService.followPlaylist(playlistId, options);
+    await UsersService.followPlaylist(playlistId, options);
   }
 
   /**
@@ -316,10 +316,7 @@ export class FollowApi {
    * @param artistIds The Spotify IDs of the artists.
    */
   public async unfollowArtists(artistIds: string[]): Promise<void> {
-    return await UsersService.unfollowArtistsUsers(
-      'artist',
-      artistIds.join(','),
-    );
+    await UsersService.unfollowArtistsUsers('artist', artistIds.join(','));
   }
 
   /**
@@ -339,7 +336,7 @@ export class FollowApi {
    * @param playlistId The Spotify ID of the playlist.
    */
   public async unfollowPlaylist(playlistId: string): Promise<void> {
-    return await UsersService.unfollowPlaylist(playlistId);
+    await UsersService.unfollowPlaylist(playlistId);
   }
 
   /**
@@ -375,6 +372,6 @@ export class FollowApi {
    * @param userIds The Spotify IDs of the users.
    */
   public async unfollowUsers(userIds: string[]): Promise<void> {
-    return await UsersService.unfollowArtistsUsers('user', userIds.join(','));
+    await UsersService.unfollowArtistsUsers('user', userIds.join(','));
   }
 }
