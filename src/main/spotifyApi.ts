@@ -7,6 +7,7 @@ import { BrowseApi } from '../apis/BrowseApi';
 import { EpisodesApi } from '../apis/EpisodesApi';
 import { FollowApi } from '../apis/FollowApi';
 import { LibraryApi } from '../apis/LibraryApi';
+import { MarketsApi } from '../apis/MarketsApi';
 import { PersonalizationApi } from '../apis/PersonalizationApi';
 import { PlayerApi } from '../apis/PlayerApi';
 import { PlaylistsApi } from '../apis/PlaylistsApi';
@@ -20,13 +21,11 @@ import {
   type GetAuthorizationUrlOptions,
   getAuthorizationUrl,
 } from '../helpers/getAuthorizationUrl';
-import { Http } from '../helpers/Http';
 import {
   type GetRefreshableUserTokensResponse,
   type GetRefreshedAccessTokenResponse,
   type GetTemporaryAppTokensResponse,
 } from '../types/SpotifyAuthorization';
-import { MarketsApi } from '../apis/MarketsApi';
 
 import { type SpotifyAxios, getSpotifyAxios } from './spotifyAxios';
 
@@ -46,7 +45,7 @@ export class SpotifyWebApi {
 
   private readonly redirectUri: string;
 
-  private readonly http: Http;
+  private accessToken: string;
 
   private readonly spotifyAxios: SpotifyAxios;
 
@@ -85,8 +84,8 @@ export class SpotifyWebApi {
     this.clientSecret = options?.clientSecret ?? '';
     this.redirectUri = options?.redirectUri ?? '';
 
-    this.http = new Http(options?.accessToken ?? '');
     this.spotifyAxios = getSpotifyAxios();
+    this.accessToken = options?.accessToken ?? '';
 
     this.albums = new AlbumsApi();
     this.artists = new ArtistsApi();
@@ -106,11 +105,11 @@ export class SpotifyWebApi {
   }
 
   public getAccessToken(): string {
-    return this.http.getAccessToken();
+    return this.accessToken;
   }
 
   public setAccessToken(accessToken: string): void {
-    this.http.setAccessToken(accessToken);
+    this.accessToken = accessToken;
   }
 
   public getClientId(): string {
