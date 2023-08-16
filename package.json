@@ -5,6 +5,9 @@
   "repository": "https://github.com/inferrinizzard/spotify-web-api.git",
   "author": "inferrinizzard",
   "license": "MIT",
+  "engines": {
+    "node": "^16.0.0 || >=18.0.0"
+  },
   "type": "module",
   "main": "dist/spotify-web-api.umd.js",
   "module": "dist/spotify-web-api.cjs",
@@ -29,7 +32,8 @@
     "types": "tsc --project tsconfig.json",
     
     "generate-docs": "typedoc --out docs src/index.ts",
-
+    "generate-types": "openapi  --input ./tools/schema/main/openapi-schema.yaml --output ./src/openapi --client axios --indent 2",
+    
     "pre-commit": "lint-staged",
     "pre-push": "yarn lint:fix && yarn test"
   },
@@ -45,9 +49,11 @@
     "@inferrinizzard/eslint-config": "^0.1.3",
     "@types/qs": "^6.9.4",
     "eslint": "^8.47.0",
+    "form-data": "4.x",
     "husky": "^8.0.3",
     "jsdom": "^22.1.0",
     "lint-staged": "^14.0.0",
+    "openapi-typescript-codegen": "^0.25.0",
     "prettier": "^2.7.1",
     "typedoc": "^0.18.0",
     "typescript": "^5.1.6",
