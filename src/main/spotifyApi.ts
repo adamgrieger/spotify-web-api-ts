@@ -7,6 +7,7 @@ import { BrowseApi } from '../apis/BrowseApi';
 import { EpisodesApi } from '../apis/EpisodesApi';
 import { FollowApi } from '../apis/FollowApi';
 import { LibraryApi } from '../apis/LibraryApi';
+import { MarketsApi } from '../apis/MarketsApi';
 import { PersonalizationApi } from '../apis/PersonalizationApi';
 import { PlayerApi } from '../apis/PlayerApi';
 import { PlaylistsApi } from '../apis/PlaylistsApi';
@@ -20,23 +21,21 @@ import {
   type GetAuthorizationUrlOptions,
   getAuthorizationUrl,
 } from '../helpers/getAuthorizationUrl';
-import { Http } from '../helpers/Http';
+import { assertClientConfigs } from '../helpers/validateClientConfigs';
 import {
   type GetRefreshableUserTokensResponse,
   type GetRefreshedAccessTokenResponse,
   type GetTemporaryAppTokensResponse,
 } from '../types/SpotifyAuthorization';
-import { MarketsApi } from '../apis/MarketsApi';
-import { assertClientConfigs } from '../helpers/validateClientConfigs';
 
 import { type SpotifyAxios, getSpotifyAxios } from './spotifyAxios';
 
 export let spotifyAxios: SpotifyAxios;
 
 export interface SpotifyWebApiOptions {
-  clientId?: string;
-  clientSecret?: string;
-  redirectUri?: string;
+  clientId: string;
+  clientSecret: string;
+  redirectUri: string;
 }
 
 export interface SpotifyWebApiCredentials {
@@ -44,15 +43,15 @@ export interface SpotifyWebApiCredentials {
 }
 
 export class SpotifyWebApi {
-  private readonly clientId: string;
+  private readonly _clientId: string;
 
-  private readonly clientSecret: string;
+  private readonly _clientSecret: string;
 
-  private readonly redirectUri: string;
-
-  private readonly http: Http;
+  private readonly _redirectUri: string;
 
   private readonly spotifyAxios: SpotifyAxios;
+
+  private accessToken: string;
 
   public albums: AlbumsApi;
 
@@ -85,15 +84,15 @@ export class SpotifyWebApi {
   public users: UsersApi;
 
   public constructor(
-    options?: SpotifyWebApiOptions,
+    options: SpotifyWebApiOptions,
     credentials?: SpotifyWebApiCredentials,
   ) {
-    this.clientId = options?.clientId ?? '';
-    this.clientSecret = options?.clientSecret ?? '';
-    this.redirectUri = options?.redirectUri ?? '';
+    this._clientId = options.clientId;
+    this._clientSecret = options.clientSecret;
+    this._redirectUri = options.redirectUri;
 
-    this.http = new Http(credentials?.accessToken ?? '');
     this.spotifyAxios = getSpotifyAxios();
+    this.accessToken = credentials?.accessToken ?? '';
 
     this.albums = new AlbumsApi();
     this.artists = new ArtistsApi();
@@ -113,23 +112,23 @@ export class SpotifyWebApi {
   }
 
   public getAccessToken(): string {
-    return this.http.getAccessToken();
+    return this.accessToken;
   }
 
   public setAccessToken(accessToken: string): void {
-    this.http.setAccessToken(accessToken);
+    this.accessToken = accessToken;
   }
 
-  public getClientId(): string {
-    return this.clientId;
+  public get clientId(): string {
+    return this._clientId;
   }
 
-  public getClientSecret(): string {
-    return this.clientSecret;
+  public get clientSecret(): string {
+    return this._clientSecret;
   }
 
-  public getRedirectUri(): string {
-    return this.redirectUri;
+  public get redirectUri(): string {
+    return this._redirectUri;
   }
 
   // +--------------------+
