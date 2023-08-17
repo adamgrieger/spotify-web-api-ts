@@ -1,4 +1,8 @@
-import { UsersService } from '../openapi';
+import {
+  type PagingArtistObject,
+  type PagingTrackObject,
+  UsersService,
+} from '../openapi';
 import { type PersonalizationOptions } from '../types/SpotifyOptions';
 
 export class PersonalizationApi {
@@ -11,15 +15,13 @@ export class PersonalizationApi {
    */
   public async getMyTopArtists(
     options?: PersonalizationOptions,
-  ): Promise<
-    Awaited<ReturnType<typeof UsersService.getUsersTopArtistsAndTracks>>
-  > {
-    return await UsersService.getUsersTopArtistsAndTracks(
+  ): Promise<PagingArtistObject> {
+    return (await UsersService.getUsersTopArtistsAndTracks(
       'artists',
       options?.time_range,
       options?.limit,
       options?.offset,
-    );
+    )) as PagingArtistObject;
   }
 
   /**
@@ -31,14 +33,12 @@ export class PersonalizationApi {
    */
   public async getMyTopTracks(
     options?: PersonalizationOptions,
-  ): Promise<
-    Awaited<ReturnType<typeof UsersService.getUsersTopArtistsAndTracks>>
-  > {
-    return await UsersService.getUsersTopArtistsAndTracks(
+  ): Promise<PagingTrackObject> {
+    return (await UsersService.getUsersTopArtistsAndTracks(
       'tracks',
       options?.time_range,
       options?.limit,
       options?.offset,
-    );
+    )) as PagingTrackObject;
   }
 }
