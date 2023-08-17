@@ -1,6 +1,7 @@
-import { type SearchArtistsResponse } from '../../types/SpotifyResponses';
+import { type SearchResponse } from '../../apis/index.types';
+import { type ArtistObject } from '../../openapi';
 
-export const searchArtistsFixture: SearchArtistsResponse = {
+export const searchArtistsFixture: SearchResponse = {
   artists: {
     href: 'https://api.spotify.com/v1/search?query=mos&type=artist&offset=0&limit=1',
     items: [
@@ -50,7 +51,7 @@ export const searchArtistsFixture: SearchArtistsResponse = {
         popularity: 67,
         type: 'artist',
         uri: 'spotify:artist:0Mz5XE0kb1GBnbLQm2VbcO',
-      },
+      } as ArtistObject,
     ],
     limit: 1,
     next: 'https://api.spotify.com/v1/search?query=mos&type=artist&offset=1&limit=1',

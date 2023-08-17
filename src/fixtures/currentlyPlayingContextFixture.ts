@@ -1,6 +1,6 @@
-import { type CurrentlyPlayingContext } from '../types/SpotifyObjects';
+import { type CurrentlyPlayingContextObject } from '../openapi';
 
-export const currentlyPlayingContextFixture: CurrentlyPlayingContext = {
+export const currentlyPlayingContextFixture = {
   device: {
     id: 'ef75895113b52f22eeb529afdfe266080ddcc11e',
     is_active: true,
@@ -261,4 +261,4 @@ export const currentlyPlayingContextFixture: CurrentlyPlayingContext = {
     },
   },
   is_playing: true,
-};
+} as CurrentlyPlayingContextObject;

@@ -1,6 +1,6 @@
-import { type Album } from '../types/SpotifyObjects';
+import { type AlbumObject } from '../openapi';
 
-export const albumFixture: Album = {
+export const albumFixture = {
   album_type: 'single',
   artists: [
     {
@@ -589,4 +589,4 @@ export const albumFixture: Album = {
   },
   type: 'album',
   uri: 'spotify:album:5PekE7fE5Zjqrfy45vjL8W',
-};
+} as AlbumObject;

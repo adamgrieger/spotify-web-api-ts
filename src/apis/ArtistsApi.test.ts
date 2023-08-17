@@ -63,7 +63,7 @@ describe('ArtistsApi', () => {
     it.todo("should get an artist's albums (with options)", async () => {
       const { httpMock, artists } = setup();
 
-      const response = await artists.getArtistAlbums('foo', { country: 'bar' });
+      const response = await artists.getArtistAlbums('foo', { market: 'bar' });
 
       expect(response).toEqual(getArtistAlbumsFixture);
       expect(httpMock.get).toHaveBeenCalledWith('/artists/foo/albums', {

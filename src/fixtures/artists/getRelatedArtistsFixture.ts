@@ -1,6 +1,6 @@
-import { type GetRelatedArtistsResponse } from '../../types/SpotifyResponses';
+import { type ArtistObject } from '../../openapi';
 
-export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
+export const getRelatedArtistsFixture: { artists: ArtistObject[] } = {
   artists: [
     {
       external_urls: {
@@ -44,7 +44,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 33,
       type: 'artist',
       uri: 'spotify:artist:0e1hn6R8UCfLkpHINwAyXR',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/5Z3GyWBvJZgJ35TS0cmXll',
@@ -88,7 +88,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 30,
       type: 'artist',
       uri: 'spotify:artist:5Z3GyWBvJZgJ35TS0cmXll',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/3NUtpWpGDoffm3RCGhSHtl',
@@ -133,7 +133,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 58,
       type: 'artist',
       uri: 'spotify:artist:3NUtpWpGDoffm3RCGhSHtl',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/3bg5rmICvmA8dmYVAdKGYH',
@@ -182,7 +182,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 39,
       type: 'artist',
       uri: 'spotify:artist:3bg5rmICvmA8dmYVAdKGYH',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/2AR42Ur9PcchQDtEdwkv4L',
@@ -225,7 +225,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 55,
       type: 'artist',
       uri: 'spotify:artist:2AR42Ur9PcchQDtEdwkv4L',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/0aIpJqqTLf683ojWREc5lg',
@@ -268,7 +268,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 41,
       type: 'artist',
       uri: 'spotify:artist:0aIpJqqTLf683ojWREc5lg',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/6BuDxEE5rfuYeyhxQsl53K',
@@ -328,7 +328,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 48,
       type: 'artist',
       uri: 'spotify:artist:6BuDxEE5rfuYeyhxQsl53K',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/23MIhFHpoOuhtEHZDrrnCS',
@@ -373,7 +373,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 43,
       type: 'artist',
       uri: 'spotify:artist:23MIhFHpoOuhtEHZDrrnCS',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/2wPDbhaGXCqROrVmwDdCrK',
@@ -431,7 +431,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 59,
       type: 'artist',
       uri: 'spotify:artist:2wPDbhaGXCqROrVmwDdCrK',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/6kic5bCjlohhDn9KzXbOta',
@@ -476,7 +476,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 44,
       type: 'artist',
       uri: 'spotify:artist:6kic5bCjlohhDn9KzXbOta',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/0IVapwlnM3dEOiMsHXsghT',
@@ -517,7 +517,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 53,
       type: 'artist',
       uri: 'spotify:artist:0IVapwlnM3dEOiMsHXsghT',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/68i1l0GWQ5dwzAy1UVNHNw',
@@ -561,7 +561,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 35,
       type: 'artist',
       uri: 'spotify:artist:68i1l0GWQ5dwzAy1UVNHNw',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/7Eu1txygG6nJttLHbZdQOh',
@@ -602,7 +602,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 69,
       type: 'artist',
       uri: 'spotify:artist:7Eu1txygG6nJttLHbZdQOh',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/7Go2Fj2YWEQkYBqTVQArYi',
@@ -646,7 +646,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 44,
       type: 'artist',
       uri: 'spotify:artist:7Go2Fj2YWEQkYBqTVQArYi',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/06xa1OLBsMQJFXcl2tQkH4',
@@ -689,7 +689,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 47,
       type: 'artist',
       uri: 'spotify:artist:06xa1OLBsMQJFXcl2tQkH4',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/46Ce0QmI1mE2bl5VQ4P9N8',
@@ -731,7 +731,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 49,
       type: 'artist',
       uri: 'spotify:artist:46Ce0QmI1mE2bl5VQ4P9N8',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/4HwlolvniI44ETSg5tajeZ',
@@ -779,7 +779,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 41,
       type: 'artist',
       uri: 'spotify:artist:4HwlolvniI44ETSg5tajeZ',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/1qiwaJwjKod5WhcYZ76O1B',
@@ -833,7 +833,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 47,
       type: 'artist',
       uri: 'spotify:artist:1qiwaJwjKod5WhcYZ76O1B',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/4nhvb6x9ZhPiYCzrHDNia9',
@@ -883,7 +883,7 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 49,
       type: 'artist',
       uri: 'spotify:artist:4nhvb6x9ZhPiYCzrHDNia9',
-    },
+    } as ArtistObject,
     {
       external_urls: {
         spotify: 'https://open.spotify.com/artist/0ygIgsjUzKivFgxgjQ9iV9',
@@ -927,6 +927,6 @@ export const getRelatedArtistsFixture: GetRelatedArtistsResponse = {
       popularity: 49,
       type: 'artist',
       uri: 'spotify:artist:0ygIgsjUzKivFgxgjQ9iV9',
-    },
+    } as ArtistObject,
   ],
 };

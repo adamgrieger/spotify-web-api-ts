@@ -1,6 +1,6 @@
-import { type GetArtistTopTracksResponse } from '../../types/SpotifyResponses';
+import { type TrackObject } from '../../openapi';
 
-export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
+export const getArtistTopTracksFixture: { tracks: TrackObject[] } = {
   tracks: [
     {
       album: {
@@ -78,7 +78,7 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
       track_number: 2,
       type: 'track',
       uri: 'spotify:track:2ZIaH69kaz55RM4Pjx6KXl',
-    },
+    } as TrackObject,
     {
       album: {
         album_type: 'album',
@@ -155,7 +155,7 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
       track_number: 1,
       type: 'track',
       uri: 'spotify:track:2WIUbg8CiAsKuQMw9DzZ1d',
-    },
+    } as TrackObject,
     {
       album: {
         album_type: 'album',
@@ -232,7 +232,7 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
       track_number: 2,
       type: 'track',
       uri: 'spotify:track:0wPfUQUkWcguy2iUH0BWOT',
-    },
+    } as TrackObject,
     {
       album: {
         album_type: 'album',
@@ -309,7 +309,7 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
       track_number: 5,
       type: 'track',
       uri: 'spotify:track:4KjNEsQ4jkqXwCmsn71a9p',
-    },
+    } as TrackObject,
     {
       album: {
         album_type: 'album',
@@ -386,7 +386,7 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
       track_number: 12,
       type: 'track',
       uri: 'spotify:track:4H4p1B3GrZHnh71vgPtHQW',
-    },
+    } as TrackObject,
     {
       album: {
         album_type: 'album',
@@ -463,7 +463,7 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
       track_number: 4,
       type: 'track',
       uri: 'spotify:track:4onzxTzKgnSrKUmA2YydJB',
-    },
+    } as TrackObject,
     {
       album: {
         album_type: 'album',
@@ -540,7 +540,7 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
       track_number: 5,
       type: 'track',
       uri: 'spotify:track:00k9dNOfAYx7009RPx31B6',
-    },
+    } as TrackObject,
     {
       album: {
         album_type: 'album',
@@ -617,7 +617,7 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
       track_number: 1,
       type: 'track',
       uri: 'spotify:track:1vBxzMZGCneeEemHVMw6Q3',
-    },
+    } as TrackObject,
     {
       album: {
         album_type: 'album',
@@ -694,7 +694,7 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
       track_number: 7,
       type: 'track',
       uri: 'spotify:track:2pOV1do0oBMOcEy4kT3ySp',
-    },
+    } as TrackObject,
     {
       album: {
         album_type: 'album',
@@ -771,6 +771,6 @@ export const getArtistTopTracksFixture: GetArtistTopTracksResponse = {
       track_number: 3,
       type: 'track',
       uri: 'spotify:track:7tO0SljL5CVxyFLFx3GKWh',
-    },
+    } as TrackObject,
   ],
 };

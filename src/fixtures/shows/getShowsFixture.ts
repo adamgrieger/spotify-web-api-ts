@@ -1,6 +1,6 @@
-import { type GetShowsResponse } from '../../types/SpotifyResponses';
+import { type SimplifiedShowObject } from '../../openapi';
 
-export const getShowsFixture: GetShowsResponse = {
+export const getShowsFixture: { shows: SimplifiedShowObject[] } = {
   shows: [
     {
       available_markets: [
@@ -90,6 +90,8 @@ export const getShowsFixture: GetShowsResponse = {
         spotify: 'https://open.spotify.com/show/0ofXAdFIQQRsCYj9754UFx',
       },
       href: 'https://api.spotify.com/v1/shows/0ofXAdFIQQRsCYj9754UFx',
+      html_description:
+        "<p>If you've ever wanted to know about champagne, satanism, the Stonewall Uprising, chaos theory, LSD, El Nino, true crime and Rosa Parks, then look no further. Josh and Chuck have you covered.</p>",
       id: '0ofXAdFIQQRsCYj9754UFx',
       images: [
         {
@@ -113,9 +115,10 @@ export const getShowsFixture: GetShowsResponse = {
       media_type: 'audio',
       name: 'Stuff You Should Know',
       publisher: 'iHeartRadio',
+      total_episodes: 0,
       type: 'show',
       uri: 'spotify:show:0ofXAdFIQQRsCYj9754UFx',
-    },
+    } as SimplifiedShowObject,
     {
       available_markets: [
         'AD',
@@ -204,6 +207,8 @@ export const getShowsFixture: GetShowsResponse = {
         spotify: 'https://open.spotify.com/show/308BQUUnIkoH2UAXJCAt0g',
       },
       href: 'https://api.spotify.com/v1/shows/308BQUUnIkoH2UAXJCAt0g',
+      html_description:
+        "<p>Free advice from three of the world's most qualified, most related experts: Justin, Travis and Griffin McElroy. For one-half to three-quarters of an hour every Monday, we tell people how to live their lives, because we're obviously doing such a great job of it so far.</p>",
       id: '308BQUUnIkoH2UAXJCAt0g',
       images: [
         {
@@ -227,8 +232,9 @@ export const getShowsFixture: GetShowsResponse = {
       media_type: 'audio',
       name: 'My Brother, My Brother And Me',
       publisher: 'The McElroys',
+      total_episodes: 0,
       type: 'show',
       uri: 'spotify:show:308BQUUnIkoH2UAXJCAt0g',
-    },
+    } as SimplifiedShowObject,
   ],
 };

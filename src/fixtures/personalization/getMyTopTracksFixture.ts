@@ -1,6 +1,9 @@
-import { type GetMyTopTracksResponse } from '../../types/SpotifyResponses';
+import {
+  type PagingSimplifiedTrackObject,
+  type SimplifiedTrackObject,
+} from '../../openapi';
 
-export const getMyTopTracksFixture: GetMyTopTracksResponse = {
+export const getMyTopTracksFixture: PagingSimplifiedTrackObject = {
   items: [
     {
       album: {
@@ -237,7 +240,7 @@ export const getMyTopTracksFixture: GetMyTopTracksResponse = {
       track_number: 10,
       type: 'track',
       uri: 'spotify:track:0M0bBnanRqRGKs8pz7ZWi0',
-    },
+    } as SimplifiedTrackObject,
   ],
   total: 50,
   limit: 1,

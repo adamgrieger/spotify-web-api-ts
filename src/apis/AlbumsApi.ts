@@ -4,8 +4,8 @@ import {
   type PagingSimplifiedTrackObject,
 } from '../openapi';
 import {
-  type GetAlbumTracksOptions,
   type MarketOptions,
+  type PagingMarketOptions,
 } from '../types/SpotifyOptions';
 
 export class AlbumsApi {
@@ -83,7 +83,7 @@ export class AlbumsApi {
    */
   public async getAlbumTracks(
     albumId: string,
-    options?: GetAlbumTracksOptions,
+    options?: PagingMarketOptions,
   ): Promise<PagingSimplifiedTrackObject> {
     return await AlbumsService.getAnAlbumsTracks(
       albumId,

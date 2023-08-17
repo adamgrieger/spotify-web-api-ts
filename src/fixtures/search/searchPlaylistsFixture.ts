@@ -1,6 +1,7 @@
-import { type SearchPlaylistsResponse } from '../../types/SpotifyResponses';
+import { type SearchResponse } from '../../apis/index.types';
+import { type SimplifiedPlaylistObject } from '../../openapi';
 
-export const searchPlaylistsFixture: SearchPlaylistsResponse = {
+export const searchPlaylistsFixture: SearchResponse = {
   playlists: {
     href: 'https://api.spotify.com/v1/search?query=garage&type=playlist&offset=0&limit=1',
     items: [
@@ -31,7 +32,7 @@ export const searchPlaylistsFixture: SearchPlaylistsResponse = {
           uri: 'spotify:user:residentadvisor',
         },
         primary_color: null,
-        public: null,
+        public: true,
         snapshot_id:
           'MjcsYmU5YjE2MDllODcxYzI4ODA5M2ZmNGY0ZDY1MzFhODVkYWViMTEwZg==',
         tracks: {
@@ -40,7 +41,7 @@ export const searchPlaylistsFixture: SearchPlaylistsResponse = {
         },
         type: 'playlist',
         uri: 'spotify:playlist:7fdQkum2nvXwcaCKnBZ7rR',
-      },
+      } as SimplifiedPlaylistObject,
     ],
     limit: 1,
     next: 'https://api.spotify.com/v1/search?query=garage&type=playlist&offset=1&limit=1',

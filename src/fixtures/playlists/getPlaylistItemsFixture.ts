@@ -1,6 +1,9 @@
-import { type GetPlaylistItemsResponse } from '../../types/SpotifyResponses';
+import {
+  type PagingPlaylistTrackObject,
+  type SimplifiedTrackObject,
+} from '../../openapi';
 
-export const getPlaylistItemsFixture: GetPlaylistItemsResponse = {
+export const getPlaylistItemsFixture: PagingPlaylistTrackObject = {
   href: 'https://api.spotify.com/v1/playlists/6SAtV2bMjUbQTV37X51F3u/tracks?offset=0&limit=1',
   items: [
     {
@@ -99,7 +102,7 @@ export const getPlaylistItemsFixture: GetPlaylistItemsResponse = {
       video_thumbnail: {
         url: null,
       },
-    },
+    } as SimplifiedTrackObject,
   ],
   limit: 1,
   next: 'https://api.spotify.com/v1/playlists/6SAtV2bMjUbQTV37X51F3u/tracks?offset=1&limit=1',

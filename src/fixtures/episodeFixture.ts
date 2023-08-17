@@ -1,6 +1,6 @@
-import { type Episode } from '../types/SpotifyObjects';
+import { type EpisodeObject } from '../openapi';
 
-export const episodeFixture: Episode = {
+export const episodeFixture = {
   audio_preview_url:
     'https://p.scdn.co/mp3-preview/54cf359aff1f67f98b3d590296a08f1fd3ef9649',
   description:
@@ -11,6 +11,8 @@ export const episodeFixture: Episode = {
     spotify: 'https://open.spotify.com/episode/2HHHvWKoifCs3fhbQvvcw8',
   },
   href: 'https://api.spotify.com/v1/episodes/2HHHvWKoifCs3fhbQvvcw8',
+  html_description:
+    '<p>We continue our preface of Kendrick Lamar’s To Pimp a Butterfly with an overview of Lamar’s major label debut good kid, m.A.A.d. city. good kid, m.A.A.d. city spans one pivotal day in Lamar’s teenage upbringing in Compton, California. The album’s protagonist, Kendrick himself at age 16, is jumped by gangbangers in front of Sherene’s house, Kendrick’s girlfriend at the time. Kendrick and his friends retaliate, leaving one of Kendrick’s best friends dead in his arms. While debating whether to retaliate once again, Kendrick and his friends are approached by an old woman, who leads the children in the Sinner’s Prayer. This sets Kendrick on a new path, dedicating his life towards family, God, and music.</p>',
   id: '2HHHvWKoifCs3fhbQvvcw8',
   images: [
     {
@@ -36,6 +38,10 @@ export const episodeFixture: Episode = {
   name: 'S1E2 - good kid, m.A.A.d. city by Kendrick Lamar',
   release_date: '2018-05-01',
   release_date_precision: 'day',
+  resume_point: {
+    fully_played: false,
+    resume_position_ms: 0,
+  },
   show: {
     available_markets: [
       'AR',
@@ -93,6 +99,8 @@ export const episodeFixture: Episode = {
       spotify: 'https://open.spotify.com/show/2b025hq3gJ17tQdxS3aV43',
     },
     href: 'https://api.spotify.com/v1/shows/2b025hq3gJ17tQdxS3aV43',
+    html_description:
+      "<p>Learn more about the albums you love with Dissect, serialized music podcast from Spotify Studios. Dissect dives deep into albums like Kendrick Lamar's To Pimp a Butterfly (Season 1), Kanye West's My Beautiful Dark Twisted Fantasy (Season 2), Frank Ocean's Blonde (Season 3), and Tyler the Creator's Flower Boy (Season 4), forensically dissecting one song per episode.</p>",
     id: '2b025hq3gJ17tQdxS3aV43',
     images: [
       {
@@ -116,9 +124,14 @@ export const episodeFixture: Episode = {
     media_type: 'audio',
     name: 'Dissect',
     publisher: 'Spotify Studios',
+    resume_point: {
+      fully_played: false,
+      resume_position_ms: 0,
+    },
+    total_episodes: 1,
     type: 'show',
     uri: 'spotify:show:2b025hq3gJ17tQdxS3aV43',
   },
   type: 'episode',
   uri: 'spotify:episode:2HHHvWKoifCs3fhbQvvcw8',
-};
+} as EpisodeObject;

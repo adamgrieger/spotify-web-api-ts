@@ -1,6 +1,7 @@
-import { type SearchAlbumsResponse } from '../../types/SpotifyResponses';
+import { type SearchResponse } from '../../apis/index.types';
+import { type SimplifiedAlbumObject } from '../../openapi';
 
-export const searchAlbumsFixture: SearchAlbumsResponse = {
+export const searchAlbumsFixture: SearchResponse = {
   albums: {
     href: 'https://api.spotify.com/v1/search?query=merriweather&type=album&offset=0&limit=1',
     items: [
@@ -47,7 +48,7 @@ export const searchAlbumsFixture: SearchAlbumsResponse = {
         total_tracks: 11,
         type: 'album',
         uri: 'spotify:album:5O9OXl9zAWMJTzawofxuan',
-      },
+      } as SimplifiedAlbumObject,
     ],
     limit: 1,
     next: 'https://api.spotify.com/v1/search?query=merriweather&type=album&offset=1&limit=1',

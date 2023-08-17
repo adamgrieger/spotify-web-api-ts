@@ -1,6 +1,6 @@
-import { type Track } from '../types/SpotifyObjects';
+import { type TrackObject } from '../openapi';
 
-export const trackFixture: Track = {
+export const trackFixture = {
   album: {
     album_type: 'album',
     artists: [
@@ -237,4 +237,4 @@ export const trackFixture: Track = {
   track_number: 4,
   type: 'track',
   uri: 'spotify:track:19Ov4l8mtvCT1iEUKks4aM',
-};
+} as TrackObject;

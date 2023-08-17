@@ -1,6 +1,6 @@
-import { type GetTracksResponse } from '../../types/SpotifyResponses';
+import { type TrackObject } from '../../openapi';
 
-export const getTracksFixture: GetTracksResponse = {
+export const getTracksFixture: { tracks: TrackObject[] } = {
   tracks: [
     {
       album: {
@@ -237,6 +237,6 @@ export const getTracksFixture: GetTracksResponse = {
       track_number: 4,
       type: 'track',
       uri: 'spotify:track:4ZcGbQ5dOKX6rJk4yvza9R',
-    },
+    } as TrackObject,
   ],
 };

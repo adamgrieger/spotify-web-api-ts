@@ -1,6 +1,9 @@
-import { type GetArtistAlbumsResponse } from '../../types/SpotifyResponses';
+import {
+  type PagingSimplifiedAlbumObject,
+  type SimplifiedAlbumObject,
+} from '../../openapi';
 
-export const getArtistAlbumsFixture: GetArtistAlbumsResponse = {
+export const getArtistAlbumsFixture: PagingSimplifiedAlbumObject = {
   href: 'https://api.spotify.com/v1/artists/2aoFQUeHD1U7pL098lRsDU/albums?offset=0&limit=20&include_groups=album,single,compilation,appears_on',
   items: [
     {
@@ -127,7 +130,7 @@ export const getArtistAlbumsFixture: GetArtistAlbumsResponse = {
       total_tracks: 25,
       type: 'album',
       uri: 'spotify:album:3giQKi73ayOnj7jxGevJwg',
-    },
+    } as SimplifiedAlbumObject,
     {
       album_group: 'album',
       album_type: 'album',
@@ -252,7 +255,7 @@ export const getArtistAlbumsFixture: GetArtistAlbumsResponse = {
       total_tracks: 10,
       type: 'album',
       uri: 'spotify:album:39qfFzn2Cii6N0AdAXdg9p',
-    },
+    } as SimplifiedAlbumObject,
     {
       album_group: 'album',
       album_type: 'album',
@@ -377,7 +380,7 @@ export const getArtistAlbumsFixture: GetArtistAlbumsResponse = {
       total_tracks: 22,
       type: 'album',
       uri: 'spotify:album:01FCoGEQ3NFWF4fHJzdiax',
-    },
+    } as SimplifiedAlbumObject,
     {
       album_group: 'appears_on',
       album_type: 'compilation',
@@ -502,7 +505,7 @@ export const getArtistAlbumsFixture: GetArtistAlbumsResponse = {
       total_tracks: 26,
       type: 'album',
       uri: 'spotify:album:4LzoQ4zHk5SLv8ITvwE0pN',
-    },
+    } as SimplifiedAlbumObject,
     {
       album_group: 'appears_on',
       album_type: 'compilation',
@@ -627,7 +630,7 @@ export const getArtistAlbumsFixture: GetArtistAlbumsResponse = {
       total_tracks: 19,
       type: 'album',
       uri: 'spotify:album:5GitFcIJajt0bEZ1JXZbou',
-    },
+    } as SimplifiedAlbumObject,
     {
       album_group: 'appears_on',
       album_type: 'album',
@@ -762,7 +765,7 @@ export const getArtistAlbumsFixture: GetArtistAlbumsResponse = {
       total_tracks: 26,
       type: 'album',
       uri: 'spotify:album:5uNZk2T2PmS3y25yV00axn',
-    },
+    } as SimplifiedAlbumObject,
   ],
   limit: 20,
   next: null,

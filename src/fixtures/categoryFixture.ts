@@ -1,6 +1,6 @@
-import { type Category } from '../types/SpotifyObjects';
+import { type CategoryObject } from '../openapi';
 
-export const categoryFixture: Category = {
+export const categoryFixture = {
   href: 'https://api.spotify.com/v1/browse/categories/gaming',
   icons: [
     {
@@ -11,4 +11,4 @@ export const categoryFixture: Category = {
   ],
   id: 'gaming',
   name: 'Gaming',
-};
+} as CategoryObject;

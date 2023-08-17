@@ -1,6 +1,4 @@
-import { type GetAvailableGenreSeedsResponse } from '../../types/SpotifyResponses';
-
-export const getAvailableGenreSeedsFixture: GetAvailableGenreSeedsResponse = {
+export const getAvailableGenreSeedsFixture: { genres: string[] } = {
   genres: [
     'acoustic',
     'afrobeat',

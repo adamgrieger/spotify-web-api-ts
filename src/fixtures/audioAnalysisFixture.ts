@@ -1,6 +1,6 @@
-import { type AudioAnalysis } from '../types/SpotifyObjects';
+import { type AudioAnalysisObject } from '../openapi';
 
-export const audioAnalysisFixture: AudioAnalysis = {
+export const audioAnalysisFixture = {
   bars: [
     {
       start: 251.98282,
@@ -84,4 +84,4 @@ export const audioAnalysisFixture: AudioAnalysis = {
     rhythmstring: 'eJyNXAmOLT2r28pZQuZh_xv7g21Iqu_3pCd160xV...',
     rhythm_version: 1,
   },
-};
+} as AudioAnalysisObject;

@@ -1,6 +1,9 @@
-import { type GetCategoryPlaylistsResponse } from '../../types/SpotifyResponses';
+import {
+  type PagingFeaturedPlaylistObject,
+  type SimplifiedPlaylistObject,
+} from '../../openapi';
 
-export const getCategoryPlaylistsFixture: GetCategoryPlaylistsResponse = {
+export const getCategoryPlaylistsFixture: PagingFeaturedPlaylistObject = {
   playlists: {
     href: 'https://api.spotify.com/v1/browse/categories/sleep/playlists?offset=0&limit=2',
     items: [
@@ -31,7 +34,7 @@ export const getCategoryPlaylistsFixture: GetCategoryPlaylistsResponse = {
           uri: 'spotify:user:spotify',
         },
         primary_color: null,
-        public: null,
+        public: true,
         snapshot_id:
           'MTU4NzEzOTMyNywwMDAwMDBiYjAwMDAwMTcxODhlMDM2YWYwMDAwMDE2Y2Y2OTUyYjAw',
         tracks: {
@@ -40,7 +43,7 @@ export const getCategoryPlaylistsFixture: GetCategoryPlaylistsResponse = {
         },
         type: 'playlist',
         uri: 'spotify:playlist:37i9dQZF1DWZd79rJ6a7lp',
-      },
+      } as SimplifiedPlaylistObject,
       {
         collaborative: false,
         description: 'Soothing, minimalist ambient for deep sleep.',
@@ -68,7 +71,7 @@ export const getCategoryPlaylistsFixture: GetCategoryPlaylistsResponse = {
           uri: 'spotify:user:spotify',
         },
         primary_color: null,
-        public: null,
+        public: true,
         snapshot_id:
           'MTU4Njc5Mzc3MCwwMDAwMDA0NjAwMDAwMTcxNzQ0NzZmNDUwMDAwMDE2ZDE1MjI3Zjk3',
         tracks: {
@@ -77,7 +80,7 @@ export const getCategoryPlaylistsFixture: GetCategoryPlaylistsResponse = {
         },
         type: 'playlist',
         uri: 'spotify:playlist:37i9dQZF1DWYcDQ1hSjOpY',
-      },
+      } as SimplifiedPlaylistObject,
     ],
     limit: 2,
     next: 'https://api.spotify.com/v1/browse/categories/sleep/playlists?offset=2&limit=2',
