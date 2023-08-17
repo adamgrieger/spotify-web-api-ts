@@ -1,0 +1,1 @@
+export { getMarketsFixture } from './getMarketsFixture';
