@@ -3,7 +3,7 @@ import {
   type SavedEpisodeObject,
 } from '../../openapi';
 
-export const getSavedEpisodesFixtures: PagingSavedEpisodeObject = {
+export const getSavedEpisodesFixture: PagingSavedEpisodeObject = {
   href: 'https://api.spotify.com/v1/me/shows?offset=0&limit=20',
   limit: 20,
   next: 'https://api.spotify.com/v1/me/shows?offset=1&limit=1',
