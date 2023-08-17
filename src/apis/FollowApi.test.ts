@@ -1,355 +1,228 @@
-import { type MockedClass } from 'vitest';
+import { type SpyInstance } from 'vitest';
 
 import { getFollowedArtistsFixture } from '../fixtures';
-import { Http } from '../helpers/Http';
+import { UsersService } from '../openapi/services/UsersService';
 
 import { FollowApi } from './FollowApi';
 
-vi.mock('../helpers/Http');
-
-const HttpMock = Http as MockedClass<typeof Http>;
-
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function setup() {
-  const httpMock = new HttpMock('token');
-  const follow = new FollowApi();
-
-  return { httpMock, follow };
-}
+const follow = new FollowApi();
 
 describe('FollowApi', () => {
-  beforeEach(() => {
+  afterEach(() => {
     vi.resetAllMocks();
   });
 
   describe('areFollowingPlaylist', () => {
-    beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue([true, false]);
-    });
-
-    it.todo('should check if users follow a playlist', async () => {
-      const { httpMock, follow } = setup();
-
+    it('should check if users follow a playlist', async () => {
+      const areFollowingPlaylistSpy = vi
+        .spyOn(UsersService, 'checkIfUserFollowsPlaylist')
+        .mockResolvedValue([true, false]);
       const response = await follow.areFollowingPlaylist('foo', ['bar', 'baz']);
 
       expect(response).toEqual([true, false]);
-      expect(httpMock.get).toHaveBeenCalledWith(
-        '/playlists/foo/followers/contains',
-        {
-          params: {
-            ids: ['bar', 'baz'],
-          },
-        },
-      );
-    });
-  });
-
-  describe('followArtist', () => {
-    it.todo('should follow an artist', async () => {
-      const { httpMock, follow } = setup();
-
-      await follow.followArtist('foo');
-
-      expect(httpMock.put).toHaveBeenCalledWith('/me/following', {
-        params: {
-          type: 'artist',
-        },
-        data: {
-          ids: ['foo'],
-        },
-      });
+      expect(areFollowingPlaylistSpy).toHaveBeenCalledWith('foo', 'bar,baz');
     });
   });
 
   describe('followArtists', () => {
-    it.todo('should follow artists', async () => {
-      const { httpMock, follow } = setup();
+    let followArtistsSpy: SpyInstance;
+    beforeEach(() => {
+      followArtistsSpy = vi
+        .spyOn(UsersService, 'followArtistsUsers')
+        .mockResolvedValue(undefined);
+    });
 
+    it('should follow an artist', async () => {
+      await follow.followArtist('foo');
+
+      expect(followArtistsSpy).toHaveBeenCalledWith('artist', 'foo');
+    });
+
+    it('should follow artists', async () => {
       await follow.followArtists(['foo', 'bar']);
 
-      expect(httpMock.put).toHaveBeenCalledWith('/me/following', {
-        params: {
-          type: 'artist',
-        },
-        data: {
-          ids: ['foo', 'bar'],
-        },
-      });
+      expect(followArtistsSpy).toHaveBeenCalledWith('artist', 'foo,bar');
     });
   });
 
   describe('followPlaylist', () => {
-    it.todo('should follow a playlist (without options)', async () => {
-      const { httpMock, follow } = setup();
+    let followPlaylistSpy: SpyInstance;
+    beforeEach(() => {
+      followPlaylistSpy = vi
+        .spyOn(UsersService, 'followPlaylist')
+        .mockResolvedValue(undefined);
+    });
 
+    it('should follow a playlist (without options)', async () => {
       await follow.followPlaylist('foo');
 
-      expect(httpMock.put).toHaveBeenCalledWith(
-        '/playlists/foo/followers',
-        undefined,
-      );
+      expect(followPlaylistSpy).toHaveBeenCalledWith('foo', undefined);
     });
 
-    it.todo('should follow a playlist (with options)', async () => {
-      const { httpMock, follow } = setup();
-
+    it('should follow a playlist (with options)', async () => {
       await follow.followPlaylist('foo', { public: false });
 
-      expect(httpMock.put).toHaveBeenCalledWith('/playlists/foo/followers', {
-        data: {
-          public: false,
-        },
-      });
-    });
-  });
-
-  describe('followUser', () => {
-    it.todo('should follow a user', async () => {
-      const { httpMock, follow } = setup();
-
-      await follow.followUser('foo');
-
-      expect(httpMock.put).toHaveBeenCalledWith('/me/following', {
-        params: {
-          type: 'user',
-        },
-        data: {
-          ids: ['foo'],
-        },
-      });
+      expect(followPlaylistSpy).toHaveBeenCalledWith('foo', { public: false });
     });
   });
 
   describe('followUsers', () => {
-    it.todo('should follow users', async () => {
-      const { httpMock, follow } = setup();
+    let followUsersSpy: SpyInstance;
+    beforeEach(() => {
+      followUsersSpy = vi
+        .spyOn(UsersService, 'followArtistsUsers')
+        .mockResolvedValue(undefined);
+    });
 
+    it('should follow a user', async () => {
+      await follow.followUser('foo');
+
+      expect(followUsersSpy).toHaveBeenCalledWith('user', 'foo');
+    });
+
+    it('should follow users', async () => {
       await follow.followUsers(['foo', 'bar']);
 
-      expect(httpMock.put).toHaveBeenCalledWith('/me/following', {
-        params: {
-          type: 'user',
-        },
-        data: {
-          ids: ['foo', 'bar'],
-        },
-      });
+      expect(followUsersSpy).toHaveBeenCalledWith('user', 'foo,bar');
     });
   });
 
   describe('getFollowedArtists', () => {
+    let getFollowedArtistsSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getFollowedArtistsFixture);
+      getFollowedArtistsSpy = vi
+        .spyOn(UsersService, 'getFollowed')
+        .mockResolvedValue(getFollowedArtistsFixture);
     });
 
-    it.todo(
-      "should get user's followed artists (without options)",
-      async () => {
-        const { httpMock, follow } = setup();
-
-        const response = await follow.getFollowedArtists();
-
-        expect(response).toEqual(getFollowedArtistsFixture.artists);
-        expect(httpMock.get).toHaveBeenCalledWith('/me/following', {
-          params: {
-            type: 'artist',
-          },
-        });
-      },
-    );
-
-    it.todo("should get user's followed artists (with options)", async () => {
-      const { httpMock, follow } = setup();
-
-      const response = await follow.getFollowedArtists({ limit: 2 });
+    it("should get user's followed artists (without options)", async () => {
+      const response = await follow.getFollowedArtists();
 
       expect(response).toEqual(getFollowedArtistsFixture.artists);
-      expect(httpMock.get).toHaveBeenCalledWith('/me/following', {
-        params: {
-          limit: 2,
-          type: 'artist',
-        },
-      });
-    });
-  });
-
-  describe('isFollowingArtist', () => {
-    beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue([true]);
+      expect(getFollowedArtistsSpy).toHaveBeenCalledWith(
+        'artist',
+        undefined,
+        undefined,
+      );
     });
 
-    it.todo('should check if current user follows artist', async () => {
-      const { httpMock, follow } = setup();
-
-      const response = await follow.isFollowingArtist('foo');
-
-      expect(response).toBeTruthy();
-      expect(httpMock.get).toHaveBeenCalledWith('/me/following/contains', {
-        params: {
-          ids: ['foo'],
-          type: 'artist',
-        },
+    it("should get user's followed artists (with options)", async () => {
+      const response = await follow.getFollowedArtists({
+        limit: 2,
+        after: 'foo',
       });
+
+      expect(response).toEqual(getFollowedArtistsFixture.artists);
+      expect(getFollowedArtistsSpy).toHaveBeenCalledWith('artist', 'foo', 2);
     });
   });
 
   describe('isFollowingArtists', () => {
+    let isFollowingArtistsSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue([true, false]);
+      isFollowingArtistsSpy = vi
+        .spyOn(UsersService, 'checkCurrentUserFollows')
+        .mockResolvedValue([true, false]);
     });
 
-    it.todo('should check if current user follows artists', async () => {
-      const { httpMock, follow } = setup();
+    it('should check if current user follows artist', async () => {
+      const response = await follow.isFollowingArtist('foo');
 
+      expect(response).toBeTruthy();
+      expect(isFollowingArtistsSpy).toHaveBeenCalledWith('artist', 'foo');
+    });
+
+    it('should check if current user follows artists', async () => {
       const response = await follow.isFollowingArtists(['foo', 'bar']);
 
       expect(response).toEqual([true, false]);
-      expect(httpMock.get).toHaveBeenCalledWith('/me/following/contains', {
-        params: {
-          ids: ['foo', 'bar'],
-          type: 'artist',
-        },
-      });
+      expect(isFollowingArtistsSpy).toHaveBeenCalledWith('artist', 'foo,bar');
     });
   });
 
   describe('isFollowingPlaylist', () => {
-    beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue([true]);
-    });
-
     it.todo('should check if a user follows a playlist', async () => {
-      const { httpMock, follow } = setup();
-
+      const isFollowingPlaylistSpy = vi
+        .spyOn(UsersService, 'checkCurrentUserFollows')
+        .mockResolvedValue([true]);
       const response = await follow.isFollowingPlaylist('foo', 'bar');
 
       expect(response).toBeTruthy();
-      expect(httpMock.get).toHaveBeenCalledWith(
-        '/playlists/foo/followers/contains',
-        {
-          params: {
-            ids: ['bar'],
-          },
-        },
-      );
-    });
-  });
-
-  describe('isFollowingUser', () => {
-    beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue([true]);
-    });
-
-    it.todo('should check if the current user follows a user', async () => {
-      const { httpMock, follow } = setup();
-
-      const response = await follow.isFollowingUser('foo');
-
-      expect(response).toBeTruthy();
-      expect(httpMock.get).toHaveBeenCalledWith('/me/following/contains', {
-        params: {
-          ids: ['foo'],
-          type: 'user',
-        },
-      });
+      expect(isFollowingPlaylistSpy).toHaveBeenCalledWith('foo', 'bar');
     });
   });
 
   describe('isFollowingUsers', () => {
+    let isFollowingUsersSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue([true, false]);
+      isFollowingUsersSpy = vi
+        .spyOn(UsersService, 'checkCurrentUserFollows')
+        .mockResolvedValue([true, false]);
     });
 
-    it.todo('should check if current user follows users', async () => {
-      const { httpMock, follow } = setup();
+    it('should check if the current user follows a user', async () => {
+      const response = await follow.isFollowingUser('foo');
 
+      expect(response).toBeTruthy();
+      expect(isFollowingUsersSpy).toHaveBeenCalledWith('user', 'foo');
+    });
+
+    it('should check if current user follows users', async () => {
       const response = await follow.isFollowingUsers(['foo', 'bar']);
 
       expect(response).toEqual([true, false]);
-      expect(httpMock.get).toHaveBeenCalledWith('/me/following/contains', {
-        params: {
-          ids: ['foo', 'bar'],
-          type: 'user',
-        },
-      });
-    });
-  });
-
-  describe('unfollowArtist', () => {
-    it.todo('should unfollow an artist', async () => {
-      const { httpMock, follow } = setup();
-
-      await follow.unfollowArtist('foo');
-
-      expect(httpMock.delete).toHaveBeenCalledWith('/me/following', {
-        params: {
-          type: 'artist',
-        },
-        data: {
-          ids: ['foo'],
-        },
-      });
+      expect(isFollowingUsersSpy).toHaveBeenCalledWith('user', 'foo,bar');
     });
   });
 
   describe('unfollowArtists', () => {
-    it.todo('should unfollow artists', async () => {
-      const { httpMock, follow } = setup();
+    let unfollowArtistsSpy: SpyInstance;
+    beforeEach(() => {
+      unfollowArtistsSpy = vi
+        .spyOn(UsersService, 'unfollowArtistsUsers')
+        .mockResolvedValue(undefined);
+    });
 
+    it('should unfollow an artist', async () => {
+      await follow.unfollowArtist('foo');
+
+      expect(unfollowArtistsSpy).toHaveBeenCalledWith('artist', 'foo');
+    });
+
+    it('should unfollow artists', async () => {
       await follow.unfollowArtists(['foo', 'bar']);
 
-      expect(httpMock.delete).toHaveBeenCalledWith('/me/following', {
-        params: {
-          type: 'artist',
-        },
-        data: {
-          ids: ['foo', 'bar'],
-        },
-      });
+      expect(unfollowArtistsSpy).toHaveBeenCalledWith('artist', 'foo,bar');
     });
   });
 
   describe('unfollowPlaylist', () => {
-    it.todo('should unfollow a playlist', async () => {
-      const { httpMock, follow } = setup();
-
+    it('should unfollow a playlist', async () => {
+      const unfollowPlaylistSpy = vi
+        .spyOn(UsersService, 'unfollowPlaylist')
+        .mockResolvedValue(undefined);
       await follow.unfollowPlaylist('foo');
 
-      expect(httpMock.delete).toHaveBeenCalledWith('/playlists/foo/followers');
-    });
-  });
-
-  describe('unfollowUser', () => {
-    it.todo('should unfollow a user', async () => {
-      const { httpMock, follow } = setup();
-
-      await follow.unfollowUser('foo');
-
-      expect(httpMock.delete).toHaveBeenCalledWith('/me/following', {
-        params: {
-          type: 'user',
-        },
-        data: {
-          ids: ['foo'],
-        },
-      });
+      expect(unfollowPlaylistSpy).toHaveBeenCalledWith('foo');
     });
   });
 
   describe('unfollowUsers', () => {
-    it.todo('should unfollow users', async () => {
-      const { httpMock, follow } = setup();
+    let unfollowUsersSpy: SpyInstance;
+    beforeEach(() => {
+      unfollowUsersSpy = vi.spyOn(UsersService, 'unfollowArtistsUsers');
+    });
 
+    it('should unfollow a user', async () => {
+      await follow.unfollowUser('foo');
+
+      expect(unfollowUsersSpy).toHaveBeenCalledWith('user', 'foo');
+    });
+
+    it('should unfollow users', async () => {
       await follow.unfollowUsers(['foo', 'bar']);
 
-      expect(httpMock.delete).toHaveBeenCalledWith('/me/following', {
-        params: {
-          type: 'user',
-        },
-        data: {
-          ids: ['foo', 'bar'],
-        },
-      });
+      expect(unfollowUsersSpy).toHaveBeenCalledWith('user', 'foo,bar');
     });
   });
 });
