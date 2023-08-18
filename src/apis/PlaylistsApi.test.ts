@@ -1,5 +1,6 @@
-import { type MockedClass } from 'vitest';
+import { type SpyInstance } from 'vitest';
 
+import { PlaylistsService } from '../openapi';
 import {
   getMyPlaylistsFixture,
   getPlaylistItemsFixture,
@@ -8,85 +9,59 @@ import {
   snapshotIdFixture,
   spotifyImageFixture,
 } from '../fixtures';
-import { Http } from '../helpers/Http';
 
 import { PlaylistsApi } from './PlaylistsApi';
 
-vi.mock('../helpers/Http');
-
-const HttpMock = Http as MockedClass<typeof Http>;
-
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function setup() {
-  const httpMock = new HttpMock('token');
-  const playlists = new PlaylistsApi();
-
-  return { httpMock, playlists };
-}
+const playlists = new PlaylistsApi();
 
 describe('PlaylistsApi', () => {
-  beforeEach(() => {
+  afterEach(() => {
     vi.resetAllMocks();
   });
 
-  describe('addItemToPlaylist', () => {
+  describe('addItemsToPlaylist', () => {
+    let addItemsToPlaylistSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.post.mockResolvedValue(snapshotIdFixture);
+      addItemsToPlaylistSpy = vi
+        .spyOn(PlaylistsService, 'addTracksToPlaylist')
+        .mockResolvedValue(snapshotIdFixture);
     });
 
-    it.todo('should add an item to a playlist (without options)', async () => {
-      const { httpMock, playlists } = setup();
-
+    it('should add an item to a playlist (without options)', async () => {
       const response = await playlists.addItemToPlaylist('foo', 'bar');
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.post).toHaveBeenCalledWith('/playlists/foo/tracks', {
-        data: {
-          uris: ['bar'],
-        },
-      });
+      expect(addItemsToPlaylistSpy).toHaveBeenCalledWith(
+        'foo',
+        undefined,
+        'bar',
+      );
     });
 
-    it.todo('should add an item to a playlist (with options)', async () => {
-      const { httpMock, playlists } = setup();
-
+    it('should add an item to a playlist (with options)', async () => {
       const response = await playlists.addItemToPlaylist('foo', 'bar', {
         position: 2,
       });
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.post).toHaveBeenCalledWith('/playlists/foo/tracks', {
-        data: {
-          uris: ['bar'],
-          position: 2,
-        },
-      });
-    });
-  });
-  describe('addItemsToPlaylist', () => {
-    beforeEach(() => {
-      HttpMock.prototype.post.mockResolvedValue(snapshotIdFixture);
+      expect(addItemsToPlaylistSpy).toHaveBeenCalledWith('foo', 2, 'bar');
     });
 
-    it.todo('should add items to a playlist (without options)', async () => {
-      const { httpMock, playlists } = setup();
-
+    it('should add items to a playlist (without options)', async () => {
       const response = await playlists.addItemsToPlaylist('foo', [
         'bar',
         'baz',
       ]);
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.post).toHaveBeenCalledWith('/playlists/foo/tracks', {
-        data: {
-          uris: ['bar', 'baz'],
-        },
-      });
+      expect(addItemsToPlaylistSpy).toHaveBeenCalledWith(
+        'foo',
+        undefined,
+        'bar,baz',
+      );
     });
 
-    it.todo('should add items to a playlist (with options)', async () => {
-      const { httpMock, playlists } = setup();
-
+    it('should add items to a playlist (with options)', async () => {
       const response = await playlists.addItemsToPlaylist(
         'foo',
         ['bar', 'baz'],
@@ -94,311 +69,291 @@ describe('PlaylistsApi', () => {
       );
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.post).toHaveBeenCalledWith('/playlists/foo/tracks', {
-        data: {
-          uris: ['bar', 'baz'],
-          position: 2,
-        },
-      });
+      expect(addItemsToPlaylistSpy).toHaveBeenCalledWith('foo', 2, 'bar,baz');
     });
   });
 
   describe('changePlaylistDetails', () => {
-    it.todo("should change a playlist's details", async () => {
-      const { httpMock, playlists } = setup();
+    it("should change a playlist's details", async () => {
+      const changePlaylistDetailsSpy = vi
+        .spyOn(PlaylistsService, 'changePlaylistDetails')
+        .mockResolvedValue(undefined);
 
-      await playlists.changePlaylistDetails('foo', { description: 'bar' });
+      await playlists.changePlaylistDetails('foo', {
+        description: 'bar',
+        collaborative: false,
+        public: true,
+        name: 'baz',
+      });
 
-      expect(httpMock.put).toHaveBeenCalledWith('/playlists/foo', {
-        data: {
-          description: 'bar',
-        },
+      expect(changePlaylistDetailsSpy).toHaveBeenCalledWith('foo', {
+        description: 'bar',
+        collaborative: false,
+        public: true,
+        name: 'baz',
       });
     });
   });
 
   describe('createPlaylist', () => {
+    let createPlaylistSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.post.mockResolvedValue(playlistFixture);
+      createPlaylistSpy = vi
+        .spyOn(PlaylistsService, 'createPlaylist')
+        .mockResolvedValue(playlistFixture);
     });
 
-    it.todo('should create a playlist (without options)', async () => {
-      const { httpMock, playlists } = setup();
-
+    it('should create a playlist (without options)', async () => {
       const response = await playlists.createPlaylist('foo', 'bar');
 
       expect(response).toEqual(playlistFixture);
-      expect(httpMock.post).toHaveBeenCalledWith('/users/foo/playlists', {
-        data: {
-          name: 'bar',
-        },
+      expect(createPlaylistSpy).toHaveBeenCalledWith('foo', {
+        name: 'bar',
       });
     });
 
-    it.todo('should create a playlist (with options)', async () => {
-      const { httpMock, playlists } = setup();
-
+    it('should create a playlist (with options)', async () => {
       const response = await playlists.createPlaylist('foo', 'bar', {
         description: 'baz',
+        collaborative: false,
+        public: true,
       });
 
       expect(response).toEqual(playlistFixture);
-      expect(httpMock.post).toHaveBeenCalledWith('/users/foo/playlists', {
-        data: {
-          name: 'bar',
-          description: 'baz',
-        },
+      expect(createPlaylistSpy).toHaveBeenCalledWith('foo', {
+        name: 'bar',
+        description: 'baz',
+        collaborative: false,
+        public: true,
       });
     });
   });
 
   describe('getMyPlaylists', () => {
+    let getMyPlaylistsSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getMyPlaylistsFixture);
+      getMyPlaylistsSpy = vi
+        .spyOn(PlaylistsService, 'getAListOfCurrentUsersPlaylists')
+        .mockResolvedValue(getMyPlaylistsFixture);
     });
 
-    it.todo(
-      "should get a list of the current user's playlists (without options)",
-      async () => {
-        const { httpMock, playlists } = setup();
+    it("should get a list of the current user's playlists (without options)", async () => {
+      const response = await playlists.getMyPlaylists();
 
-        const response = await playlists.getMyPlaylists();
+      expect(response).toEqual(getMyPlaylistsFixture);
+      expect(getMyPlaylistsSpy).toHaveBeenCalledWith(undefined, undefined);
+    });
 
-        expect(response).toEqual(getMyPlaylistsFixture);
-        expect(httpMock.get).toHaveBeenCalledWith('/me/playlists', undefined);
-      },
-    );
+    it("should get a list of the current user's playlists (with options)", async () => {
+      const response = await playlists.getMyPlaylists({ limit: 1, offset: 2 });
 
-    it.todo(
-      "should get a list of the current user's playlists (with options)",
-      async () => {
-        const { httpMock, playlists } = setup();
-
-        const response = await playlists.getMyPlaylists({ limit: 2 });
-
-        expect(response).toEqual(getMyPlaylistsFixture);
-        expect(httpMock.get).toHaveBeenCalledWith('/me/playlists', {
-          params: {
-            limit: 2,
-          },
-        });
-      },
-    );
+      expect(response).toEqual(getMyPlaylistsFixture);
+      expect(getMyPlaylistsSpy).toHaveBeenCalledWith(1, 2);
+    });
   });
 
   describe('getPlaylist', () => {
+    let getPlaylistSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(playlistFixture);
+      getPlaylistSpy = vi
+        .spyOn(PlaylistsService, 'getPlaylist')
+        .mockResolvedValue(playlistFixture);
     });
 
-    it.todo('should get a playlist (without options)', async () => {
-      const { httpMock, playlists } = setup();
-
+    it('should get a playlist (without options)', async () => {
       const response = await playlists.getPlaylist('foo');
 
       expect(response).toEqual(playlistFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/playlists/foo', undefined);
-    });
-
-    it.todo('should get a playlist (with options)', async () => {
-      const { httpMock, playlists } = setup();
-
-      const response = await playlists.getPlaylist('foo', { market: 'bar' });
-
-      expect(response).toEqual(playlistFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/playlists/foo', {
-        params: {
-          market: 'bar',
-        },
-      });
-    });
-  });
-
-  describe('getPlaylistCover', () => {
-    beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue([spotifyImageFixture]);
-    });
-
-    it.todo('should get a playlist cover image', async () => {
-      const { httpMock, playlists } = setup();
-
-      const response = await playlists.getPlaylistCover('foo');
-
-      expect(response).toEqual([spotifyImageFixture]);
-      expect(httpMock.get).toHaveBeenCalledWith('/playlists/foo/images');
-    });
-  });
-
-  describe('getPlaylistItems', () => {
-    beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getPlaylistItemsFixture);
-    });
-
-    it.todo("should get a playlist's items (without options)", async () => {
-      const { httpMock, playlists } = setup();
-
-      const response = await playlists.getPlaylistItems('foo');
-
-      expect(response).toEqual(getPlaylistItemsFixture);
-      expect(httpMock.get).toHaveBeenCalledWith(
-        '/playlists/foo/tracks',
+      expect(getPlaylistSpy).toHaveBeenCalledWith(
+        'foo',
+        undefined,
+        undefined,
         undefined,
       );
     });
 
-    it.todo("should get a playlist's items (with options)", async () => {
-      const { httpMock, playlists } = setup();
+    it('should get a playlist (with options)', async () => {
+      const response = await playlists.getPlaylist('foo', {
+        market: 'bar',
+        fields: 'baz',
+        additional_types: ['episode'],
+      });
 
-      const response = await playlists.getPlaylistItems('foo', { limit: 2 });
+      expect(response).toEqual(playlistFixture);
+      expect(getPlaylistSpy).toHaveBeenCalledWith(
+        'foo',
+        'bar',
+        'baz',
+        'episode',
+      );
+    });
+  });
+
+  describe('getPlaylistCover', () => {
+    it.todo('should get a playlist cover image', async () => {
+      // const getPlaylistCoverSpy = vi
+      //   .spyOn(PlaylistsService, 'getPlaylistCover')
+      //   .mockResolvedValue(getPlaylistCoverFixture);
+      const response = await playlists.getPlaylistCover('foo');
+
+      expect(response).toEqual([spotifyImageFixture]);
+      expect(null).toHaveBeenCalledWith('/playlists/foo/images');
+    });
+  });
+
+  describe('getPlaylistItems', () => {
+    let getPlaylistItemsSpy: SpyInstance;
+    beforeEach(() => {
+      getPlaylistItemsSpy = vi
+        .spyOn(PlaylistsService, 'getPlaylistsTracks')
+        .mockResolvedValue(getPlaylistItemsFixture);
+    });
+
+    it("should get a playlist's items (without options)", async () => {
+      const response = await playlists.getPlaylistItems('foo');
 
       expect(response).toEqual(getPlaylistItemsFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/playlists/foo/tracks', {
-        params: {
-          limit: 2,
-        },
+      expect(getPlaylistItemsSpy.mock.calls[0][0]).toBe('foo');
+    });
+
+    it("should get a playlist's items (with options)", async () => {
+      const response = await playlists.getPlaylistItems('foo', {
+        limit: 1,
+        offset: 2,
+        market: 'bar',
+        fields: 'baz',
+        additional_types: ['episode'],
       });
+
+      expect(response).toEqual(getPlaylistItemsFixture);
+      expect(getPlaylistItemsSpy).toHaveBeenCalledWith(
+        'foo',
+        'bar',
+        'baz',
+        1,
+        2,
+        'episode',
+      );
     });
   });
 
   describe('getUserPlaylists', () => {
+    let getUserPlaylistsSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getUserPlaylistsFixture);
+      getUserPlaylistsSpy = vi
+        .spyOn(PlaylistsService, 'getListUsersPlaylists')
+        .mockResolvedValue(getUserPlaylistsFixture);
     });
 
-    it.todo(
-      "should get a list of a user's playlists (without options)",
-      async () => {
-        const { httpMock, playlists } = setup();
+    it("should get a list of a user's playlists (without options)", async () => {
+      const response = await playlists.getUserPlaylists('foo');
 
-        const response = await playlists.getUserPlaylists('foo');
-
-        expect(response).toEqual(getUserPlaylistsFixture);
-        expect(httpMock.get).toHaveBeenCalledWith(
-          '/users/foo/playlists',
-          undefined,
-        );
-      },
-    );
-
-    it.todo(
-      "should get a list of a user's playlists (with options)",
-      async () => {
-        const { httpMock, playlists } = setup();
-
-        const response = await playlists.getUserPlaylists('foo', { limit: 2 });
-
-        expect(response).toEqual(getUserPlaylistsFixture);
-        expect(httpMock.get).toHaveBeenCalledWith('/users/foo/playlists', {
-          params: {
-            limit: 2,
-          },
-        });
-      },
-    );
-  });
-
-  describe('removePlaylistItem', () => {
-    beforeEach(() => {
-      HttpMock.prototype.delete.mockResolvedValue(snapshotIdFixture);
+      expect(response).toEqual(getUserPlaylistsFixture);
+      expect(getUserPlaylistsSpy).toHaveBeenCalledWith(
+        'foo',
+        undefined,
+        undefined,
+      );
     });
 
-    it.todo('should remove an item from a playlist', async () => {
-      const { httpMock, playlists } = setup();
-
-      const response = await playlists.removePlaylistItem('foo', 'bar');
-
-      expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.delete).toHaveBeenCalledWith('/playlists/foo/tracks', {
-        data: {
-          tracks: [{ uri: 'bar' }],
-        },
+    it("should get a list of a user's playlists (with options)", async () => {
+      const response = await playlists.getUserPlaylists('foo', {
+        limit: 1,
+        offset: 2,
       });
+
+      expect(response).toEqual(getUserPlaylistsFixture);
+      expect(getUserPlaylistsSpy).toHaveBeenCalledWith('foo', 1, 2);
     });
   });
 
   describe('removePlaylistItems', () => {
+    let removePlaylistsItemSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.delete.mockResolvedValue(snapshotIdFixture);
+      removePlaylistsItemSpy = vi
+        .spyOn(PlaylistsService, 'removeTracksPlaylist')
+        .mockResolvedValue(snapshotIdFixture);
     });
 
-    it.todo('should remove items from a playlist', async () => {
-      const { httpMock, playlists } = setup();
-
-      const response = await playlists.removePlaylistItems('foo', [
-        'bar',
-        'baz',
-      ]);
+    it('should remove an item from a playlist', async () => {
+      const response = await playlists.removePlaylistItem('foo', 'bar');
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.delete).toHaveBeenCalledWith('/playlists/foo/tracks', {
-        data: {
-          tracks: [{ uri: 'bar' }, { uri: 'baz' }],
-        },
+      expect(removePlaylistsItemSpy).toHaveBeenCalledWith('foo', {
+        tracks: [{ uri: 'bar' }],
+      });
+    });
+
+    it('should remove items from a playlist', async () => {
+      const response = await playlists.removePlaylistItems(
+        'foo',
+        ['bar', 'baz'],
+        'qux',
+      );
+
+      expect(response).toBe(snapshotIdFixture.snapshot_id);
+      expect(removePlaylistsItemSpy).toHaveBeenCalledWith('foo', {
+        tracks: [{ uri: 'bar' }, { uri: 'baz' }],
+        snapshot_id: 'qux',
       });
     });
   });
 
   describe('reorderPlaylistItems', () => {
+    let reorderPlaylistItemsSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.put.mockResolvedValue(snapshotIdFixture);
+      reorderPlaylistItemsSpy = vi
+        .spyOn(PlaylistsService, 'reorderOrReplacePlaylistsTracks')
+        .mockResolvedValue(snapshotIdFixture);
     });
 
-    it.todo("should reorder a playlist's items (without options)", async () => {
-      const { httpMock, playlists } = setup();
-
+    it("should reorder a playlist's items (without options)", async () => {
       const response = await playlists.reorderPlaylistItems('foo', 3, 2);
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.put).toHaveBeenCalledWith('/playlists/foo/tracks', {
-        data: {
-          range_start: 3,
-          insert_before: 2,
-        },
+      expect(reorderPlaylistItemsSpy).toHaveBeenCalledWith('foo', undefined, {
+        range_start: 3,
+        insert_before: 2,
+        range_length: undefined,
+        snapshot_id: undefined,
       });
     });
 
-    it.todo("should reorder a playlist's items (with options)", async () => {
-      const { httpMock, playlists } = setup();
-
+    it("should reorder a playlist's items (with options)", async () => {
       const response = await playlists.reorderPlaylistItems('foo', 3, 2, {
         snapshot_id: 'bar',
+        range_length: 4,
       });
 
       expect(response).toBe(snapshotIdFixture.snapshot_id);
-      expect(httpMock.put).toHaveBeenCalledWith('/playlists/foo/tracks', {
-        data: {
-          range_start: 3,
-          insert_before: 2,
-          snapshot_id: 'bar',
-        },
+      expect(reorderPlaylistItemsSpy).toHaveBeenCalledWith('foo', undefined, {
+        range_start: 3,
+        insert_before: 2,
+        snapshot_id: 'bar',
+        range_length: 4,
       });
     });
   });
 
   describe('replacePlaylistItems', () => {
-    it.todo("should replace a playlist's items", async () => {
-      const { httpMock, playlists } = setup();
-
+    it("should replace a playlist's items", async () => {
+      const replacePlaylistItemsSpy = vi
+        .spyOn(PlaylistsService, 'reorderOrReplacePlaylistsTracks')
+        .mockResolvedValue(snapshotIdFixture);
       await playlists.replacePlaylistItems('foo', ['bar', 'baz']);
 
-      expect(httpMock.put).toHaveBeenCalledWith('/playlists/foo/tracks', {
-        data: {
-          uris: ['bar', 'baz'],
-        },
-      });
+      expect(replacePlaylistItemsSpy).toHaveBeenCalledWith('foo', 'bar,baz');
     });
   });
 
   describe('uploadPlaylistCover', () => {
-    it.todo('should upload a custom playlist cover image', async () => {
-      const { httpMock, playlists } = setup();
-
+    it('should upload a custom playlist cover image', async () => {
+      const uploadPlaylistCoverSpy = vi
+        .spyOn(PlaylistsService, 'uploadCustomPlaylistCover')
+        .mockResolvedValue(snapshotIdFixture);
       await playlists.uploadPlaylistCover('foo', 'bar');
 
-      expect(httpMock.put).toHaveBeenCalledWith('/playlists/foo/images', {
-        data: 'bar',
-        contentType: 'image/jpeg',
-      });
+      expect(uploadPlaylistCoverSpy).toHaveBeenCalledWith('foo', 'bar');
     });
   });
 });
