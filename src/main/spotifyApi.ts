@@ -20,7 +20,7 @@ import {
   type GetAuthorizationUrlOptions,
   type PKCEExtensionOptions,
   getAuthorizationUrl,
-} from '../helpers/getAuthorizationUrl';
+} from '../utils/getAuthorizationUrl';
 import { base64 } from '../openapi/core/request';
 import {
   type GetRefreshableUserTokensResponse,
