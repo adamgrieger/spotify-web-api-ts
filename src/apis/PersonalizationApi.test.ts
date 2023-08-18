@@ -1,92 +1,88 @@
-import { type MockedClass } from 'vitest';
+import { type SpyInstance } from 'vitest';
 
 import { getMyTopArtistsFixture, getMyTopTracksFixture } from '../fixtures';
-import { Http } from '../helpers/Http';
+import { UsersService } from '../openapi/services/UsersService';
 
 import { PersonalizationApi } from './PersonalizationApi';
 
-vi.mock('../helpers/Http');
-
-const HttpMock = Http as MockedClass<typeof Http>;
-
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function setup() {
-  const httpMock = new HttpMock('token');
-  const personalization = new PersonalizationApi();
-
-  return { httpMock, personalization };
-}
+const personalization = new PersonalizationApi();
 
 describe('PersonalizationApi', () => {
-  beforeEach(() => {
+  afterEach(() => {
     vi.resetAllMocks();
   });
 
   describe('getMyTopArtists', () => {
+    let getMyTopArtistsSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getMyTopArtistsFixture);
+      getMyTopArtistsSpy = vi
+        .spyOn(UsersService, 'getUsersTopArtistsAndTracks')
+        .mockResolvedValue(getMyTopArtistsFixture);
     });
 
-    it.todo(
-      "should get the current user's top artists (without options)",
-      async () => {
-        const { httpMock, personalization } = setup();
+    it("should get the current user's top artists (without options)", async () => {
+      const response = await personalization.getMyTopArtists();
 
-        const response = await personalization.getMyTopArtists();
+      expect(response).toEqual(getMyTopArtistsFixture);
+      expect(getMyTopArtistsSpy).toHaveBeenCalledWith(
+        'artists',
+        undefined,
+        undefined,
+        undefined,
+      );
+    });
 
-        expect(response).toEqual(getMyTopArtistsFixture);
-        expect(httpMock.get).toHaveBeenCalledWith('/me/top/artists', undefined);
-      },
-    );
+    it("should get the current user's top artists (with options)", async () => {
+      const response = await personalization.getMyTopArtists({
+        limit: 1,
+        offset: 2,
+        time_range: 'long_term',
+      });
 
-    it.todo(
-      "should get the current user's top artists (with options)",
-      async () => {
-        const { httpMock, personalization } = setup();
-
-        const response = await personalization.getMyTopArtists({ limit: 2 });
-
-        expect(response).toEqual(getMyTopArtistsFixture);
-        expect(httpMock.get).toHaveBeenCalledWith('/me/top/artists', {
-          params: {
-            limit: 2,
-          },
-        });
-      },
-    );
+      expect(response).toEqual(getMyTopArtistsFixture);
+      expect(getMyTopArtistsSpy).toHaveBeenCalledWith(
+        'artists',
+        'long_term',
+        1,
+        2,
+      );
+    });
   });
 
   describe('getMyTopTracks', () => {
+    let getMyTopTracksSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getMyTopTracksFixture);
+      getMyTopTracksSpy = vi
+        .spyOn(UsersService, 'getUsersTopArtistsAndTracks')
+        .mockResolvedValue(getMyTopTracksFixture);
     });
 
-    it.todo(
-      "should get the current user's top tracks (without options)",
-      async () => {
-        const { httpMock, personalization } = setup();
+    it("should get the current user's top tracks (without options)", async () => {
+      const response = await personalization.getMyTopTracks();
 
-        const response = await personalization.getMyTopTracks();
+      expect(response).toEqual(getMyTopTracksFixture);
+      expect(getMyTopTracksSpy).toHaveBeenCalledWith(
+        'tracks',
+        undefined,
+        undefined,
+        undefined,
+      );
+    });
 
-        expect(response).toEqual(getMyTopTracksFixture);
-        expect(httpMock.get).toHaveBeenCalledWith('/me/top/tracks', undefined);
-      },
-    );
+    it("should get the current user's top tracks (with options)", async () => {
+      const response = await personalization.getMyTopTracks({
+        limit: 1,
+        offset: 2,
+        time_range: 'long_term',
+      });
 
-    it.todo(
-      "should get the current user's top tracks (with options)",
-      async () => {
-        const { httpMock, personalization } = setup();
-
-        const response = await personalization.getMyTopTracks({ limit: 2 });
-
-        expect(response).toEqual(getMyTopTracksFixture);
-        expect(httpMock.get).toHaveBeenCalledWith('/me/top/tracks', {
-          params: {
-            limit: 2,
-          },
-        });
-      },
-    );
+      expect(response).toEqual(getMyTopTracksFixture);
+      expect(getMyTopTracksSpy).toHaveBeenCalledWith(
+        'tracks',
+        'long_term',
+        1,
+        2,
+      );
+    });
   });
 });

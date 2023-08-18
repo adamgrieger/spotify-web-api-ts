@@ -125,11 +125,11 @@ export interface PersonalizationOptions extends PagingOptions {
 // +--------+
 
 export interface GetCurrentlyPlayingTrackOptions extends MarketOptions {
-  additional_types?: Array<'episode'>;
+  additional_types?: ['episode'];
 }
 
 export interface GetPlaybackInfoOptions extends MarketOptions {
-  additional_types?: Array<'episode'>;
+  additional_types?: ['episode'];
 }
 
 export interface GetRecentlyPlayedTracksOptions {
@@ -163,12 +163,12 @@ export interface CreatePlaylistOptions {
 }
 
 export interface GetPlaylistOptions extends MarketOptions {
-  additional_types?: Array<'episode'>;
+  additional_types?: ['episode'];
   fields?: string;
 }
 
 export interface GetPlaylistItemsOptions extends PagingMarketOptions {
-  additional_types?: Array<'episode'>;
+  additional_types?: ['episode'];
   fields?: string;
 }
 

@@ -1,4 +1,4 @@
-import { type MockedClass } from 'vitest';
+import { type SpyInstance } from 'vitest';
 
 import {
   audioAnalysisFixture,
@@ -7,138 +7,98 @@ import {
   getTracksFixture,
   trackFixture,
 } from '../fixtures';
-import { Http } from '../helpers/Http';
+import { TracksService } from '../openapi/services/TracksService';
 
 import { TracksApi } from './TracksApi';
 
-vi.mock('../helpers/Http');
-
-const HttpMock = Http as MockedClass<typeof Http>;
-
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function setup() {
-  const httpMock = new HttpMock('token');
-  const tracks = new TracksApi();
-
-  return { httpMock, tracks };
-}
+const tracks = new TracksApi();
 
 describe('TracksApi', () => {
-  beforeEach(() => {
+  afterEach(() => {
     vi.resetAllMocks();
   });
 
   describe('getAudioAnalysisForTrack', () => {
-    beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(audioAnalysisFixture);
-    });
-
-    it.todo('should get audio analysis for a track', async () => {
-      const { httpMock, tracks } = setup();
-
+    it('should get audio analysis for a track', async () => {
+      const getAudioAnalysisForTrackSpy = vi
+        .spyOn(TracksService, 'getAudioAnalysis')
+        .mockResolvedValue(audioAnalysisFixture);
       const response = await tracks.getAudioAnalysisForTrack('foo');
 
       expect(response).toEqual(audioAnalysisFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/audio-analysis/foo');
+      expect(getAudioAnalysisForTrackSpy).toHaveBeenCalledWith('foo');
     });
   });
 
   describe('getAudioFeaturesForTrack', () => {
-    beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(audioFeaturesFixture);
-    });
-
-    it.todo('should get audio features for a track', async () => {
-      const { httpMock, tracks } = setup();
-
+    it('should get audio features for a track', async () => {
+      const getAudioFeaturesForTrackSpy = vi
+        .spyOn(TracksService, 'getAudioFeatures')
+        .mockResolvedValue(audioFeaturesFixture);
       const response = await tracks.getAudioFeaturesForTrack('foo');
 
       expect(response).toEqual(audioFeaturesFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/audio-features/foo');
+      expect(getAudioFeaturesForTrackSpy).toHaveBeenCalledWith('foo');
     });
   });
 
   describe('getAudioFeaturesForTracks', () => {
-    beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(
-        getAudioFeaturesForTracksFixture,
-      );
-    });
-
-    it.todo('should get audio features for several tracks', async () => {
-      const { httpMock, tracks } = setup();
-
+    it('should get audio features for several tracks', async () => {
+      const getAudioFeaturesForTracksSpy = vi
+        .spyOn(TracksService, 'getSeveralAudioFeatures')
+        .mockResolvedValue(getAudioFeaturesForTracksFixture);
       const response = await tracks.getAudioFeaturesForTracks(['foo', 'bar']);
 
       expect(response).toEqual(getAudioFeaturesForTracksFixture.audio_features);
-      expect(httpMock.get).toHaveBeenCalledWith('/audio-features', {
-        params: {
-          ids: ['foo', 'bar'],
-        },
-      });
+      expect(getAudioFeaturesForTracksSpy).toHaveBeenCalledWith('foo,bar');
     });
   });
 
   describe('getTrack', () => {
+    let getTrackSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(trackFixture);
+      getTrackSpy = vi
+        .spyOn(TracksService, 'getTrack')
+        .mockResolvedValue(trackFixture);
     });
 
-    it.todo('should get a track (without options)', async () => {
-      const { httpMock, tracks } = setup();
-
+    it('should get a track (without options)', async () => {
       const response = await tracks.getTrack('foo');
 
       expect(response).toEqual(trackFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/tracks/foo', undefined);
+      expect(getTrackSpy).toHaveBeenCalledWith('foo', undefined);
     });
 
-    it.todo('should get a track (with options)', async () => {
-      const { httpMock, tracks } = setup();
-
+    it('should get a track (with options)', async () => {
       const response = await tracks.getTrack('foo', { market: 'bar' });
 
       expect(response).toEqual(trackFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/tracks/foo', {
-        params: {
-          market: 'bar',
-        },
-      });
+      expect(getTrackSpy).toHaveBeenCalledWith('foo', 'bar');
     });
   });
 
   describe('getTracks', () => {
+    let getTracksSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getTracksFixture);
+      getTracksSpy = vi
+        .spyOn(TracksService, 'getSeveralTracks')
+        .mockResolvedValue(getTracksFixture);
     });
 
-    it.todo('should get several tracks (without options)', async () => {
-      const { httpMock, tracks } = setup();
-
+    it('should get several tracks (without options)', async () => {
       const response = await tracks.getTracks(['foo', 'bar']);
 
       expect(response).toEqual(getTracksFixture.tracks);
-      expect(httpMock.get).toHaveBeenCalledWith('/tracks', {
-        params: {
-          ids: ['foo', 'bar'],
-        },
-      });
+      expect(getTracksSpy).toHaveBeenCalledWith('foo,bar', undefined);
     });
 
-    it.todo('should get several tracks (with options)', async () => {
-      const { httpMock, tracks } = setup();
-
+    it('should get several tracks (with options)', async () => {
       const response = await tracks.getTracks(['foo', 'bar'], {
         market: 'baz',
       });
 
       expect(response).toEqual(getTracksFixture.tracks);
-      expect(httpMock.get).toHaveBeenCalledWith('/tracks', {
-        params: {
-          ids: ['foo', 'bar'],
-          market: 'baz',
-        },
-      });
+      expect(getTracksSpy).toHaveBeenCalledWith('foo,bar', 'baz');
     });
   });
 });

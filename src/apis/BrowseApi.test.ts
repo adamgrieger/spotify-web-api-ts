@@ -1,5 +1,10 @@
-import { type MockedClass } from 'vitest';
+import { type SpyInstance } from 'vitest';
 
+import { GenresService } from '../openapi/services/GenresService';
+import { CategoriesService } from '../openapi/services/CategoriesService';
+import { AlbumsService } from '../openapi/services/AlbumsService';
+import { PlaylistsService } from '../openapi/services/PlaylistsService';
+import { TracksService } from '../openapi/services/TracksService';
 import {
   categoryFixture,
   getAvailableGenreSeedsFixture,
@@ -9,258 +14,222 @@ import {
   getNewReleasesFixture,
   getRecommendationsFixture,
 } from '../fixtures';
-import { Http } from '../helpers/Http';
 
 import { BrowseApi } from './BrowseApi';
 
-vi.mock('../helpers/Http');
-
-const HttpMock = Http as MockedClass<typeof Http>;
-
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function setup() {
-  const httpMock = new HttpMock('token');
-  const browse = new BrowseApi();
-
-  return { httpMock, browse };
-}
+const browse = new BrowseApi();
 
 describe('BrowseApi', () => {
-  beforeEach(() => {
+  afterEach(() => {
     vi.resetAllMocks();
   });
 
   describe('getAvailableGenreSeeds', () => {
-    beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getAvailableGenreSeedsFixture);
-    });
-
-    it.todo('should get available genre seeds', async () => {
-      const { httpMock, browse } = setup();
+    it('should get available genre seeds', async () => {
+      const getAvailableGenreSeedsSpy = vi
+        .spyOn(GenresService, 'getRecommendationGenres')
+        .mockResolvedValue(getAvailableGenreSeedsFixture);
 
       const response = await browse.getAvailableGenreSeeds();
 
       expect(response).toEqual(getAvailableGenreSeedsFixture.genres);
-      expect(httpMock.get).toHaveBeenCalledWith(
-        '/recommendations/available-genre-seeds',
-      );
+      expect(getAvailableGenreSeedsSpy).toHaveBeenCalledWith();
     });
   });
 
   describe('getCategories', () => {
+    let getCategoriesSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getCategoriesFixture);
+      getCategoriesSpy = vi
+        .spyOn(CategoriesService, 'getCategories')
+        .mockResolvedValue(getCategoriesFixture);
     });
 
-    it.todo('should get a list of categories (without options)', async () => {
-      const { httpMock, browse } = setup();
-
+    it('should get a list of categories (without options)', async () => {
       const response = await browse.getCategories();
 
       expect(response).toEqual(getCategoriesFixture.categories);
-      expect(httpMock.get).toHaveBeenCalledWith(
-        '/browse/categories',
+      expect(getCategoriesSpy).toHaveBeenCalledWith(
+        undefined,
+        undefined,
+        undefined,
         undefined,
       );
     });
 
-    it.todo('should get a list of categories (with options)', async () => {
-      const { httpMock, browse } = setup();
-
-      const response = await browse.getCategories({ country: 'foo' });
+    it('should get a list of categories (with options)', async () => {
+      const response = await browse.getCategories({
+        country: 'foo',
+        locale: 'bar',
+        limit: 1,
+        offset: 2,
+      });
 
       expect(response).toEqual(getCategoriesFixture.categories);
-      expect(httpMock.get).toHaveBeenCalledWith('/browse/categories', {
-        params: {
-          country: 'foo',
-        },
-      });
+      expect(getCategoriesSpy).toHaveBeenCalledWith('foo', 'bar', 1, 2);
     });
   });
 
   describe('getCategory', () => {
+    let getCategorySpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(categoryFixture);
+      getCategorySpy = vi
+        .spyOn(CategoriesService, 'getACategory')
+        .mockResolvedValue(categoryFixture);
     });
 
-    it.todo('should get a category (without options)', async () => {
-      const { httpMock, browse } = setup();
-
+    it('should get a category (without options)', async () => {
       const response = await browse.getCategory('foo');
 
       expect(response).toEqual(categoryFixture);
-      expect(httpMock.get).toHaveBeenCalledWith(
-        '/browse/categories/foo',
-        undefined,
-      );
+      expect(getCategorySpy).toHaveBeenCalledWith('foo', undefined, undefined);
     });
 
-    it.todo('should get a category (with options)', async () => {
-      const { httpMock, browse } = setup();
-
-      const response = await browse.getCategory('foo', { country: 'bar' });
+    it('should get a category (with options)', async () => {
+      const response = await browse.getCategory('foo', {
+        country: 'bar',
+        locale: 'baz',
+      });
 
       expect(response).toEqual(categoryFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/browse/categories/foo', {
-        params: {
-          country: 'bar',
-        },
-      });
+      expect(getCategorySpy).toHaveBeenCalledWith('foo', 'bar', 'baz');
     });
   });
 
   describe('getCategoryPlaylists', () => {
+    let getCategoryPlaylistsSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getCategoryPlaylistsFixture);
+      getCategoryPlaylistsSpy = vi
+        .spyOn(CategoriesService, 'getACategoriesPlaylists')
+        .mockResolvedValue(getCategoryPlaylistsFixture);
     });
 
-    it.todo("should get a category's playlists (without options)", async () => {
-      const { httpMock, browse } = setup();
-
+    it("should get a category's playlists (without options)", async () => {
       const response = await browse.getCategoryPlaylists('foo');
 
-      expect(response).toEqual(getCategoryPlaylistsFixture.playlists);
-      expect(httpMock.get).toHaveBeenCalledWith(
-        '/browse/categories/foo/playlists',
+      expect(response).toEqual(getCategoryPlaylistsFixture);
+      expect(getCategoryPlaylistsSpy).toHaveBeenCalledWith(
+        'foo',
+        undefined,
+        undefined,
         undefined,
       );
     });
 
-    it.todo("should get a category's playlists (with options)", async () => {
-      const { httpMock, browse } = setup();
-
+    it("should get a category's playlists (with options)", async () => {
       const response = await browse.getCategoryPlaylists('foo', {
         country: 'bar',
+        limit: 1,
+        offset: 2,
       });
 
-      expect(response).toEqual(getCategoryPlaylistsFixture.playlists);
-      expect(httpMock.get).toHaveBeenCalledWith(
-        '/browse/categories/foo/playlists',
-        {
-          params: {
-            country: 'bar',
-          },
-        },
-      );
+      expect(response).toEqual(getCategoryPlaylistsFixture);
+      expect(getCategoryPlaylistsSpy).toHaveBeenCalledWith('foo', 'bar', 1, 2);
     });
   });
 
   describe('getFeaturedPlaylists', () => {
+    let getFeaturedPlaylistsSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getFeaturedPlaylistsFixture);
+      getFeaturedPlaylistsSpy = vi
+        .spyOn(PlaylistsService, 'getFeaturedPlaylists')
+        .mockResolvedValue(getFeaturedPlaylistsFixture);
     });
 
-    it.todo(
-      'should get a list of featured playlists (without options)',
-      async () => {
-        const { httpMock, browse } = setup();
+    it('should get a list of featured playlists (without options)', async () => {
+      const response = await browse.getFeaturedPlaylists();
 
-        const response = await browse.getFeaturedPlaylists();
-
-        expect(response).toEqual(getFeaturedPlaylistsFixture);
-        expect(httpMock.get).toHaveBeenCalledWith(
-          '/browse/featured-playlists',
-          undefined,
-        );
-      },
-    );
-
-    it.todo(
-      'should get a list of featured playlists (with options)',
-      async () => {
-        const { httpMock, browse } = setup();
-
-        const response = await browse.getFeaturedPlaylists({ country: 'foo' });
-
-        expect(response).toEqual(getFeaturedPlaylistsFixture);
-        expect(httpMock.get).toHaveBeenCalledWith(
-          '/browse/featured-playlists',
-          {
-            params: {
-              country: 'foo',
-            },
-          },
-        );
-      },
-    );
-  });
-
-  describe('getNewReleases', () => {
-    beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getNewReleasesFixture);
-    });
-
-    it.todo('should get a list of new releases (without options)', async () => {
-      const { httpMock, browse } = setup();
-
-      const response = await browse.getNewReleases();
-
-      expect(response).toEqual(getNewReleasesFixture.albums);
-      expect(httpMock.get).toHaveBeenCalledWith(
-        '/browse/new-releases',
+      expect(response).toEqual(getFeaturedPlaylistsFixture);
+      expect(getFeaturedPlaylistsSpy).toHaveBeenCalledWith(
+        undefined,
+        undefined,
+        undefined,
+        undefined,
         undefined,
       );
     });
 
-    it.todo('should get a list of new releases (with options)', async () => {
-      const { httpMock, browse } = setup();
+    it('should get a list of featured playlists (with options)', async () => {
+      const response = await browse.getFeaturedPlaylists({
+        country: 'foo',
+        locale: 'bar',
+        timestamp: 'baz',
+        limit: 1,
+        offset: 2,
+      });
 
-      const response = await browse.getNewReleases({ country: 'foo' });
+      expect(response).toEqual(getFeaturedPlaylistsFixture);
+      expect(getFeaturedPlaylistsSpy).toHaveBeenCalledWith(
+        'foo',
+        'bar',
+        'baz',
+        1,
+        2,
+      );
+    });
+  });
+
+  describe('getNewReleases', () => {
+    let getNewReleasesSpy: SpyInstance;
+    beforeEach(() => {
+      getNewReleasesSpy = vi
+        .spyOn(AlbumsService, 'getNewReleases')
+        .mockResolvedValue(getNewReleasesFixture);
+    });
+
+    it('should get a list of new releases (without options)', async () => {
+      const response = await browse.getNewReleases();
 
       expect(response).toEqual(getNewReleasesFixture.albums);
-      expect(httpMock.get).toHaveBeenCalledWith('/browse/new-releases', {
-        params: {
-          country: 'foo',
-        },
+      expect(getNewReleasesSpy).toHaveBeenCalledWith(
+        undefined,
+        undefined,
+        undefined,
+      );
+    });
+
+    it('should get a list of new releases (with options)', async () => {
+      const response = await browse.getNewReleases({
+        country: 'foo',
+        limit: 1,
+        offset: 2,
       });
+
+      expect(response).toEqual(getNewReleasesFixture.albums);
+      expect(getNewReleasesSpy).toHaveBeenCalledWith('foo', 1, 2);
     });
   });
 
   describe('getRecommendations', () => {
+    let getRecommendationsSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getRecommendationsFixture);
+      getRecommendationsSpy = vi
+        .spyOn(TracksService, 'getRecommendations')
+        .mockResolvedValue(getRecommendationsFixture);
     });
 
-    it.todo(
-      'should get recommendations based on seeds (without options)',
-      async () => {
-        const { httpMock, browse } = setup();
+    it('should get recommendations based on seeds (without options)', async () => {
+      const response = await browse.getRecommendations({
+        seed_artists: ['foo', 'bar'],
+      });
 
-        const response = await browse.getRecommendations({
-          seed_artists: ['foo', 'bar'],
-        });
+      expect(response).toEqual(getRecommendationsFixture);
+      expect(getRecommendationsSpy.mock.lastCall?.[0]).toBe('foo,bar');
+    });
 
-        expect(response).toEqual(getRecommendationsFixture);
-        expect(httpMock.get).toHaveBeenCalledWith('/recommendations', {
-          params: {
-            seed_artists: ['foo', 'bar'],
-          },
-        });
-      },
-    );
+    it('should get recommendations based on seeds (with options)', async () => {
+      const response = await browse.getRecommendations(
+        {
+          seed_genres: ['foo', 'bar'],
+        },
+        {
+          market: 'baz',
+        },
+      );
 
-    it.todo(
-      'should get recommendations based on seeds (with options)',
-      async () => {
-        const { httpMock, browse } = setup();
-
-        const response = await browse.getRecommendations(
-          {
-            seed_artists: ['foo', 'bar'],
-          },
-          {
-            market: 'baz',
-          },
-        );
-
-        expect(response).toEqual(getRecommendationsFixture);
-        expect(httpMock.get).toHaveBeenCalledWith('/recommendations', {
-          params: {
-            seed_artists: ['foo', 'bar'],
-            market: 'baz',
-          },
-        });
-      },
-    );
+      expect(response).toEqual(getRecommendationsFixture);
+      expect(getRecommendationsSpy.mock.lastCall?.[1]).toBe('foo,bar');
+      expect(getRecommendationsSpy.mock.lastCall?.[4]).toBe('baz');
+    });
   });
 });

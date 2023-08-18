@@ -1,255 +1,330 @@
-import { type MockedFunction } from 'vitest';
+import { type SpyInstance } from 'vitest';
 
 import {
   searchAlbumsFixture,
   searchArtistsFixture,
+  searchAudiobooksFixture,
   searchEpisodesFixture,
   searchFixture,
   searchPlaylistsFixture,
   searchShowsFixture,
   searchTracksFixture,
 } from '../fixtures';
-import { Http } from '../helpers/Http';
-import { searchHelper } from '../helpers/searchHelper';
+import { SearchService } from '../openapi/services/SearchService';
 
 import { SearchApi } from './SearchApi';
 
-vi.mock('../helpers/searchHelper');
+const search = new SearchApi();
 
-const searchHelperMock = searchHelper as MockedFunction<typeof searchHelper>;
-
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function setup() {
-  const http = new Http('token');
-  const search = new SearchApi();
-
-  return { http, search };
-}
+const searchOptions = {
+  limit: 1,
+  offset: 2,
+  market: 'bar',
+  include_external: 'audio',
+} as const;
 
 describe('SearchApi', () => {
-  beforeEach(() => {
+  afterEach(() => {
     vi.resetAllMocks();
   });
 
   describe('search', () => {
+    let searchSpy: SpyInstance;
     beforeEach(() => {
-      searchHelperMock.mockResolvedValue(searchFixture);
+      searchSpy = vi
+        .spyOn(SearchService, 'search')
+        .mockResolvedValue(searchFixture);
     });
 
-    it.todo('should search for an item (without options)', async () => {
-      const { http, search } = setup();
-
+    it('should search for an item (without options)', async () => {
       const response = await search.search('foo', ['album', 'artist']);
 
       expect(response).toEqual(searchFixture);
-      expect(searchHelperMock).toHaveBeenCalledWith(
-        http,
+      expect(searchSpy).toHaveBeenCalledWith(
         'foo',
         ['album', 'artist'],
+        undefined,
+        undefined,
+        undefined,
         undefined,
       );
     });
 
-    it.todo('should search for an item (with options)', async () => {
-      const { http, search } = setup();
-
-      const response = await search.search('foo', ['album', 'artist'], {
-        limit: 2,
-      });
-
-      expect(response).toEqual(searchFixture);
-      expect(searchHelperMock).toHaveBeenCalledWith(
-        http,
+    it('should search for an item (with options)', async () => {
+      const response = await search.search(
         'foo',
         ['album', 'artist'],
-        { limit: 2 },
+        searchOptions,
+      );
+
+      expect(response).toEqual(searchFixture);
+      expect(searchSpy).toHaveBeenCalledWith(
+        'foo',
+        ['album', 'artist'],
+        'bar',
+        1,
+        2,
+        'audio',
       );
     });
   });
 
   describe('searchAlbums', () => {
+    let searchAlbumsSpy: SpyInstance;
     beforeEach(() => {
-      searchHelperMock.mockResolvedValue(searchAlbumsFixture);
+      searchAlbumsSpy = vi
+        .spyOn(SearchService, 'search')
+        .mockResolvedValue(searchAlbumsFixture);
     });
 
-    it.todo('should search for an album (without options)', async () => {
-      const { http, search } = setup();
-
+    it('should search for an album (without options)', async () => {
       const response = await search.searchAlbums('foo');
 
       expect(response).toEqual(searchAlbumsFixture.albums);
-      expect(searchHelperMock).toHaveBeenCalledWith(
-        http,
+      expect(searchAlbumsSpy).toHaveBeenCalledWith(
         'foo',
         ['album'],
+        undefined,
+        undefined,
+        undefined,
         undefined,
       );
     });
 
-    it.todo('should search for an album (with options)', async () => {
-      const { http, search } = setup();
-
-      const response = await search.searchAlbums('foo', { limit: 2 });
+    it('should search for an album (with options)', async () => {
+      const response = await search.searchAlbums('foo', searchOptions);
 
       expect(response).toEqual(searchAlbumsFixture.albums);
-      expect(searchHelperMock).toHaveBeenCalledWith(http, 'foo', ['album'], {
-        limit: 2,
-      });
+      expect(searchAlbumsSpy).toHaveBeenCalledWith(
+        'foo',
+        ['album'],
+        'bar',
+        1,
+        2,
+        'audio',
+      );
     });
   });
 
   describe('searchArtists', () => {
+    let searchArtistsSpy: SpyInstance;
     beforeEach(() => {
-      searchHelperMock.mockResolvedValue(searchArtistsFixture);
+      searchArtistsSpy = vi
+        .spyOn(SearchService, 'search')
+        .mockResolvedValue(searchArtistsFixture);
     });
 
-    it.todo('should search for an artist (without options)', async () => {
-      const { http, search } = setup();
-
+    it('should search for an artist (without options)', async () => {
       const response = await search.searchArtists('foo');
 
       expect(response).toEqual(searchArtistsFixture.artists);
-      expect(searchHelperMock).toHaveBeenCalledWith(
-        http,
+      expect(searchArtistsSpy).toHaveBeenCalledWith(
         'foo',
         ['artist'],
+        undefined,
+        undefined,
+        undefined,
         undefined,
       );
     });
 
-    it.todo('should search for an artist (with options)', async () => {
-      const { http, search } = setup();
-
-      const response = await search.searchArtists('foo', { limit: 2 });
+    it('should search for an artist (with options)', async () => {
+      const response = await search.searchArtists('foo', searchOptions);
 
       expect(response).toEqual(searchArtistsFixture.artists);
-      expect(searchHelperMock).toHaveBeenCalledWith(http, 'foo', ['artist'], {
-        limit: 2,
-      });
+      expect(searchArtistsSpy).toHaveBeenCalledWith(
+        'foo',
+        ['artist'],
+        'bar',
+        1,
+        2,
+        'audio',
+      );
+    });
+  });
+
+  describe('searchAudiobooks', () => {
+    let searchAudiobooksSpy: SpyInstance;
+    beforeEach(() => {
+      searchAudiobooksSpy = vi
+        .spyOn(SearchService, 'search')
+        .mockResolvedValue(searchAudiobooksFixture);
+    });
+
+    it('should search for an audiobook (without options)', async () => {
+      const response = await search.searchAudiobooks('foo');
+
+      expect(response).toEqual(searchAudiobooksFixture.audiobooks);
+      expect(searchAudiobooksSpy).toHaveBeenCalledWith(
+        'foo',
+        ['audiobook'],
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+      );
+    });
+
+    it('should search for an audiobook (with options)', async () => {
+      const response = await search.searchAudiobooks('foo', searchOptions);
+
+      expect(response).toEqual(searchAudiobooksFixture.audiobooks);
+      expect(searchAudiobooksSpy).toHaveBeenCalledWith(
+        'foo',
+        ['audiobook'],
+        'bar',
+        1,
+        2,
+        'audio',
+      );
     });
   });
 
   describe('searchEpisodes', () => {
+    let searchEpisodesSpy: SpyInstance;
     beforeEach(() => {
-      searchHelperMock.mockResolvedValue(searchEpisodesFixture);
+      searchEpisodesSpy = vi
+        .spyOn(SearchService, 'search')
+        .mockResolvedValue(searchEpisodesFixture);
     });
 
-    it.todo('should search for an episode (without options)', async () => {
-      const { http, search } = setup();
-
+    it('should search for an episode (without options)', async () => {
       const response = await search.searchEpisodes('foo');
 
       expect(response).toEqual(searchEpisodesFixture.episodes);
-      expect(searchHelperMock).toHaveBeenCalledWith(
-        http,
+      expect(searchEpisodesSpy).toHaveBeenCalledWith(
         'foo',
         ['episode'],
+        undefined,
+        undefined,
+        undefined,
         undefined,
       );
     });
 
-    it.todo('should search for an episode (with options)', async () => {
-      const { http, search } = setup();
-
-      const response = await search.searchEpisodes('foo', { limit: 2 });
+    it('should search for an episode (with options)', async () => {
+      const response = await search.searchEpisodes('foo', searchOptions);
 
       expect(response).toEqual(searchEpisodesFixture.episodes);
-      expect(searchHelperMock).toHaveBeenCalledWith(http, 'foo', ['episode'], {
-        limit: 2,
-      });
+      expect(searchEpisodesSpy).toHaveBeenCalledWith(
+        'foo',
+        ['episode'],
+        'bar',
+        1,
+        2,
+        'audio',
+      );
     });
   });
 
   describe('searchPlaylists', () => {
+    let searchPlaylistsSpy: SpyInstance;
     beforeEach(() => {
-      searchHelperMock.mockResolvedValue(searchPlaylistsFixture);
+      searchPlaylistsSpy = vi
+        .spyOn(SearchService, 'search')
+        .mockResolvedValue(searchPlaylistsFixture);
     });
 
-    it.todo('should search for a playlist (without options)', async () => {
-      const { http, search } = setup();
-
+    it('should search for a playlist (without options)', async () => {
       const response = await search.searchPlaylists('foo');
 
       expect(response).toEqual(searchPlaylistsFixture.playlists);
-      expect(searchHelperMock).toHaveBeenCalledWith(
-        http,
+      expect(searchPlaylistsSpy).toHaveBeenCalledWith(
         'foo',
         ['playlist'],
+        undefined,
+        undefined,
+        undefined,
         undefined,
       );
     });
 
-    it.todo('should search for a playlist (with options)', async () => {
-      const { http, search } = setup();
-
-      const response = await search.searchPlaylists('foo', { limit: 2 });
+    it('should search for a playlist (with options)', async () => {
+      const response = await search.searchPlaylists('foo', searchOptions);
 
       expect(response).toEqual(searchPlaylistsFixture.playlists);
-      expect(searchHelperMock).toHaveBeenCalledWith(http, 'foo', ['playlist'], {
-        limit: 2,
-      });
+      expect(searchPlaylistsSpy).toHaveBeenCalledWith(
+        'foo',
+        ['playlist'],
+        'bar',
+        1,
+        2,
+        'audio',
+      );
     });
   });
 
   describe('searchShows', () => {
+    let searchShowsSpy: SpyInstance;
     beforeEach(() => {
-      searchHelperMock.mockResolvedValue(searchShowsFixture);
+      searchShowsSpy = vi
+        .spyOn(SearchService, 'search')
+        .mockResolvedValue(searchShowsFixture);
     });
 
-    it.todo('should search for a show (without options)', async () => {
-      const { http, search } = setup();
-
+    it('should search for a show (without options)', async () => {
       const response = await search.searchShows('foo');
 
       expect(response).toEqual(searchShowsFixture.shows);
-      expect(searchHelperMock).toHaveBeenCalledWith(
-        http,
+      expect(searchShowsSpy).toHaveBeenCalledWith(
         'foo',
         ['show'],
+        undefined,
+        undefined,
+        undefined,
         undefined,
       );
     });
 
-    it.todo('should search for a show (with options)', async () => {
-      const { http, search } = setup();
-
-      const response = await search.searchShows('foo', { limit: 2 });
+    it('should search for a show (with options)', async () => {
+      const response = await search.searchShows('foo', searchOptions);
 
       expect(response).toEqual(searchShowsFixture.shows);
-      expect(searchHelperMock).toHaveBeenCalledWith(http, 'foo', ['show'], {
-        limit: 2,
-      });
+      expect(searchShowsSpy).toHaveBeenCalledWith(
+        'foo',
+        ['show'],
+        'bar',
+        1,
+        2,
+        'audio',
+      );
     });
   });
 
   describe('searchTracks', () => {
+    let searchTracksSpy: SpyInstance;
     beforeEach(() => {
-      searchHelperMock.mockResolvedValue(searchTracksFixture);
+      searchTracksSpy = vi
+        .spyOn(SearchService, 'search')
+        .mockResolvedValue(searchTracksFixture);
     });
 
-    it.todo('should search for a track (without options)', async () => {
-      const { http, search } = setup();
-
+    it('should search for a track (without options)', async () => {
       const response = await search.searchTracks('foo');
 
       expect(response).toEqual(searchTracksFixture.tracks);
-      expect(searchHelperMock).toHaveBeenCalledWith(
-        http,
+      expect(searchTracksSpy).toHaveBeenCalledWith(
         'foo',
         ['track'],
+        undefined,
+        undefined,
+        undefined,
         undefined,
       );
     });
 
-    it.todo('should search for a track (with options)', async () => {
-      const { http, search } = setup();
-
-      const response = await search.searchTracks('foo', { limit: 2 });
+    it('should search for a track (with options)', async () => {
+      const response = await search.searchTracks('foo', searchOptions);
 
       expect(response).toEqual(searchTracksFixture.tracks);
-      expect(searchHelperMock).toHaveBeenCalledWith(http, 'foo', ['track'], {
-        limit: 2,
-      });
+      expect(searchTracksSpy).toHaveBeenCalledWith(
+        'foo',
+        ['track'],
+        'bar',
+        1,
+        2,
+        'audio',
+      );
     });
   });
 });

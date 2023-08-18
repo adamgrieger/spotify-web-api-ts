@@ -1,5 +1,6 @@
-import { type MockedClass } from 'vitest';
+import { type SpyInstance } from 'vitest';
 
+import { ArtistsService } from '../openapi/services/ArtistsService';
 import {
   artistFixture,
   getArtistAlbumsFixture,
@@ -7,123 +8,105 @@ import {
   getArtistsFixture,
   getRelatedArtistsFixture,
 } from '../fixtures';
-import { Http } from '../helpers/Http';
 
 import { ArtistsApi } from './ArtistsApi';
 
-vi.mock('../helpers/Http');
-
-const HttpMock = Http as MockedClass<typeof Http>;
-
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function setup() {
-  const httpMock = new HttpMock('token');
-  const artists = new ArtistsApi();
-
-  return { httpMock, artists };
-}
+const artists = new ArtistsApi();
 
 describe('ArtistsApi', () => {
-  beforeEach(() => {
+  afterEach(() => {
     vi.resetAllMocks();
   });
 
   describe('getArtist', () => {
+    let getArtistSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(artistFixture);
+      getArtistSpy = vi
+        .spyOn(ArtistsService, 'getAnArtist')
+        .mockResolvedValue(artistFixture);
     });
 
-    it.todo('should get an artist', async () => {
-      const { httpMock, artists } = setup();
-
+    it('should get an artist', async () => {
       const response = await artists.getArtist('foo');
 
       expect(response).toEqual(artistFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/artists/foo');
+      expect(getArtistSpy).toHaveBeenCalledWith('foo');
     });
   });
 
   describe('getArtistAlbums', () => {
+    let getArtistAlbumsSpy: SpyInstance;
     beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getArtistAlbumsFixture);
+      getArtistAlbumsSpy = vi
+        .spyOn(ArtistsService, 'getAnArtistsAlbums')
+        .mockResolvedValue(getArtistAlbumsFixture);
     });
 
-    it.todo("should get an artist's albums (without options)", async () => {
-      const { httpMock, artists } = setup();
-
+    it("should get an artist's albums (without options)", async () => {
       const response = await artists.getArtistAlbums('foo');
 
       expect(response).toEqual(getArtistAlbumsFixture);
-      expect(httpMock.get).toHaveBeenCalledWith(
-        '/artists/foo/albums',
+      expect(getArtistAlbumsSpy).toHaveBeenCalledWith(
+        'foo',
+        undefined,
+        undefined,
+        undefined,
         undefined,
       );
     });
 
-    it.todo("should get an artist's albums (with options)", async () => {
-      const { httpMock, artists } = setup();
-
-      const response = await artists.getArtistAlbums('foo', { market: 'bar' });
+    it("should get an artist's albums (with options)", async () => {
+      const response = await artists.getArtistAlbums('foo', {
+        market: 'bar',
+        include_groups: ['album', 'appears_on', 'compilation', 'single'],
+        limit: 1,
+        offset: 2,
+      });
 
       expect(response).toEqual(getArtistAlbumsFixture);
-      expect(httpMock.get).toHaveBeenCalledWith('/artists/foo/albums', {
-        params: {
-          country: 'bar',
-        },
-      });
+      expect(getArtistAlbumsSpy).toHaveBeenCalledWith(
+        'foo',
+        'album,appears_on,compilation,single',
+        'bar',
+        1,
+        2,
+      );
     });
   });
 
   describe('getArtists', () => {
-    beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getArtistsFixture);
-    });
-
-    it.todo('should get several artists', async () => {
-      const { httpMock, artists } = setup();
-
+    it('should get several artists', async () => {
+      const getArtistsSpy = vi
+        .spyOn(ArtistsService, 'getMultipleArtists')
+        .mockResolvedValue(getArtistsFixture);
       const response = await artists.getArtists(['foo', 'bar']);
 
       expect(response).toEqual(getArtistsFixture.artists);
-      expect(httpMock.get).toHaveBeenCalledWith('/artists', {
-        params: {
-          ids: ['foo', 'bar'],
-        },
-      });
+      expect(getArtistsSpy).toHaveBeenCalledWith('foo,bar');
     });
   });
 
   describe('getArtistTopTracks', () => {
-    beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getArtistTopTracksFixture);
-    });
-
-    it.todo("should get an artist's top tracks", async () => {
-      const { httpMock, artists } = setup();
-
+    it("should get an artist's top tracks", async () => {
+      const getArtistTopTracksSpy = vi
+        .spyOn(ArtistsService, 'getAnArtistsTopTracks')
+        .mockResolvedValue(getArtistTopTracksFixture);
       const response = await artists.getArtistTopTracks('foo', 'bar');
 
       expect(response).toEqual(getArtistTopTracksFixture.tracks);
-      expect(httpMock.get).toHaveBeenCalledWith('/artists/foo/top-tracks', {
-        params: {
-          country: 'bar',
-        },
-      });
+      expect(getArtistTopTracksSpy).toHaveBeenCalledWith('foo', 'bar');
     });
   });
 
   describe('getRelatedArtists', () => {
-    beforeEach(() => {
-      HttpMock.prototype.get.mockResolvedValue(getRelatedArtistsFixture);
-    });
-
-    it.todo("should get an artist's related artists", async () => {
-      const { httpMock, artists } = setup();
-
+    it("should get an artist's related artists", async () => {
+      const getRelatedArtistsSpy = vi
+        .spyOn(ArtistsService, 'getAnArtistsRelatedArtists')
+        .mockResolvedValue(getRelatedArtistsFixture);
       const response = await artists.getRelatedArtists('foo');
 
       expect(response).toEqual(getRelatedArtistsFixture.artists);
-      expect(httpMock.get).toHaveBeenCalledWith('/artists/foo/related-artists');
+      expect(getRelatedArtistsSpy).toHaveBeenCalledWith('foo');
     });
   });
 });

@@ -32,6 +32,7 @@ export * from './browse';
 export * from './episodes';
 export * from './follow';
 export * from './library';
+export * from './markets';
 export * from './personalization';
 export * from './player';
 export * from './playlists';

@@ -1,13 +1,10 @@
-import {
-  type PagingSimplifiedTrackObject,
-  type SimplifiedTrackObject,
-} from '../../openapi';
+import { type PagingTrackObject, type TrackObject } from '../../openapi';
 
-export const getMyTopTracksFixture: PagingSimplifiedTrackObject = {
+export const getMyTopTracksFixture: PagingTrackObject = {
   items: [
     {
       album: {
-        album_type: 'ALBUM',
+        album_type: 'album',
         artists: [
           {
             external_urls: {
@@ -240,7 +237,7 @@ export const getMyTopTracksFixture: PagingSimplifiedTrackObject = {
       track_number: 10,
       type: 'track',
       uri: 'spotify:track:0M0bBnanRqRGKs8pz7ZWi0',
-    } as SimplifiedTrackObject,
+    } as TrackObject,
   ],
   total: 50,
   limit: 1,
