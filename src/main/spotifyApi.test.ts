@@ -87,6 +87,34 @@ describe('SpotifyWebApi', () => {
     });
   });
 
+  describe('getAuthorizationCodePKCEUrl', () => {
+    it('should get a URL for refreshable authorization (without options)', () => {
+      const spotify = new SpotifyWebApi(mockSpotifyWebApiConfigs);
+
+      const url = spotify.getAuthorizationCodePKCEUrl(
+        mockSpotifyWebApiConfigs.clientId,
+        { code_challenge: 'qux', code_challenge_method: 'S256' },
+      );
+
+      expect(url).toBe(
+        `${AUTHORIZE_URL}?code_challenge=qux&code_challenge_method=S256&client_id=foo&redirect_uri=baz&response_type=code`,
+      );
+    });
+
+    it('should get a URL for refreshable authorization (with options)', () => {
+      const spotify = new SpotifyWebApi(mockSpotifyWebApiConfigs);
+
+      const url = spotify.getAuthorizationCodePKCEUrl(
+        mockSpotifyWebApiConfigs.clientId,
+        { state: 'quz', code_challenge: 'qux', code_challenge_method: 'S256' },
+      );
+
+      expect(url).toBe(
+        `${AUTHORIZE_URL}?state=quz&code_challenge=qux&code_challenge_method=S256&client_id=foo&redirect_uri=baz&response_type=code`,
+      );
+    });
+  });
+
   describe('getTemporaryAuthorizationUrl', () => {
     it('should get a URL for temporary authorization (without options)', () => {
       const spotify = new SpotifyWebApi(mockSpotifyWebApiConfigs);
@@ -122,6 +150,29 @@ describe('SpotifyWebApi', () => {
         {
           headers: {
             'Authorization': `Basic ${base64('foo:bar')}`,
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        },
+      );
+    });
+  });
+
+  describe('getTokenWithAuthenticateCodePKCE', () => {
+    it('should get refreshable user tokens', async () => {
+      mocks.axios.post.mockResolvedValue({});
+      const spotify = new SpotifyWebApi(mockSpotifyWebApiConfigs);
+
+      await spotify.getTokenWithAuthenticateCodePKCE(
+        'qux',
+        'verifierQuz',
+        mockSpotifyWebApiConfigs.clientId,
+      );
+
+      expect(mocks.axios.post).toHaveBeenCalledWith(
+        TOKEN_URL,
+        'code=qux&code_verifier=verifierQuz&grant_type=authorization_code&redirect_uri=baz&client_id=foo',
+        {
+          headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         },

@@ -154,7 +154,7 @@ export class SpotifyWebApi {
    */
   public getAuthorizationCodePKCEUrl(
     clientId: string,
-    options?: GetAuthorizationUrlOptions & PKCEExtensionOptions,
+    options: GetAuthorizationUrlOptions & PKCEExtensionOptions,
   ): string {
     return getAuthorizationUrl(clientId, this.redirectUri, 'code', options);
   }
