@@ -18,6 +18,7 @@ import { UsersApi } from '../apis/UsersApi';
 import { TOKEN_URL } from '../constants';
 import {
   type GetAuthorizationUrlOptions,
+  type PKCEExtensionOptions,
   getAuthorizationUrl,
 } from '../helpers/getAuthorizationUrl';
 import { base64 } from '../openapi/core/request';
@@ -137,15 +138,25 @@ export class SpotifyWebApi {
    *
    * @param options Optional URL parameters.
    */
-  public getRefreshableAuthorizationUrl(
-    options?: GetAuthorizationUrlOptions,
-  ): string {
+  public getAuthorizationCodeUrl(options?: GetAuthorizationUrlOptions): string {
     return getAuthorizationUrl(
       this.clientId,
       this.redirectUri,
       'code',
       options,
     );
+  }
+
+  /**
+   * Get an authorization URL for use with the Authorization Code + PKCE extension flow.
+   *
+   * @param options Optional URL parameters.
+   */
+  public getAuthorizationCodePKCEUrl(
+    clientId: string,
+    options?: GetAuthorizationUrlOptions & PKCEExtensionOptions,
+  ): string {
+    return getAuthorizationUrl(clientId, this.redirectUri, 'code', options);
   }
 
   /**
@@ -181,7 +192,7 @@ export class SpotifyWebApi {
    * @param code The authorization code returned from the initial request to
    *             the authorization endpoint.
    */
-  public async getRefreshableUserTokens(
+  public async getTokenWithAuthenticateCode(
     code: string,
   ): Promise<GetRefreshableUserTokensResponse> {
     const response =
@@ -197,6 +208,45 @@ export class SpotifyWebApi {
             'Authorization': `Basic ${base64(
               `${this.clientId}:${this.clientSecret}`,
             )}`,
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        },
+      );
+    return response.data;
+  }
+
+  /**
+   * Get refreshable authorization tokens using the Authorization Code + PKCE extension flow.
+   *
+   * The authorization code flow with PKCE is the recommended authorization
+   * flow if you’re implementing authorization in a mobile app, single page
+   * web app, or any other type of application where the client secret can’t
+   * be safely stored.
+   *
+   * @param code The authorization code returned from the initial request to
+   *             the authorization endpoint.
+   *
+   * @param codeVerifier SHA256 hashed and base64 encoded code string that
+   *                     matches the code_challenge initially sent with the
+   *                     authorization url
+   */
+  public async getTokenWithAuthenticateCodePKCE(
+    code: string,
+    codeVerifier: string,
+    clientId: string,
+  ): Promise<GetRefreshableUserTokensResponse> {
+    const response =
+      await this.spotifyAxios.axiosInstance.post<GetRefreshableUserTokensResponse>(
+        TOKEN_URL,
+        qs.stringify({
+          code,
+          code_verifier: codeVerifier,
+          grant_type: 'authorization_code',
+          redirect_uri: this.redirectUri,
+          client_id: clientId,
+        }),
+        {
+          headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         },
