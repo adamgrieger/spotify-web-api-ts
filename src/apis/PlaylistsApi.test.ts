@@ -3,11 +3,11 @@ import { type SpyInstance } from 'vitest';
 import { PlaylistsService } from '../openapi';
 import {
   getMyPlaylistsFixture,
+  getPlaylistCoverFixture,
   getPlaylistItemsFixture,
   getUserPlaylistsFixture,
   playlistFixture,
   snapshotIdFixture,
-  spotifyImageFixture,
 } from '../fixtures';
 
 import { PlaylistsApi } from './PlaylistsApi';
@@ -190,14 +190,14 @@ describe('PlaylistsApi', () => {
   });
 
   describe('getPlaylistCover', () => {
-    it.todo('should get a playlist cover image', async () => {
-      // const getPlaylistCoverSpy = vi
-      //   .spyOn(PlaylistsService, 'getPlaylistCover')
-      //   .mockResolvedValue(getPlaylistCoverFixture);
+    it('should get a playlist cover image', async () => {
+      const getPlaylistCoverSpy = vi
+        .spyOn(PlaylistsService, 'getPlaylistCover')
+        .mockResolvedValue(getPlaylistCoverFixture);
       const response = await playlists.getPlaylistCover('foo');
 
-      expect(response).toEqual([spotifyImageFixture]);
-      expect(null).toHaveBeenCalledWith('/playlists/foo/images');
+      expect(response).toEqual(getPlaylistCoverFixture);
+      expect(getPlaylistCoverSpy).toHaveBeenCalledWith('foo');
     });
   });
 
