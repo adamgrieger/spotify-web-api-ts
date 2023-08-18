@@ -20,7 +20,6 @@ import {
   type GetAuthorizationUrlOptions,
   getAuthorizationUrl,
 } from '../helpers/getAuthorizationUrl';
-import { assertClientConfigs } from '../helpers/validateClientConfigs';
 import { base64 } from '../openapi/core/request';
 import {
   type GetRefreshableUserTokensResponse,
@@ -185,12 +184,6 @@ export class SpotifyWebApi {
   public async getRefreshableUserTokens(
     code: string,
   ): Promise<GetRefreshableUserTokensResponse> {
-    assertClientConfigs({
-      clientId: this.clientId,
-      clientSecret: this.clientSecret,
-      redirectUri: this.redirectUri,
-    });
-
     const response =
       await this.spotifyAxios.axiosInstance.post<GetRefreshableUserTokensResponse>(
         TOKEN_URL,
@@ -221,11 +214,6 @@ export class SpotifyWebApi {
   public async getRefreshedAccessToken(
     refreshToken: string,
   ): Promise<GetRefreshedAccessTokenResponse> {
-    assertClientConfigs({
-      clientId: this.clientId,
-      clientSecret: this.clientSecret,
-    });
-
     const response =
       await this.spotifyAxios.axiosInstance.post<GetRefreshedAccessTokenResponse>(
         TOKEN_URL,
@@ -258,11 +246,6 @@ export class SpotifyWebApi {
    * access token, is that a higher rate limit is applied.
    */
   public async getTemporaryAppTokens(): Promise<GetTemporaryAppTokensResponse> {
-    assertClientConfigs({
-      clientId: this.clientId,
-      clientSecret: this.clientSecret,
-    });
-
     const response =
       await this.spotifyAxios.axiosInstance.post<GetTemporaryAppTokensResponse>(
         TOKEN_URL,
