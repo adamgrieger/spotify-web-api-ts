@@ -79,8 +79,9 @@ export class TracksApi {
     trackIds: string[],
     options?: MarketOptions,
   ): Promise<TrackObject[]> {
-    return await TracksService.getSeveralTracks(trackIds.join(',')).then(
-      ({ tracks }) => tracks,
-    );
+    return await TracksService.getSeveralTracks(
+      trackIds.join(','),
+      options?.market,
+    ).then(({ tracks }) => tracks);
   }
 }
