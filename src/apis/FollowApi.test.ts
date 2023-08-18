@@ -141,9 +141,9 @@ describe('FollowApi', () => {
   });
 
   describe('isFollowingPlaylist', () => {
-    it.todo('should check if a user follows a playlist', async () => {
+    it('should check if a user follows a playlist', async () => {
       const isFollowingPlaylistSpy = vi
-        .spyOn(UsersService, 'checkCurrentUserFollows')
+        .spyOn(UsersService, 'checkIfUserFollowsPlaylist')
         .mockResolvedValue([true]);
       const response = await follow.isFollowingPlaylist('foo', 'bar');
 
