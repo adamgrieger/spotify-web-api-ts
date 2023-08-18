@@ -16,11 +16,12 @@ import { ShowsApi } from '../apis/ShowsApi';
 import { TracksApi } from '../apis/TracksApi';
 import { UsersApi } from '../apis/UsersApi';
 import { TOKEN_URL } from '../constants';
-import { encodeToBase64 } from '../helpers/encodeToBase64';
 import {
   type GetAuthorizationUrlOptions,
+  type PKCEExtensionOptions,
   getAuthorizationUrl,
 } from '../helpers/getAuthorizationUrl';
+import { base64 } from '../openapi/core/request';
 import {
   type GetRefreshableUserTokensResponse,
   type GetRefreshedAccessTokenResponse,
@@ -32,18 +33,21 @@ import { type SpotifyAxios, getSpotifyAxios } from './spotifyAxios';
 export let spotifyAxios: SpotifyAxios;
 
 export interface SpotifyWebApiOptions {
+  clientId: string;
+  clientSecret: string;
+  redirectUri: string;
+}
+
+export interface SpotifyWebApiCredentials {
   accessToken?: string;
-  clientId?: string;
-  clientSecret?: string;
-  redirectUri?: string;
 }
 
 export class SpotifyWebApi {
-  private readonly clientId: string;
+  private readonly _clientId: string;
 
-  private readonly clientSecret: string;
+  private readonly _clientSecret: string;
 
-  private readonly redirectUri: string;
+  private readonly _redirectUri: string;
 
   private readonly spotifyAxios: SpotifyAxios;
 
@@ -77,13 +81,16 @@ export class SpotifyWebApi {
 
   public users: UsersApi;
 
-  public constructor(options?: SpotifyWebApiOptions) {
-    this.clientId = options?.clientId ?? '';
-    this.clientSecret = options?.clientSecret ?? '';
-    this.redirectUri = options?.redirectUri ?? '';
+  public constructor(
+    options: SpotifyWebApiOptions,
+    credentials?: SpotifyWebApiCredentials,
+  ) {
+    this._clientId = options.clientId;
+    this._clientSecret = options.clientSecret;
+    this._redirectUri = options.redirectUri;
 
     this.spotifyAxios = getSpotifyAxios();
-    this.setAccessToken(options?.accessToken ?? '');
+    this.setAccessToken(credentials?.accessToken ?? '');
 
     this.albums = new AlbumsApi();
     this.artists = new ArtistsApi();
@@ -110,16 +117,16 @@ export class SpotifyWebApi {
     this.spotifyAxios.apiConfig.TOKEN = accessToken;
   }
 
-  public getClientId(): string {
-    return this.clientId;
+  public get clientId(): string {
+    return this._clientId;
   }
 
-  public getClientSecret(): string {
-    return this.clientSecret;
+  public get clientSecret(): string {
+    return this._clientSecret;
   }
 
-  public getRedirectUri(): string {
-    return this.redirectUri;
+  public get redirectUri(): string {
+    return this._redirectUri;
   }
 
   // +--------------------+
@@ -131,15 +138,25 @@ export class SpotifyWebApi {
    *
    * @param options Optional URL parameters.
    */
-  public getRefreshableAuthorizationUrl(
-    options?: GetAuthorizationUrlOptions,
-  ): string {
+  public getAuthorizationCodeUrl(options?: GetAuthorizationUrlOptions): string {
     return getAuthorizationUrl(
       this.clientId,
       this.redirectUri,
       'code',
       options,
     );
+  }
+
+  /**
+   * Get an authorization URL for use with the Authorization Code + PKCE extension flow.
+   *
+   * @param options Optional URL parameters.
+   */
+  public getAuthorizationCodePKCEUrl(
+    clientId: string,
+    options: GetAuthorizationUrlOptions & PKCEExtensionOptions,
+  ): string {
+    return getAuthorizationUrl(clientId, this.redirectUri, 'code', options);
   }
 
   /**
@@ -175,7 +192,7 @@ export class SpotifyWebApi {
    * @param code The authorization code returned from the initial request to
    *             the authorization endpoint.
    */
-  public async getRefreshableUserTokens(
+  public async getTokenWithAuthenticateCode(
     code: string,
   ): Promise<GetRefreshableUserTokensResponse> {
     const response =
@@ -188,9 +205,48 @@ export class SpotifyWebApi {
         }),
         {
           headers: {
-            'Authorization': `Basic ${encodeToBase64(
+            'Authorization': `Basic ${base64(
               `${this.clientId}:${this.clientSecret}`,
             )}`,
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        },
+      );
+    return response.data;
+  }
+
+  /**
+   * Get refreshable authorization tokens using the Authorization Code + PKCE extension flow.
+   *
+   * The authorization code flow with PKCE is the recommended authorization
+   * flow if you’re implementing authorization in a mobile app, single page
+   * web app, or any other type of application where the client secret can’t
+   * be safely stored.
+   *
+   * @param code The authorization code returned from the initial request to
+   *             the authorization endpoint.
+   *
+   * @param codeVerifier SHA256 hashed and base64 encoded code string that
+   *                     matches the code_challenge initially sent with the
+   *                     authorization url
+   */
+  public async getTokenWithAuthenticateCodePKCE(
+    code: string,
+    codeVerifier: string,
+    clientId: string,
+  ): Promise<GetRefreshableUserTokensResponse> {
+    const response =
+      await this.spotifyAxios.axiosInstance.post<GetRefreshableUserTokensResponse>(
+        TOKEN_URL,
+        qs.stringify({
+          code,
+          code_verifier: codeVerifier,
+          grant_type: 'authorization_code',
+          redirect_uri: this.redirectUri,
+          client_id: clientId,
+        }),
+        {
+          headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         },
@@ -217,7 +273,7 @@ export class SpotifyWebApi {
         }),
         {
           headers: {
-            'Authorization': `Basic ${encodeToBase64(
+            'Authorization': `Basic ${base64(
               `${this.clientId}:${this.clientSecret}`,
             )}`,
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -248,7 +304,7 @@ export class SpotifyWebApi {
         }),
         {
           headers: {
-            'Authorization': `Basic ${encodeToBase64(
+            'Authorization': `Basic ${base64(
               `${this.clientId}:${this.clientSecret}`,
             )}`,
             'Content-Type': 'application/x-www-form-urlencoded',

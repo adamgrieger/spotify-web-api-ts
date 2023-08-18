@@ -1,156 +1,178 @@
-import axios from 'axios';
-import { type Mocked, type MockedFunction } from 'vitest';
-
-import { TOKEN_URL } from '../constants';
-import { encodeToBase64 } from '../helpers/encodeToBase64';
-import { getAuthorizationUrl } from '../helpers/getAuthorizationUrl';
+import { AUTHORIZE_URL, TOKEN_URL } from '../constants';
+import { base64 } from '../openapi/core/request';
 
 import { SpotifyWebApi } from './spotifyApi';
 
-vi.mock('axios');
-vi.mock('./helpers/getAuthorizationUrl');
+import type axios from 'axios';
 
-const axiosMock = axios as Mocked<typeof axios>;
-const getAuthorizationUrlMock = getAuthorizationUrl as MockedFunction<
-  typeof getAuthorizationUrl
->;
+const mocks = vi.hoisted(() => {
+  const axiosPostSpy = vi.fn();
+
+  return {
+    axios: {
+      post: axiosPostSpy,
+    },
+  };
+});
+
+vi.mock('axios', async () => {
+  const actual = (await vi.importActual('axios')) as typeof axios;
+
+  return {
+    default: {
+      // @ts-expect-error Ignore for test
+      create: (args) => ({ ...actual.create(args), post: mocks.axios.post }),
+      post: mocks.axios.post,
+    },
+  };
+});
+
+const mockSpotifyWebApiConfigs = {
+  clientId: 'foo',
+  clientSecret: 'bar',
+  redirectUri: 'baz',
+};
 
 describe('SpotifyWebApi', () => {
-  beforeEach(() => {
+  afterEach(() => {
     vi.resetAllMocks();
   });
 
-  it.todo('should construct a SpotifyWebApi instance (without options)', () => {
-    const spotify = new SpotifyWebApi();
+  // it('should construct a SpotifyWebApi instance (without options)', () => {
+  //   const spotify = new SpotifyWebApi({});
+
+  //   expect(spotify.getAccessToken()).toBe('');
+  //   expect(spotify.clientId).toBe('');
+  //   expect(spotify.clientSecret).toBe('');
+  //   expect(spotify.redirectUri).toBe('');
+  // });
+
+  it('should construct a SpotifyWebApi instance (with options)', () => {
+    const spotify = new SpotifyWebApi(mockSpotifyWebApiConfigs);
 
     expect(spotify.getAccessToken()).toBe('');
-    expect(spotify.getClientId()).toBe('');
-    expect(spotify.getClientSecret()).toBe('');
-    expect(spotify.getRedirectUri()).toBe('');
+    expect(spotify.clientId).toBe('foo');
+    expect(spotify.clientSecret).toBe('bar');
+    expect(spotify.redirectUri).toBe('baz');
   });
 
-  it.todo('should construct a SpotifyWebApi instance (with options)', () => {
-    const spotify = new SpotifyWebApi({
-      accessToken: 'foo',
-      clientId: 'bar',
-      clientSecret: 'baz',
-      redirectUri: 'qux',
+  it('should get and set the access token', () => {
+    const spotify = new SpotifyWebApi(mockSpotifyWebApiConfigs, {
+      accessToken: 'token',
     });
-
-    expect(spotify.getAccessToken()).toBe('foo');
-    expect(spotify.getClientId()).toBe('bar');
-    expect(spotify.getClientSecret()).toBe('baz');
-    expect(spotify.getRedirectUri()).toBe('qux');
-  });
-
-  it.todo('should get and set the access token', () => {
-    const spotify = new SpotifyWebApi({ accessToken: 'token' });
     expect(spotify.getAccessToken()).toBe('token');
     spotify.setAccessToken('newToken');
     expect(spotify.getAccessToken()).toBe('newToken');
   });
 
-  describe('getRefreshableAuthorizationUrl', () => {
-    it.todo(
-      'should get a URL for refreshable authorization (without options)',
-      () => {
-        const spotify = new SpotifyWebApi({
-          clientId: 'foo',
-          redirectUri: 'bar',
-        });
+  describe('getAuthorizationCodeUrl', () => {
+    it('should get a URL for refreshable authorization (without options)', () => {
+      const spotify = new SpotifyWebApi(mockSpotifyWebApiConfigs);
 
-        spotify.getRefreshableAuthorizationUrl();
+      const url = spotify.getAuthorizationCodeUrl();
 
-        expect(getAuthorizationUrlMock).toHaveBeenCalledWith(
-          'foo',
-          'bar',
-          'code',
-          undefined,
-        );
-      },
-    );
+      expect(url).toBe(
+        `${AUTHORIZE_URL}?client_id=foo&redirect_uri=baz&response_type=code`,
+      );
+    });
 
-    it.todo(
-      'should get a URL for refreshable authorization (with options)',
-      () => {
-        const spotify = new SpotifyWebApi({
-          clientId: 'foo',
-          redirectUri: 'bar',
-        });
+    it('should get a URL for refreshable authorization (with options)', () => {
+      const spotify = new SpotifyWebApi(mockSpotifyWebApiConfigs);
 
-        spotify.getRefreshableAuthorizationUrl({ state: 'baz' });
+      const url = spotify.getAuthorizationCodeUrl({ state: 'qux' });
 
-        expect(getAuthorizationUrlMock).toHaveBeenCalledWith(
-          'foo',
-          'bar',
-          'code',
-          {
-            state: 'baz',
-          },
-        );
-      },
-    );
+      expect(url).toBe(
+        `${AUTHORIZE_URL}?state=qux&client_id=foo&redirect_uri=baz&response_type=code`,
+      );
+    });
+  });
+
+  describe('getAuthorizationCodePKCEUrl', () => {
+    it('should get a URL for refreshable authorization (without options)', () => {
+      const spotify = new SpotifyWebApi(mockSpotifyWebApiConfigs);
+
+      const url = spotify.getAuthorizationCodePKCEUrl(
+        mockSpotifyWebApiConfigs.clientId,
+        { code_challenge: 'qux', code_challenge_method: 'S256' },
+      );
+
+      expect(url).toBe(
+        `${AUTHORIZE_URL}?code_challenge=qux&code_challenge_method=S256&client_id=foo&redirect_uri=baz&response_type=code`,
+      );
+    });
+
+    it('should get a URL for refreshable authorization (with options)', () => {
+      const spotify = new SpotifyWebApi(mockSpotifyWebApiConfigs);
+
+      const url = spotify.getAuthorizationCodePKCEUrl(
+        mockSpotifyWebApiConfigs.clientId,
+        { state: 'quz', code_challenge: 'qux', code_challenge_method: 'S256' },
+      );
+
+      expect(url).toBe(
+        `${AUTHORIZE_URL}?state=quz&code_challenge=qux&code_challenge_method=S256&client_id=foo&redirect_uri=baz&response_type=code`,
+      );
+    });
   });
 
   describe('getTemporaryAuthorizationUrl', () => {
-    it.todo(
-      'should get a URL for temporary authorization (without options)',
-      () => {
-        const spotify = new SpotifyWebApi({
-          clientId: 'foo',
-          redirectUri: 'bar',
-        });
+    it('should get a URL for temporary authorization (without options)', () => {
+      const spotify = new SpotifyWebApi(mockSpotifyWebApiConfigs);
 
-        spotify.getTemporaryAuthorizationUrl();
+      const url = spotify.getTemporaryAuthorizationUrl();
 
-        expect(getAuthorizationUrlMock).toHaveBeenCalledWith(
-          'foo',
-          'bar',
-          'token',
-          undefined,
-        );
-      },
-    );
+      expect(url).toBe(
+        `${AUTHORIZE_URL}?client_id=foo&redirect_uri=baz&response_type=token`,
+      );
+    });
 
-    it.todo(
-      'should get a URL for temporary authorization (with options)',
-      () => {
-        const spotify = new SpotifyWebApi({
-          clientId: 'foo',
-          redirectUri: 'bar',
-        });
+    it('should get a URL for temporary authorization (with options)', () => {
+      const spotify = new SpotifyWebApi(mockSpotifyWebApiConfigs);
 
-        spotify.getTemporaryAuthorizationUrl({ state: 'baz' });
+      const url = spotify.getTemporaryAuthorizationUrl({ state: 'qux' });
 
-        expect(getAuthorizationUrlMock).toHaveBeenCalledWith(
-          'foo',
-          'bar',
-          'token',
-          {
-            state: 'baz',
-          },
-        );
-      },
-    );
+      expect(url).toBe(
+        `${AUTHORIZE_URL}?state=qux&client_id=foo&redirect_uri=baz&response_type=token`,
+      );
+    });
   });
 
-  describe('getRefreshableUserTokens', () => {
-    it.todo('should get refreshable user tokens', async () => {
-      axiosMock.post.mockResolvedValue({});
-      const spotify = new SpotifyWebApi({
-        clientId: 'foo',
-        clientSecret: 'bar',
-        redirectUri: 'baz',
-      });
+  describe('getTokenWithAuthenticateCode', () => {
+    it('should get refreshable user tokens', async () => {
+      mocks.axios.post.mockResolvedValue({});
+      const spotify = new SpotifyWebApi(mockSpotifyWebApiConfigs);
 
-      await spotify.getRefreshableUserTokens('qux');
+      await spotify.getTokenWithAuthenticateCode('qux');
 
-      expect(axiosMock.post).toHaveBeenCalledWith(
+      expect(mocks.axios.post).toHaveBeenCalledWith(
         TOKEN_URL,
         'code=qux&grant_type=authorization_code&redirect_uri=baz',
         {
           headers: {
-            'Authorization': `Basic ${encodeToBase64('foo:bar')}`,
+            'Authorization': `Basic ${base64('foo:bar')}`,
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        },
+      );
+    });
+  });
+
+  describe('getTokenWithAuthenticateCodePKCE', () => {
+    it('should get refreshable user tokens', async () => {
+      mocks.axios.post.mockResolvedValue({});
+      const spotify = new SpotifyWebApi(mockSpotifyWebApiConfigs);
+
+      await spotify.getTokenWithAuthenticateCodePKCE(
+        'qux',
+        'verifierQuz',
+        mockSpotifyWebApiConfigs.clientId,
+      );
+
+      expect(mocks.axios.post).toHaveBeenCalledWith(
+        TOKEN_URL,
+        'code=qux&code_verifier=verifierQuz&grant_type=authorization_code&redirect_uri=baz&client_id=foo',
+        {
+          headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         },
@@ -159,21 +181,18 @@ describe('SpotifyWebApi', () => {
   });
 
   describe('getRefreshedAccessToken', () => {
-    it.todo('should get a refreshed access token', async () => {
-      axiosMock.post.mockResolvedValue({});
-      const spotify = new SpotifyWebApi({
-        clientId: 'foo',
-        clientSecret: 'bar',
-      });
+    it('should get a refreshed access token', async () => {
+      mocks.axios.post.mockResolvedValue({});
+      const spotify = new SpotifyWebApi(mockSpotifyWebApiConfigs);
 
       await spotify.getRefreshedAccessToken('baz');
 
-      expect(axiosMock.post).toHaveBeenCalledWith(
+      expect(mocks.axios.post).toHaveBeenCalledWith(
         TOKEN_URL,
         'grant_type=refresh_token&refresh_token=baz',
         {
           headers: {
-            'Authorization': `Basic ${encodeToBase64('foo:bar')}`,
+            'Authorization': `Basic ${base64('foo:bar')}`,
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         },
@@ -182,21 +201,18 @@ describe('SpotifyWebApi', () => {
   });
 
   describe('getTemporaryAppTokens', () => {
-    it.todo('should get temporary app tokens', async () => {
-      axiosMock.post.mockResolvedValue({});
-      const spotify = new SpotifyWebApi({
-        clientId: 'foo',
-        clientSecret: 'bar',
-      });
+    it('should get temporary app tokens', async () => {
+      mocks.axios.post.mockResolvedValue({});
+      const spotify = new SpotifyWebApi(mockSpotifyWebApiConfigs);
 
       await spotify.getTemporaryAppTokens();
 
-      expect(axiosMock.post).toHaveBeenCalledWith(
+      expect(mocks.axios.post).toHaveBeenCalledWith(
         TOKEN_URL,
         'grant_type=client_credentials',
         {
           headers: {
-            'Authorization': `Basic ${encodeToBase64('foo:bar')}`,
+            'Authorization': `Basic ${base64('foo:bar')}`,
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         },

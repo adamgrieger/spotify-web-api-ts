@@ -9,11 +9,18 @@ export interface GetAuthorizationUrlOptions {
   state?: string;
 }
 
+export interface PKCEExtensionOptions {
+  code_challenge: string;
+  code_challenge_method: 'S256';
+}
+
 export function getAuthorizationUrl(
   clientId: string,
   redirectUri: string,
   responseType: 'code' | 'token',
-  options?: GetAuthorizationUrlOptions,
+  options?:
+    | GetAuthorizationUrlOptions
+    | (GetAuthorizationUrlOptions & PKCEExtensionOptions),
 ): string {
   return `${AUTHORIZE_URL}?${qs.stringify({
     ...options,

@@ -6,10 +6,13 @@ export type AuthorizationScope =
   | 'playlist-read-private'
   | 'streaming'
   | 'ugc-image-upload'
+  | 'user-create-partner'
   | 'user-follow-modify'
   | 'user-follow-read'
   | 'user-library-modify'
   | 'user-library-read'
+  | 'user-manage-entitlements'
+  | 'user-manage-partner'
   | 'user-modify-playback-state'
   | 'user-read-currently-playing'
   | 'user-read-email'
@@ -17,6 +20,8 @@ export type AuthorizationScope =
   | 'user-read-playback-state'
   | 'user-read-private'
   | 'user-read-recently-played'
+  | 'user-soa-link'
+  | 'user-soa-unlink'
   | 'user-top-read';
 
 export interface GetRefreshableUserTokensResponse {
