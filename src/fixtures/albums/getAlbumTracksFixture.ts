@@ -1,8 +1,7 @@
-import { GetAlbumTracksResponse } from '../../types/SpotifyResponses';
+import { type PagingTrackObject, type TrackObject } from '../../openapi';
 
-export const getAlbumTracksFixture: GetAlbumTracksResponse = {
-  href:
-    'https://api.spotify.com/v1/albums/76254F4WYdKOm0pVAVvp0x/tracks?offset=0&limit=20',
+export const getAlbumTracksFixture: PagingTrackObject = {
+  href: 'https://api.spotify.com/v1/albums/76254F4WYdKOm0pVAVvp0x/tracks?offset=0&limit=20',
   items: [
     {
       artists: [
@@ -113,7 +112,7 @@ export const getAlbumTracksFixture: GetAlbumTracksResponse = {
       track_number: 1,
       type: 'track',
       uri: 'spotify:track:596ZFzLjAI58LTxkXbQWuj',
-    },
+    } as TrackObject,
     {
       artists: [
         {
@@ -223,7 +222,7 @@ export const getAlbumTracksFixture: GetAlbumTracksResponse = {
       track_number: 2,
       type: 'track',
       uri: 'spotify:track:1f8Egwl9HHjPIawRbuioCi',
-    },
+    } as TrackObject,
   ],
   limit: 20,
   next: null,

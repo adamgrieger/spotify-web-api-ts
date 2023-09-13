@@ -1,35 +1,26 @@
-import { Http } from '../helpers/Http';
 import {
-  Category,
-  GetRecommendationsSeeds,
-  Paging,
-  SimplifiedAlbum,
-  SimplifiedPlaylist,
-} from '../types/SpotifyObjects';
+  AlbumsService,
+  CategoriesService,
+  type CategoryObject,
+  GenresService,
+  type PagingFeaturedPlaylistObject,
+  type PagingObject,
+  type PagingSimplifiedAlbumObject,
+  PlaylistsService,
+  type RecommendationsObject,
+  TracksService,
+} from '../openapi';
+import { type GetRecommendationsSeeds } from '../types/SpotifyObjects';
 import {
-  GetCategoriesOptions,
-  GetCategoryOptions,
-  GetCategoryPlaylistsOptions,
-  GetFeaturedPlaylistsOptions,
-  GetNewReleasesOptions,
-  GetRecommendationsOptions,
+  type GetCategoriesOptions,
+  type GetCategoryOptions,
+  type GetCategoryPlaylistsOptions,
+  type GetFeaturedPlaylistsOptions,
+  type GetNewReleasesOptions,
+  type GetRecommendationsOptions,
 } from '../types/SpotifyOptions';
-import {
-  GetAvailableGenreSeedsResponse,
-  GetCategoriesResponse,
-  GetCategoryPlaylistsResponse,
-  GetFeaturedPlaylistsResponse,
-  GetNewReleasesResponse,
-  GetRecommendationsResponse,
-} from '../types/SpotifyResponses';
 
 export class BrowseApi {
-  private http: Http;
-
-  constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * ### Get Available Genre Seeds
    *
@@ -44,11 +35,10 @@ export class BrowseApi {
    * // Array [ "acoustic", "afrobeat", ... ]
    * ```
    */
-  async getAvailableGenreSeeds(): Promise<string[]> {
-    const response = await this.http.get<GetAvailableGenreSeedsResponse>(
-      '/recommendations/available-genre-seeds',
+  public async getAvailableGenreSeeds(): Promise<string[]> {
+    return await GenresService.getRecommendationGenres().then(
+      ({ genres }) => genres,
     );
-    return response.genres;
   }
 
   /**
@@ -68,14 +58,15 @@ export class BrowseApi {
    *
    * @param options Optional request information.
    */
-  async getCategories(
+  public async getCategories(
     options?: GetCategoriesOptions,
-  ): Promise<Paging<Category>> {
-    const response = await this.http.get<GetCategoriesResponse>(
-      '/browse/categories',
-      options && { params: options },
-    );
-    return response.categories;
+  ): Promise<PagingObject> {
+    return await CategoriesService.getCategories(
+      options?.country,
+      options?.locale,
+      options?.limit,
+      options?.offset,
+    ).then(({ categories }) => categories);
   }
 
   /**
@@ -96,13 +87,14 @@ export class BrowseApi {
    * @param categoryId The Spotify category ID for the category.
    * @param options Optional request information.
    */
-  getCategory(
+  public async getCategory(
     categoryId: string,
     options?: GetCategoryOptions,
-  ): Promise<Category> {
-    return this.http.get<Category>(
-      `/browse/categories/${categoryId}`,
-      options && { params: options },
+  ): Promise<CategoryObject> {
+    return await CategoriesService.getACategory(
+      categoryId,
+      options?.country,
+      options?.locale,
     );
   }
 
@@ -123,15 +115,16 @@ export class BrowseApi {
    * @param categoryId The Spotify category ID for the category.
    * @param options Optional request information.
    */
-  async getCategoryPlaylists(
+  public async getCategoryPlaylists(
     categoryId: string,
     options?: GetCategoryPlaylistsOptions,
-  ): Promise<Paging<SimplifiedPlaylist>> {
-    const response = await this.http.get<GetCategoryPlaylistsResponse>(
-      `/browse/categories/${categoryId}/playlists`,
-      options && { params: options },
+  ): Promise<PagingFeaturedPlaylistObject> {
+    return await CategoriesService.getACategoriesPlaylists(
+      categoryId,
+      options?.country,
+      options?.limit,
+      options?.offset,
     );
-    return response.playlists;
   }
 
   /**
@@ -151,12 +144,15 @@ export class BrowseApi {
    *
    * @param options Optional request information.
    */
-  getFeaturedPlaylists(
+  public async getFeaturedPlaylists(
     options?: GetFeaturedPlaylistsOptions,
-  ): Promise<GetFeaturedPlaylistsResponse> {
-    return this.http.get<GetFeaturedPlaylistsResponse>(
-      '/browse/featured-playlists',
-      options && { params: options },
+  ): Promise<PagingFeaturedPlaylistObject> {
+    return await PlaylistsService.getFeaturedPlaylists(
+      options?.country,
+      options?.locale,
+      options?.timestamp,
+      options?.limit,
+      options?.offset,
     );
   }
 
@@ -177,14 +173,14 @@ export class BrowseApi {
    *
    * @param options Optional request information.
    */
-  async getNewReleases(
+  public async getNewReleases(
     options?: GetNewReleasesOptions,
-  ): Promise<Paging<SimplifiedAlbum>> {
-    const response = await this.http.get<GetNewReleasesResponse>(
-      '/browse/new-releases',
-      options && { params: options },
-    );
-    return response.albums;
+  ): Promise<PagingSimplifiedAlbumObject> {
+    return await AlbumsService.getNewReleases(
+      options?.country,
+      options?.limit,
+      options?.offset,
+    ).then(({ albums }) => albums);
   }
 
   /**
@@ -215,15 +211,58 @@ export class BrowseApi {
    * @param seeds Artists, genres, and/or tracks to use as seeds for recommendations.
    * @param options Optional request information.
    */
-  getRecommendations(
+  public async getRecommendations(
     seeds: GetRecommendationsSeeds,
     options?: GetRecommendationsOptions,
-  ): Promise<GetRecommendationsResponse> {
-    return this.http.get<GetRecommendationsResponse>('/recommendations', {
-      params: {
-        ...seeds,
-        ...options,
-      },
-    });
+  ): Promise<RecommendationsObject> {
+    return await TracksService.getRecommendations(
+      seeds.seed_artists?.join(',') ?? '',
+      seeds.seed_genres?.join(',') ?? '',
+      seeds.seed_tracks?.join(',') ?? '',
+      options?.limit,
+      options?.market,
+      options?.min_acousticness,
+      options?.max_acousticness,
+      options?.target_acousticness,
+      options?.min_danceability,
+      options?.max_danceability,
+      options?.target_danceability,
+      options?.min_duration_ms,
+      options?.max_duration_ms,
+      options?.target_duration_ms,
+      options?.min_energy,
+      options?.max_energy,
+      options?.target_energy,
+      options?.min_instrumentalness,
+      options?.max_instrumentalness,
+      options?.target_instrumentalness,
+      options?.min_key,
+      options?.max_key,
+      options?.target_key,
+      options?.min_liveness,
+      options?.max_liveness,
+      options?.target_liveness,
+      options?.min_loudness,
+      options?.max_loudness,
+      options?.target_loudness,
+      options?.min_mode,
+      options?.max_mode,
+      options?.target_mode,
+      options?.min_popularity,
+      options?.max_popularity,
+      options?.target_popularity,
+      options?.min_speechiness,
+      options?.max_speechiness,
+      options?.target_speechiness,
+      options?.min_tempo,
+      options?.max_tempo,
+      options?.target_tempo,
+      options?.min_time_signature,
+      options?.max_time_signature,
+      options?.target_time_signature,
+      options?.min_valence,
+      options?.max_valence,
+      options?.target_valence,
+    );
   }
 }

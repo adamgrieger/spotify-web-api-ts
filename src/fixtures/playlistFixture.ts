@@ -1,6 +1,6 @@
-import { Playlist } from '../types/SpotifyObjects';
+import { type PlaylistObject } from '../openapi';
 
-export const playlistFixture: Playlist = {
+export const playlistFixture = {
   collaborative: false,
   description: "An isomorphic TypeScript wrapper for Spotify's Web API",
   external_urls: {
@@ -38,4 +38,4 @@ export const playlistFixture: Playlist = {
   },
   type: 'playlist',
   uri: 'spotify:playlist:44lbOkAFTkHFB7nNeUQ0du',
-};
+} as PlaylistObject;

@@ -1,33 +1,21 @@
-import { Http } from '../helpers/Http';
 import {
-  Playlist,
-  PlaylistDetails,
-  SpotifyImage,
-} from '../types/SpotifyObjects';
+  type ImageObject,
+  type PagingPlaylistObject,
+  type PagingPlaylistTrackObject,
+  type PlaylistObject,
+  PlaylistsService,
+} from '../openapi';
+import { type PlaylistDetails } from '../types/SpotifyObjects';
 import {
-  AddItemsToPlaylistOptions,
-  CreatePlaylistOptions,
-  GetMyPlaylistsOptions,
-  GetPlaylistItemsOptions,
-  GetPlaylistOptions,
-  GetUserPlaylistsOptions,
-  RemovePlaylistItemsByPositionOptions,
-  ReorderPlaylistItemsOptions,
+  type AddItemsToPlaylistOptions,
+  type CreatePlaylistOptions,
+  type GetPlaylistItemsOptions,
+  type GetPlaylistOptions,
+  type PagingOptions,
+  type ReorderPlaylistItemsOptions,
 } from '../types/SpotifyOptions';
-import {
-  GetMyPlaylistsResponse,
-  GetPlaylistItemsResponse,
-  GetUserPlaylistsResponse,
-  SnapshotIdResponse,
-} from '../types/SpotifyResponses';
 
 export class PlaylistsApi {
-  private http: Http;
-
-  constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * Add Item to a Playlist
    *
@@ -37,12 +25,12 @@ export class PlaylistsApi {
    * @param uri The Spotify track or episode URI to add.
    * @param options Optional request information.
    */
-  addItemToPlaylist(
+  public async addItemToPlaylist(
     playlistId: string,
     uri: string,
     options?: AddItemsToPlaylistOptions,
-  ): Promise<string> {
-    return this.addItemsToPlaylist(playlistId, [uri], options);
+  ): Promise<string | undefined> {
+    return await this.addItemsToPlaylist(playlistId, [uri], options);
   }
 
   /**
@@ -54,21 +42,16 @@ export class PlaylistsApi {
    * @param uris The Spotify track or episode URIs to add.
    * @param options Optional request information.
    */
-  async addItemsToPlaylist(
+  public async addItemsToPlaylist(
     playlistId: string,
     uris: string[],
     options?: AddItemsToPlaylistOptions,
-  ): Promise<string> {
-    const response = await this.http.post<SnapshotIdResponse>(
-      `/playlists/${playlistId}/tracks`,
-      {
-        data: {
-          ...options,
-          uris,
-        },
-      },
-    );
-    return response.snapshot_id;
+  ): Promise<string | undefined> {
+    return await PlaylistsService.addTracksToPlaylist(
+      playlistId,
+      options?.position,
+      uris.join(','),
+    ).then(({ snapshot_id }) => snapshot_id);
   }
 
   /**
@@ -80,14 +63,11 @@ export class PlaylistsApi {
    * @param playlistId The Spotify ID for the playlist.
    * @param details The playlist details to update.
    */
-  changePlaylistDetails(
+  public async changePlaylistDetails(
     playlistId: string,
     details: PlaylistDetails,
   ): Promise<void> {
-    return this.http.put<void>(
-      `/playlists/${playlistId}`,
-      details && { data: details },
-    );
+    await PlaylistsService.changePlaylistDetails(playlistId, details);
   }
 
   /**
@@ -100,16 +80,14 @@ export class PlaylistsApi {
    * @param playlistName The name for the new playlist.
    * @param options Optional request information.
    */
-  createPlaylist(
+  public async createPlaylist(
     userId: string,
     playlistName: string,
     options?: CreatePlaylistOptions,
-  ): Promise<Playlist> {
-    return this.http.post<Playlist>(`/users/${userId}/playlists`, {
-      data: {
-        ...options,
-        name: playlistName,
-      },
+  ): Promise<PlaylistObject> {
+    return await PlaylistsService.createPlaylist(userId, {
+      name: playlistName,
+      ...options,
     });
   }
 
@@ -120,12 +98,12 @@ export class PlaylistsApi {
    *
    * @param options Optional request information.
    */
-  getMyPlaylists(
-    options?: GetMyPlaylistsOptions,
-  ): Promise<GetMyPlaylistsResponse> {
-    return this.http.get<GetMyPlaylistsResponse>(
-      '/me/playlists',
-      options && { params: options },
+  public async getMyPlaylists(
+    options?: PagingOptions,
+  ): Promise<PagingPlaylistObject> {
+    return await PlaylistsService.getAListOfCurrentUsersPlaylists(
+      options?.limit,
+      options?.offset,
     );
   }
 
@@ -137,13 +115,15 @@ export class PlaylistsApi {
    * @param playlistId The Spotify ID for the playlist.
    * @param options Optional request information.
    */
-  getPlaylist(
+  public async getPlaylist(
     playlistId: string,
     options?: GetPlaylistOptions,
-  ): Promise<Playlist> {
-    return this.http.get<Playlist>(
-      `/playlists/${playlistId}`,
-      options && { params: options },
+  ): Promise<PlaylistObject> {
+    return await PlaylistsService.getPlaylist(
+      playlistId,
+      options?.market,
+      options?.fields,
+      options?.additional_types?.join(','),
     );
   }
 
@@ -154,8 +134,8 @@ export class PlaylistsApi {
    *
    * @param playlistId The Spotify ID for the playlist.
    */
-  getPlaylistCover(playlistId: string): Promise<SpotifyImage[]> {
-    return this.http.get<SpotifyImage[]>(`/playlists/${playlistId}/images`);
+  public async getPlaylistCover(playlistId: string): Promise<ImageObject[]> {
+    return await PlaylistsService.getPlaylistCover(playlistId);
   }
 
   /**
@@ -167,13 +147,17 @@ export class PlaylistsApi {
    * @param playlistId The Spotify ID for the playlist.
    * @param options Optional request information.
    */
-  getPlaylistItems(
+  public async getPlaylistItems(
     playlistId: string,
     options?: GetPlaylistItemsOptions,
-  ): Promise<GetPlaylistItemsResponse> {
-    return this.http.get<GetPlaylistItemsResponse>(
-      `/playlists/${playlistId}/tracks`,
-      options && { params: options },
+  ): Promise<PagingPlaylistTrackObject> {
+    return await PlaylistsService.getPlaylistsTracks(
+      playlistId,
+      options?.market,
+      options?.fields,
+      options?.limit,
+      options?.offset,
+      options?.additional_types?.join(','),
     );
   }
 
@@ -185,13 +169,14 @@ export class PlaylistsApi {
    * @param userId The user's Spotify user ID.
    * @param options Optional request information.
    */
-  getUserPlaylists(
+  public async getUserPlaylists(
     userId: string,
-    options?: GetUserPlaylistsOptions,
-  ): Promise<GetUserPlaylistsResponse> {
-    return this.http.get<GetUserPlaylistsResponse>(
-      `/users/${userId}/playlists`,
-      options && { params: options },
+    options?: PagingOptions,
+  ): Promise<PagingPlaylistObject> {
+    return await PlaylistsService.getListUsersPlaylists(
+      userId,
+      options?.limit,
+      options?.offset,
     );
   }
 
@@ -203,8 +188,12 @@ export class PlaylistsApi {
    * @param playlistId The Spotify ID for the playlist.
    * @param uri The Spotify track or episode URI to remove.
    */
-  removePlaylistItem(playlistId: string, uri: string): Promise<string> {
-    return this.removePlaylistItems(playlistId, [uri]);
+  public async removePlaylistItem(
+    playlistId: string,
+    uri: string,
+    snapshotId?: string,
+  ): Promise<string | undefined> {
+    return await this.removePlaylistItems(playlistId, [uri], snapshotId);
   }
 
   /**
@@ -215,68 +204,15 @@ export class PlaylistsApi {
    * @param playlistId The Spotify ID for the playlist.
    * @param uris The Spotify track or episode URIs to remove.
    */
-  async removePlaylistItems(
+  public async removePlaylistItems(
     playlistId: string,
     uris: string[],
-  ): Promise<string> {
-    const response = await this.http.delete<SnapshotIdResponse>(
-      `/playlists/${playlistId}/tracks`,
-      {
-        data: {
-          tracks: uris.map(uri => ({ uri })),
-        },
-      },
-    );
-    return response.snapshot_id;
-  }
-
-  /**
-   * Remove Item from a Playlist by Position
-   *
-   * Remove an item from a user's playlist by position.
-   *
-   * @param playlistId The Spotify ID for the playlist.
-   * @param uri The Spotify track or episode URI to remove.
-   * @param positions The positions of the item to remove.
-   * @param options Optional request information.
-   */
-  removePlaylistItemByPosition(
-    playlistId: string,
-    uri: string,
-    positions: number[],
-    options?: RemovePlaylistItemsByPositionOptions,
-  ): Promise<string> {
-    return this.removePlaylistItemsByPosition(
-      playlistId,
-      [{ uri, positions }],
-      options,
-    );
-  }
-
-  /**
-   * Remove Items from a Playlist by Position
-   *
-   * Remove one or more items from a user's playlist by position.
-   *
-   * @param playlistId The Spotify ID for the playlist.
-   * @param items The Spotify track or episode URIs and positions to remove.
-   * @param options Optional request information.
-   */
-  async removePlaylistItemsByPosition(
-    playlistId: string,
-    items: Array<{ uri: string; positions: number[] }>,
-    options?: RemovePlaylistItemsByPositionOptions,
-  ): Promise<string> {
-    const response = await this.http.delete<SnapshotIdResponse>(
-      `/playlists/${playlistId}/tracks`,
-      {
-        data: {
-          ...options,
-          tracks: items,
-        },
-      },
-    );
-    return response.snapshot_id;
+    snapshotId?: string,
+  ): Promise<string | undefined> {
+    return await PlaylistsService.removeTracksPlaylist(playlistId, {
+      tracks: uris.map((uri) => ({ uri })),
+      snapshot_id: snapshotId,
+    }).then(({ snapshot_id }) => snapshot_id);
   }
 
   /**
@@ -289,23 +225,22 @@ export class PlaylistsApi {
    * @param insertBefore The position where the items should be inserted.
    * @param options Optional request information.
    */
-  async reorderPlaylistItems(
+  public async reorderPlaylistItems(
     playlistId: string,
     rangeStart: number,
     insertBefore: number,
     options?: ReorderPlaylistItemsOptions,
-  ): Promise<string> {
-    const response = await this.http.put<SnapshotIdResponse>(
-      `/playlists/${playlistId}/tracks`,
+  ): Promise<string | undefined> {
+    return await PlaylistsService.reorderOrReplacePlaylistsTracks(
+      playlistId,
+      undefined,
       {
-        data: {
-          ...options,
-          range_start: rangeStart,
-          insert_before: insertBefore,
-        },
+        range_start: rangeStart,
+        insert_before: insertBefore,
+        range_length: options?.range_length,
+        snapshot_id: options?.snapshot_id,
       },
-    );
-    return response.snapshot_id;
+    ).then(({ snapshot_id }) => snapshot_id);
   }
 
   /**
@@ -316,12 +251,14 @@ export class PlaylistsApi {
    * @param playlistId The Spotify ID for the playlist.
    * @param uris The Spotify track or episode URIs to set.
    */
-  replacePlaylistItems(playlistId: string, uris: string[]): Promise<void> {
-    return this.http.put<void>(`/playlists/${playlistId}/tracks`, {
-      data: {
-        uris: uris,
-      },
-    });
+  public async replacePlaylistItems(
+    playlistId: string,
+    uris: string[],
+  ): Promise<string | undefined> {
+    return await PlaylistsService.reorderOrReplacePlaylistsTracks(
+      playlistId,
+      uris?.join(','),
+    ).then(({ snapshot_id }) => snapshot_id);
   }
 
   /**
@@ -332,10 +269,10 @@ export class PlaylistsApi {
    * @param playlistId The Spotify ID for the playlist.
    * @param image Base64 encoded JPEG image data.
    */
-  uploadPlaylistCover(playlistId: string, image: string): Promise<void> {
-    return this.http.put<void>(`/playlists/${playlistId}/images`, {
-      data: image,
-      contentType: 'image/jpeg',
-    });
+  public async uploadPlaylistCover(
+    playlistId: string,
+    image: string,
+  ): Promise<void> {
+    await PlaylistsService.uploadCustomPlaylistCover(playlistId, image);
   }
 }

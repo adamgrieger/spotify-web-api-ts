@@ -1,42 +1,47 @@
 export type AuthorizationScope =
-  | 'ugc-image-upload'
-  | 'user-read-playback-state'
-  | 'user-modify-playback-state'
-  | 'user-read-currently-playing'
-  | 'streaming'
   | 'app-remote-control'
-  | 'user-read-email'
-  | 'user-read-private'
-  | 'playlist-read-collaborative'
-  | 'playlist-modify-public'
-  | 'playlist-read-private'
   | 'playlist-modify-private'
+  | 'playlist-modify-public'
+  | 'playlist-read-collaborative'
+  | 'playlist-read-private'
+  | 'streaming'
+  | 'ugc-image-upload'
+  | 'user-create-partner'
+  | 'user-follow-modify'
+  | 'user-follow-read'
   | 'user-library-modify'
   | 'user-library-read'
-  | 'user-top-read'
+  | 'user-manage-entitlements'
+  | 'user-manage-partner'
+  | 'user-modify-playback-state'
+  | 'user-read-currently-playing'
+  | 'user-read-email'
   | 'user-read-playback-position'
+  | 'user-read-playback-state'
+  | 'user-read-private'
   | 'user-read-recently-played'
-  | 'user-follow-read'
-  | 'user-follow-modify';
+  | 'user-soa-link'
+  | 'user-soa-unlink'
+  | 'user-top-read';
 
-export type GetRefreshableUserTokensResponse = {
+export interface GetRefreshableUserTokensResponse {
   access_token: string;
-  token_type: 'Bearer';
-  scope: string;
   expires_in: number;
   refresh_token: string;
-};
-
-export type GetRefreshedAccessTokenResponse = {
-  access_token: string;
+  scope: string;
   token_type: 'Bearer';
+}
+
+export interface GetRefreshedAccessTokenResponse {
+  access_token: string;
   expires_in: number;
   scope: string;
-};
-
-export type GetTemporaryAppTokensResponse = {
-  access_token: string;
   token_type: 'Bearer';
+}
+
+export interface GetTemporaryAppTokensResponse {
+  access_token: string;
   expires_in: number;
   scope: string;
-};
+  token_type: 'Bearer';
+}

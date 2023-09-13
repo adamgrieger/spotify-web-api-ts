@@ -1,6 +1,6 @@
-import { GetTracksResponse } from '../../types/SpotifyResponses';
+import { type TrackObject } from '../../openapi';
 
-export const getTracksFixture: GetTracksResponse = {
+export const getTracksFixture: { tracks: TrackObject[] } = {
   tracks: [
     {
       album: {
@@ -105,20 +105,17 @@ export const getTracksFixture: GetTracksResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b273a26581cf15fff67319407061',
+            url: 'https://i.scdn.co/image/ab67616d0000b273a26581cf15fff67319407061',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e02a26581cf15fff67319407061',
+            url: 'https://i.scdn.co/image/ab67616d00001e02a26581cf15fff67319407061',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d00004851a26581cf15fff67319407061',
+            url: 'https://i.scdn.co/image/ab67616d00004851a26581cf15fff67319407061',
             width: 64,
           },
         ],
@@ -240,6 +237,6 @@ export const getTracksFixture: GetTracksResponse = {
       track_number: 4,
       type: 'track',
       uri: 'spotify:track:4ZcGbQ5dOKX6rJk4yvza9R',
-    },
+    } as TrackObject,
   ],
 };

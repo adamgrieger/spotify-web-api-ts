@@ -1,18 +1,14 @@
-import { Http } from '../helpers/Http';
-import { Album } from '../types/SpotifyObjects';
-import { GetAlbumTracksOptions, MarketOptions } from '../types/SpotifyOptions';
 import {
-  GetAlbumsResponse,
-  GetAlbumTracksResponse,
-} from '../types/SpotifyResponses';
+  type AlbumObject,
+  AlbumsService,
+  type PagingSimplifiedTrackObject,
+} from '../openapi';
+import {
+  type MarketOptions,
+  type PagingMarketOptions,
+} from '../types/SpotifyOptions';
 
 export class AlbumsApi {
-  private http: Http;
-
-  constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * ### Get an Album
    *
@@ -30,11 +26,11 @@ export class AlbumsApi {
    * @param albumId The Spotify ID for the album.
    * @param options Optional request information.
    */
-  getAlbum(albumId: string, options?: MarketOptions): Promise<Album> {
-    return this.http.get<Album>(
-      `/albums/${albumId}`,
-      options && { params: options },
-    );
+  public async getAlbum(
+    albumId: string,
+    options?: MarketOptions,
+  ): Promise<AlbumObject> {
+    return await AlbumsService.getAnAlbum(albumId, options?.market);
   }
 
   /**
@@ -58,17 +54,14 @@ export class AlbumsApi {
    * @param albumIds The Spotify IDs for the albums.
    * @param options Optional request information.
    */
-  async getAlbums(
+  public async getAlbums(
     albumIds: string[],
     options?: MarketOptions,
-  ): Promise<Array<Album | null>> {
-    const response = await this.http.get<GetAlbumsResponse>('/albums', {
-      params: {
-        ...options,
-        ids: albumIds,
-      },
-    });
-    return response.albums;
+  ): Promise<AlbumObject[]> {
+    return await AlbumsService.getMultipleAlbums(
+      albumIds.join(','),
+      options?.market,
+    ).then(({ albums }) => albums);
   }
 
   /**
@@ -88,13 +81,15 @@ export class AlbumsApi {
    * @param albumId The Spotify ID for the album.
    * @param options Optional request information.
    */
-  getAlbumTracks(
+  public async getAlbumTracks(
     albumId: string,
-    options?: GetAlbumTracksOptions,
-  ): Promise<GetAlbumTracksResponse> {
-    return this.http.get<GetAlbumTracksResponse>(
-      `/albums/${albumId}/tracks`,
-      options && { params: options },
+    options?: PagingMarketOptions,
+  ): Promise<PagingSimplifiedTrackObject> {
+    return await AlbumsService.getAnAlbumsTracks(
+      albumId,
+      options?.market,
+      options?.limit,
+      options?.offset,
     );
   }
 }

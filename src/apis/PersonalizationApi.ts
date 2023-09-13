@@ -1,17 +1,11 @@
-import { Http } from '../helpers/Http';
-import { PersonalizationOptions } from '../types/SpotifyOptions';
 import {
-  GetMyTopArtistsResponse,
-  GetMyTopTracksResponse,
-} from '../types/SpotifyResponses';
+  type PagingArtistObject,
+  type PagingTrackObject,
+  UsersService,
+} from '../openapi';
+import { type PersonalizationOptions } from '../types/SpotifyOptions';
 
 export class PersonalizationApi {
-  private http: Http;
-
-  constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * Get the Current User's Top Artists
    *
@@ -19,13 +13,15 @@ export class PersonalizationApi {
    *
    * @param options Optional request information.
    */
-  getMyTopArtists(
+  public async getMyTopArtists(
     options?: PersonalizationOptions,
-  ): Promise<GetMyTopArtistsResponse> {
-    return this.http.get<GetMyTopArtistsResponse>(
-      '/me/top/artists',
-      options && { params: options },
-    );
+  ): Promise<PagingArtistObject> {
+    return (await UsersService.getUsersTopArtistsAndTracks(
+      'artists',
+      options?.time_range,
+      options?.limit,
+      options?.offset,
+    )) as PagingArtistObject;
   }
 
   /**
@@ -35,12 +31,14 @@ export class PersonalizationApi {
    *
    * @param options Optional request information.
    */
-  getMyTopTracks(
+  public async getMyTopTracks(
     options?: PersonalizationOptions,
-  ): Promise<GetMyTopTracksResponse> {
-    return this.http.get<GetMyTopTracksResponse>(
-      '/me/top/tracks',
-      options && { params: options },
-    );
+  ): Promise<PagingTrackObject> {
+    return (await UsersService.getUsersTopArtistsAndTracks(
+      'tracks',
+      options?.time_range,
+      options?.limit,
+      options?.offset,
+    )) as PagingTrackObject;
   }
 }

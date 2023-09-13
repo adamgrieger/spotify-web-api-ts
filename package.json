@@ -1,43 +1,68 @@
 {
   "name": "spotify-web-api-ts",
-  "version": "1.0.0",
+  "version": "2.0.0-alpha-0",
   "description": "An isomorphic TypeScript wrapper for Spotify's Web API",
-  "main": "cjs/index.js",
-  "module": "esm/index.js",
-  "types": "types",
   "repository": "https://github.com/adamgrieger/spotify-web-api-ts.git",
   "author": "Adam Grieger",
   "license": "MIT",
+  "engines": {
+    "node": "^16.0.0 || >=18.0.0"
+  },
+  "type": "module",
+  "main": "dist/spotify-web-api.umd.js",
+  "module": "dist/spotify-web-api.cjs",
+  "types": "dist/spotify-web-api.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/spotify-web-api.cjs",
+      "require": "./dist/spotify-web-api.umd.js"
+    }
+  },
   "files": [
-    "cjs",
-    "esm",
-    "types",
+    "dist",
     "assets"
   ],
   "scripts": {
-    "build": "web-scripts build --project tsconfig.build.json",
-    "commit": "web-scripts commit",
-    "format": "web-scripts format",
-    "lint": "web-scripts lint",
-    "prepare": "web-scripts audit",
-    "release": "web-scripts release",
-    "test": "web-scripts test",
-    "generate-docs": "typedoc --out docs src/index.ts"
+    "build": "vite build",
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
+    "test:dom": "vitest run --environment jsdom",
+    "test:node": "vitest run --environment node",
+    "test": "yarn test:dom && yarn test:node",
+    "types": "tsc --project tsconfig.json",
+
+    "generate-api": "bash -c ./tools/generate-openapi.sh",
+    "generate-docs": "typedoc --out docs src/index.ts",
+
+    "pre-commit": "lint-staged",
+    "pre-push": "yarn lint:fix && yarn test"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "web-scripts commitmsg",
-      "pre-commit": "web-scripts precommit"
-    }
-  },
-  "devDependencies": {
-    "@spotify/web-scripts": "^8.0.2",
-    "@types/qs": "^6.9.4",
-    "husky": "^4.2.5",
-    "typedoc": "^0.18.0"
+  "lint-staged": {
+    "src/**/*": "eslint --fix",
+    "*.ts": "bash -c yarn types"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^1.4.0",
     "qs": "^6.9.4"
-  }
+  },
+  "devDependencies": {
+    "@inferrinizzard/eslint-config": "^0.1.3",
+    "@types/qs": "^6.9.4",
+    "eslint": "^8.47.0",
+    "form-data": "4.x",
+    "husky": "^8.0.3",
+    "jsdom": "^22.1.0",
+    "lint-staged": "^14.0.0",
+    "openapi-typescript-codegen": "^0.25.0",
+    "prettier": "^2.7.1",
+    "typedoc": "^0.18.0",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.9",
+    "vite-plugin-dts": "^3.5.2",
+    "vitest": "^0.34.1"
+  },
+  "contributors": [
+    "inferrinizzard",
+    "adamgrieger"
+  ]
 }

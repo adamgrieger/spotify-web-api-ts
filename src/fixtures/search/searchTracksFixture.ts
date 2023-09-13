@@ -1,9 +1,9 @@
-import { SearchTracksResponse } from '../../types/SpotifyResponses';
+import { type SearchResponse } from '../../apis/index.types';
+import { type TrackObject } from '../../openapi';
 
-export const searchTracksFixture: SearchTracksResponse = {
+export const searchTracksFixture: SearchResponse = {
   tracks: {
-    href:
-      'https://api.spotify.com/v1/search?query=vroom&type=track&offset=0&limit=1',
+    href: 'https://api.spotify.com/v1/search?query=vroom&type=track&offset=0&limit=1',
     items: [
       {
         album: {
@@ -108,20 +108,17 @@ export const searchTracksFixture: SearchTracksResponse = {
           images: [
             {
               height: 640,
-              url:
-                'https://i.scdn.co/image/ab67616d0000b27345fefe45b11cde997046d567',
+              url: 'https://i.scdn.co/image/ab67616d0000b27345fefe45b11cde997046d567',
               width: 640,
             },
             {
               height: 300,
-              url:
-                'https://i.scdn.co/image/ab67616d00001e0245fefe45b11cde997046d567',
+              url: 'https://i.scdn.co/image/ab67616d00001e0245fefe45b11cde997046d567',
               width: 300,
             },
             {
               height: 64,
-              url:
-                'https://i.scdn.co/image/ab67616d0000485145fefe45b11cde997046d567',
+              url: 'https://i.scdn.co/image/ab67616d0000485145fefe45b11cde997046d567',
               width: 64,
             },
           ],
@@ -242,11 +239,10 @@ export const searchTracksFixture: SearchTracksResponse = {
         track_number: 1,
         type: 'track',
         uri: 'spotify:track:5hyq3LBlCfjRQAFkdQwe8o',
-      },
+      } as TrackObject,
     ],
     limit: 1,
-    next:
-      'https://api.spotify.com/v1/search?query=vroom&type=track&offset=1&limit=1',
+    next: 'https://api.spotify.com/v1/search?query=vroom&type=track&offset=1&limit=1',
     offset: 0,
     previous: null,
     total: 930,

@@ -1,6 +1,6 @@
-import { AudioAnalysis } from '../types/SpotifyObjects';
+import { type AudioAnalysisObject } from '../openapi';
 
-export const audioAnalysisFixture: AudioAnalysis = {
+export const audioAnalysisFixture = {
   bars: [
     {
       start: 251.98282,
@@ -41,32 +41,12 @@ export const audioAnalysisFixture: AudioAnalysis = {
       loudness_max: -18.121,
       loudness_end: -60,
       pitches: [
-        0.709,
-        0.092,
-        0.196,
-        0.084,
-        0.352,
-        0.134,
-        0.161,
-        1,
-        0.17,
-        0.161,
-        0.211,
+        0.709, 0.092, 0.196, 0.084, 0.352, 0.134, 0.161, 1, 0.17, 0.161, 0.211,
         0.15,
       ],
       timbre: [
-        23.312,
-        -7.374,
-        -45.719,
-        294.874,
-        51.869,
-        -79.384,
-        -89.048,
-        143.322,
-        -4.676,
-        -51.303,
-        -33.274,
-        -19.037,
+        23.312, -7.374, -45.719, 294.874, 51.869, -79.384, -89.048, 143.322,
+        -4.676, -51.303, -33.274, -19.037,
       ],
     },
   ],
@@ -104,4 +84,4 @@ export const audioAnalysisFixture: AudioAnalysis = {
     rhythmstring: 'eJyNXAmOLT2r28pZQuZh_xv7g21Iqu_3pCd160xV...',
     rhythm_version: 1,
   },
-};
+} as AudioAnalysisObject;

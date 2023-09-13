@@ -1,6 +1,6 @@
-import { GetShowsResponse } from '../../types/SpotifyResponses';
+import { type SimplifiedShowObject } from '../../openapi';
 
-export const getShowsFixture: GetShowsResponse = {
+export const getShowsFixture: { shows: SimplifiedShowObject[] } = {
   shows: [
     {
       available_markets: [
@@ -90,24 +90,23 @@ export const getShowsFixture: GetShowsResponse = {
         spotify: 'https://open.spotify.com/show/0ofXAdFIQQRsCYj9754UFx',
       },
       href: 'https://api.spotify.com/v1/shows/0ofXAdFIQQRsCYj9754UFx',
+      html_description:
+        "<p>If you've ever wanted to know about champagne, satanism, the Stonewall Uprising, chaos theory, LSD, El Nino, true crime and Rosa Parks, then look no further. Josh and Chuck have you covered.</p>",
       id: '0ofXAdFIQQRsCYj9754UFx',
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/69610f7b5a459d74d1bd94d8b0189e37a6373162',
+          url: 'https://i.scdn.co/image/69610f7b5a459d74d1bd94d8b0189e37a6373162',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/a32d33f7763c9c5e40f0730b85b7158c67f413f5',
+          url: 'https://i.scdn.co/image/a32d33f7763c9c5e40f0730b85b7158c67f413f5',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/0cd1ffe3e99ef04620c00a10be88a1676f14c2c7',
+          url: 'https://i.scdn.co/image/0cd1ffe3e99ef04620c00a10be88a1676f14c2c7',
           width: 64,
         },
       ],
@@ -116,9 +115,10 @@ export const getShowsFixture: GetShowsResponse = {
       media_type: 'audio',
       name: 'Stuff You Should Know',
       publisher: 'iHeartRadio',
+      total_episodes: 0,
       type: 'show',
       uri: 'spotify:show:0ofXAdFIQQRsCYj9754UFx',
-    },
+    } as SimplifiedShowObject,
     {
       available_markets: [
         'AD',
@@ -207,24 +207,23 @@ export const getShowsFixture: GetShowsResponse = {
         spotify: 'https://open.spotify.com/show/308BQUUnIkoH2UAXJCAt0g',
       },
       href: 'https://api.spotify.com/v1/shows/308BQUUnIkoH2UAXJCAt0g',
+      html_description:
+        "<p>Free advice from three of the world's most qualified, most related experts: Justin, Travis and Griffin McElroy. For one-half to three-quarters of an hour every Monday, we tell people how to live their lives, because we're obviously doing such a great job of it so far.</p>",
       id: '308BQUUnIkoH2UAXJCAt0g',
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/f98b2557f4c992405e70ebe70540c24592043540',
+          url: 'https://i.scdn.co/image/f98b2557f4c992405e70ebe70540c24592043540',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/8650ae0b7542c57d0b4f7e96016b65776515e3cd',
+          url: 'https://i.scdn.co/image/8650ae0b7542c57d0b4f7e96016b65776515e3cd',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/f3376e395e743adc694fd0c79769fe13a78df29c',
+          url: 'https://i.scdn.co/image/f3376e395e743adc694fd0c79769fe13a78df29c',
           width: 64,
         },
       ],
@@ -233,8 +232,9 @@ export const getShowsFixture: GetShowsResponse = {
       media_type: 'audio',
       name: 'My Brother, My Brother And Me',
       publisher: 'The McElroys',
+      total_episodes: 0,
       type: 'show',
       uri: 'spotify:show:308BQUUnIkoH2UAXJCAt0g',
-    },
+    } as SimplifiedShowObject,
   ],
 };

@@ -1,6 +1,6 @@
-import { Artist } from '../types/SpotifyObjects';
+import { type ArtistObject } from '../openapi';
 
-export const artistFixture: Artist = {
+export const artistFixture = {
   external_urls: {
     spotify: 'https://open.spotify.com/artist/5c3GLXai8YOMid29ZEuR9y',
   },
@@ -49,4 +49,4 @@ export const artistFixture: Artist = {
   popularity: 65,
   type: 'artist',
   uri: 'spotify:artist:5c3GLXai8YOMid29ZEuR9y',
-};
+} as ArtistObject;

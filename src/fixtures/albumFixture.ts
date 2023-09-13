@@ -1,6 +1,6 @@
-import { Album } from '../types/SpotifyObjects';
+import { type AlbumObject } from '../openapi';
 
-export const albumFixture: Album = {
+export const albumFixture = {
   album_type: 'single',
   artists: [
     {
@@ -138,8 +138,7 @@ export const albumFixture: Album = {
   release_date_precision: 'day',
   total_tracks: 4,
   tracks: {
-    href:
-      'https://api.spotify.com/v1/albums/5PekE7fE5Zjqrfy45vjL8W/tracks?offset=0&limit=50',
+    href: 'https://api.spotify.com/v1/albums/5PekE7fE5Zjqrfy45vjL8W/tracks?offset=0&limit=50',
     items: [
       {
         artists: [
@@ -590,4 +589,4 @@ export const albumFixture: Album = {
   },
   type: 'album',
   uri: 'spotify:album:5PekE7fE5Zjqrfy45vjL8W',
-};
+} as AlbumObject;
