@@ -1,10 +1,10 @@
-import { GetRecommendationsResponse } from '../../types/SpotifyResponses';
+import { type RecommendationsObject, type TrackObject } from '../../openapi';
 
-export const getRecommendationsFixture: GetRecommendationsResponse = {
+export const getRecommendationsFixture: RecommendationsObject = {
   tracks: [
     {
       album: {
-        album_type: 'ALBUM',
+        album_type: 'album',
         artists: [
           {
             external_urls: {
@@ -116,20 +116,17 @@ export const getRecommendationsFixture: GetRecommendationsResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b273c790025ad67295b3ecc13aa0',
+            url: 'https://i.scdn.co/image/ab67616d0000b273c790025ad67295b3ecc13aa0',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e02c790025ad67295b3ecc13aa0',
+            url: 'https://i.scdn.co/image/ab67616d00001e02c790025ad67295b3ecc13aa0',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d00004851c790025ad67295b3ecc13aa0',
+            url: 'https://i.scdn.co/image/ab67616d00004851c790025ad67295b3ecc13aa0',
             width: 64,
           },
         ],
@@ -252,10 +249,10 @@ export const getRecommendationsFixture: GetRecommendationsResponse = {
       track_number: 7,
       type: 'track',
       uri: 'spotify:track:3THLm08Nd6uyLpFVpm0ChG',
-    },
+    } as TrackObject,
     {
       album: {
-        album_type: 'ALBUM',
+        album_type: 'album',
         artists: [
           {
             external_urls: {
@@ -357,20 +354,17 @@ export const getRecommendationsFixture: GetRecommendationsResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b2730c65cfa2a4a782e7d002b1af',
+            url: 'https://i.scdn.co/image/ab67616d0000b2730c65cfa2a4a782e7d002b1af',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e020c65cfa2a4a782e7d002b1af',
+            url: 'https://i.scdn.co/image/ab67616d00001e020c65cfa2a4a782e7d002b1af',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d000048510c65cfa2a4a782e7d002b1af',
+            url: 'https://i.scdn.co/image/ab67616d000048510c65cfa2a4a782e7d002b1af',
             width: 64,
           },
         ],
@@ -493,7 +487,7 @@ export const getRecommendationsFixture: GetRecommendationsResponse = {
       track_number: 3,
       type: 'track',
       uri: 'spotify:track:20Y5XZkFEJ7hEFPQq611vZ',
-    },
+    } as TrackObject,
   ],
   seeds: [
     {

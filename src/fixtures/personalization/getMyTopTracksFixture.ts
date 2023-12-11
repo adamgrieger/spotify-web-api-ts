@@ -1,10 +1,10 @@
-import { GetMyTopTracksResponse } from '../../types/SpotifyResponses';
+import { type PagingTrackObject, type TrackObject } from '../../openapi';
 
-export const getMyTopTracksFixture: GetMyTopTracksResponse = {
+export const getMyTopTracksFixture: PagingTrackObject = {
   items: [
     {
       album: {
-        album_type: 'ALBUM',
+        album_type: 'album',
         artists: [
           {
             external_urls: {
@@ -105,20 +105,17 @@ export const getMyTopTracksFixture: GetMyTopTracksResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b2730f2a198651d9c2e4efad9d18',
+            url: 'https://i.scdn.co/image/ab67616d0000b2730f2a198651d9c2e4efad9d18',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e020f2a198651d9c2e4efad9d18',
+            url: 'https://i.scdn.co/image/ab67616d00001e020f2a198651d9c2e4efad9d18',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d000048510f2a198651d9c2e4efad9d18',
+            url: 'https://i.scdn.co/image/ab67616d000048510f2a198651d9c2e4efad9d18',
             width: 64,
           },
         ],
@@ -240,7 +237,7 @@ export const getMyTopTracksFixture: GetMyTopTracksResponse = {
       track_number: 10,
       type: 'track',
       uri: 'spotify:track:0M0bBnanRqRGKs8pz7ZWi0',
-    },
+    } as TrackObject,
   ],
   total: 50,
   limit: 1,

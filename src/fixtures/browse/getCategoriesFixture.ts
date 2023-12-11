@@ -1,6 +1,9 @@
-import { GetCategoriesResponse } from '../../types/SpotifyResponses';
+import { type CategoryObject, type PagingObject } from '../../openapi';
 
-export const getCategoriesFixture: GetCategoriesResponse = {
+// TODO: DNE
+export const getCategoriesFixture: {
+  categories: PagingObject & { items?: CategoryObject[] };
+} = {
   categories: {
     href: 'https://api.spotify.com/v1/browse/categories?offset=0&limit=20',
     items: [
@@ -9,8 +12,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: 275,
-            url:
-              'https://t.scdn.co/media/derived/toplists_11160599e6a04ac5d6f2757f5511778f_0_0_275_275.jpg',
+            url: 'https://t.scdn.co/media/derived/toplists_11160599e6a04ac5d6f2757f5511778f_0_0_275_275.jpg',
             width: 275,
           },
         ],
@@ -22,8 +24,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: null,
-            url:
-              'https://t.scdn.co/images/04da469dd7be4dab96659aa1fa9f0ac9.jpeg',
+            url: 'https://t.scdn.co/images/04da469dd7be4dab96659aa1fa9f0ac9.jpeg',
             width: null,
           },
         ],
@@ -35,8 +36,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: 274,
-            url:
-              'https://t.scdn.co/media/original/hip-274_0a661854d61e29eace5fe63f73495e68_274x274.jpg',
+            url: 'https://t.scdn.co/media/original/hip-274_0a661854d61e29eace5fe63f73495e68_274x274.jpg',
             width: 274,
           },
         ],
@@ -48,8 +48,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: 274,
-            url:
-              'https://t.scdn.co/media/derived/pop-274x274_447148649685019f5e2a03a39e78ba52_0_0_274_274.jpg',
+            url: 'https://t.scdn.co/media/derived/pop-274x274_447148649685019f5e2a03a39e78ba52_0_0_274_274.jpg',
             width: 274,
           },
         ],
@@ -61,8 +60,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: 274,
-            url:
-              'https://t.scdn.co/media/original/mood-274x274_976986a31ac8c49794cbdc7246fd5ad7_274x274.jpg',
+            url: 'https://t.scdn.co/media/original/mood-274x274_976986a31ac8c49794cbdc7246fd5ad7_274x274.jpg',
             width: 274,
           },
         ],
@@ -74,8 +72,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: 274,
-            url:
-              'https://t.scdn.co/media/derived/decades_9ad8e458242b2ac8b184e79ef336c455_0_0_274_274.jpg',
+            url: 'https://t.scdn.co/media/derived/decades_9ad8e458242b2ac8b184e79ef336c455_0_0_274_274.jpg',
             width: 274,
           },
         ],
@@ -87,8 +84,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: null,
-            url:
-              'https://t.scdn.co/images/a2e0ebe2ebed4566ba1d8236b869241f.jpeg',
+            url: 'https://t.scdn.co/images/a2e0ebe2ebed4566ba1d8236b869241f.jpeg',
             width: null,
           },
         ],
@@ -112,8 +108,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: 274,
-            url:
-              'https://t.scdn.co/media/derived/rock_9ce79e0a4ef901bbd10494f5b855d3cc_0_0_274_274.jpg',
+            url: 'https://t.scdn.co/media/derived/rock_9ce79e0a4ef901bbd10494f5b855d3cc_0_0_274_274.jpg',
             width: 274,
           },
         ],
@@ -125,8 +120,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: null,
-            url:
-              'https://t.scdn.co/images/26a60378-a374-4cd7-b894-28efa5e154cb.jpg',
+            url: 'https://t.scdn.co/images/26a60378-a374-4cd7-b894-28efa5e154cb.jpg',
             width: null,
           },
         ],
@@ -138,8 +132,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: 274,
-            url:
-              'https://t.scdn.co/media/original/genre-images-square-274x274_5e50d72b846a198fcd2ca9b3aef5f0c8_274x274.jpg',
+            url: 'https://t.scdn.co/media/original/genre-images-square-274x274_5e50d72b846a198fcd2ca9b3aef5f0c8_274x274.jpg',
             width: 274,
           },
         ],
@@ -151,8 +144,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: 274,
-            url:
-              'https://t.scdn.co/media/derived/chill-274x274_4c46374f007813dd10b37e8d8fd35b4b_0_0_274_274.jpg',
+            url: 'https://t.scdn.co/media/derived/chill-274x274_4c46374f007813dd10b37e8d8fd35b4b_0_0_274_274.jpg',
             width: 274,
           },
         ],
@@ -164,8 +156,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: 274,
-            url:
-              'https://t.scdn.co/media/derived/edm-274x274_0ef612604200a9c14995432994455a6d_0_0_274_274.jpg',
+            url: 'https://t.scdn.co/media/derived/edm-274x274_0ef612604200a9c14995432994455a6d_0_0_274_274.jpg',
             width: 274,
           },
         ],
@@ -177,8 +168,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: null,
-            url:
-              'https://t.scdn.co/images/b4182906bf244b4994805084c057e9ee.jpeg',
+            url: 'https://t.scdn.co/images/b4182906bf244b4994805084c057e9ee.jpeg',
             width: null,
           },
         ],
@@ -190,8 +180,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: 274,
-            url:
-              'https://t.scdn.co/media/derived/r-b-274x274_fd56efa72f4f63764b011b68121581d8_0_0_274_274.jpg',
+            url: 'https://t.scdn.co/media/derived/r-b-274x274_fd56efa72f4f63764b011b68121581d8_0_0_274_274.jpg',
             width: 274,
           },
         ],
@@ -203,8 +192,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: null,
-            url:
-              'https://t.scdn.co/images/fe06caf056474bc58862591cd60b57fc.jpeg',
+            url: 'https://t.scdn.co/images/fe06caf056474bc58862591cd60b57fc.jpeg',
             width: null,
           },
         ],
@@ -216,8 +204,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: null,
-            url:
-              'https://t.scdn.co/images/2adf91e7179a4e098834d630c74824b1.jpeg',
+            url: 'https://t.scdn.co/images/2adf91e7179a4e098834d630c74824b1.jpeg',
             width: null,
           },
         ],
@@ -229,8 +216,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: null,
-            url:
-              'https://t.scdn.co/images/7fe0f2c9c91f45a3b6bae49d298201a4.jpeg',
+            url: 'https://t.scdn.co/images/7fe0f2c9c91f45a3b6bae49d298201a4.jpeg',
             width: null,
           },
         ],
@@ -254,8 +240,7 @@ export const getCategoriesFixture: GetCategoriesResponse = {
         icons: [
           {
             height: 274,
-            url:
-              'https://t.scdn.co/media/derived/sleep-274x274_0d4f836af8fab7bf31526968073e671c_0_0_274_274.jpg',
+            url: 'https://t.scdn.co/media/derived/sleep-274x274_0d4f836af8fab7bf31526968073e671c_0_0_274_274.jpg',
             width: 274,
           },
         ],

@@ -1,36 +1,35 @@
-import { GetEpisodesResponse } from '../../types/SpotifyResponses';
+import { type EpisodeObject } from '../../openapi';
 
-export const getEpisodesFixture: GetEpisodesResponse = {
+export const getEpisodesFixture: { episodes: EpisodeObject[] } = {
   episodes: [
     {
       audio_preview_url:
         'https://p.scdn.co/mp3-preview/c96fc432f980f3ef1f1fbecde548d9684fdc2da8',
       description:
-        '         Okay, we know we just had a non-standard 500th episode celebration, but as luck would have it, THIS episode also marks 10 years of us in the podcastin’ business. So, yes, Justin sings the song again. (Also, we’ve got new art, courtesy of the very talented Sarah McKay!)Suggested talking points: ZOLO Memories, Feline Sex Den, American Hero Horn, Play Along At Home (Sorry),Teleconference Mirror World, Healing and Growth Squad        ',
+        'Okay, we know we just had a non-standard 500th episode celebration, but as luck would have it, THIS episode also marks 10 years of us in the podcastin’ business. So, yes, Justin sings the song again. (Also, we’ve got new art, courtesy of the very talented Sarah McKay!)Suggested talking points: ZOLO Memories, Feline Sex Den, American Hero Horn, Play Along At Home (Sorry),Teleconference Mirror World, Healing and Growth Squad',
       duration_ms: 3664785,
       explicit: true,
       external_urls: {
         spotify: 'https://open.spotify.com/episode/0eJcFWEwtpDqS3QJPDC7Ag',
       },
       href: 'https://api.spotify.com/v1/episodes/0eJcFWEwtpDqS3QJPDC7Ag',
+      html_description:
+        '<p>Okay, we know we just had a non-standard 500th episode celebration, but as luck would have it, THIS episode also marks 10 years of us in the podcastin’ business. So, yes, Justin sings the song again. (Also, we’ve got new art, courtesy of the very talented Sarah McKay!)Suggested talking points: ZOLO Memories, Feline Sex Den, American Hero Horn, Play Along At Home (Sorry),Teleconference Mirror World, Healing and Growth Squad</p>',
       id: '0eJcFWEwtpDqS3QJPDC7Ag',
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/f98b2557f4c992405e70ebe70540c24592043540',
+          url: 'https://i.scdn.co/image/f98b2557f4c992405e70ebe70540c24592043540',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/8650ae0b7542c57d0b4f7e96016b65776515e3cd',
+          url: 'https://i.scdn.co/image/8650ae0b7542c57d0b4f7e96016b65776515e3cd',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/f3376e395e743adc694fd0c79769fe13a78df29c',
+          url: 'https://i.scdn.co/image/f3376e395e743adc694fd0c79769fe13a78df29c',
           width: 64,
         },
       ],
@@ -41,6 +40,10 @@ export const getEpisodesFixture: GetEpisodesResponse = {
       name: 'MBMBaM 506: The Enchanted Horn of American Heroism',
       release_date: '2020-04-13',
       release_date_precision: 'day',
+      resume_point: {
+        fully_played: false,
+        resume_position_ms: 0,
+      },
       show: {
         available_markets: [
           'AD',
@@ -129,24 +132,23 @@ export const getEpisodesFixture: GetEpisodesResponse = {
           spotify: 'https://open.spotify.com/show/308BQUUnIkoH2UAXJCAt0g',
         },
         href: 'https://api.spotify.com/v1/shows/308BQUUnIkoH2UAXJCAt0g',
+        html_description:
+          "<p>Free advice from three of the world's most qualified, most related experts: Justin, Travis and Griffin McElroy. For one-half to three-quarters of an hour every Monday, we tell people how to live their lives, because we're obviously doing such a great job of it so far.</p>",
         id: '308BQUUnIkoH2UAXJCAt0g',
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/f98b2557f4c992405e70ebe70540c24592043540',
+            url: 'https://i.scdn.co/image/f98b2557f4c992405e70ebe70540c24592043540',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/8650ae0b7542c57d0b4f7e96016b65776515e3cd',
+            url: 'https://i.scdn.co/image/8650ae0b7542c57d0b4f7e96016b65776515e3cd',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/f3376e395e743adc694fd0c79769fe13a78df29c',
+            url: 'https://i.scdn.co/image/f3376e395e743adc694fd0c79769fe13a78df29c',
             width: 64,
           },
         ],
@@ -155,41 +157,41 @@ export const getEpisodesFixture: GetEpisodesResponse = {
         media_type: 'audio',
         name: 'My Brother, My Brother And Me',
         publisher: 'The McElroys',
+        total_episodes: 0,
         type: 'show',
         uri: 'spotify:show:308BQUUnIkoH2UAXJCAt0g',
       },
       type: 'episode',
       uri: 'spotify:episode:0eJcFWEwtpDqS3QJPDC7Ag',
-    },
+    } as EpisodeObject,
     {
       audio_preview_url:
         'https://p.scdn.co/mp3-preview/abbe53bde49de8c4dd3f427621ca84b2a1f7a5ed',
       description:
-        '         In today’s episode, we set a new record for Lack of Commitment to an Opening Bit — a record whose previous holders include … let’s see here … oh, it’s us! The list just says us, like, fifty times.Suggested talking points: Hot Gin, Sonic’s Sacrifice, Timesheet Secrets, Bathroom Investigations, Goldfish Punishment, Large Old Pizza News, Titanic Kaiju        ',
+        'In today’s episode, we set a new record for Lack of Commitment to an Opening Bit — a record whose previous holders include … let’s see here … oh, it’s us! The list just says us, like, fifty times.Suggested talking points: Hot Gin, Sonic’s Sacrifice, Timesheet Secrets, Bathroom Investigations, Goldfish Punishment, Large Old Pizza News, Titanic Kaiju',
       duration_ms: 3343793,
       explicit: true,
       external_urls: {
         spotify: 'https://open.spotify.com/episode/21GI2b0xGzvznuIetkJINx',
       },
       href: 'https://api.spotify.com/v1/episodes/21GI2b0xGzvznuIetkJINx',
+      html_description:
+        '<p>In today’s episode, we set a new record for Lack of Commitment to an Opening Bit — a record whose previous holders include … let’s see here … oh, it’s us! The list just says us, like, fifty times.Suggested talking points: Hot Gin, Sonic’s Sacrifice, Timesheet Secrets, Bathroom Investigations, Goldfish Punishment, Large Old Pizza News, Titanic Kaiju</p>',
       id: '21GI2b0xGzvznuIetkJINx',
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/f98b2557f4c992405e70ebe70540c24592043540',
+          url: 'https://i.scdn.co/image/f98b2557f4c992405e70ebe70540c24592043540',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/8650ae0b7542c57d0b4f7e96016b65776515e3cd',
+          url: 'https://i.scdn.co/image/8650ae0b7542c57d0b4f7e96016b65776515e3cd',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/f3376e395e743adc694fd0c79769fe13a78df29c',
+          url: 'https://i.scdn.co/image/f3376e395e743adc694fd0c79769fe13a78df29c',
           width: 64,
         },
       ],
@@ -200,6 +202,10 @@ export const getEpisodesFixture: GetEpisodesResponse = {
       name: 'MBMBaM 505: Slippery When Voltron',
       release_date: '2020-04-06',
       release_date_precision: 'day',
+      resume_point: {
+        fully_played: false,
+        resume_position_ms: 0,
+      },
       show: {
         available_markets: [
           'AD',
@@ -288,24 +294,23 @@ export const getEpisodesFixture: GetEpisodesResponse = {
           spotify: 'https://open.spotify.com/show/308BQUUnIkoH2UAXJCAt0g',
         },
         href: 'https://api.spotify.com/v1/shows/308BQUUnIkoH2UAXJCAt0g',
+        html_description:
+          "Free advice from three of the world's most qualified, most related experts: Justin, Travis and Griffin McElroy. For one-half to three-quarters of an hour every Monday, we tell people how to live their lives, because we're obviously doing such a great job of it so far.",
         id: '308BQUUnIkoH2UAXJCAt0g',
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/f98b2557f4c992405e70ebe70540c24592043540',
+            url: 'https://i.scdn.co/image/f98b2557f4c992405e70ebe70540c24592043540',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/8650ae0b7542c57d0b4f7e96016b65776515e3cd',
+            url: 'https://i.scdn.co/image/8650ae0b7542c57d0b4f7e96016b65776515e3cd',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/f3376e395e743adc694fd0c79769fe13a78df29c',
+            url: 'https://i.scdn.co/image/f3376e395e743adc694fd0c79769fe13a78df29c',
             width: 64,
           },
         ],
@@ -314,11 +319,12 @@ export const getEpisodesFixture: GetEpisodesResponse = {
         media_type: 'audio',
         name: 'My Brother, My Brother And Me',
         publisher: 'The McElroys',
+        total_episodes: 0,
         type: 'show',
         uri: 'spotify:show:308BQUUnIkoH2UAXJCAt0g',
       },
       type: 'episode',
       uri: 'spotify:episode:21GI2b0xGzvznuIetkJINx',
-    },
+    } as EpisodeObject,
   ],
 };

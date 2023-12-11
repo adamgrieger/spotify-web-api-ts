@@ -1,9 +1,9 @@
-import { SearchAlbumsResponse } from '../../types/SpotifyResponses';
+import { type SearchResponse } from '../../apis/index.types';
+import { type SimplifiedAlbumObject } from '../../openapi';
 
-export const searchAlbumsFixture: SearchAlbumsResponse = {
+export const searchAlbumsFixture: SearchResponse = {
   albums: {
-    href:
-      'https://api.spotify.com/v1/search?query=merriweather&type=album&offset=0&limit=1',
+    href: 'https://api.spotify.com/v1/search?query=merriweather&type=album&offset=0&limit=1',
     items: [
       {
         album_type: 'album',
@@ -28,20 +28,17 @@ export const searchAlbumsFixture: SearchAlbumsResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b273400b0756273d1168643d8891',
+            url: 'https://i.scdn.co/image/ab67616d0000b273400b0756273d1168643d8891',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e02400b0756273d1168643d8891',
+            url: 'https://i.scdn.co/image/ab67616d00001e02400b0756273d1168643d8891',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d00004851400b0756273d1168643d8891',
+            url: 'https://i.scdn.co/image/ab67616d00004851400b0756273d1168643d8891',
             width: 64,
           },
         ],
@@ -51,11 +48,10 @@ export const searchAlbumsFixture: SearchAlbumsResponse = {
         total_tracks: 11,
         type: 'album',
         uri: 'spotify:album:5O9OXl9zAWMJTzawofxuan',
-      },
+      } as SimplifiedAlbumObject,
     ],
     limit: 1,
-    next:
-      'https://api.spotify.com/v1/search?query=merriweather&type=album&offset=1&limit=1',
+    next: 'https://api.spotify.com/v1/search?query=merriweather&type=album&offset=1&limit=1',
     offset: 0,
     previous: null,
     total: 66,

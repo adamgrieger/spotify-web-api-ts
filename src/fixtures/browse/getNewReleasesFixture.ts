@@ -1,6 +1,9 @@
-import { GetNewReleasesResponse } from '../../types/SpotifyResponses';
+import {
+  type PagingSimplifiedAlbumObject,
+  type SimplifiedAlbumObject,
+} from '../../openapi';
 
-export const getNewReleasesFixture: GetNewReleasesResponse = {
+export const getNewReleasesFixture: { albums: PagingSimplifiedAlbumObject } = {
   albums: {
     href: 'https://api.spotify.com/v1/browse/new-releases?offset=0&limit=2',
     items: [
@@ -107,20 +110,17 @@ export const getNewReleasesFixture: GetNewReleasesResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b27320e08c8cc23f404d723b5647',
+            url: 'https://i.scdn.co/image/ab67616d0000b27320e08c8cc23f404d723b5647',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e0220e08c8cc23f404d723b5647',
+            url: 'https://i.scdn.co/image/ab67616d00001e0220e08c8cc23f404d723b5647',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d0000485120e08c8cc23f404d723b5647',
+            url: 'https://i.scdn.co/image/ab67616d0000485120e08c8cc23f404d723b5647',
             width: 64,
           },
         ],
@@ -130,7 +130,7 @@ export const getNewReleasesFixture: GetNewReleasesResponse = {
         total_tracks: 13,
         type: 'album',
         uri: 'spotify:album:623PL2MBg50Br5dLXC9E9e',
-      },
+      } as SimplifiedAlbumObject,
       {
         album_type: 'album',
         artists: [
@@ -234,20 +234,17 @@ export const getNewReleasesFixture: GetNewReleasesResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/ab67616d0000b273841292c1316c4bf85447bcd9',
+            url: 'https://i.scdn.co/image/ab67616d0000b273841292c1316c4bf85447bcd9',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/ab67616d00001e02841292c1316c4bf85447bcd9',
+            url: 'https://i.scdn.co/image/ab67616d00001e02841292c1316c4bf85447bcd9',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/ab67616d00004851841292c1316c4bf85447bcd9',
+            url: 'https://i.scdn.co/image/ab67616d00004851841292c1316c4bf85447bcd9',
             width: 64,
           },
         ],
@@ -257,7 +254,7 @@ export const getNewReleasesFixture: GetNewReleasesResponse = {
         total_tracks: 13,
         type: 'album',
         uri: 'spotify:album:0fO1KemWL2uCCQmM22iKlj',
-      },
+      } as SimplifiedAlbumObject,
     ],
     limit: 2,
     next: 'https://api.spotify.com/v1/browse/new-releases?offset=2&limit=2',

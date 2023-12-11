@@ -1,10 +1,12 @@
-import { GetFeaturedPlaylistsResponse } from '../../types/SpotifyResponses';
+import {
+  type PagingFeaturedPlaylistObject,
+  type SimplifiedPlaylistObject,
+} from '../../openapi';
 
-export const getFeaturedPlaylistsFixture: GetFeaturedPlaylistsResponse = {
+export const getFeaturedPlaylistsFixture: PagingFeaturedPlaylistObject = {
   message: "Editor's picks",
   playlists: {
-    href:
-      'https://api.spotify.com/v1/browse/featured-playlists?timestamp=2020-04-19T03%3A06%3A33&offset=0&limit=2',
+    href: 'https://api.spotify.com/v1/browse/featured-playlists?timestamp=2020-04-19T03%3A06%3A33&offset=0&limit=2',
     items: [
       {
         collaborative: false,
@@ -18,8 +20,7 @@ export const getFeaturedPlaylistsFixture: GetFeaturedPlaylistsResponse = {
         images: [
           {
             height: null,
-            url:
-              'https://i.scdn.co/image/ab67706f00000002314724fc7ca36a4fce2f1b6a',
+            url: 'https://i.scdn.co/image/ab67706f00000002314724fc7ca36a4fce2f1b6a',
             width: null,
           },
         ],
@@ -35,17 +36,16 @@ export const getFeaturedPlaylistsFixture: GetFeaturedPlaylistsResponse = {
           uri: 'spotify:user:spotify',
         },
         primary_color: null,
-        public: null,
+        public: true,
         snapshot_id:
           'MTU4NzI2NTU2MCwwMDAwMDAwMGQ0MWQ4Y2Q5OGYwMGIyMDRlOTgwMDk5OGVjZjg0Mjdl',
         tracks: {
-          href:
-            'https://api.spotify.com/v1/playlists/37i9dQZF1DWSRc3WJklgBs/tracks',
+          href: 'https://api.spotify.com/v1/playlists/37i9dQZF1DWSRc3WJklgBs/tracks',
           total: 140,
         },
         type: 'playlist',
         uri: 'spotify:playlist:37i9dQZF1DWSRc3WJklgBs',
-      },
+      } as SimplifiedPlaylistObject,
       {
         collaborative: false,
         description:
@@ -58,8 +58,7 @@ export const getFeaturedPlaylistsFixture: GetFeaturedPlaylistsResponse = {
         images: [
           {
             height: null,
-            url:
-              'https://i.scdn.co/image/ab67706f00000002e2c938563967c4f22c76ed74',
+            url: 'https://i.scdn.co/image/ab67706f00000002e2c938563967c4f22c76ed74',
             width: null,
           },
         ],
@@ -75,21 +74,19 @@ export const getFeaturedPlaylistsFixture: GetFeaturedPlaylistsResponse = {
           uri: 'spotify:user:spotify',
         },
         primary_color: null,
-        public: null,
+        public: true,
         snapshot_id:
           'MTU4NzI2NTU3OSwwMDAwMDAwMGQ0MWQ4Y2Q5OGYwMGIyMDRlOTgwMDk5OGVjZjg0Mjdl',
         tracks: {
-          href:
-            'https://api.spotify.com/v1/playlists/37i9dQZF1DX843Qf4lrFtZ/tracks',
+          href: 'https://api.spotify.com/v1/playlists/37i9dQZF1DX843Qf4lrFtZ/tracks',
           total: 100,
         },
         type: 'playlist',
         uri: 'spotify:playlist:37i9dQZF1DX843Qf4lrFtZ',
-      },
+      } as SimplifiedPlaylistObject,
     ],
     limit: 2,
-    next:
-      'https://api.spotify.com/v1/browse/featured-playlists?timestamp=2020-04-19T03%3A06%3A33&offset=2&limit=2',
+    next: 'https://api.spotify.com/v1/browse/featured-playlists?timestamp=2020-04-19T03%3A06%3A33&offset=2&limit=2',
     offset: 0,
     previous: null,
     total: 12,

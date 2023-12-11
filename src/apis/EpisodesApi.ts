@@ -1,15 +1,7 @@
-import { Http } from '../helpers/Http';
-import { Episode } from '../types/SpotifyObjects';
-import { MarketOptions } from '../types/SpotifyOptions';
-import { GetEpisodesResponse } from '../types/SpotifyResponses';
+import { type EpisodeObject, EpisodesService } from '../openapi';
+import { type MarketOptions } from '../types/SpotifyOptions';
 
 export class EpisodesApi {
-  private http: Http;
-
-  constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * ### Get an Episode
    *
@@ -25,14 +17,14 @@ export class EpisodesApi {
    * console.log(episode.name);
    * // "S1E6 - Institutionalized by Kendrick Lamar"
    * ```
-   *
+   * @param episodeId The Spotify ID for the episode.
    * @param options Optional request information.
    */
-  getEpisode(episodeId: string, options?: MarketOptions): Promise<Episode> {
-    return this.http.get<Episode>(
-      `/episodes/${episodeId}`,
-      options && { params: options },
-    );
+  public async getEpisode(
+    episodeId: string,
+    options?: MarketOptions,
+  ): Promise<EpisodeObject> {
+    return await EpisodesService.getAnEpisode(episodeId, options?.market);
   }
 
   /**
@@ -57,16 +49,13 @@ export class EpisodesApi {
    * @param episodeIds A list of the Spotify IDs for the episodes.
    * @param options Optional request information.
    */
-  async getEpisodes(
+  public async getEpisodes(
     episodeIds: string[],
     options?: MarketOptions,
-  ): Promise<Array<Episode | null>> {
-    const response = await this.http.get<GetEpisodesResponse>('/episodes', {
-      params: {
-        ...options,
-        ids: episodeIds,
-      },
-    });
-    return response.episodes;
+  ): Promise<EpisodeObject[]> {
+    return await EpisodesService.getMultipleEpisodes(
+      episodeIds.join(','),
+      options?.market,
+    ).then(({ episodes }) => episodes);
   }
 }

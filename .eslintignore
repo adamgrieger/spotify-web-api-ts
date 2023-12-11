@@ -1,0 +1,9 @@
+package.json
+.eslintrc.*
+
+tsconfig.json
+tsconfig.*.json
+
+dist/
+
+src/openapi/**/(!request)*

@@ -1,6 +1,9 @@
-import { GetRecentlyPlayedTracksResponse } from '../../types/SpotifyResponses';
+import {
+  type CursorPagingPlayHistoryObject,
+  type PlayHistoryObject,
+} from '../../openapi';
 
-export const getRecentlyPlayedTracksFixture: GetRecentlyPlayedTracksResponse = {
+export const getRecentlyPlayedTracksFixture: CursorPagingPlayHistoryObject = {
   items: [
     {
       track: {
@@ -105,20 +108,17 @@ export const getRecentlyPlayedTracksFixture: GetRecentlyPlayedTracksResponse = {
           images: [
             {
               height: 640,
-              url:
-                'https://i.scdn.co/image/ab67616d0000b27366a89b08608325d5a34f31d2',
+              url: 'https://i.scdn.co/image/ab67616d0000b27366a89b08608325d5a34f31d2',
               width: 640,
             },
             {
               height: 300,
-              url:
-                'https://i.scdn.co/image/ab67616d00001e0266a89b08608325d5a34f31d2',
+              url: 'https://i.scdn.co/image/ab67616d00001e0266a89b08608325d5a34f31d2',
               width: 300,
             },
             {
               height: 64,
-              url:
-                'https://i.scdn.co/image/ab67616d0000485166a89b08608325d5a34f31d2',
+              url: 'https://i.scdn.co/image/ab67616d0000485166a89b08608325d5a34f31d2',
               width: 64,
             },
           ],
@@ -240,8 +240,7 @@ export const getRecentlyPlayedTracksFixture: GetRecentlyPlayedTracksResponse = {
         uri: 'spotify:track:43bYs8QkPdCdy5esfnmU1T',
       },
       played_at: '2020-04-23T02:47:01.613Z',
-      context: null,
-    },
+    } as PlayHistoryObject,
     {
       track: {
         album: {
@@ -345,20 +344,17 @@ export const getRecentlyPlayedTracksFixture: GetRecentlyPlayedTracksResponse = {
           images: [
             {
               height: 640,
-              url:
-                'https://i.scdn.co/image/ab67616d0000b27366a89b08608325d5a34f31d2',
+              url: 'https://i.scdn.co/image/ab67616d0000b27366a89b08608325d5a34f31d2',
               width: 640,
             },
             {
               height: 300,
-              url:
-                'https://i.scdn.co/image/ab67616d00001e0266a89b08608325d5a34f31d2',
+              url: 'https://i.scdn.co/image/ab67616d00001e0266a89b08608325d5a34f31d2',
               width: 300,
             },
             {
               height: 64,
-              url:
-                'https://i.scdn.co/image/ab67616d0000485166a89b08608325d5a34f31d2',
+              url: 'https://i.scdn.co/image/ab67616d0000485166a89b08608325d5a34f31d2',
               width: 64,
             },
           ],
@@ -480,11 +476,9 @@ export const getRecentlyPlayedTracksFixture: GetRecentlyPlayedTracksResponse = {
         uri: 'spotify:track:0HKr9aqzHBsVNnsUCdH4bw',
       },
       played_at: '2020-04-23T02:44:00.115Z',
-      context: null,
-    },
+    } as PlayHistoryObject,
   ],
-  next:
-    'https://api.spotify.com/v1/me/player/recently-played?before=1587609840115&limit=2',
+  next: 'https://api.spotify.com/v1/me/player/recently-played?before=1587609840115&limit=2',
   cursors: {
     after: '1587610021613',
     before: '1587609840115',

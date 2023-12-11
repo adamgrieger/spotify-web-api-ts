@@ -1,9 +1,9 @@
-import { SearchShowsResponse } from '../../types/SpotifyResponses';
+import { type SearchResponse } from '../../apis/index.types';
+import { type SimplifiedShowObject } from '../../openapi';
 
-export const searchShowsFixture: SearchShowsResponse = {
+export const searchShowsFixture: SearchResponse = {
   shows: {
-    href:
-      'https://api.spotify.com/v1/search?query=brother&type=show&offset=0&limit=1',
+    href: 'https://api.spotify.com/v1/search?query=brother&type=show&offset=0&limit=1',
     items: [
       {
         available_markets: [
@@ -93,24 +93,23 @@ export const searchShowsFixture: SearchShowsResponse = {
           spotify: 'https://open.spotify.com/show/308BQUUnIkoH2UAXJCAt0g',
         },
         href: 'https://api.spotify.com/v1/shows/308BQUUnIkoH2UAXJCAt0g',
+        html_description:
+          "<p>Free advice from three of the world's most qualified, most related experts: Justin, Travis and Griffin McElroy. For one-half to three-quarters of an hour every Monday, we tell people how to live their lives, because we're obviously doing such a great job of it so far.</p>",
         id: '308BQUUnIkoH2UAXJCAt0g',
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/f98b2557f4c992405e70ebe70540c24592043540',
+            url: 'https://i.scdn.co/image/f98b2557f4c992405e70ebe70540c24592043540',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/8650ae0b7542c57d0b4f7e96016b65776515e3cd',
+            url: 'https://i.scdn.co/image/8650ae0b7542c57d0b4f7e96016b65776515e3cd',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/f3376e395e743adc694fd0c79769fe13a78df29c',
+            url: 'https://i.scdn.co/image/f3376e395e743adc694fd0c79769fe13a78df29c',
             width: 64,
           },
         ],
@@ -119,13 +118,13 @@ export const searchShowsFixture: SearchShowsResponse = {
         media_type: 'audio',
         name: 'My Brother, My Brother And Me',
         publisher: 'The McElroys',
+        total_episodes: 0,
         type: 'show',
         uri: 'spotify:show:308BQUUnIkoH2UAXJCAt0g',
-      },
+      } as SimplifiedShowObject,
     ],
     limit: 1,
-    next:
-      'https://api.spotify.com/v1/search?query=brother&type=show&offset=1&limit=1',
+    next: 'https://api.spotify.com/v1/search?query=brother&type=show&offset=1&limit=1',
     offset: 0,
     previous: null,
     total: 3505,

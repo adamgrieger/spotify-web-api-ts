@@ -1,6 +1,6 @@
-import { CurrentlyPlayingContext } from '../types/SpotifyObjects';
+import { type CurrentlyPlayingContextObject } from '../openapi';
 
-export const currentlyPlayingContextFixture: CurrentlyPlayingContext = {
+export const currentlyPlayingContextFixture = {
   device: {
     id: 'ef75895113b52f22eeb529afdfe266080ddcc11e',
     is_active: true,
@@ -123,20 +123,17 @@ export const currentlyPlayingContextFixture: CurrentlyPlayingContext = {
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/ab67616d0000b27366a89b08608325d5a34f31d2',
+          url: 'https://i.scdn.co/image/ab67616d0000b27366a89b08608325d5a34f31d2',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/ab67616d00001e0266a89b08608325d5a34f31d2',
+          url: 'https://i.scdn.co/image/ab67616d00001e0266a89b08608325d5a34f31d2',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/ab67616d0000485166a89b08608325d5a34f31d2',
+          url: 'https://i.scdn.co/image/ab67616d0000485166a89b08608325d5a34f31d2',
           width: 64,
         },
       ],
@@ -264,4 +261,4 @@ export const currentlyPlayingContextFixture: CurrentlyPlayingContext = {
     },
   },
   is_playing: true,
-};
+} as CurrentlyPlayingContextObject;

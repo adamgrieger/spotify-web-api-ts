@@ -1,9 +1,9 @@
-import { SearchEpisodesResponse } from '../../types/SpotifyResponses';
+import { type SearchResponse } from '../../apis/index.types';
+import { type SimplifiedEpisodeObject } from '../../openapi';
 
-export const searchEpisodesFixture: SearchEpisodesResponse = {
+export const searchEpisodesFixture: SearchResponse = {
   episodes: {
-    href:
-      'https://api.spotify.com/v1/search?query=institutionalized&type=episode&offset=0&limit=1',
+    href: 'https://api.spotify.com/v1/search?query=institutionalized&type=episode&offset=0&limit=1',
     items: [
       {
         audio_preview_url:
@@ -20,20 +20,17 @@ export const searchEpisodesFixture: SearchEpisodesResponse = {
         images: [
           {
             height: 640,
-            url:
-              'https://i.scdn.co/image/79396b6b84ae10498489feb7d22640caaed34269',
+            url: 'https://i.scdn.co/image/79396b6b84ae10498489feb7d22640caaed34269',
             width: 640,
           },
           {
             height: 300,
-            url:
-              'https://i.scdn.co/image/d8cfa4ec49dd676b85ddbda5c8f79c6ea039cf15',
+            url: 'https://i.scdn.co/image/d8cfa4ec49dd676b85ddbda5c8f79c6ea039cf15',
             width: 300,
           },
           {
             height: 64,
-            url:
-              'https://i.scdn.co/image/f21af3f28df2e76b417b8c839787ae42ae049a3e',
+            url: 'https://i.scdn.co/image/f21af3f28df2e76b417b8c839787ae42ae049a3e',
             width: 64,
           },
         ],
@@ -46,11 +43,10 @@ export const searchEpisodesFixture: SearchEpisodesResponse = {
         release_date_precision: 'day',
         type: 'episode',
         uri: 'spotify:episode:5VhaAEtTrKQ1NSneHsXK6C',
-      },
+      } as SimplifiedEpisodeObject,
     ],
     limit: 1,
-    next:
-      'https://api.spotify.com/v1/search?query=institutionalized&type=episode&offset=1&limit=1',
+    next: 'https://api.spotify.com/v1/search?query=institutionalized&type=episode&offset=1&limit=1',
     offset: 0,
     previous: null,
     total: 63,

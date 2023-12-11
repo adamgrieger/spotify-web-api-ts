@@ -1,6 +1,8 @@
-import { GetAudioFeaturesForTracksResponse } from '../../types/SpotifyResponses';
+import { type AudioFeaturesObject } from '../../openapi';
 
-export const getAudioFeaturesForTracksFixture: GetAudioFeaturesForTracksResponse = {
+export const getAudioFeaturesForTracksFixture: {
+  audio_features: AudioFeaturesObject[];
+} = {
   audio_features: [
     {
       danceability: 0.788,
@@ -22,6 +24,6 @@ export const getAudioFeaturesForTracksFixture: GetAudioFeaturesForTracksResponse
         'https://api.spotify.com/v1/audio-analysis/0hUUXDIddDc4T2Zz5o0tCY',
       duration_ms: 323120,
       time_signature: 4,
-    },
+    } as AudioFeaturesObject,
   ],
 };

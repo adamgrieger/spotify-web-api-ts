@@ -1,6 +1,6 @@
-import { AudioFeatures } from '../types/SpotifyObjects';
+import { type AudioFeaturesObject } from '../openapi';
 
-export const audioFeaturesFixture: AudioFeatures = {
+export const audioFeaturesFixture = {
   danceability: 0.787,
   energy: 0.855,
   key: 1,
@@ -20,4 +20,4 @@ export const audioFeaturesFixture: AudioFeatures = {
     'https://api.spotify.com/v1/audio-analysis/7JvuiP16UTKCnieS9E2Bg3',
   duration_ms: 229108,
   time_signature: 4,
-};
+} as AudioFeaturesObject;

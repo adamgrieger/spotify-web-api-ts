@@ -1,6 +1,6 @@
-import { CurrentlyPlaying } from '../types/SpotifyObjects';
+import { type CurrentlyPlayingObject } from '../openapi';
 
-export const currentlyPlayingFixture: CurrentlyPlaying = {
+export const currentlyPlayingFixture = {
   timestamp: 1587438536283,
   context: {
     external_urls: {
@@ -115,20 +115,17 @@ export const currentlyPlayingFixture: CurrentlyPlaying = {
       images: [
         {
           height: 640,
-          url:
-            'https://i.scdn.co/image/ab67616d0000b273841292c1316c4bf85447bcd9',
+          url: 'https://i.scdn.co/image/ab67616d0000b273841292c1316c4bf85447bcd9',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://i.scdn.co/image/ab67616d00001e02841292c1316c4bf85447bcd9',
+          url: 'https://i.scdn.co/image/ab67616d00001e02841292c1316c4bf85447bcd9',
           width: 300,
         },
         {
           height: 64,
-          url:
-            'https://i.scdn.co/image/ab67616d00004851841292c1316c4bf85447bcd9',
+          url: 'https://i.scdn.co/image/ab67616d00004851841292c1316c4bf85447bcd9',
           width: 64,
         },
       ],
@@ -259,4 +256,4 @@ export const currentlyPlayingFixture: CurrentlyPlaying = {
     },
   },
   is_playing: true,
-};
+} as CurrentlyPlayingObject;

@@ -1,33 +1,19 @@
-import { Http } from '../helpers/Http';
-import { searchHelper } from '../helpers/searchHelper';
 import {
-  Artist,
-  Paging,
-  SearchType,
-  SimplifiedAlbum,
-  SimplifiedEpisode,
-  SimplifiedPlaylist,
-  SimplifiedShow,
-  Track,
-} from '../types/SpotifyObjects';
-import { SearchOptions } from '../types/SpotifyOptions';
-import {
-  SearchAlbumsResponse,
-  SearchArtistsResponse,
-  SearchEpisodesResponse,
-  SearchPlaylistsResponse,
-  SearchResponse,
-  SearchShowsResponse,
-  SearchTracksResponse,
-} from '../types/SpotifyResponses';
+  type PagingArtistObject,
+  type PagingPlaylistObject,
+  type PagingSimplifiedAlbumObject,
+  type PagingSimplifiedAudiobookObject,
+  type PagingSimplifiedEpisodeObject,
+  type PagingSimplifiedShowObject,
+  type PagingTrackObject,
+  SearchService,
+} from '../openapi';
+import { type SearchOptions } from '../types/SpotifyOptions';
+
+export type SearchResponse = Awaited<ReturnType<typeof SearchService.search>>;
+export type SearchType = Parameters<typeof SearchService.search>[1][number];
 
 export class SearchApi {
-  private http: Http;
-
-  constructor(http: Http) {
-    this.http = http;
-  }
-
   /**
    * Search for an Item
    *
@@ -35,15 +21,23 @@ export class SearchApi {
    * shows, or episodes that match a keyword string.
    *
    * @param query Search query keywords, optional field filters, and operators.
-   * @param type The item types to search across.
+   * @param searchTypes The item types to search across.
    * @param options Optional request information.
    */
-  search(
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  public async search<SearchTypes extends SearchType[]>(
     query: string,
-    type: SearchType[],
+    searchTypes: SearchTypes,
     options?: SearchOptions,
-  ): Promise<SearchResponse> {
-    return searchHelper<SearchResponse>(this.http, query, type, options);
+  ) {
+    return (await SearchService.search(
+      query,
+      searchTypes,
+      options?.market,
+      options?.limit,
+      options?.offset,
+      options?.include_external,
+    )) as Pick<SearchResponse, `${SearchTypes[number]}s`>;
   }
 
   /**
@@ -54,17 +48,13 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchAlbums(
+  public async searchAlbums(
     query: string,
     options?: SearchOptions,
-  ): Promise<Paging<SimplifiedAlbum>> {
-    const response = await searchHelper<SearchAlbumsResponse>(
-      this.http,
-      query,
-      ['album'],
-      options,
+  ): Promise<PagingSimplifiedAlbumObject | undefined> {
+    return await this.search(query, ['album'], options).then(
+      ({ albums }) => albums,
     );
-    return response.albums;
   }
 
   /**
@@ -75,17 +65,30 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchArtists(
+  public async searchArtists(
     query: string,
     options?: SearchOptions,
-  ): Promise<Paging<Artist>> {
-    const response = await searchHelper<SearchArtistsResponse>(
-      this.http,
-      query,
-      ['artist'],
-      options,
+  ): Promise<PagingArtistObject | undefined> {
+    return await this.search(query, ['artist'], options).then(
+      ({ artists }) => artists,
     );
-    return response.artists;
+  }
+
+  /**
+   * Search for an Audiobook
+   *
+   * Get Spotify Catalog information about audiobooks that match a keyword string.
+   *
+   * @param query Search query keywords, optional field filters, and operators.
+   * @param options Optional request information.
+   */
+  public async searchAudiobooks(
+    query: string,
+    options?: SearchOptions,
+  ): Promise<PagingSimplifiedAudiobookObject | undefined> {
+    return await this.search(query, ['audiobook'], options).then(
+      ({ audiobooks }) => audiobooks,
+    );
   }
 
   /**
@@ -96,17 +99,13 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchEpisodes(
+  public async searchEpisodes(
     query: string,
     options?: SearchOptions,
-  ): Promise<Paging<SimplifiedEpisode>> {
-    const response = await searchHelper<SearchEpisodesResponse>(
-      this.http,
-      query,
-      ['episode'],
-      options,
+  ): Promise<PagingSimplifiedEpisodeObject | undefined> {
+    return await this.search(query, ['episode'], options).then(
+      ({ episodes }) => episodes,
     );
-    return response.episodes;
   }
 
   /**
@@ -117,17 +116,13 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchPlaylists(
+  public async searchPlaylists(
     query: string,
     options?: SearchOptions,
-  ): Promise<Paging<SimplifiedPlaylist>> {
-    const response = await searchHelper<SearchPlaylistsResponse>(
-      this.http,
-      query,
-      ['playlist'],
-      options,
+  ): Promise<PagingPlaylistObject | undefined> {
+    return await this.search(query, ['playlist'], options).then(
+      ({ playlists }) => playlists,
     );
-    return response.playlists;
   }
 
   /**
@@ -138,17 +133,13 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchShows(
+  public async searchShows(
     query: string,
     options?: SearchOptions,
-  ): Promise<Paging<SimplifiedShow>> {
-    const response = await searchHelper<SearchShowsResponse>(
-      this.http,
-      query,
-      ['show'],
-      options,
+  ): Promise<PagingSimplifiedShowObject | undefined> {
+    return await this.search(query, ['show'], options).then(
+      ({ shows }) => shows,
     );
-    return response.shows;
   }
 
   /**
@@ -159,16 +150,12 @@ export class SearchApi {
    * @param query Search query keywords, optional field filters, and operators.
    * @param options Optional request information.
    */
-  async searchTracks(
+  public async searchTracks(
     query: string,
     options?: SearchOptions,
-  ): Promise<Paging<Track>> {
-    const response = await searchHelper<SearchTracksResponse>(
-      this.http,
-      query,
-      ['track'],
-      options,
+  ): Promise<PagingTrackObject | undefined> {
+    return await this.search(query, ['track'], options).then(
+      ({ tracks }) => tracks,
     );
-    return response.tracks;
   }
 }

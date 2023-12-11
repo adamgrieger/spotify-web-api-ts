@@ -1,6 +1,9 @@
-import { GetUserPlaylistsResponse } from '../../types/SpotifyResponses';
+import {
+  type PagingPlaylistObject,
+  type SimplifiedPlaylistObject,
+} from '../../openapi';
 
-export const getUserPlaylistsFixture: GetUserPlaylistsResponse = {
+export const getUserPlaylistsFixture: PagingPlaylistObject = {
   href: 'https://api.spotify.com/v1/users/griegs/playlists?offset=1&limit=1',
   items: [
     {
@@ -15,20 +18,17 @@ export const getUserPlaylistsFixture: GetUserPlaylistsResponse = {
       images: [
         {
           height: 640,
-          url:
-            'https://mosaic.scdn.co/640/ab67616d0000b2733a76edacefe2e7a589222787ab67616d0000b273b1178724f4be59abf7acc6c5ab67616d0000b273e3f907e70bc502a263ee1bc0ab67616d0000b273fab3bfcc801b1d28701da1df',
+          url: 'https://mosaic.scdn.co/640/ab67616d0000b2733a76edacefe2e7a589222787ab67616d0000b273b1178724f4be59abf7acc6c5ab67616d0000b273e3f907e70bc502a263ee1bc0ab67616d0000b273fab3bfcc801b1d28701da1df',
           width: 640,
         },
         {
           height: 300,
-          url:
-            'https://mosaic.scdn.co/300/ab67616d0000b2733a76edacefe2e7a589222787ab67616d0000b273b1178724f4be59abf7acc6c5ab67616d0000b273e3f907e70bc502a263ee1bc0ab67616d0000b273fab3bfcc801b1d28701da1df',
+          url: 'https://mosaic.scdn.co/300/ab67616d0000b2733a76edacefe2e7a589222787ab67616d0000b273b1178724f4be59abf7acc6c5ab67616d0000b273e3f907e70bc502a263ee1bc0ab67616d0000b273fab3bfcc801b1d28701da1df',
           width: 300,
         },
         {
           height: 60,
-          url:
-            'https://mosaic.scdn.co/60/ab67616d0000b2733a76edacefe2e7a589222787ab67616d0000b273b1178724f4be59abf7acc6c5ab67616d0000b273e3f907e70bc502a263ee1bc0ab67616d0000b273fab3bfcc801b1d28701da1df',
+          url: 'https://mosaic.scdn.co/60/ab67616d0000b2733a76edacefe2e7a589222787ab67616d0000b273b1178724f4be59abf7acc6c5ab67616d0000b273e3f907e70bc502a263ee1bc0ab67616d0000b273fab3bfcc801b1d28701da1df',
           width: 60,
         },
       ],
@@ -48,13 +48,12 @@ export const getUserPlaylistsFixture: GetUserPlaylistsResponse = {
       snapshot_id:
         'NjAsNjA1ZDIxNjFiZGJmNTkyMWNlMGFlYTZkY2E4ODIxMTEwMmYwOGUzOQ==',
       tracks: {
-        href:
-          'https://api.spotify.com/v1/playlists/6SAtV2bMjUbQTV37X51F3u/tracks',
+        href: 'https://api.spotify.com/v1/playlists/6SAtV2bMjUbQTV37X51F3u/tracks',
         total: 52,
       },
       type: 'playlist',
       uri: 'spotify:playlist:6SAtV2bMjUbQTV37X51F3u',
-    },
+    } as SimplifiedPlaylistObject,
   ],
   limit: 1,
   next: 'https://api.spotify.com/v1/users/griegs/playlists?offset=2&limit=1',
